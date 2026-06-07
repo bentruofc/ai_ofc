@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/lbp_normalization.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/lbp_normalization.py
 import numpy as np
 from skimage.feature import local_binary_pattern
 from PIL import Image

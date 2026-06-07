@@ -1,9 +1,9 @@
 # ---
-# ComfyUI AIOFC - Prompt Batch Preview Node
+# ComfyUI INSTARAW - Prompt Batch Preview Node
 # Debug utility to preview batch lists from Reality Prompt Generator
 # ---
 
-class AIOFC_PromptBatchPreview:
+class INSTARAW_PromptBatchPreview:
     """
     Debug utility to preview prompt/seed batches from RPG.
     Displays all batch elements in a formatted output.
@@ -23,7 +23,7 @@ class AIOFC_PromptBatchPreview:
     RETURN_NAMES = ("summary",)
     OUTPUT_NODE = True
     FUNCTION = "preview_batch"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     INPUT_IS_LIST = True  # Accept lists
 
@@ -42,7 +42,7 @@ class AIOFC_PromptBatchPreview:
         print("="*80)
 
         # Build formatted output for UI
-        ui_lines = [f"BATCH PREVIEW: {count} prompts\n" + "="*60 + "\n"]
+        ui_lines = [f"📊 BATCH PREVIEW: {count} prompts\n" + "="*60 + "\n"]
 
         for i in range(count):
             pos = positives[i] if i < len(positives) else "MISSING"
@@ -51,13 +51,13 @@ class AIOFC_PromptBatchPreview:
 
             # Console output
             print(f"\n[{i+1}/{count}] Seed: {seed_val}")
-            print(f"Positive: {pos[:100]}{'...' if len(str(pos)) > 100 else ''}")
-            print(f"Negative: {neg[:100]}{'...' if len(str(neg)) > 100 else ''}")
+            print(f"  ✅ Positive: {pos[:100]}{'...' if len(str(pos)) > 100 else ''}")
+            print(f"  ❌ Negative: {neg[:100]}{'...' if len(str(neg)) > 100 else ''}")
 
             # UI output (shorter for readability)
             ui_lines.append(f"[{i+1}] Seed: {seed_val}")
-            ui_lines.append(f"{str(pos)[:80]}{'...' if len(str(pos)) > 80 else ''}")
-            ui_lines.append(f"{str(neg)[:80]}{'...' if len(str(neg)) > 80 else ''}\n")
+            ui_lines.append(f"✅ {str(pos)[:80]}{'...' if len(str(pos)) > 80 else ''}")
+            ui_lines.append(f"❌ {str(neg)[:80]}{'...' if len(str(neg)) > 80 else ''}\n")
 
         print("\n" + "="*80 + "\n")
 
@@ -72,9 +72,9 @@ class AIOFC_PromptBatchPreview:
 
 # Export node mappings
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_PromptBatchPreview": AIOFC_PromptBatchPreview,
+    "INSTARAW_PromptBatchPreview": INSTARAW_PromptBatchPreview,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_PromptBatchPreview": "Prompt Batch Preview",
+    "INSTARAW_PromptBatchPreview": "🔍 INSTARAW Prompt Batch Preview",
 }

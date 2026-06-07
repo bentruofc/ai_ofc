@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - Workflow Logic Nodes (Final Corrected Version)
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Workflow Logic Nodes (Final Corrected Version)
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-from ..api_nodes.gemini_native import AIOFC_GeminiNative
+from ..api_nodes.gemini_native import INSTARAW_GeminiNative
 
 DEFAULT_PROMPT_TEMPLATE = """{llm_base_prompt}
 
@@ -28,10 +28,10 @@ def tensor_to_pil(image_tensor):
 def pil_to_tensor(pil_image):
     return torch.from_numpy(np.array(pil_image).astype(np.float32) / 255.0).unsqueeze(0)
 
-class AIOFC_FeatureDescriber:
+class INSTARAW_FeatureDescriber:
     @classmethod
     def INPUT_TYPES(cls):
-        gemini_inputs = AIOFC_GeminiNative.INPUT_TYPES()
+        gemini_inputs = INSTARAW_GeminiNative.INPUT_TYPES()
         # --- FIX V3: Use full, identical fallback definitions ---
         required = gemini_inputs.get("required", {})
         api_key_input = required.get("api_key", ("STRING", {"default": "GEMINI_LOAD_FAILED"}))
@@ -53,19 +53,19 @@ class AIOFC_FeatureDescriber:
                 "enable_thinking": thinking_input, "safety_level": safety_input,
             }
         }
-    RETURN_TYPES = ("STRING", "IMAGE",); FUNCTION = "describe"; CATEGORY = "Workflow Logic"
+    RETURN_TYPES = ("STRING", "IMAGE",); FUNCTION = "describe"; CATEGORY = "INSTARAW/Workflow Logic"
     def describe(self, **kwargs):
         if not kwargs.get('enabled'): return (None, None)
         final_desc = kwargs.get('user_prompt', '').strip()
         if kwargs.get('use_llm_description'):
             prompt = kwargs.get('prompt_template').format(llm_base_prompt=kwargs.get('llm_base_prompt'), user_prompt=final_desc) if final_desc else kwargs.get('llm_base_prompt')
-            final_desc = AIOFC_GeminiNative().generate_content(**{k: v for k, v in kwargs.items() if k not in ['enabled', 'feature_image', 'use_llm_description', 'user_prompt', 'llm_base_prompt', 'prompt_template']}, image_1=kwargs.get('feature_image'))[0].strip()
+            final_desc = INSTARAW_GeminiNative().generate_content(**{k: v for k, v in kwargs.items() if k not in ['enabled', 'feature_image', 'use_llm_description', 'user_prompt', 'llm_base_prompt', 'prompt_template']}, image_1=kwargs.get('feature_image'))[0].strip()
         return (final_desc, kwargs.get('feature_image'))
 
-class AIOFC_UniversalDescriber:
+class INSTARAW_UniversalDescriber:
     @classmethod
     def INPUT_TYPES(cls):
-        gemini_inputs = AIOFC_GeminiNative.INPUT_TYPES()
+        gemini_inputs = INSTARAW_GeminiNative.INPUT_TYPES()
         # --- FIX V3: Use full, identical fallback definitions ---
         required = gemini_inputs.get("required", {})
         api_key_input = required.get("api_key", ("STRING", {"default": "GEMINI_LOAD_FAILED"}))
@@ -84,31 +84,31 @@ class AIOFC_UniversalDescriber:
                 "enable_thinking": thinking_input, "safety_level": safety_input,
             }, "optional": { "image_1": ("IMAGE",), "image_2": ("IMAGE",), "image_3": ("IMAGE",), "image_4": ("IMAGE",) }
         }
-    RETURN_TYPES = ("STRING", "IMAGE", "IMAGE", "IMAGE", "IMAGE",); FUNCTION = "describe"; CATEGORY = "Workflow Logic"
+    RETURN_TYPES = ("STRING", "IMAGE", "IMAGE", "IMAGE", "IMAGE",); FUNCTION = "describe"; CATEGORY = "INSTARAW/Workflow Logic"
     def describe(self, **kwargs):
         images = (kwargs.get('image_1'), kwargs.get('image_2'), kwargs.get('image_3'), kwargs.get('image_4'))
         if not kwargs.get('enabled'): return (None, *images)
         final_desc = kwargs.get('user_prompt', '').strip()
         if kwargs.get('use_llm_description'):
             prompt = kwargs.get('prompt_template').format(llm_base_prompt=kwargs.get('llm_base_prompt'), user_prompt=final_desc) if final_desc else kwargs.get('llm_base_prompt')
-            final_desc = AIOFC_GeminiNative().generate_content(**{k: v for k, v in kwargs.items() if k.startswith('api_') or k in ['model', 'seed', 'temperature', 'enable_thinking', 'safety_level']}, prompt=prompt, image_1=kwargs.get('image_1'), image_2=kwargs.get('image_2'), image_3=kwargs.get('image_3'), image_4=kwargs.get('image_4'))[0].strip()
+            final_desc = INSTARAW_GeminiNative().generate_content(**{k: v for k, v in kwargs.items() if k.startswith('api_') or k in ['model', 'seed', 'temperature', 'enable_thinking', 'safety_level']}, prompt=prompt, image_1=kwargs.get('image_1'), image_2=kwargs.get('image_2'), image_3=kwargs.get('image_3'), image_4=kwargs.get('image_4'))[0].strip()
         return (final_desc, *images)
 
-class AIOFC_SwapPromptAssembler:
+class INSTARAW_SwapPromptAssembler:
     @classmethod
     def INPUT_TYPES(cls):
         return { "required": { "hair_prefix": ("STRING", {}), "outfit_prefix": ("STRING", {}), "separator": ("STRING", {"default": " + "}), }, "optional": { "hair_description": ("STRING", {"forceInput": True}), "outfit_description": ("STRING", {"forceInput": True}), } }
-    RETURN_TYPES = ("STRING", "BOOLEAN",); FUNCTION = "assemble"; CATEGORY = "Workflow Logic"
+    RETURN_TYPES = ("STRING", "BOOLEAN",); FUNCTION = "assemble"; CATEGORY = "INSTARAW/Workflow Logic"
     def assemble(self, hair_prefix, outfit_prefix, separator, hair_description=None, outfit_description=None):
         parts = []
         if hair_description and hair_description.strip(): parts.append(f"{hair_prefix.strip()} {hair_description.strip()}")
         if outfit_description and outfit_description.strip(): parts.append(f"{outfit_prefix.strip()} {outfit_description.strip()}")
         return (separator.join(parts), bool(parts))
 
-class AIOFC_ParallelFeatureDescriber:
+class INSTARAW_ParallelFeatureDescriber:
     @classmethod
     def INPUT_TYPES(cls):
-        gemini_inputs = AIOFC_GeminiNative.INPUT_TYPES()
+        gemini_inputs = INSTARAW_GeminiNative.INPUT_TYPES()
         # --- FIX V3: Use full, identical fallback definitions ---
         required = gemini_inputs.get("required", {})
         api_key_input = required.get("api_key", ("STRING", {"default": "GEMINI_LOAD_FAILED"}))
@@ -130,7 +130,7 @@ class AIOFC_ParallelFeatureDescriber:
                 "enable_thinking": thinking_input, "safety_level": safety_input,
             }, "optional": { "hair_feature_image": ("IMAGE",), "outfit_feature_image": ("IMAGE",), }
         }
-    RETURN_TYPES = ("STRING", "IMAGE", "STRING", "IMAGE",); FUNCTION = "describe_parallel"; CATEGORY = "Workflow Logic"
+    RETURN_TYPES = ("STRING", "IMAGE", "STRING", "IMAGE",); FUNCTION = "describe_parallel"; CATEGORY = "INSTARAW/Workflow Logic"
     def describe_parallel(self, **kwargs):
         results = {}
         def worker(feature_name, enabled, use_llm, user_prompt, llm_base_prompt, prompt_template, image):
@@ -140,12 +140,12 @@ class AIOFC_ParallelFeatureDescriber:
                 if use_llm:
                     # --- FIX V3: Use 'is None' to check for Tensor existence ---
                     if image is None:
-                        print(f"Warning: LLM for '{feature_name}' enabled but no image provided. Skipping."); results[f"{feature_name}_description"], results[f"{feature_name}_image_out"] = None, None; return
+                        print(f"⚠️ Warning: LLM for '{feature_name}' enabled but no image provided. Skipping."); results[f"{feature_name}_description"], results[f"{feature_name}_image_out"] = None, None; return
                     prompt_for_llm = prompt_template.format(llm_base_prompt=llm_base_prompt, user_prompt=user_prompt) if user_prompt.strip() else llm_base_prompt
                     gemini_args = {k: v for k, v in kwargs.items() if k.startswith('api_') or k in ['model', 'seed', 'temperature', 'enable_thinking', 'safety_level']}
                     gemini_args['prompt'] = prompt_for_llm
                     gemini_args['image_1'] = image
-                    desc = AIOFC_GeminiNative().generate_content(**gemini_args)[0].strip()
+                    desc = INSTARAW_GeminiNative().generate_content(**gemini_args)[0].strip()
                 results[f"{feature_name}_description"] = desc
                 results[f"{feature_name}_image_out"] = image if enabled else None
             except Exception as e: results[f"{feature_name}_exception"] = e
@@ -157,10 +157,10 @@ class AIOFC_ParallelFeatureDescriber:
         return (results.get("hair_description"), results.get("hair_image_out"), results.get("outfit_description"), results.get("outfit_image_out"),)
 
 # The rest of the file remains the same...
-class AIOFC_SeeDreamPromptBuilder:
+class INSTARAW_SeeDreamPromptBuilder:
     @classmethod
     def INPUT_TYPES(cls): return { "required": { "hair_prefix_single": ("STRING", {}), "outfit_prefix_single": ("STRING", {}), "hair_prefix_multi_template": ("STRING", {"default": "perfectly change hair of image {} to"}), "outfit_prefix_multi_template": ("STRING", {"default": "perfectly change outfit of image {} to"}), "separator": ("STRING", {"default": " + "}), }, "optional": { "hair_description": ("STRING", {"forceInput": True}), "outfit_description": ("STRING", {"forceInput": True}), "hair_image_ref": ("IMAGE",), "outfit_image_ref": ("IMAGE",), } }
-    RETURN_TYPES = ("STRING", "IMAGE", "IMAGE",); FUNCTION = "build_prompt"; CATEGORY = "Workflow Logic"
+    RETURN_TYPES = ("STRING", "IMAGE", "IMAGE",); FUNCTION = "build_prompt"; CATEGORY = "INSTARAW/Workflow Logic"
     def build_prompt(self, hair_prefix_single, outfit_prefix_single, hair_prefix_multi_template, outfit_prefix_multi_template, separator, hair_description=None, outfit_description=None, hair_image_ref=None, outfit_image_ref=None):
         num_refs = (1 if hair_image_ref is not None else 0) + (1 if outfit_image_ref is not None else 0)
         target_idx = num_refs + 1
@@ -171,10 +171,10 @@ class AIOFC_SeeDreamPromptBuilder:
         if outfit_description and outfit_description.strip(): parts.append(f"{outfit_prefix.strip()} {outfit_description.strip()}")
         return (separator.join(parts), hair_image_ref, outfit_image_ref)
 
-class AIOFC_PreviewAssembler:
+class INSTARAW_PreviewAssembler:
     @classmethod
     def INPUT_TYPES(cls): return { "required": { "main_image": ("IMAGE",), "layout": (["Horizontal", "Vertical"],), "spacing": ("INT", {"default": 10}), "add_labels": ("BOOLEAN", {"default": True}), "label_scale": ("FLOAT", {"default": 1.0}), "font_color": ("STRING", {"default": "white"}), "label_position": (["Top Left", "Top Center", "Bottom Left", "Bottom Center"],), }, "optional": { "hair_image_ref": ("IMAGE",), "outfit_image_ref": ("IMAGE",), } }
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "assemble_preview"; CATEGORY = "Workflow Logic"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "assemble_preview"; CATEGORY = "INSTARAW/Workflow Logic"
     def assemble_preview(self, main_image, layout, spacing, add_labels, label_scale, font_color, label_position, hair_image_ref=None, outfit_image_ref=None):
         images = [("Target", main_image)]
         if hair_image_ref is not None: images.append(("Hair Ref", hair_image_ref))
@@ -204,11 +204,11 @@ class AIOFC_PreviewAssembler:
             offset += (img.width if layout == "Horizontal" else img.height) + spacing
         return (pil_to_tensor(canvas),)
 
-class AIOFC_TeleportInputAssembler:
+class INSTARAW_TeleportInputAssembler:
     @classmethod
     def INPUT_TYPES(cls): return { "required": { "character_image": ("IMAGE",), "teleport_to_image": ("IMAGE",), "layout": (["Horizontal", "Vertical"], {}), "spacing": ("INT", {"default": 10}), "add_labels": ("BOOLEAN", {"default": True}), "label_scale": ("FLOAT", {"default": 1.0}), "font_color": ("STRING", {"default": "white"}), "label_position": (["Top Left", "Top Center", "Bottom Left", "Bottom Center"],), } }
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "assemble_inputs"; CATEGORY = "Workflow Logic"
-    def assemble_inputs(self, **kwargs): return AIOFC_PreviewAssembler().assemble_preview(main_image=kwargs['character_image'], hair_image_ref=kwargs['teleport_to_image'], **{k:v for k,v in kwargs.items() if k not in ['character_image', 'teleport_to_image']})
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "assemble_inputs"; CATEGORY = "INSTARAW/Workflow Logic"
+    def assemble_inputs(self, **kwargs): return INSTARAW_PreviewAssembler().assemble_preview(main_image=kwargs['character_image'], hair_image_ref=kwargs['teleport_to_image'], **{k:v for k,v in kwargs.items() if k not in ['character_image', 'teleport_to_image']})
 
-NODE_CLASS_MAPPINGS = { "AIOFC_FeatureDescriber": AIOFC_FeatureDescriber, "AIOFC_UniversalDescriber": AIOFC_UniversalDescriber, "AIOFC_SwapPromptAssembler": AIOFC_SwapPromptAssembler, "AIOFC_ParallelFeatureDescriber": AIOFC_ParallelFeatureDescriber, "AIOFC_SeeDreamPromptBuilder": AIOFC_SeeDreamPromptBuilder, "AIOFC_PreviewAssembler": AIOFC_PreviewAssembler, "AIOFC_TeleportInputAssembler": AIOFC_TeleportInputAssembler, }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_FeatureDescriber": "Feature Describer (Single)", "AIOFC_UniversalDescriber": "Universal Describer", "AIOFC_SwapPromptAssembler": "Swap Prompt Assembler", "AIOFC_ParallelFeatureDescriber": "Feature Describer (Parallel)", "AIOFC_SeeDreamPromptBuilder": "SeeDream Prompt Builder", "AIOFC_PreviewAssembler": "Preview Assembler", "AIOFC_TeleportInputAssembler": "Teleport Input Assembler", }
+NODE_CLASS_MAPPINGS = { "INSTARAW_FeatureDescriber": INSTARAW_FeatureDescriber, "INSTARAW_UniversalDescriber": INSTARAW_UniversalDescriber, "INSTARAW_SwapPromptAssembler": INSTARAW_SwapPromptAssembler, "INSTARAW_ParallelFeatureDescriber": INSTARAW_ParallelFeatureDescriber, "INSTARAW_SeeDreamPromptBuilder": INSTARAW_SeeDreamPromptBuilder, "INSTARAW_PreviewAssembler": INSTARAW_PreviewAssembler, "INSTARAW_TeleportInputAssembler": INSTARAW_TeleportInputAssembler, }
+NODE_DISPLAY_NAME_MAPPINGS = { "INSTARAW_FeatureDescriber": "✨ INSTARAW Feature Describer (Single)", "INSTARAW_UniversalDescriber": "✨ INSTARAW Universal Describer", "INSTARAW_SwapPromptAssembler": "✍️ INSTARAW Swap Prompt Assembler", "INSTARAW_ParallelFeatureDescriber": "🚀 INSTARAW Feature Describer (Parallel)", "INSTARAW_SeeDreamPromptBuilder": "🗣️ INSTARAW SeeDream Prompt Builder", "INSTARAW_PreviewAssembler": "🖼️ INSTARAW Preview Assembler", "INSTARAW_TeleportInputAssembler": "🖼️ INSTARAW Teleport Input Assembler", }

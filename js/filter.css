@@ -1,4 +1,4 @@
-.aiofc_popup {
+.instaraw_popup {
     position: absolute;
     width:100%;
     height:100%;
@@ -7,7 +7,7 @@
     --text_area_height: 0px;
 }
 
-.aiofc_popup .grid {
+.instaraw_popup .grid {
     position: absolute;
     width:70%;
     left:15%;
@@ -18,12 +18,12 @@
     align-items: center;
 }
 
-.aiofc_popup .overlaygrid {
+.instaraw_popup .overlaygrid {
     opacity: 0.5;
     pointer-events: none;
 }
 
-.aiofc_popup .title {
+.instaraw_popup .title {
     position: absolute;
     width:100%;
     text-align: center;
@@ -31,13 +31,13 @@
     font-size: 250%;
 }
 
-.aiofc_popup .tip {
+.instaraw_popup .tip {
     display: block;
     padding-top: 10px;
     line-height: 20px;
 }
 
-.aiofc_popup .buttons {
+.instaraw_popup .buttons {
     position: absolute;
     width:14%;
     left:86%;
@@ -46,12 +46,12 @@
     font-size: small;
 }
 
-.aiofc_popup .control_text:after {
+.instaraw_popup .control_text:after {
     content:"\a";
     white-space: pre;
 }
 
-.aiofc_popup .grid img {
+.instaraw_popup .grid img {
     margin: 2px;
     border: 1px solid white;
     padding: 4px;
@@ -59,20 +59,20 @@
     max-height: 100%;
 }
 
-.aiofc_popup .grid img.selected {
+.instaraw_popup .grid img.selected {
     border: 3px solid green;
     padding: 2px;
 }
 
-.aiofc_popup .grid img.hover {
+.instaraw_popup .grid img.hover {
     box-shadow: 0 0 4px 4px red;
 }
 
-.aiofc_popup.hidden {
+.instaraw_popup.hidden {
     display:none !important;
 }
 
-.aiofc_popup .hidden {
+.instaraw_popup .hidden {
     display: none !important;
 }
 
@@ -81,7 +81,7 @@
 }
 
 /* --- Interactive Crop Styles --- */
-.aiofc_popup .crop_container {
+.instaraw_popup .crop_container {
     position: absolute;
     width: 70%;
     left: 15%;
@@ -93,14 +93,14 @@
     user-select: none;
 }
 
-.aiofc_popup .crop_image_bg {
+.instaraw_popup .crop_image_bg {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
     pointer-events: none;
 }
 
-.aiofc_popup .crop_canvas_overlay {
+.instaraw_popup .crop_canvas_overlay {
     position: absolute;
     cursor: crosshair;
 }

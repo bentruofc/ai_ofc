@@ -1,6 +1,6 @@
 # ---
-# ComfyUI AIOFC - Nano Banana Pro Aspect Ratio Node
-# Copyright © 2025 Aiofc. All rights reserved.
+# ComfyUI INSTARAW - Nano Banana Pro Aspect Ratio Node
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -11,7 +11,7 @@ Includes visual preview via JavaScript widget.
 """
 
 
-class AIOFC_NanoBananaAspectRatio:
+class INSTARAW_NanoBananaAspectRatio:
     """
     Aspect ratio and resolution selector for Nano Banana Pro.
     Supports all standard aspect ratios and 1K/2K/4K resolution tiers.
@@ -77,7 +77,7 @@ class AIOFC_NanoBananaAspectRatio:
     RETURN_TYPES = ("STRING", "STRING", "INT", "INT", "STRING")
     RETURN_NAMES = ("aspect_ratio", "resolution", "width", "height", "aspect_label")
     FUNCTION = "get_settings"
-    CATEGORY = "Input"
+    CATEGORY = "INSTARAW/Input"
     DESCRIPTION = "Nano Banana Pro aspect ratio and resolution selector with visual preview."
 
     def get_settings(self, aspect_ratio, resolution):
@@ -121,9 +121,9 @@ class AIOFC_NanoBananaAspectRatio:
 
 # Node registration
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_NanoBananaAspectRatio": AIOFC_NanoBananaAspectRatio,
+    "INSTARAW_NanoBananaAspectRatio": INSTARAW_NanoBananaAspectRatio,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_NanoBananaAspectRatio": "Nano Banana Pro Aspect Ratio",
+    "INSTARAW_NanoBananaAspectRatio": "📐 Nano Banana Pro Aspect Ratio",
 }

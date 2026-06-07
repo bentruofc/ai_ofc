@@ -1,10 +1,10 @@
 """
-AIOFC Float Input Node
+INSTARAW Float Input Node
 A simple float input node with three decimal place precision.
 """
 
 
-class AIOFC_FloatInput:
+class INSTARAW_FloatInput:
     """
     A simple float input node that accepts values with up to three decimal places.
     Useful for precise parameter control in workflows.
@@ -28,7 +28,7 @@ class AIOFC_FloatInput:
     RETURN_TYPES = ("FLOAT",)
     RETURN_NAMES = ("float",)
     FUNCTION = "output_float"
-    CATEGORY = "Input"
+    CATEGORY = "INSTARAW/Input"
     DESCRIPTION = "Outputs a float value with up to three decimal places precision"
 
     def output_float(self, value):
@@ -45,9 +45,9 @@ class AIOFC_FloatInput:
 
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_FloatInput": AIOFC_FloatInput,
+    "INSTARAW_FloatInput": INSTARAW_FloatInput,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_FloatInput": "Float Input (3 decimals)",
+    "INSTARAW_FloatInput": "🔢 INSTARAW Float Input (3 decimals)",
 }

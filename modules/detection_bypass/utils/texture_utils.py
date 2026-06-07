@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/texture_utils.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/texture_utils.py
 # (Definitive, Stable Log-Based Loss)
 import torch
 import torch.nn.functional as F

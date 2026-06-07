@@ -4,7 +4,7 @@ Provides preset aspect ratios optimized for SDXL (Stable Diffusion XL) workflows
 """
 
 
-class AIOFC_SDXLAspectRatio:
+class INSTARAW_SDXLAspectRatio:
     """
     Aspect ratio presets for SDXL (Stable Diffusion XL) workflows.
     These resolutions are optimized for SDXL's native training resolution.
@@ -31,7 +31,7 @@ class AIOFC_SDXLAspectRatio:
     RETURN_TYPES = ("INT", "INT", "STRING")
     RETURN_NAMES = ("width", "height", "aspect_label")
     FUNCTION = "get_resolution"
-    CATEGORY = "Input"
+    CATEGORY = "INSTARAW/Input"
     DESCRIPTION = "SDXL aspect ratio presets. Outputs resolution optimized for Stable Diffusion XL."
 
     def get_resolution(self, aspect_ratio):
@@ -52,9 +52,9 @@ class AIOFC_SDXLAspectRatio:
 
 # Node registration
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_SDXLAspectRatio": AIOFC_SDXLAspectRatio
+    "INSTARAW_SDXLAspectRatio": INSTARAW_SDXLAspectRatio
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_SDXLAspectRatio": "SDXL Aspect Ratio"
+    "INSTARAW_SDXLAspectRatio": "📐 SDXL Aspect Ratio"
 }

@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/neural_grain_node.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/neural_grain_node.py
 # ---
 
 import torch
@@ -9,15 +9,15 @@ from PIL import Image
 # Import the GrainNet architecture from our modules
 from ...modules.neural_grain.net import GrainNet
 
-# Get the absolute path to the root of the ComfyUI_AIOFC custom node
+# Get the absolute path to the root of the ComfyUI_INSTARAW custom node
 NODE_FILE_PATH = os.path.dirname(os.path.realpath(__file__))
-AIOFC_ROOT_PATH = os.path.abspath(os.path.join(NODE_FILE_PATH, "..", ".."))
-MODEL_PATH = os.path.join(AIOFC_ROOT_PATH, "pretrained", "neural_grain", "grainnet.pt")
+INSTARAW_ROOT_PATH = os.path.abspath(os.path.join(NODE_FILE_PATH, "..", ".."))
+MODEL_PATH = os.path.join(INSTARAW_ROOT_PATH, "pretrained", "neural_grain", "grainnet.pt")
 
 # Global variable to hold the loaded model, so we don't reload it every time
 GRAIN_NET_MODEL = None
 
-class AIOFC_NeuralGrain:
+class INSTARAW_NeuralGrain:
     """
     Applies a sophisticated, learned grain pattern using the GrainNet model from the
     "Neural Film Grain Rendering" paper. This version is adapted to apply achromatic
@@ -43,7 +43,7 @@ class AIOFC_NeuralGrain:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "apply_grain"
-    CATEGORY = "Post-Processing"
+    CATEGORY = "INSTARAW/Post-Processing"
 
     def load_model(self):
         """Loads the GrainNet model into a global variable for reuse."""
@@ -52,13 +52,13 @@ class AIOFC_NeuralGrain:
             if not os.path.exists(MODEL_PATH):
                 raise FileNotFoundError(f"Neural Grain model not found! Expected at: {MODEL_PATH}")
             
-            print("Neural Grain: Loading GrainNet model...")
+            print("🧠 INSTARAW Neural Grain: Loading GrainNet model...")
             # The pretrained model uses block_nb=2 and activation='tanh'
             state_dict = torch.load(MODEL_PATH, map_location="cpu")
             GRAIN_NET_MODEL = GrainNet(block_nb=2, activation='tanh')
             GRAIN_NET_MODEL.load_state_dict(state_dict)
             GRAIN_NET_MODEL.eval()
-            print("Neural Grain: Model loaded.")
+            print("✅ INSTARAW Neural Grain: Model loaded.")
         return GRAIN_NET_MODEL
 
     def apply_grain(self, image: torch.Tensor, seed: int, grain_size: float, strength: float):
@@ -102,14 +102,14 @@ class AIOFC_NeuralGrain:
 
         final_image = blended_image_bchw.permute(0, 2, 3, 1).to(original_device)
 
-        print("Neural Grain: Processing complete.")
+        print("✅ INSTARAW Neural Grain: Processing complete.")
         return (final_image,)
 
 # --- Node Registration ---
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_NeuralGrain": AIOFC_NeuralGrain,
+    "INSTARAW_NeuralGrain": INSTARAW_NeuralGrain,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_NeuralGrain": "Neural Grain",
+    "INSTARAW_NeuralGrain": "✨ INSTARAW Neural Grain",
 }

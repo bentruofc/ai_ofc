@@ -1,8 +1,8 @@
 /* ---
-// Filename: ../ComfyUI_AIOFC/js/advanced_image_loader.css
+// Filename: ../ComfyUI_INSTARAW/js/advanced_image_loader.css
 // --- */
 
-.aiofc-adv-loader-container {
+.instaraw-adv-loader-container {
 	background: #0d0f12;
 	padding: 16px;
 	border-radius: 4px;
@@ -10,20 +10,20 @@
 }
 
 /* Brand Row */
-.aiofc-adv-loader-brand-row {
+.instaraw-adv-loader-brand-row {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	margin-bottom: 12px;
 }
 
-.aiofc-adv-loader-logo {
+.instaraw-adv-loader-logo {
 	width: 140px;
 	height: auto;
 	opacity: 0.85;
 }
 
-.aiofc-adv-loader-version {
+.instaraw-adv-loader-version {
 	position: absolute;
 	right: 0;
 	top: 50%;
@@ -35,7 +35,7 @@
 }
 
 /* Top Bar - Mode + Stats */
-.aiofc-adv-loader-topbar {
+.instaraw-adv-loader-topbar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -46,26 +46,26 @@
 	border-radius: 4px;
 	border: 1px solid rgba(255, 255, 255, 0.08);
 }
-.aiofc-adv-loader-topbar-left {
+.instaraw-adv-loader-topbar-left {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 }
-.aiofc-adv-loader-topbar-right {
+.instaraw-adv-loader-topbar-right {
 	display: flex;
 	align-items: center;
 	gap: 6px;
 	font-size: 12px;
 	color: rgba(249, 250, 251, 0.7);
 }
-.aiofc-adv-loader-separator {
+.instaraw-adv-loader-separator {
 	color: rgba(255, 255, 255, 0.3);
 }
-.aiofc-adv-loader-mode-select {
+.instaraw-adv-loader-mode-select {
 	display: flex;
 	align-items: center;
 }
-.aiofc-adv-loader-progress-badge {
+.instaraw-adv-loader-progress-badge {
 	font-size: 11px;
 	color: #818cf8;
 	font-weight: 600;
@@ -75,7 +75,7 @@
 }
 
 /* Mode Badge */
-.aiofc-adv-loader-mode-badge {
+.instaraw-adv-loader-mode-badge {
 	padding: 6px 12px;
 	border-radius: 4px;
 	font-size: 11px;
@@ -84,19 +84,19 @@
 	text-transform: uppercase;
 }
 
-.aiofc-adv-loader-mode-txt2img {
+.instaraw-adv-loader-mode-txt2img {
 	background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
 	color: #ffffff;
 	border: 2px solid #a78bfa;
 }
 
-.aiofc-adv-loader-mode-img2img {
+.instaraw-adv-loader-mode-img2img {
 	background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
 	color: #ffffff;
 	border: 2px solid #60a5fa;
 }
 
-.aiofc-adv-loader-mode-selector {
+.instaraw-adv-loader-mode-selector {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -106,13 +106,13 @@
 	border-radius: 4px;
 	border: 1px solid rgba(255, 255, 255, 0.06);
 }
-.aiofc-adv-loader-mode-selector label {
+.instaraw-adv-loader-mode-selector label {
 	color: rgba(249, 250, 251, 0.7);
 	font-size: 11px;
 	font-weight: 500;
 	text-transform: uppercase;
 }
-.aiofc-adv-loader-mode-dropdown {
+.instaraw-adv-loader-mode-dropdown {
 	background: rgba(255, 255, 255, 0.05);
 	color: #f9fafb;
 	border: 1px solid rgba(255, 255, 255, 0.1);
@@ -123,15 +123,15 @@
 	font-weight: 500;
 	outline: none;
 }
-.aiofc-adv-loader-mode-dropdown:hover {
+.instaraw-adv-loader-mode-dropdown:hover {
 	background: rgba(255, 255, 255, 0.08);
 	border-color: #818cf8;
 	transition: none;
 }
-.aiofc-adv-loader-mode-dropdown:focus {
+.instaraw-adv-loader-mode-dropdown:focus {
 	border-color: #a78bfa;
 }
-.aiofc-adv-loader-queue-all-btn {
+.instaraw-adv-loader-queue-all-btn {
 	background: #7c3aed;
 	color: #ffffff;
 	border: none;
@@ -141,11 +141,11 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-queue-all-btn:hover {
+.instaraw-adv-loader-queue-all-btn:hover {
 	background: #6d28d9;
 	transition: none;
 }
-.aiofc-adv-loader-add-latent-btn {
+.instaraw-adv-loader-add-latent-btn {
 	background: #059669;
 	color: #ffffff;
 	border: none;
@@ -155,11 +155,11 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-add-latent-btn:hover {
+.instaraw-adv-loader-add-latent-btn:hover {
 	background: #047857;
 	transition: none;
 }
-.aiofc-adv-loader-batch-add-btn {
+.instaraw-adv-loader-batch-add-btn {
 	background: #059669;
 	color: #ffffff;
 	border: none;
@@ -169,16 +169,16 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-batch-add-btn:hover {
+.instaraw-adv-loader-batch-add-btn:hover {
 	background: #047857;
 	transition: none;
 }
-.aiofc-adv-loader-batch-add-controls {
+.instaraw-adv-loader-batch-add-controls {
 	display: flex;
 	align-items: center;
 	gap: 4px;
 }
-.aiofc-adv-loader-batch-count-input {
+.instaraw-adv-loader-batch-count-input {
 	width: 50px;
 	padding: 9px 8px;
 	border: 1px solid rgba(255, 255, 255, 0.15);
@@ -188,19 +188,19 @@
 	font-size: 13px;
 	text-align: center;
 }
-.aiofc-adv-loader-header {
+.instaraw-adv-loader-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 16px;
 }
-.aiofc-adv-loader-actions {
+.instaraw-adv-loader-actions {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 8px;
 	margin-bottom: 12px;
 }
-.aiofc-adv-loader-upload-btn {
+.instaraw-adv-loader-upload-btn {
 	background: #6366f1;
 	color: #ffffff;
 	border: none;
@@ -210,15 +210,15 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-upload-btn:hover {
+.instaraw-adv-loader-upload-btn:hover {
 	background: #4f46e5;
 	transition: none;
 }
-.aiofc-adv-loader-upload-btn:disabled {
+.instaraw-adv-loader-upload-btn:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 }
-.aiofc-adv-loader-delete-all-btn {
+.instaraw-adv-loader-delete-all-btn {
 	background: #dc2626;
 	color: #ffffff;
 	border: none;
@@ -228,11 +228,11 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-delete-all-btn:hover {
+.instaraw-adv-loader-delete-all-btn:hover {
 	background: #ef4444;
 	transition: none;
 }
-.aiofc-adv-loader-duplicate-btn {
+.instaraw-adv-loader-duplicate-btn {
 	background: #374151;
 	color: #ffffff;
 	border: none;
@@ -242,11 +242,11 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-duplicate-btn:hover {
+.instaraw-adv-loader-duplicate-btn:hover {
 	background: #4b5563;
 	transition: none;
 }
-.aiofc-adv-loader-sync-btn {
+.instaraw-adv-loader-sync-btn {
 	background: #4f46e5;
 	color: #ffffff;
 	border: none;
@@ -256,26 +256,26 @@
 	font-weight: 600;
 	font-size: 13px;
 }
-.aiofc-adv-loader-sync-btn:hover {
+.instaraw-adv-loader-sync-btn:hover {
 	background: #6366f1;
 	transition: none;
 }
-.aiofc-adv-loader-stats {
+.instaraw-adv-loader-stats {
 	display: flex;
 	align-items: center;
 	gap: 16px;
 	color: #f9fafb;
 	font-size: 12px;
 }
-.aiofc-adv-loader-count {
+.instaraw-adv-loader-count {
 	font-weight: 600;
 	color: rgba(249, 250, 251, 0.9);
 }
-.aiofc-adv-loader-total {
+.instaraw-adv-loader-total {
 	font-weight: 500;
 	color: rgba(167, 139, 250, 0.9);
 }
-.aiofc-adv-loader-progress {
+.instaraw-adv-loader-progress {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -285,19 +285,19 @@
 	margin-bottom: 16px;
 	border: 1px solid rgba(167, 139, 250, 0.2);
 }
-.aiofc-adv-loader-progress .aiofc-adv-loader-progress-label {
+.instaraw-adv-loader-progress .instaraw-adv-loader-progress-label {
 	color: rgba(249, 250, 251, 0.7);
 	font-size: 11px;
 	font-weight: 500;
 	text-transform: uppercase;
 }
-.aiofc-adv-loader-progress .aiofc-adv-loader-progress-value {
+.instaraw-adv-loader-progress .instaraw-adv-loader-progress-value {
 	color: #a78bfa;
 	font-size: 16px;
 	font-weight: 600;
 	font-variant-numeric: tabular-nums;
 }
-.aiofc-adv-loader-gallery {
+.instaraw-adv-loader-gallery {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 	gap: 12px;
@@ -305,7 +305,7 @@
 	overflow: visible;
 	position: relative;
 }
-.aiofc-adv-loader-empty {
+.instaraw-adv-loader-empty {
 	grid-column: 1 / -1;
 	text-align: center;
 	padding: 48px 24px;
@@ -313,18 +313,18 @@
 	border-radius: 4px;
 	border: 1px dashed rgba(167, 139, 250, 0.2);
 }
-.aiofc-adv-loader-empty p {
+.instaraw-adv-loader-empty p {
 	margin: 8px 0;
 	color: rgba(249, 250, 251, 0.7);
 	font-size: 13px;
 	font-weight: 500;
 }
-.aiofc-adv-loader-empty .aiofc-adv-loader-hint {
+.instaraw-adv-loader-empty .instaraw-adv-loader-hint {
 	font-size: 12px;
 	color: rgba(129, 140, 248, 0.6);
 	font-weight: 400;
 }
-.aiofc-adv-loader-item {
+.instaraw-adv-loader-item {
 	background: rgba(255, 255, 255, 0.04);
 	border-radius: 4px;
 	overflow: hidden;
@@ -332,22 +332,22 @@
 	position: relative;
 	border: 2px solid rgba(255, 255, 255, 0.08);
 }
-.aiofc-adv-loader-item:hover {
+.instaraw-adv-loader-item:hover {
 	border-color: rgba(99, 102, 241, 0.5);
 	transition: none;
 }
-.aiofc-adv-loader-item-active {
+.instaraw-adv-loader-item-active {
 	border-color: #a78bfa !important;
 	background: rgba(167, 139, 250, 0.08);
 }
-.aiofc-adv-loader-item-processing {
+.instaraw-adv-loader-item-processing {
 	border-color: #10b981 !important;
 	background: rgba(16, 185, 129, 0.08);
 }
-.aiofc-adv-loader-item-done {
+.instaraw-adv-loader-item-done {
 	opacity: 0.5;
 }
-.aiofc-adv-loader-index-badge {
+.instaraw-adv-loader-index-badge {
 	position: absolute;
 	top: 8px;
 	left: 8px;
@@ -359,7 +359,7 @@
 	font-weight: 600;
 	z-index: 10;
 }
-.aiofc-adv-loader-processing-indicator {
+.instaraw-adv-loader-processing-indicator {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -372,7 +372,7 @@
 	font-weight: 600;
 	z-index: 10;
 }
-.aiofc-adv-loader-active-indicator {
+.instaraw-adv-loader-active-indicator {
 	position: absolute;
 	top: 8px;
 	right: 8px;
@@ -384,7 +384,7 @@
 	font-weight: 600;
 	z-index: 10;
 }
-.aiofc-adv-loader-done-indicator {
+.instaraw-adv-loader-done-indicator {
 	position: absolute;
 	top: 8px;
 	right: 8px;
@@ -399,7 +399,7 @@
 	font-size: 12px;
 	z-index: 10;
 }
-.aiofc-adv-loader-item.aiofc-adv-loader-drop-before::before {
+.instaraw-adv-loader-item.instaraw-adv-loader-drop-before::before {
 	content: '';
 	position: absolute;
 	top: -7px;
@@ -411,7 +411,7 @@
 	z-index: 1000;
 	pointer-events: none;
 }
-.aiofc-adv-loader-item.aiofc-adv-loader-drop-after::after {
+.instaraw-adv-loader-item.instaraw-adv-loader-drop-after::after {
 	content: '';
 	position: absolute;
 	bottom: -7px;
@@ -423,20 +423,20 @@
 	z-index: 1000;
 	pointer-events: none;
 }
-.aiofc-adv-loader-thumb {
+.instaraw-adv-loader-thumb {
 	width: 100%;
 	height: 140px;
 	overflow: hidden;
 	background: #000000;
 	position: relative;
 }
-.aiofc-adv-loader-thumb img {
+.instaraw-adv-loader-thumb img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	display: block;
 }
-.aiofc-adv-loader-controls {
+.instaraw-adv-loader-controls {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -444,12 +444,12 @@
 	background: rgba(0, 0, 0, 0.3);
 	border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-.aiofc-adv-loader-controls label {
+.instaraw-adv-loader-controls label {
 	color: rgba(249, 250, 251, 0.6);
 	font-size: 11px;
 	font-weight: 500;
 }
-.aiofc-adv-loader-repeat-input {
+.instaraw-adv-loader-repeat-input {
 	width: 55px;
 	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.1);
@@ -461,15 +461,15 @@
 	font-weight: 600;
 	outline: none;
 }
-.aiofc-adv-loader-repeat-input:hover {
+.instaraw-adv-loader-repeat-input:hover {
 	background: rgba(255, 255, 255, 0.08);
 	border-color: #818cf8;
 	transition: none;
 }
-.aiofc-adv-loader-repeat-input:focus {
+.instaraw-adv-loader-repeat-input:focus {
 	border-color: #a78bfa;
 }
-.aiofc-adv-loader-delete-btn {
+.instaraw-adv-loader-delete-btn {
 	margin-left: auto;
 	background: #ef4444;
 	color: #ffffff;
@@ -485,17 +485,17 @@
 	align-items: center;
 	justify-content: center;
 }
-.aiofc-adv-loader-delete-btn:hover {
+.instaraw-adv-loader-delete-btn:hover {
 	background: #dc2626;
 	transition: none;
 }
-.aiofc-adv-loader-info {
+.instaraw-adv-loader-info {
 	padding: 8px 10px;
 	font-size: 11px;
 	background: rgba(0, 0, 0, 0.2);
 	border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-.aiofc-adv-loader-info .aiofc-adv-loader-filename {
+.instaraw-adv-loader-info .instaraw-adv-loader-filename {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -504,7 +504,7 @@
 	font-weight: 500;
 	line-height: 1.3;
 }
-.aiofc-adv-loader-info .aiofc-adv-loader-dimensions {
+.instaraw-adv-loader-info .instaraw-adv-loader-dimensions {
 	color: #818cf8;
 	font-size: 11px;
 	font-weight: 600;
@@ -513,13 +513,13 @@
 /* ===== Txt2Img Mode Styles ===== */
 
 /* Batch add controls */
-.aiofc-adv-loader-batch-add-controls {
+.instaraw-adv-loader-batch-add-controls {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
 }
 
-.aiofc-adv-loader-batch-count-input {
+.instaraw-adv-loader-batch-count-input {
 	width: 54px;
 	background: rgba(255, 255, 255, 0.06);
 	border: 1px solid rgba(255, 255, 255, 0.1);
@@ -532,17 +532,17 @@
 	outline: none;
 }
 
-.aiofc-adv-loader-batch-count-input:hover {
+.instaraw-adv-loader-batch-count-input:hover {
 	background: rgba(255, 255, 255, 0.08);
 	border-color: #818cf8;
 	transition: none;
 }
 
-.aiofc-adv-loader-batch-count-input:focus {
+.instaraw-adv-loader-batch-count-input:focus {
 	border-color: #a78bfa;
 }
 
-.aiofc-adv-loader-batch-add-btn {
+.instaraw-adv-loader-batch-add-btn {
 	background: #8b5cf6;
 	color: #ffffff;
 	border: none;
@@ -554,12 +554,12 @@
 	white-space: nowrap;
 }
 
-.aiofc-adv-loader-batch-add-btn:hover {
+.instaraw-adv-loader-batch-add-btn:hover {
 	background: #7c3aed;
 	transition: none;
 }
 
-.aiofc-adv-loader-add-latent-btn {
+.instaraw-adv-loader-add-latent-btn {
 	background: #8b5cf6;
 	color: #ffffff;
 	border: none;
@@ -570,13 +570,13 @@
 	font-size: 13px;
 }
 
-.aiofc-adv-loader-add-latent-btn:hover {
+.instaraw-adv-loader-add-latent-btn:hover {
 	background: #7c3aed;
 	transition: none;
 }
 
 /* Empty latent placeholder */
-.aiofc-adv-loader-latent-thumb {
+.instaraw-adv-loader-latent-thumb {
 	width: 100%;
 	height: 140px;
 	overflow: hidden;
@@ -589,7 +589,7 @@
 	gap: 8px;
 }
 
-.aiofc-adv-loader-latent-aspect {
+.instaraw-adv-loader-latent-aspect {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -597,12 +597,12 @@
 	color: #ffffff;
 }
 
-.aiofc-adv-loader-latent-aspect-icon {
+.instaraw-adv-loader-latent-aspect-icon {
 	font-size: 24px;
 	opacity: 0.9;
 }
 
-.aiofc-adv-loader-latent-aspect-label {
+.instaraw-adv-loader-latent-aspect-label {
 	font-size: 13px;
 	font-weight: 600;
 	opacity: 0.95;
@@ -611,7 +611,7 @@
 	border-radius: 4px;
 }
 
-.aiofc-adv-loader-latent-id {
+.instaraw-adv-loader-latent-id {
 	position: absolute;
 	bottom: 8px;
 	left: 8px;
@@ -624,14 +624,14 @@
 	font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
 }
 
-.aiofc-adv-loader-latent-resolution {
+.instaraw-adv-loader-latent-resolution {
 	color: #c4b5fd;
 	font-size: 11px;
 	font-weight: 600;
 }
 
 /* Aspect ratio preview box */
-.aiofc-adv-loader-aspect-preview {
+.instaraw-adv-loader-aspect-preview {
 	max-width: 80%;
 	max-height: 80%;
 	background: rgba(255, 255, 255, 0.1);
@@ -643,13 +643,13 @@
 	padding: 12px;
 }
 
-.aiofc-adv-loader-aspect-content {
+.instaraw-adv-loader-aspect-content {
 	text-align: center;
 	color: white;
 }
 
 /* === Drag and Drop File Upload Visual Feedback === */
-.aiofc-adv-loader-drag-over {
+.instaraw-adv-loader-drag-over {
 	position: relative;
 	outline: 3px dashed #60a5fa !important;
 	outline-offset: -3px !important;
@@ -657,7 +657,7 @@
 	box-shadow: 0 0 20px rgba(59, 130, 246, 0.3) !important;
 }
 
-.aiofc-adv-loader-drag-over::before {
+.instaraw-adv-loader-drag-over::before {
 	content: "📁 Drop images here to upload";
 	position: absolute;
 	top: 50%;
@@ -677,10 +677,10 @@
 
 /* ===== Selection Mode Styles ===== */
 
-.aiofc-adv-loader-select-all-btn,
-.aiofc-adv-loader-deselect-all-btn,
-.aiofc-adv-loader-cancel-selection-btn,
-.aiofc-adv-loader-enter-selection-btn {
+.instaraw-adv-loader-select-all-btn,
+.instaraw-adv-loader-deselect-all-btn,
+.instaraw-adv-loader-cancel-selection-btn,
+.instaraw-adv-loader-enter-selection-btn {
 	background: #374151;
 	color: #ffffff;
 	border: none;
@@ -691,15 +691,15 @@
 	font-size: 13px;
 }
 
-.aiofc-adv-loader-select-all-btn:hover,
-.aiofc-adv-loader-deselect-all-btn:hover,
-.aiofc-adv-loader-cancel-selection-btn:hover,
-.aiofc-adv-loader-enter-selection-btn:hover {
+.instaraw-adv-loader-select-all-btn:hover,
+.instaraw-adv-loader-deselect-all-btn:hover,
+.instaraw-adv-loader-cancel-selection-btn:hover,
+.instaraw-adv-loader-enter-selection-btn:hover {
 	background: #4b5563;
 	transition: none;
 }
 
-.aiofc-adv-loader-delete-selected-btn {
+.instaraw-adv-loader-delete-selected-btn {
 	background: #dc2626;
 	color: #ffffff;
 	border: none;
@@ -710,18 +710,18 @@
 	font-size: 13px;
 }
 
-.aiofc-adv-loader-delete-selected-btn:hover {
+.instaraw-adv-loader-delete-selected-btn:hover {
 	background: #ef4444;
 	transition: none;
 }
 
-.aiofc-adv-loader-delete-selected-btn:disabled {
+.instaraw-adv-loader-delete-selected-btn:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
 }
 
 /* Selection checkbox in card */
-.aiofc-adv-loader-selection-checkbox {
+.instaraw-adv-loader-selection-checkbox {
 	position: absolute;
 	top: 8px;
 	left: 8px;
@@ -732,7 +732,7 @@
 	cursor: pointer;
 }
 
-.aiofc-adv-loader-image-checkbox {
+.instaraw-adv-loader-image-checkbox {
 	width: 22px;
 	height: 22px;
 	cursor: pointer;
@@ -740,21 +740,21 @@
 }
 
 /* Selection mode item styling */
-.aiofc-adv-loader-item-selection {
+.instaraw-adv-loader-item-selection {
 	cursor: pointer;
 }
 
-.aiofc-adv-loader-item-selection:hover {
+.instaraw-adv-loader-item-selection:hover {
 	border-color: #8b5cf6;
 	transition: none;
 }
 
-.aiofc-adv-loader-item-selected {
+.instaraw-adv-loader-item-selected {
 	border-color: #8b5cf6 !important;
 	background: rgba(139, 92, 246, 0.15);
 }
 
-.aiofc-adv-loader-item-selection .aiofc-adv-loader-controls {
+.instaraw-adv-loader-item-selection .instaraw-adv-loader-controls {
 	opacity: 0.5;
 	pointer-events: none;
 }

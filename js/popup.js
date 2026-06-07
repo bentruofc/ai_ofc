@@ -14,9 +14,9 @@ import { Log } from './log.js';
 import { create } from './utils.js';
 import { FloatingWindow } from './floating_window.js';
 
-// Renamed to AIOFC node class names
-const POPUP_NODES = ['AIOFC_ImageFilter', 'AIOFC_TextImageFilter', 'AIOFC_Interactive_Crop'];
-const MASK_NODES = ['AIOFC_MaskImageFilter'];
+// Renamed to INSTARAW node class names
+const POPUP_NODES = ['INSTARAW_ImageFilter', 'INSTARAW_TextImageFilter', 'INSTARAW_Interactive_Crop'];
+const MASK_NODES = ['INSTARAW_MaskImageFilter'];
 
 const REQUEST_RESHOW = '-1';
 const CANCEL = '-3';
@@ -43,9 +43,9 @@ class Popup extends HTMLElement {
 	constructor() {
 		super();
 		// Path updated to point to our package's assets
-		this.audio = new Audio('extensions/ComfyUI_/ding.mp3');
+		this.audio = new Audio('extensions/ComfyUI_INSTARAW/ding.mp3');
 
-		this.classList.add('aiofc_popup');
+		this.classList.add('instaraw_popup');
 
 		this.grid = create('span', 'grid', this);
 		this.overlaygrid = create('span', 'grid overlaygrid', this);
@@ -244,7 +244,7 @@ class Popup extends HTMLElement {
 		try {
 			const body = new FormData();
 			body.append('response', JSON.stringify(msg));
-			api.fetchApi('//interactive_message', { method: 'POST', body });
+			api.fetchApi('/instaraw/interactive_message', { method: 'POST', body });
 			Log.message_out(msg);
 		} catch (e) {
 			Log.error(e);
@@ -279,7 +279,7 @@ class Popup extends HTMLElement {
 
 	maybe_play_sound() {
 		// Updated settings key
-		if (app.ui.settings.getSettingValue('AIOFC.Interactive.PlaySound')) this.audio.play();
+		if (app.ui.settings.getSettingValue('INSTARAW.Interactive.PlaySound')) this.audio.play();
 	}
 
 	handle_message(message) {
@@ -296,7 +296,7 @@ class Popup extends HTMLElement {
 
 	autosend() {
 		// Updated settings key
-		return app.ui.settings.getSettingValue('AIOFC.Interactive.AutosendIdentical') && this.allsame;
+		return app.ui.settings.getSettingValue('INSTARAW.Interactive.AutosendIdentical') && this.allsame;
 	}
 
 	on_new_node(nd) {
@@ -345,7 +345,7 @@ class Popup extends HTMLElement {
 
 		if (this.handling_message) return `Ignoring message because we're already handling a message`;
 
-		this.set_title(this.node.title ?? 'Image Filter'); // Updated default title
+		this.set_title(this.node.title ?? 'INSTARAW Image Filter'); // Updated default title
 		this.allsame = detail.allsame || false;
 		if (detail.tip) this.tip_row.innerHTML = detail.tip.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 		else this.tip_row.innerHTML = '';
@@ -353,7 +353,7 @@ class Popup extends HTMLElement {
 		// Updated settings key
 		if (
 			this.state == State.INACTIVE &&
-			app.ui.settings.getSettingValue('AIOFC.Interactive.SmallWindow') &&
+			app.ui.settings.getSettingValue('INSTARAW.Interactive.SmallWindow') &&
 			!using_saved &&
 			!this.autosend()
 		) {
@@ -478,7 +478,7 @@ class Popup extends HTMLElement {
 			if (
 				this.state != State.FILTER &&
 				this.state != State.ZOOMED &&
-				app.ui.settings.getSettingValue('AIOFC.Interactive.StartZoomed') != 0
+				app.ui.settings.getSettingValue('INSTARAW.Interactive.StartZoomed') != 0
 			) {
 				this.autozoom_pending = true;
 			}
@@ -529,7 +529,7 @@ class Popup extends HTMLElement {
 		});
 
 		// Updated settings key
-		const fps = app.ui.settings.getSettingValue('AIOFC.Interactive.FPS');
+		const fps = app.ui.settings.getSettingValue('INSTARAW.Interactive.FPS');
 		const delay = fps > 0 ? 1000 / fps : 1000;
 		setTimeout(this.advance_videos.bind(this), delay);
 	}
@@ -547,7 +547,7 @@ class Popup extends HTMLElement {
 	zoom_auto() {
 		this.autozoom_pending = false;
 		// Updated settings key
-		const startZoomed = app.ui.settings.getSettingValue('AIOFC.Interactive.StartZoomed');
+		const startZoomed = app.ui.settings.getSettingValue('INSTARAW.Interactive.StartZoomed');
 		if (startZoomed == 1) {
 			this.zoomed_image_holder = this.grid.firstChild;
 		} else if (startZoomed == -1) {
@@ -663,7 +663,7 @@ class Popup extends HTMLElement {
 		}
 		const s = `${n}`;
 		// Updated settings key
-		if (app.ui.settings.getSettingValue('AIOFC.Interactive.ClickSends')) {
+		if (app.ui.settings.getSettingValue('INSTARAW.Interactive.ClickSends')) {
 			this.picked.add(s);
 			this._send_response();
 		} else {
@@ -740,7 +740,7 @@ class Popup extends HTMLElement {
 		const h_used = ((sub.height + GRID_IMAGE_SPACE) * this.rows) / box.height;
 		const could_zoom = 1.0 / Math.max(w_used, h_used);
 		// Updated settings key
-		if (could_zoom > 1 && app.ui.settings.getSettingValue('AIOFC.Interactive.EnlargeSmall')) {
+		if (could_zoom > 1 && app.ui.settings.getSettingValue('INSTARAW.Interactive.EnlargeSmall')) {
 			Array.from(this.grid.children).forEach((img) => {
 				img.style.width = `${sub.width * could_zoom}px`;
 			});
@@ -770,7 +770,7 @@ class Popup extends HTMLElement {
 		if (detail.lock_aspect_ratio) {
 			this.crop_data.aspectRatio = detail.lock_aspect_ratio.width / detail.lock_aspect_ratio.height;
 			this.crop_data.aspectRatioLabel = detail.lock_aspect_ratio.label;
-			console.log(`Crop aspect ratio locked to ${detail.lock_aspect_ratio.label} (${this.crop_data.aspectRatio.toFixed(3)})`);
+			console.log(`🔒 Crop aspect ratio locked to ${detail.lock_aspect_ratio.label} (${this.crop_data.aspectRatio.toFixed(3)})`);
 		}
 
 		this.state = State.CROP;
@@ -951,7 +951,7 @@ class Popup extends HTMLElement {
             const outlineColor = '#1e1b4b';
             ctx.font = 'bold 12px sans-serif';
             ctx.textAlign = 'left';
-            const lockLabel = `${this.crop_data.aspectRatioLabel}`;
+            const lockLabel = `🔒 ${this.crop_data.aspectRatioLabel}`;
             // Text shadow
             ctx.fillStyle = outlineColor;
             ctx.fillText(lockLabel, 11, 21);
@@ -1233,6 +1233,6 @@ class Popup extends HTMLElement {
     }
 }
 
-customElements.define('aiofc-imgae-filter-popup', Popup); // Renamed custom element
+customElements.define('instaraw-imgae-filter-popup', Popup); // Renamed custom element
 
 export const popup = new Popup();

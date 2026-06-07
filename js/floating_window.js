@@ -59,5 +59,5 @@ export class FloatingWindow extends HTMLElement {
     }
 }
 
-// Renamed custom element to be unique to AIOFC
-customElements.define('aiofc-floater',  FloatingWindow);
+// Renamed custom element to be unique to INSTARAW
+customElements.define('instaraw-floater',  FloatingWindow);

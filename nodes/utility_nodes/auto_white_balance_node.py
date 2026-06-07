@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/auto_white_balance_node.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/auto_white_balance_node.py
 import torch
 import numpy as np
 from PIL import Image
@@ -6,12 +6,12 @@ import os
 
 # Define the path to the internal reference image
 NODE_DIR = os.path.dirname(os.path.realpath(__file__))
-# We need to go up two levels from `utility_nodes` to the `ComfyUI_AIOFC` root
-AIOFC_ROOT = os.path.abspath(os.path.join(NODE_DIR, "..", ".."))
-IPHONE13_REF_PATH = os.path.join(AIOFC_ROOT, "modules", "_refs", "iphone13.jpg")
+# We need to go up two levels from `utility_nodes` to the `ComfyUI_INSTARAW` root
+INSTARAW_ROOT = os.path.abspath(os.path.join(NODE_DIR, "..", ".."))
+IPHONE13_REF_PATH = os.path.join(INSTARAW_ROOT, "modules", "_refs", "iphone13.jpg")
 
 
-class AIOFC_AutoWhiteBalance:
+class INSTARAW_AutoWhiteBalance:
     """
     Corrects color cast. Can use an Authenticity Profile, a live reference image,
     a built-in iPhone 13 sample, or a simple grey-world assumption.
@@ -47,7 +47,7 @@ class AIOFC_AutoWhiteBalance:
             }
         }
 
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor is None: return None
@@ -81,20 +81,20 @@ class AIOFC_AutoWhiteBalance:
                 try:
                     stats = np.load(npz_path)
                     if 'chroma_mean' in stats:
-                        print(f"AWB: Using Authenticity Profile '{os.path.basename(npz_path)}'.")
+                        print(f"🎨 AWB: Using Authenticity Profile '{os.path.basename(npz_path)}'.")
                         target_mean = stats['chroma_mean'].mean(axis=0)
                     else:
-                        print(f"AWB Warning: 'chroma_mean' not found in profile. Check profile or select another mode.")
+                        print(f"⚠️ AWB Warning: 'chroma_mean' not found in profile. Check profile or select another mode.")
                 except Exception as e:
-                    print(f"AWB Warning: Could not load profile '{npz_path}'. Error: {e}")
+                    print(f"⚠️ AWB Warning: Could not load profile '{npz_path}'. Error: {e}")
             else:
-                print("AWB Warning: 'Authenticity Profile' mode selected but no profile connected.")
+                print("⚠️ AWB Warning: 'Authenticity Profile' mode selected but no profile connected.")
 
         # 2. Internal Sample Mode
         elif mode == "Internal Sample Image (iPhone 13)":
             if not os.path.exists(IPHONE13_REF_PATH):
                 raise FileNotFoundError(f"Internal reference image not found! Expected at: {IPHONE13_REF_PATH}")
-            print("AWB: Using Internal Sample Image (iPhone 13).")
+            print("🎨 AWB: Using Internal Sample Image (iPhone 13).")
             ref_pil = Image.open(IPHONE13_REF_PATH)
             ref_numpy = np.array(ref_pil.convert("RGB"))
             target_mean = ref_numpy.astype(np.float32).reshape(-1, 3).mean(axis=0)
@@ -102,16 +102,16 @@ class AIOFC_AutoWhiteBalance:
         # 3. Live Reference Image Mode
         elif mode == "Reference Image":
             if awb_ref_image is not None:
-                print("AWB: Using live reference image.")
+                print("🎨 AWB: Using live reference image.")
                 ref_numpy = self._tensor_to_numpy(awb_ref_image)
                 target_mean = ref_numpy.astype(np.float32).reshape(-1, 3).mean(axis=0)
             else:
-                print("AWB Warning: 'Reference Image' mode selected but no reference connected.")
+                print("⚠️ AWB Warning: 'Reference Image' mode selected but no reference connected.")
         
         # 4. Fallback to Grey World if no other target was found, or if explicitly selected
         if target_mean is None:
             grey_target_value = self.GREY_TARGETS.get(mode, 128.0)
-            print(f"AWB: Falling back to Grey World assumption (target: {grey_target_value}).")
+            print(f"🎨 AWB: Falling back to Grey World assumption (target: {grey_target_value}).")
             target_mean = np.array([grey_target_value, grey_target_value, grey_target_value], dtype=np.float32)
 
         # --- BATCH PROCESSING ---

@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - API Model Selector Node (Corrected)
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - API Model Selector Node (Corrected)
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -12,7 +12,7 @@ A utility node to select a generative API model, simplifying workflows that use 
 
 from ..api_nodes.generative_api_nodes import MODEL_CONFIG
 
-class AIOFC_API_ModelSelector:
+class INSTARAW_API_ModelSelector:
     """
     Selects a generative model from a dropdown. The list of models is dynamically
     loaded from the generative_api_nodes configuration, ensuring it's always up to date.
@@ -30,7 +30,7 @@ class AIOFC_API_ModelSelector:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("model",)
     FUNCTION = "select_model"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def select_model(self, model):
         # --- THE FIX: Return a tuple with ONE item ---
@@ -41,9 +41,9 @@ class AIOFC_API_ModelSelector:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_API_ModelSelector": AIOFC_API_ModelSelector,
+    "INSTARAW_API_ModelSelector": INSTARAW_API_ModelSelector,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_API_ModelSelector": "API Model Selector",
+    "INSTARAW_API_ModelSelector": "🤖 INSTARAW API Model Selector",
 }

@@ -1,13 +1,13 @@
 # ---
-# ComfyUI AIOFC - Propose Crop from Detections Node
-# Copyright © 2025 Aiofc. All rights reserved.
+# ComfyUI INSTARAW - Propose Crop from Detections Node
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
 import json
 import torch
 
-class AIOFC_CropBox_From_BoundingBoxes:
+class INSTARAW_CropBox_From_BoundingBoxes:
     """
     Calculates a "safe" crop area that excludes detected NSFW bounding boxes.
     It takes JSON-formatted bounding box data and an image (for dimensions)
@@ -28,7 +28,7 @@ class AIOFC_CropBox_From_BoundingBoxes:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("proposed_crop_json",)
     FUNCTION = "propose_crop"
-    CATEGORY = "NSFW"
+    CATEGORY = "INSTARAW/NSFW"
 
     def propose_crop(self, image, bounding_boxes_json, crop_strategy, padding):
         _batch, img_height, img_width, _channels = image.shape
@@ -57,7 +57,7 @@ class AIOFC_CropBox_From_BoundingBoxes:
             
         # Ensure the crop height is not zero or negative.
         if crop_height <= 0:
-            print("Propose Crop: Calculated crop height is zero or less. Defaulting to top half.")
+            print("⚠️ INSTARAW Propose Crop: Calculated crop height is zero or less. Defaulting to top half.")
             crop_height = img_height // 2
         
         # The crop always starts from the top-left corner.
@@ -78,9 +78,9 @@ class AIOFC_CropBox_From_BoundingBoxes:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_CropBox_From_BoundingBoxes": AIOFC_CropBox_From_BoundingBoxes,
+    "INSTARAW_CropBox_From_BoundingBoxes": INSTARAW_CropBox_From_BoundingBoxes,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_CropBox_From_BoundingBoxes": "Propose Crop from Detections",
+    "INSTARAW_CropBox_From_BoundingBoxes": "✂️ INSTARAW Propose Crop from Detections",
 }

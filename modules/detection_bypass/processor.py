@@ -1,5 +1,5 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/modules/detection_bypass/processor.py (Refactored)
+# Filename: ../ComfyUI_INSTARAW/modules/detection_bypass/processor.py (Refactored)
 # ---
 #!/usr/bin/env python3
 """

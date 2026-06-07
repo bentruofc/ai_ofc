@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/unmarker_full.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/unmarker_full.py
 # ---
 """
 Full two-stage spectral normalization implementation. FINAL VERSION.
@@ -62,9 +62,9 @@ class SpectralNormalizer:
             try:
                 self.stats_matcher = StatsMatcher(stats_path_to_load, self.device)
                 if self.verbose:
-                    print(f"Stats-based guardrail enabled using: {stats_path_to_load}")
+                    print(f"✅ Stats-based guardrail enabled using: {stats_path_to_load}")
             except Exception as exc:
-                print(f"Failed to load stats from {stats_path_to_load}: {exc}")
+                print(f"⚠️ Failed to load stats from {stats_path_to_load}: {exc}")
         else:
             if self.verbose:
                 print("ℹ️ iPhone stats file not found. Attack will be UNGUIDED.")
@@ -165,8 +165,8 @@ class SpectralNormalizer:
             resize_back_shape = original_shape
             if self.verbose: print(f"   ↳ Downscaling canvas to {new_h}x{new_w}")
         if self.verbose:
-            print(f"Input resolution: {img_np.shape[0]}x{img_np.shape[1]}")
-            print("Spectral Engine: Starting GUIDED normalization...")
+            print(f"🖼️ Input resolution: {img_np.shape[0]}x{img_np.shape[1]}")
+            print("🚀 INSTARAW Spectral Engine: Starting GUIDED normalization...")
         stage1_params = stage_overrides.get("high_freq", {})
         if self.verbose: print("\n=== STAGE 1: High Frequency Normalization ===")
         stage1_out = self._optimize_stage(
@@ -183,7 +183,7 @@ class SpectralNormalizer:
             stage2_out = F.interpolate(stage2_out, size=resize_back_shape, mode="bicubic", align_corners=False)
         final_tensor = (stage2_out.squeeze(0).cpu().detach() + 1) / 2
         final_np = (final_tensor.permute(1, 2, 0).clamp(0, 1) * 255).numpy().astype(np.uint8)
-        if self.verbose: print("\n Spectral Engine: Normalization complete!")
+        if self.verbose: print("\n✅ INSTARAW Spectral Engine: Normalization complete!")
         return final_np
 
 def _size_profile_overrides(
@@ -258,5 +258,5 @@ def normalize_spectrum_twostage(img_arr: np.ndarray, preset: str = "balanced", *
     thread.start()
     thread.join()
     if exception_container: raise exception_container[0]
-    if not result_container: raise RuntimeError("Spectral Engine failed to return a result.")
+    if not result_container: raise RuntimeError("INSTARAW Spectral Engine failed to return a result.")
     return result_container[0]

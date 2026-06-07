@@ -1,9 +1,9 @@
 # ---
-# Filename: ../combined_test_codex/ComfyUI_AIOFC/nodes/api_nodes/creative_api.py
+# Filename: ../combined_test_codex/ComfyUI_INSTARAW/nodes/api_nodes/creative_api.py
 # ---
 
 # ---
-# Filename: ../ComfyUI_AIOFC/creative_api.py
+# Filename: ../ComfyUI_INSTARAW/creative_api.py
 # Creative Prompt Generation API - Gemini & Grok Integration
 # ---
 
@@ -268,7 +268,7 @@ IMPORTANT: All images are REALISTIC photography. Do not include artistic styles,
         if random_inspiration_prompts and len(random_inspiration_prompts) > 0:
             if generation_style == "reality":
                 # Reality Mode: Strict adherence to library prompts
-                base_prompt += "\n\n REALITY MODE: You must ONLY use elements, words, and concepts from these reference prompts. Stay precise and constrained to what's provided:"
+                base_prompt += "\n\n🎯 REALITY MODE: You must ONLY use elements, words, and concepts from these reference prompts. Stay precise and constrained to what's provided:"
                 for i, prompt in enumerate(random_inspiration_prompts[:5]):  # Limit to 5 for context
                     pos = prompt.get("prompt", {}).get("positive", "")
                     tags = ", ".join(prompt.get("tags", [])[:5])
@@ -278,7 +278,7 @@ IMPORTANT: All images are REALISTIC photography. Do not include artistic styles,
                 base_prompt += "\n\nIMPORTANT: Your generated prompts should ONLY combine and rearrange elements from these references. Do not introduce new concepts or elements not present in these prompts."
             else:
                 # Creative Mode: Flexible inspiration
-                base_prompt += "\n\n CREATIVE MODE: Use these prompts as creative inspiration for generating diverse, high-quality variations. Feel free to be flexible and creative:"
+                base_prompt += "\n\n✨ CREATIVE MODE: Use these prompts as creative inspiration for generating diverse, high-quality variations. Feel free to be flexible and creative:"
                 for i, prompt in enumerate(random_inspiration_prompts[:5]):  # Limit to 5 for context
                     pos = prompt.get("prompt", {}).get("positive", "")
                     tags = ", ".join(prompt.get("tags", [])[:5])
@@ -353,7 +353,7 @@ Generate {generation_count} unique prompts."""
 # === API Endpoint ===
 async def _generate_creative_prompts(request):
     """
-    POST /aiofc/generate_creative_prompts
+    POST /instaraw/generate_creative_prompts
 
     Body:
     {
@@ -506,9 +506,9 @@ async def _generate_creative_prompts(request):
             print(f"[RPG Creative API] Inspiration prompts: {len(random_inspiration_prompts)}, User input: {len(user_text_input)} chars")
         if images and len(images) > 0:
             if len(images) > 1:
-                print(f"[RPG Creative API] Multi-image vision mode: {len(images)} images for combined prompt generation")
+                print(f"[RPG Creative API] 🖼️ Multi-image vision mode: {len(images)} images for combined prompt generation")
             else:
-                print(f"[RPG Creative API] Processing {len(images)} image(s) for vision mode - First image base64 length: {len(images[0])} chars")
+                print(f"[RPG Creative API] 🖼️ Processing {len(images)} image(s) for vision mode - First image base64 length: {len(images[0])} chars")
 
         if model.startswith("gemini"):
             prompts = await generate_with_gemini(system_prompt, user_prompt, model, gemini_api_key, temperature, top_p, images=images)
@@ -534,18 +534,18 @@ async def _generate_creative_prompts(request):
         }, status=500, headers=CORS_HEADERS)
 
 
-@PromptServer.instance.routes.post("//generate_creative_prompts")
+@PromptServer.instance.routes.post("/instaraw/generate_creative_prompts")
 async def generate_creative_prompts_endpoint(request):
     return await _generate_creative_prompts(request)
 
 
-@PromptServer.instance.routes.post("//generate_creative_prompts/")
+@PromptServer.instance.routes.post("/instaraw/generate_creative_prompts/")
 async def generate_creative_prompts_endpoint_slash(request):
     return await _generate_creative_prompts(request)
 
 
-@PromptServer.instance.routes.options("//generate_creative_prompts")
-@PromptServer.instance.routes.options("//generate_creative_prompts/")
+@PromptServer.instance.routes.options("/instaraw/generate_creative_prompts")
+@PromptServer.instance.routes.options("/instaraw/generate_creative_prompts/")
 async def generate_creative_prompts_options(request):
     return web.Response(headers=CORS_HEADERS)
 
@@ -807,7 +807,7 @@ Example output:
 
 async def _generate_character_description(request):
     """
-    POST /aiofc/generate_character_description
+    POST /instaraw/generate_character_description
 
     Body:
     {
@@ -904,7 +904,7 @@ async def _generate_character_description(request):
         # Cache the description
         CHARACTER_DESCRIPTION_CACHE[cache_key] = description
 
-        print(f"[RPG Character API] Generated character description ({len(description)} chars)")
+        print(f"[RPG Character API] ✅ Generated character description ({len(description)} chars)")
         return web.json_response({
             "success": True,
             "description": description,
@@ -922,7 +922,7 @@ async def _generate_character_description(request):
 
 # === Random Prompt Selection ===
 PROMPTS_DB_CACHE = None
-PROMPTS_DB_URL = "https://.s3.us-east-1.amazonaws.com/prompts.db.json"
+PROMPTS_DB_URL = "https://instara.s3.us-east-1.amazonaws.com/prompts.db.json"
 
 async def load_prompts_database():
     """Load and cache the prompts database from remote URL."""
@@ -952,7 +952,7 @@ async def load_prompts_database():
 
 async def _get_random_prompts(request):
     """
-    POST /aiofc/get_random_prompts
+    POST /instaraw/get_random_prompts
 
     Body:
     {
@@ -1040,41 +1040,41 @@ async def _get_random_prompts(request):
 
 
 # === Register New Endpoints ===
-@PromptServer.instance.routes.post("//generate_character_description")
+@PromptServer.instance.routes.post("/instaraw/generate_character_description")
 async def generate_character_description_endpoint(request):
     return await _generate_character_description(request)
 
 
-@PromptServer.instance.routes.post("//generate_character_description/")
+@PromptServer.instance.routes.post("/instaraw/generate_character_description/")
 async def generate_character_description_endpoint_slash(request):
     return await _generate_character_description(request)
 
 
-@PromptServer.instance.routes.options("//generate_character_description")
-@PromptServer.instance.routes.options("//generate_character_description/")
+@PromptServer.instance.routes.options("/instaraw/generate_character_description")
+@PromptServer.instance.routes.options("/instaraw/generate_character_description/")
 async def generate_character_description_options(request):
     return web.Response(headers=CORS_HEADERS)
 
 
-@PromptServer.instance.routes.post("//get_random_prompts")
+@PromptServer.instance.routes.post("/instaraw/get_random_prompts")
 async def get_random_prompts_endpoint(request):
     return await _get_random_prompts(request)
 
 
-@PromptServer.instance.routes.post("//get_random_prompts/")
+@PromptServer.instance.routes.post("/instaraw/get_random_prompts/")
 async def get_random_prompts_endpoint_slash(request):
     return await _get_random_prompts(request)
 
 
-@PromptServer.instance.routes.options("//get_random_prompts")
-@PromptServer.instance.routes.options("//get_random_prompts/")
+@PromptServer.instance.routes.options("/instaraw/get_random_prompts")
+@PromptServer.instance.routes.options("/instaraw/get_random_prompts/")
 async def get_random_prompts_options(request):
     return web.Response(headers=CORS_HEADERS)
 
 
-print("[RPG Creative API] Endpoint registered: POST //generate_creative_prompts")
-print("[RPG Character API] Endpoint registered: POST //generate_character_description")
-print("[RPG Prompts API] Endpoint registered: POST //get_random_prompts")
+print("[RPG Creative API] Endpoint registered: POST /instaraw/generate_creative_prompts")
+print("[RPG Character API] Endpoint registered: POST /instaraw/generate_character_description")
+print("[RPG Prompts API] Endpoint registered: POST /instaraw/get_random_prompts")
 
 # Add these lines to the end of the file
 NODE_CLASS_MAPPINGS = {}

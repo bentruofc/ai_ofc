@@ -3,9 +3,9 @@ import { app } from '../../scripts/app.js';
 const _al = Array.isArray([]);
 
 app.registerExtension({
-	name: 'Comfy.AIOFC.DynamicAPINodes',
+	name: 'Comfy.INSTARAW.DynamicAPINodes',
 	async beforeRegisterNodeDef(nodeType, nodeData, app) {
-		if (nodeData.name === 'AIOFC_APITextToImage' || nodeData.name === 'AIOFC_APIImageToImage') {
+		if (nodeData.name === 'INSTARAW_APITextToImage' || nodeData.name === 'INSTARAW_APIImageToImage') {
 			
 			const onNodeCreated = nodeType.prototype.onNodeCreated;
 			nodeType.prototype.onNodeCreated = function () {

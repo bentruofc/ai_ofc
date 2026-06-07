@@ -1,20 +1,20 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/utility_nodes/lut_selector.py
+# Filename: ../ComfyUI_INSTARAW/nodes/utility_nodes/lut_selector.py
 # ---
 import os
 
 # Correctly locate the root of your custom node package
 NODE_FILE_PATH = os.path.dirname(os.path.realpath(__file__))
-AIOFC_ROOT_PATH = os.path.abspath(os.path.join(NODE_FILE_PATH, "..", ".."))
+INSTARAW_ROOT_PATH = os.path.abspath(os.path.join(NODE_FILE_PATH, "..", ".."))
 
-class AIOFC_LUT_Selector:
+class INSTARAW_LUT_Selector:
     """
     Dynamically finds and lists all .cube LUT files from the internal
     'modules/detection_bypass/_luts' directory, including subdirectories.
     Outputs the full path to the selected LUT file.
     """
     
-    LUTS_DIR = os.path.join(AIOFC_ROOT_PATH, "modules", "detection_bypass", "_luts")
+    LUTS_DIR = os.path.join(INSTARAW_ROOT_PATH, "modules", "detection_bypass", "_luts")
     LUT_FILES = []
     if os.path.isdir(LUTS_DIR):
         for root, _, files in os.walk(LUTS_DIR):
@@ -42,7 +42,7 @@ class AIOFC_LUT_Selector:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("lut_path",)
     FUNCTION = "get_path"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def get_path(self, lut_name):
         full_path = os.path.join(self.LUTS_DIR, lut_name)
@@ -50,5 +50,5 @@ class AIOFC_LUT_Selector:
         if not os.path.exists(full_path):
             raise FileNotFoundError(f"Selected LUT file could not be found: {full_path}")
             
-        print(f"LUT Selector: Providing path '{full_path}'")
+        print(f"✅ INSTARAW LUT Selector: Providing path '{full_path}'")
         return (full_path,)

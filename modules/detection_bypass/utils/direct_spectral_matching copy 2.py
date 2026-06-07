@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/direct_spectral_matching.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/direct_spectral_matching.py
 # ---
 
 import numpy as np

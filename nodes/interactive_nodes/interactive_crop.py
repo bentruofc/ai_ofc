@@ -1,6 +1,6 @@
 # ---
-# ComfyUI AIOFC - Interactive Crop Node (Final Corrected Version)
-# Copyright © 2025 Aiofc. All rights reserved.
+# ComfyUI INSTARAW - Interactive Crop Node (Final Corrected Version)
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -27,7 +27,7 @@ ASPECT_RATIOS = {
 }
 
 
-class AIOFC_Interactive_Crop(PreviewImage):
+class INSTARAW_Interactive_Crop(PreviewImage):
     """
     An interactive node that displays an image and allows a user to define a crop region
     by drawing, moving, and resizing a rectangle. Supports locked aspect ratios.
@@ -36,7 +36,7 @@ class AIOFC_Interactive_Crop(PreviewImage):
     RETURN_TYPES = ("IMAGE", "MASK", "STRING",)
     RETURN_NAMES = ("cropped_image", "cropped_mask", "crop_data_json",)
     FUNCTION = "crop_interactively"
-    CATEGORY = "Interactive"
+    CATEGORY = "INSTARAW/Interactive"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -86,7 +86,7 @@ class AIOFC_Interactive_Crop(PreviewImage):
         proposed_crop_json = kwargs.get('proposed_crop_json')
 
         if image is None or timeout is None or uid is None or node_identifier is None:
-            raise ValueError("_Interactive_Crop is missing required inputs. Check connections.")
+            raise ValueError("INSTARAW_Interactive_Crop is missing required inputs. Check connections.")
 
         img_height = image.shape[1]
         img_width = image.shape[2]
@@ -96,12 +96,12 @@ class AIOFC_Interactive_Crop(PreviewImage):
             if proposed_crop_json and proposed_crop_json.strip():
                 try:
                     crop_data = json.loads(proposed_crop_json)
-                    print(f"Crop BYPASS: Applying proposed crop directly: {crop_data}")
+                    print(f"⏭️ INSTARAW Crop BYPASS: Applying proposed crop directly: {crop_data}")
                     return self._apply_crop(image, mask, crop_data)
                 except json.JSONDecodeError:
-                    print("Crop BYPASS: Invalid proposed_crop_json, returning full image.")
+                    print("⚠️ INSTARAW Crop BYPASS: Invalid proposed_crop_json, returning full image.")
             else:
-                print("Crop BYPASS: No proposed crop, returning full image.")
+                print("⏭️ INSTARAW Crop BYPASS: No proposed crop, returning full image.")
 
             # No valid proposed crop, return full image
             full_mask = torch.ones(1, img_height, img_width) if mask is None else mask
@@ -119,7 +119,7 @@ class AIOFC_Interactive_Crop(PreviewImage):
 
         # Check for cached crop - "Resend previous crop" bypasses editor entirely
         if cache_behavior == "Resend previous crop" and os.path.exists(cache_filepath):
-            print(f"Crop Cache Hit! Resending previous crop from {cache_filepath}")
+            print(f"✅ INSTARAW Crop Cache Hit! Resending previous crop from {cache_filepath}")
             with open(cache_filepath, 'r') as f:
                 crop_data = json.load(f)
             return self._apply_crop(image, mask, crop_data)
@@ -151,20 +151,20 @@ class AIOFC_Interactive_Crop(PreviewImage):
 
         # Determine proposed crop: from cache (Edit mode) or from input
         if cache_behavior == "Edit previous crop" and os.path.exists(cache_filepath):
-            print(f"Crop Cache: Loading previous crop for editing from {cache_filepath}")
+            print(f"💨 INSTARAW Crop Cache: Loading previous crop for editing from {cache_filepath}")
             with open(cache_filepath, 'r') as f:
                 payload["proposed_crop"] = json.load(f)
         elif proposed_crop_json and proposed_crop_json.strip():
             try:
                 payload["proposed_crop"] = json.loads(proposed_crop_json)
             except json.JSONDecodeError:
-                print("Interactive Crop: Invalid proposed_crop_json. Ignoring.")
+                print("⚠️ INSTARAW Interactive Crop: Invalid proposed_crop_json. Ignoring.")
 
-        print("Interactive Crop: Waiting for user to define crop area...")
+        print("💨 INSTARAW Interactive Crop: Waiting for user to define crop area...")
         response = send_and_wait(payload, timeout, uid, node_identifier)
 
         if isinstance(response, TimeoutResponse):
-            print("Interactive Crop: Timed out. Passing through original image.")
+            print("⏰ INSTARAW Interactive Crop: Timed out. Passing through original image.")
             full_mask = torch.ones_like(image[:, :, :, 0]) if mask is None else mask
             crop_data = {"x": 0, "y": 0, "width": image.shape[2], "height": image.shape[1], "status": "timeout"}
             return (image, full_mask, json.dumps(crop_data))
@@ -174,10 +174,10 @@ class AIOFC_Interactive_Crop(PreviewImage):
         if not crop_data:
             raise InterruptProcessingException("User cancelled the crop operation.")
 
-        print(f"Interactive Crop: Received crop data: {crop_data}")
+        print(f"✅ INSTARAW Interactive Crop: Received crop data: {crop_data}")
 
         # Save to cache
-        print(f"Saving crop data to cache: {cache_filepath}")
+        print(f"💾 Saving crop data to cache: {cache_filepath}")
         with open(cache_filepath, 'w') as f:
             json.dump(crop_data, f)
 
@@ -200,7 +200,7 @@ class AIOFC_Interactive_Crop(PreviewImage):
         height = max(1, min(height, img_height - y))
 
         if x != crop_data.get("x") or y != crop_data.get("y") or width != crop_data.get("width") or height != crop_data.get("height"):
-            print(f"Crop: Adjusted crop to fit image bounds: x={x}, y={y}, w={width}, h={height}")
+            print(f"⚠️ INSTARAW Crop: Adjusted crop to fit image bounds: x={x}, y={y}, w={width}, h={height}")
 
         cropped_image = image[:, y:y+height, x:x+width, :]
 

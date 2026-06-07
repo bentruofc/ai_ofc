@@ -82,7 +82,7 @@ class MessageState:
     def real(self) -> bool: return self.special is None
 
 
-@PromptServer.instance.routes.post('//interactive_message')
+@PromptServer.instance.routes.post('/instaraw/interactive_message')
 async def cg_image_filter_message(request):
     post     = await request.post()
     response = post.get("response")
@@ -99,17 +99,17 @@ async def cg_image_filter_message(request):
     return web.json_response({})
 
 # --- NEW API ENDPOINT FOR INSTANT CACHE CLEARING ---
-@PromptServer.instance.routes.post('//clear_text_filter_cache')
+@PromptServer.instance.routes.post('/instaraw/clear_text_filter_cache')
 async def clear_text_filter_cache(request):
     try:
         # The UID from the request isn't strictly needed anymore, but we can keep it for logging.
         data = await request.json()
         uid = data.get('uid')
-        print(f"API: Received request to clear text filter cache from node UID {uid}.")
+        print(f"🧹 INSTARAW API: Received request to clear text filter cache from node UID {uid}.")
 
         cache_dir = os.path.join(os.path.dirname(__file__), "..", "..", "cache")
         if not os.path.isdir(cache_dir):
-            print("API: Cache directory does not exist. Nothing to clear.")
+            print("🧹 INSTARAW API: Cache directory does not exist. Nothing to clear.")
             return web.json_response({"status": "success", "cleared_count": 0, "message": "Cache directory not found."})
 
         cleared_count = 0
@@ -125,14 +125,14 @@ async def clear_text_filter_cache(request):
                     files_cleared.append(filename)
                     cleared_count += 1
                 except OSError as e:
-                    print(f"API: Error clearing cache file {file_path}: {e}")
+                    print(f"⚠️ INSTARAW API: Error clearing cache file {file_path}: {e}")
                     # We continue even if one file fails to delete
         
-        print(f"API: Successfully cleared {cleared_count} text filter cache file(s).")
+        print(f"✅ INSTARAW API: Successfully cleared {cleared_count} text filter cache file(s).")
         return web.json_response({"status": "success", "cleared_count": cleared_count, "files": files_cleared})
 
     except Exception as e:
-        print(f"API: An unexpected error occurred while clearing cache: {e}")
+        print(f"❌ INSTARAW API: An unexpected error occurred while clearing cache: {e}")
         return web.json_response({"status": "error", "message": str(e)}, status=500)
 
 
@@ -148,10 +148,10 @@ def wait_for_response(secs, uid, unique) -> Response:
             # Only check for interrupts after grace period
             if time.monotonic() > grace_period_end:
                 throw_exception_if_processing_interrupted()
-            PromptServer.instance.send_sync("interactive-images", {"tick": int(end_time - time.monotonic()), "uid": uid, "unique":unique})
+            PromptServer.instance.send_sync("instaraw-interactive-images", {"tick": int(end_time - time.monotonic()), "uid": uid, "unique":unique})
             time.sleep(0.5)
         if MessageState.waiting():
-            PromptServer.instance.send_sync("interactive-images", {"timeout": True, "uid": uid, "unique":unique})
+            PromptServer.instance.send_sync("instaraw-interactive-images", {"timeout": True, "uid": uid, "unique":unique})
         return MessageState.get_response()
     finally: MessageState.stop_waiting()
     
@@ -160,7 +160,7 @@ def send_and_wait(payload, timeout, uid, unique) -> Response:
     payload['unique'] = unique
 
     while True:
-        PromptServer.instance.send_sync("interactive-images", payload)
+        PromptServer.instance.send_sync("instaraw-interactive-images", payload)
         r = wait_for_response(timeout, uid, unique)
         if isinstance(r,CancelledResponse): raise InterruptProcessingException()
         if (not isinstance(r, RequestResponse)): return r

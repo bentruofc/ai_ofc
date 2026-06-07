@@ -1,9 +1,9 @@
 from comfy.comfy_types.node_typing import IO
 
-class AIOFC_SplitByCommas:
+class INSTARAW_SplitByCommas:
     RETURN_TYPES = ("STRING","STRING","STRING","STRING","STRING","STRING")
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     OUTPUT_NODE = False
     OUTPUT_IS_LIST = [False, False, False, False, False, True]
     DESCRIPTION = "Split the input string into up to five pieces. Splits on commas (or | or ^) and then strips whitespace."
@@ -18,10 +18,10 @@ class AIOFC_SplitByCommas:
         if len(bits)>5: bits = bits[:4] + [",".join(bits[4:]),]
         return (bits[0], bits[1], bits[2], bits[3], bits[4], bits)
 
-class AIOFC_AnyListToString:
+class INSTARAW_AnyListToString:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     INPUT_IS_LIST  = True
     OUTPUT_IS_LIST = (False,) 
 
@@ -32,10 +32,10 @@ class AIOFC_AnyListToString:
     def func(self, anything, join:str):
         return ( join[0].join( [f"{x}" for x in anything] ), )
     
-class AIOFC_StringToInt:
+class INSTARAW_StringToInt:
     RETURN_TYPES = ("INT",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -45,10 +45,10 @@ class AIOFC_StringToInt:
         try: return (int(string.strip()),)
         except: return (default,)
 
-class AIOFC_StringToFloat:
+class INSTARAW_StringToFloat:
     RETURN_TYPES = ("FLOAT",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -58,14 +58,14 @@ class AIOFC_StringToFloat:
         try: return (float(string.strip()),)
         except: return (default,)
 
-class AIOFC_ConcatenateStringsNullSafe:
+class INSTARAW_ConcatenateStringsNullSafe:
     """
     Concatenates two strings with an optional separator. 
     Crucially, it handles None inputs (from disabled switches) by treating them as empty strings.
     """
     RETURN_TYPES = ("STRING",)
     FUNCTION = "concatenate"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     
     @classmethod
     def INPUT_TYPES(cls):
@@ -100,7 +100,7 @@ class AIOFC_ConcatenateStringsNullSafe:
             
         return (result,)
 
-class AIOFC_StringCombine:
+class INSTARAW_StringCombine:
     """
     A 'None-safe' string combination node.
     It takes multiple optional strings and a separator, ignores any that are None or empty,
@@ -123,7 +123,7 @@ class AIOFC_StringCombine:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "combine"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def combine(self, separator, string_1=None, string_2=None, string_3=None, string_4=None, print_to_console=False):
         # Collect all provided strings into a list
@@ -136,6 +136,6 @@ class AIOFC_StringCombine:
         combined_string = separator.join(valid_strings)
         
         if print_to_console:
-            print(f"String Combine Output: '{combined_string}'")
+            print(f"INSTARAW String Combine Output: '{combined_string}'")
             
         return (combined_string,)

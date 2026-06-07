@@ -1,5 +1,5 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/input_nodes/reality_prompt_generator.py
+# Filename: ../ComfyUI_INSTARAW/nodes/input_nodes/reality_prompt_generator.py
 # Reality Prompt Generator (RPG) - Full Implementation
 # ---
 
@@ -7,7 +7,7 @@ import json
 import hashlib
 
 
-class AIOFC_RealityPromptGenerator:
+class INSTARAW_RealityPromptGenerator:
     """
     Reality Prompt Generator (RPG) - A comprehensive prompt batch manager
     that integrates with a 22MB prompts database and supports creative AI generation.
@@ -87,7 +87,7 @@ class AIOFC_RealityPromptGenerator:
                     "STRING",
                     {
                         "default": "1:1",
-                        "tooltip": "Aspect ratio label (e.g., '16:9'). Connect from Aspect Ratio Selector.",
+                        "tooltip": "Aspect ratio label (e.g., '16:9'). Connect from INSTARAW Aspect Ratio Selector.",
                     },
                 ),
             },
@@ -131,7 +131,7 @@ class AIOFC_RealityPromptGenerator:
     # generation_count, resolved_mode => scalars
 
     FUNCTION = "execute"
-    CATEGORY = "Prompts"
+    CATEGORY = "INSTARAW/Prompts"
 
     def execute(
         self,
@@ -217,9 +217,9 @@ class AIOFC_RealityPromptGenerator:
         # 6) Log validation info
         if image_count > 0 and generation_count > 0:
             if image_count == generation_count:
-                print(f"[RPG] {generation_count} prompts ↔ {image_count} images (perfect match)")
+                print(f"[RPG] ✅ {generation_count} prompts ↔ {image_count} images (perfect match)")
             else:
-                print(f"[RPG] {generation_count} prompts vs {image_count} images (mismatch)")
+                print(f"[RPG] ⚠️ {generation_count} prompts vs {image_count} images (mismatch)")
 
         # 7) If prompt_batch is empty, return valid empty lists (no exception)
         if generation_count == 0:
@@ -250,9 +250,9 @@ class AIOFC_RealityPromptGenerator:
 
 # Export node mappings
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_RealityPromptGenerator": AIOFC_RealityPromptGenerator,
+    "INSTARAW_RealityPromptGenerator": INSTARAW_RealityPromptGenerator,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_RealityPromptGenerator": "Reality Prompt Generator",
+    "INSTARAW_RealityPromptGenerator": "🎲 INSTARAW Reality Prompt Generator",
 }

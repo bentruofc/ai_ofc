@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/direct_spectral_matching.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/direct_spectral_matching.py
 # ---
 
 import numpy as np
@@ -117,9 +117,9 @@ def direct_spectral_match(img_arr, target_spectra, strength, mode="Per-Channel (
     """
     Smart dispatcher for spectral matching.
     - Defaults to "Per-Channel (Legacy)" to ensure backward compatibility with
-      the AIOFC_SpectralEngine node, which does not pass a 'mode'.
+      the INSTARAW_SpectralEngine node, which does not pass a 'mode'.
     - Can be explicitly called with "Color-Safe (Luminance)" by the new
-      AIOFC_FFT_Match node.
+      INSTARAW_FFT_Match node.
     """
     if mode == "Color-Safe (Luminance)":
         # The color-safe algorithm needs a single luminance spectrum.

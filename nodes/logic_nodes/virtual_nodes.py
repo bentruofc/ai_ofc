@@ -1,10 +1,10 @@
-# --- Filename: ../ComfyUI_AIOFC/nodes/logic_nodes/virtual_nodes.py (UPDATED) ---
+# --- Filename: ../ComfyUI_INSTARAW/nodes/logic_nodes/virtual_nodes.py (UPDATED) ---
 import json
 from comfy.comfy_types.node_typing import IO
 import torch
 
 
-class AIOFC_BooleanBypass:
+class INSTARAW_BooleanBypass:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -37,7 +37,7 @@ class AIOFC_BooleanBypass:
         "output_4",
     )
     FUNCTION = "passthrough"
-    CATEGORY = "Logic"
+    CATEGORY = "INSTARAW/Logic"
 
     def passthrough(
         self,
@@ -56,7 +56,7 @@ class AIOFC_BooleanBypass:
         )
 
 # --- NEW NODE CLASS ---
-class AIOFC_GroupBypassToBoolean:
+class INSTARAW_GroupBypassToBoolean:
     """
     Outputs a boolean reflecting its own bypass state.
     Place this node inside a group to use the group's bypass as a boolean controller.
@@ -74,7 +74,7 @@ class AIOFC_GroupBypassToBoolean:
     RETURN_TYPES = ("BOOLEAN",)
     RETURN_NAMES = ("boolean",)
     FUNCTION = "get_status"
-    CATEGORY = "Logic"
+    CATEGORY = "INSTARAW/Logic"
 
     def get_status(self, is_active):
         # This function simply returns the value of the widget,
@@ -83,7 +83,7 @@ class AIOFC_GroupBypassToBoolean:
 # --- END NEW NODE CLASS ---
 
 
-class AIOFC_PreviewAnyAndPassthrough:
+class INSTARAW_PreviewAnyAndPassthrough:
     @classmethod
     def INPUT_TYPES(cls):
         # We only define the input socket. The UI will be generated automatically by the return message.
@@ -94,7 +94,7 @@ class AIOFC_PreviewAnyAndPassthrough:
     RETURN_TYPES = (IO.ANY,)
     RETURN_NAMES = ("source_out",)
     FUNCTION = "preview_and_pass"
-    CATEGORY = "Logic"
+    CATEGORY = "INSTARAW/Logic"
     OUTPUT_NODE = True  # CRITICAL for passthrough functionality
 
     def preview_and_pass(self, source=None):
@@ -118,12 +118,12 @@ class AIOFC_PreviewAnyAndPassthrough:
 
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_BooleanBypass": AIOFC_BooleanBypass,
-    "AIOFC_PreviewAnyAndPassthrough": AIOFC_PreviewAnyAndPassthrough,
-    "AIOFC_GroupBypassToBoolean": AIOFC_GroupBypassToBoolean, # Add new node here
+    "INSTARAW_BooleanBypass": INSTARAW_BooleanBypass,
+    "INSTARAW_PreviewAnyAndPassthrough": INSTARAW_PreviewAnyAndPassthrough,
+    "INSTARAW_GroupBypassToBoolean": INSTARAW_GroupBypassToBoolean, # Add new node here
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_BooleanBypass": "Boolean Bypass",
-    "AIOFC_PreviewAnyAndPassthrough": "Preview Any & Passthrough",
-    "AIOFC_GroupBypassToBoolean": "Group Bypass Detector", # And here
+    "INSTARAW_BooleanBypass": "🔀 INSTARAW Boolean Bypass",
+    "INSTARAW_PreviewAnyAndPassthrough": "👁️ INSTARAW Preview Any & Passthrough",
+    "INSTARAW_GroupBypassToBoolean": "🔀 INSTARAW Group Bypass Detector", # And here
 }

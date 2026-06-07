@@ -1,5 +1,5 @@
 """
-AIOFC Input Nodes
+INSTARAW Input Nodes
 Nodes for loading data into the workflow.
 """
 

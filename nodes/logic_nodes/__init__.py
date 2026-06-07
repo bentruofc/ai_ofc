@@ -1,5 +1,5 @@
 """
-AIOFC Logic Nodes
+INSTARAW Logic Nodes
 Nodes for controlling workflow execution and logic.
 """
 

@@ -25,7 +25,7 @@ def is_tool(name: str) -> bool:
 
 def load_locations_data():
     if not LOCATIONS_FILE.exists():
-        print(f"Locations file not found. Creating a default at '{LOCATIONS_FILE}'")
+        print(f"⚠️ INSTARAW: Locations file not found. Creating a default at '{LOCATIONS_FILE}'")
         LOCATIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
         default_data = {
           "North America": {
@@ -56,7 +56,7 @@ def load_locations_data():
 EXIFTOOL_AVAILABLE = is_tool("exiftool") or is_tool("exiftool.exe")
 
 
-class AIOFC_SynthesizeAuthenticMetadata:
+class INSTARAW_SynthesizeAuthenticMetadata:
     """
     Final design goals:
 
@@ -67,7 +67,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
       so they are honored correctly.
     """
     OUTPUT_NODE = False
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
     FUNCTION = "synthesize_and_save"
 
     _locations_data = None
@@ -143,7 +143,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
                 "start_date": ("STRING", {"default": default_start_date}),
                 "end_date": ("STRING", {"default": default_end_date}),
                 "scene_type": (scene_types, {"default": "Synthesize Random"}),
-                "output_subfolder": ("STRING", {"default": "", "tooltip": "Subdirectory within ComfyUI output folder (e.g., '' or 'authentic')"}),
+                "output_subfolder": ("STRING", {"default": "", "tooltip": "Subdirectory within ComfyUI output folder (e.g., 'INSTARAW' or 'authentic')"}),
             }
         }
 
@@ -221,7 +221,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
             final_tags = source_profile.copy()
 
             # Remove known undesired/raw-only keys
-            for tag in ["EXIF:ThumbnailImage", "_aiofc_icc_profile_file"]:
+            for tag in ["EXIF:ThumbnailImage", "_instaraw_icc_profile_file"]:
                 if tag in final_tags:
                     del final_tags[tag]
 
@@ -292,7 +292,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
                         "EXIF:SubSecTimeDigitized": sub_sec,
                     })
                 except Exception as e:
-                    print(f"Synthesize: Invalid date format. Error: {e}")
+                    print(f"⚠️ INSTARAW Synthesize: Invalid date format. Error: {e}")
 
             # 7. Scene-based exposure tweaks
             if scene_type == "Synthesize Random":
@@ -335,7 +335,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
 
             # 10. Save a clean JPEG (no EXIF) to a temp file
             temp_dir = tempfile.gettempdir()
-            temp_filepath = os.path.join(temp_dir, f"_img_{uuid.uuid4()}.jpg")
+            temp_filepath = os.path.join(temp_dir, f"instaraw_img_{uuid.uuid4()}.jpg")
             img_pil.save(temp_filepath, quality=95, format='JPEG', exif=b'')
 
             # 11. Build ExifTool args
@@ -359,7 +359,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
                         "File:",       # file system info
                         "Composite:",  # derived tags
                         "JFIF:",       # JFIF container
-                        "_",           # internal keys like _aiofc...
+                        "_",           # internal keys like _instaraw...
                     ))
                 }
 
@@ -437,8 +437,8 @@ class AIOFC_SynthesizeAuthenticMetadata:
 
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_SynthesizeAuthenticMetadata": AIOFC_SynthesizeAuthenticMetadata
+    "INSTARAW_SynthesizeAuthenticMetadata": INSTARAW_SynthesizeAuthenticMetadata
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_SynthesizeAuthenticMetadata": "Synthesize Authentic Metadata"
+    "INSTARAW_SynthesizeAuthenticMetadata": "💾 INSTARAW Synthesize Authentic Metadata"
 }

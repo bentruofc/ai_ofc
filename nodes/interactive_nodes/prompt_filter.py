@@ -1,9 +1,9 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/interactive_nodes/prompt_filter.py
+# Filename: ../ComfyUI_INSTARAW/nodes/interactive_nodes/prompt_filter.py
 # ---
 
 """
-AIOFC Prompt Filter Node
+INSTARAW Prompt Filter Node
 Allows filtering a list of images along with their synchronized prompt lists.
 Works with RPG outputs where everything is a list.
 """
@@ -25,7 +25,7 @@ HIDDEN = {
 }
 
 
-class AIOFC_PromptFilter(PreviewImage):
+class INSTARAW_PromptFilter(PreviewImage):
     """
     Filter a list of images along with synchronized positive/negative prompt lists.
 
@@ -38,7 +38,7 @@ class AIOFC_PromptFilter(PreviewImage):
     OUTPUT_IS_LIST = (True, True, True, True, False, False)
     INPUT_IS_LIST = True
     FUNCTION = "func"
-    CATEGORY = "Interactive"
+    CATEGORY = "INSTARAW/Interactive"
     OUTPUT_NODE = False
     DESCRIPTION = "Filter images and their associated prompts/seeds together"
 

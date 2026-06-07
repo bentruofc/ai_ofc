@@ -1,10 +1,10 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/compression_node.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/compression_node.py
 import torch
 import numpy as np
 from ...modules.detection_bypass.camera_pipeline import _jpeg_recompress
 import random
 
-class AIOFC_Multi_Compression:
+class INSTARAW_Multi_Compression:
     """
     Simulates the generational loss from repeated JPEG compression, a key
     artifact of images shared online. This should be a final step.
@@ -34,7 +34,7 @@ class AIOFC_Multi_Compression:
             },
         }
 
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor.ndim == 4: tensor = tensor[0]
@@ -68,5 +68,5 @@ class AIOFC_Multi_Compression:
         return (torch.cat(processed_images, dim=0),) if processed_images else (image,)
 
 # --- Node Registration ---
-NODE_CLASS_MAPPINGS = {"AIOFC_Multi_Compression": AIOFC_Multi_Compression}
-NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_Multi_Compression": "Multi-Compression"}
+NODE_CLASS_MAPPINGS = {"INSTARAW_Multi_Compression": INSTARAW_Multi_Compression}
+NODE_DISPLAY_NAME_MAPPINGS = {"INSTARAW_Multi_Compression": "🛡️ INSTARAW Multi-Compression"}

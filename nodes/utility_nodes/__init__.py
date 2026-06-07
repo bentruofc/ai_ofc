@@ -1,8 +1,8 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/__init__.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/__init__.py
 # ---
 
 """
-AIOFC Utility Nodes
+INSTARAW Utility Nodes
 Helper nodes for workflow convenience
 """
 
@@ -40,19 +40,19 @@ from .workflow_logic_nodes import (
     NODE_DISPLAY_NAME_MAPPINGS as WORKFLOW_LOGIC_DISPLAY_MAPPINGS,
 )
 from .list_utility_nodes import (
-    AIOFC_BatchFromImageList,
-    AIOFC_ImageListFromBatch,
-    AIOFC_PickFromList,
-    AIOFC_StringListFromStrings,
+    INSTARAW_BatchFromImageList,
+    INSTARAW_ImageListFromBatch,
+    INSTARAW_PickFromList,
+    INSTARAW_StringListFromStrings,
 )
 from .string_utility_nodes import (
-    AIOFC_SplitByCommas,
-    AIOFC_StringToFloat,
-    AIOFC_StringToInt,
-    AIOFC_AnyListToString,
-    AIOFC_StringCombine,
+    INSTARAW_SplitByCommas,
+    INSTARAW_StringToFloat,
+    INSTARAW_StringToInt,
+    INSTARAW_AnyListToString,
+    INSTARAW_StringCombine,
 )
-from .mask_utility_nodes import AIOFC_MaskedSection, AIOFC_MaskCombine
+from .mask_utility_nodes import INSTARAW_MaskedSection, INSTARAW_MaskCombine
 from .branding_node import (
     NODE_CLASS_MAPPINGS as BRANDING_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as BRANDING_DISPLAY_MAPPINGS,
@@ -69,7 +69,7 @@ from .json_utils import (
     NODE_CLASS_MAPPINGS as JSON_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as JSON_DISPLAY_MAPPINGS,
 )
-from .lut_selector import AIOFC_LUT_Selector
+from .lut_selector import INSTARAW_LUT_Selector
 from .spectral_engine_node import (
     NODE_CLASS_MAPPINGS as SPECTRAL_ENGINE_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as SPECTRAL_ENGINE_DISPLAY_MAPPINGS,
@@ -78,7 +78,7 @@ from .color_science_node import (
     NODE_CLASS_MAPPINGS as COLOR_SCIENCE_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as COLOR_SCIENCE_DISPLAY_MAPPINGS,
 )
-from .auto_white_balance_node import AIOFC_AutoWhiteBalance
+from .auto_white_balance_node import INSTARAW_AutoWhiteBalance
 from .neural_grain_node import (
     NODE_CLASS_MAPPINGS as NEURAL_GRAIN_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as NEURAL_GRAIN_DISPLAY_MAPPINGS,
@@ -92,19 +92,19 @@ from .compression_node import (
     NODE_CLASS_MAPPINGS as COMPRESSION_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as COMPRESSION_DISPLAY_MAPPINGS,
 )
-from .authenticity_profile_selector import AIOFC_AuthenticityProfile_Selector
-from .fft_match import AIOFC_FFT_Match
-from .texture_normalize import AIOFC_GLCM_Normalize, AIOFC_LBP_Normalize
-from .metadata_inspector import AIOFC_Metadata_Inspector
+from .authenticity_profile_selector import INSTARAW_AuthenticityProfile_Selector
+from .fft_match import INSTARAW_FFT_Match
+from .texture_normalize import INSTARAW_GLCM_Normalize, INSTARAW_LBP_Normalize
+from .metadata_inspector import INSTARAW_Metadata_Inspector
 from .texture_engine import NODE_CLASS_MAPPINGS as TEXTURE_ENGINE_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as TEXTURE_ENGINE_DISPLAY_MAPPINGS
-from .spectral_normalizer_node import AIOFC_Spectral_Normalizer
-from .pixel_perturb import AIOFC_Pixel_Perturb
-from .blend_colors import AIOFC_BlendColors
-from .camera_simulator import AIOFC_Camera_Simulator
+from .spectral_normalizer_node import INSTARAW_Spectral_Normalizer
+from .pixel_perturb import INSTARAW_Pixel_Perturb
+from .blend_colors import INSTARAW_BlendColors
+from .camera_simulator import INSTARAW_Camera_Simulator
 from .load_image_from_path import NODE_CLASS_MAPPINGS as LOADER_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as LOADER_DISPLAY_MAPPINGS
-from .line_splitter import AIOFC_LineSplitter
-from .image_prompt_iterator import AIOFC_ImagePromptIterator
-from .debug_prompt_overlay import AIOFC_DebugPromptOverlay
+from .line_splitter import INSTARAW_LineSplitter
+from .image_prompt_iterator import INSTARAW_ImagePromptIterator
+from .debug_prompt_overlay import INSTARAW_DebugPromptOverlay
 from .prompt_batch_preview import (
     NODE_CLASS_MAPPINGS as PREVIEW_MAPPINGS,
     NODE_DISPLAY_NAME_MAPPINGS as PREVIEW_DISPLAY_MAPPINGS,
@@ -125,42 +125,42 @@ NODE_CLASS_MAPPINGS = {
     **NOISE_MAPPINGS,
     **JPEG_MAPPINGS,
     **WORKFLOW_LOGIC_MAPPINGS,
-    "AIOFC_BatchFromImageList": AIOFC_BatchFromImageList,
-    "AIOFC_ImageListFromBatch": AIOFC_ImageListFromBatch,
-    "AIOFC_PickFromList": AIOFC_PickFromList,
-    "AIOFC_StringListFromStrings": AIOFC_StringListFromStrings,
-    "AIOFC_SplitByCommas": AIOFC_SplitByCommas,
-    "AIOFC_StringToFloat": AIOFC_StringToFloat,
-    "AIOFC_StringToInt": AIOFC_StringToInt,
-    "AIOFC_AnyListToString": AIOFC_AnyListToString,
-    "AIOFC_MaskedSection": AIOFC_MaskedSection,
-    "AIOFC_MaskCombine": AIOFC_MaskCombine,
-    "AIOFC_StringCombine": AIOFC_StringCombine,
+    "INSTARAW_BatchFromImageList": INSTARAW_BatchFromImageList,
+    "INSTARAW_ImageListFromBatch": INSTARAW_ImageListFromBatch,
+    "INSTARAW_PickFromList": INSTARAW_PickFromList,
+    "INSTARAW_StringListFromStrings": INSTARAW_StringListFromStrings,
+    "INSTARAW_SplitByCommas": INSTARAW_SplitByCommas,
+    "INSTARAW_StringToFloat": INSTARAW_StringToFloat,
+    "INSTARAW_StringToInt": INSTARAW_StringToInt,
+    "INSTARAW_AnyListToString": INSTARAW_AnyListToString,
+    "INSTARAW_MaskedSection": INSTARAW_MaskedSection,
+    "INSTARAW_MaskCombine": INSTARAW_MaskCombine,
+    "INSTARAW_StringCombine": INSTARAW_StringCombine,
     **BRANDING_MAPPINGS,
     **RESIZE_MAPPINGS,
     **MODEL_SELECTOR_MAPPINGS,
     **JSON_MAPPINGS,
-    "AIOFC_LUT_Selector": AIOFC_LUT_Selector,
+    "INSTARAW_LUT_Selector": INSTARAW_LUT_Selector,
     **SPECTRAL_ENGINE_MAPPINGS,
     **COLOR_SCIENCE_MAPPINGS,
-    "AIOFC_AutoWhiteBalance": AIOFC_AutoWhiteBalance,
+    "INSTARAW_AutoWhiteBalance": INSTARAW_AutoWhiteBalance,
     **NEURAL_GRAIN_MAPPINGS,
     **LENS_EFFECTS_MAPPINGS,
     **COMPRESSION_MAPPINGS,
-    "AIOFC_AuthenticityProfile_Selector": AIOFC_AuthenticityProfile_Selector,
-    "AIOFC_FFT_Match": AIOFC_FFT_Match,
-    "AIOFC_GLCM_Normalize": AIOFC_GLCM_Normalize,
-    "AIOFC_LBP_Normalize": AIOFC_LBP_Normalize,
-    "AIOFC_Metadata_Inspector": AIOFC_Metadata_Inspector,
+    "INSTARAW_AuthenticityProfile_Selector": INSTARAW_AuthenticityProfile_Selector,
+    "INSTARAW_FFT_Match": INSTARAW_FFT_Match,
+    "INSTARAW_GLCM_Normalize": INSTARAW_GLCM_Normalize,
+    "INSTARAW_LBP_Normalize": INSTARAW_LBP_Normalize,
+    "INSTARAW_Metadata_Inspector": INSTARAW_Metadata_Inspector,
     **TEXTURE_ENGINE_MAPPINGS,
-    "AIOFC_Spectral_Normalizer": AIOFC_Spectral_Normalizer,
-    "AIOFC_Pixel_Perturb": AIOFC_Pixel_Perturb,
-    "AIOFC_BlendColors": AIOFC_BlendColors,
-    "AIOFC_Camera_Simulator": AIOFC_Camera_Simulator,
+    "INSTARAW_Spectral_Normalizer": INSTARAW_Spectral_Normalizer,
+    "INSTARAW_Pixel_Perturb": INSTARAW_Pixel_Perturb,
+    "INSTARAW_BlendColors": INSTARAW_BlendColors,
+    "INSTARAW_Camera_Simulator": INSTARAW_Camera_Simulator,
     **LOADER_MAPPINGS,
-    "AIOFC_LineSplitter": AIOFC_LineSplitter,
-    "AIOFC_ImagePromptIterator": AIOFC_ImagePromptIterator,
-    "AIOFC_DebugPromptOverlay": AIOFC_DebugPromptOverlay,
+    "INSTARAW_LineSplitter": INSTARAW_LineSplitter,
+    "INSTARAW_ImagePromptIterator": INSTARAW_ImagePromptIterator,
+    "INSTARAW_DebugPromptOverlay": INSTARAW_DebugPromptOverlay,
     **PREVIEW_MAPPINGS,
     **MASK_TO_CROP_MAPPINGS,
 }
@@ -174,42 +174,42 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     **NOISE_DISPLAY_MAPPINGS,
     **JPEG_DISPLAY_MAPPINGS,
     **WORKFLOW_LOGIC_DISPLAY_MAPPINGS,
-    "AIOFC_BatchFromImageList": "Batch From Image List",
-    "AIOFC_ImageListFromBatch": "Image List From Batch",
-    "AIOFC_PickFromList": "Pick From List",
-    "AIOFC_StringListFromStrings": "String List",
-    "AIOFC_SplitByCommas": "Split String",
-    "AIOFC_StringToFloat": "→FLOAT String To Float",
-    "AIOFC_StringToInt": "→INT String To Int",
-    "AIOFC_AnyListToString": "→STRING List To String",
-    "AIOFC_MaskedSection": "Masked Section",
-    "AIOFC_MaskCombine": "Mask Combine",
-    "AIOFC_StringCombine": "String Combine (Safe)",
+    "INSTARAW_BatchFromImageList": "🗃️ INSTARAW Batch From Image List",
+    "INSTARAW_ImageListFromBatch": "📑 INSTARAW Image List From Batch",
+    "INSTARAW_PickFromList": "👉 INSTARAW Pick From List",
+    "INSTARAW_StringListFromStrings": "📑 INSTARAW String List",
+    "INSTARAW_SplitByCommas": "🔪 INSTARAW Split String",
+    "INSTARAW_StringToFloat": "→FLOAT INSTARAW String To Float",
+    "INSTARAW_StringToInt": "→INT INSTARAW String To Int",
+    "INSTARAW_AnyListToString": "→STRING INSTARAW List To String",
+    "INSTARAW_MaskedSection": "🖼️ INSTARAW Masked Section",
+    "INSTARAW_MaskCombine": "➕ INSTARAW Mask Combine",
+    "INSTARAW_StringCombine": "✍️ INSTARAW String Combine (Safe)",
     **BRANDING_DISPLAY_MAPPINGS,
     **RESIZE_DISPLAY_MAPPINGS,
     **MODEL_SELECTOR_DISPLAY_MAPPINGS,
     **JSON_DISPLAY_MAPPINGS,
-    "AIOFC_LUT_Selector": "LUT Selector",
+    "INSTARAW_LUT_Selector": "🎨 INSTARAW LUT Selector",
     **SPECTRAL_ENGINE_DISPLAY_MAPPINGS,
     **COLOR_SCIENCE_DISPLAY_MAPPINGS,
-    "AIOFC_AutoWhiteBalance": "Auto White Balance",
+    "INSTARAW_AutoWhiteBalance": "🎨 INSTARAW Auto White Balance",
     **NEURAL_GRAIN_DISPLAY_MAPPINGS,
     **LENS_EFFECTS_DISPLAY_MAPPINGS,
     **COMPRESSION_DISPLAY_MAPPINGS,
-    "AIOFC_AuthenticityProfile_Selector": "Authenticity Profile",
-    "AIOFC_FFT_Match": "FFT Match",
-    "AIOFC_GLCM_Normalize": "GLCM Normalize",
-    "AIOFC_LBP_Normalize": "LBP Normalize",
-    "AIOFC_Metadata_Inspector": "Metadata Inspector",
+    "INSTARAW_AuthenticityProfile_Selector": "👑 INSTARAW Authenticity Profile",
+    "INSTARAW_FFT_Match": "🛡️ INSTARAW FFT Match",
+    "INSTARAW_GLCM_Normalize": "🛡️ INSTARAW GLCM Normalize",
+    "INSTARAW_LBP_Normalize": "🛡️ INSTARAW LBP Normalize",
+    "INSTARAW_Metadata_Inspector": "📊 INSTARAW Metadata Inspector",
     **TEXTURE_ENGINE_DISPLAY_MAPPINGS,
-    "AIOFC_Spectral_Normalizer": "Spectral Normalizer",
-    "AIOFC_Pixel_Perturb": "Pixel Perturb",
-    "AIOFC_BlendColors": "Blend Colors",
-    "AIOFC_Camera_Simulator": "Camera Simulator",
+    "INSTARAW_Spectral_Normalizer": "🛡️ INSTARAW Spectral Normalizer",
+    "INSTARAW_Pixel_Perturb": "🛡️ INSTARAW Pixel Perturb",
+    "INSTARAW_BlendColors": "🛡️ INSTARAW Blend Colors",
+    "INSTARAW_Camera_Simulator": "🛡️ INSTARAW Camera Simulator",
     **LOADER_DISPLAY_MAPPINGS,
-    "AIOFC_LineSplitter": "Line Splitter",
-    "AIOFC_ImagePromptIterator": "Image Prompt Iterator",
-    "AIOFC_DebugPromptOverlay": "Debug Prompt Overlay",
+    "INSTARAW_LineSplitter": "✂️ INSTARAW Line Splitter",
+    "INSTARAW_ImagePromptIterator": "🧪 INSTARAW Image Prompt Iterator",
+    "INSTARAW_DebugPromptOverlay": "🐛 INSTARAW Debug Prompt Overlay",
     **PREVIEW_DISPLAY_MAPPINGS,
     **MASK_TO_CROP_DISPLAY_MAPPINGS,
 }

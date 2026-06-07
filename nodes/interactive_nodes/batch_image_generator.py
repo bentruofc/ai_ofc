@@ -1,12 +1,12 @@
 # ---
-# ComfyUI AIOFC - Interactive Batch Image Generator
+# ComfyUI INSTARAW - Interactive Batch Image Generator
 # Production-ready parallel image generation with retry logic and interactive selection
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
 """
-AIOFC Interactive Batch Image Generator
+INSTARAW Interactive Batch Image Generator
 
 A premium interactive node for parallel image generation featuring:
 - Real-time parallel generation with configurable concurrency
@@ -43,7 +43,7 @@ from server import PromptServer
 from aiohttp import web
 
 from .image_filter_messaging import send_and_wait, Response, TimeoutResponse
-from ..api_nodes.generative_api_nodes import MODEL_CONFIG, AIOFC_GenerativeAPIBase
+from ..api_nodes.generative_api_nodes import MODEL_CONFIG, INSTARAW_GenerativeAPIBase
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -128,7 +128,7 @@ class ProgressTracker:
             "should_stop": False,  # Flag to stop generation
             "start_time": time.time(),
         }
-        self._emit_event("batch-gen-start", {
+        self._emit_event("instaraw-batch-gen-start", {
             "node_id": node_id,
             "jobs": self._progress_data[node_id]["jobs"],
         })
@@ -151,7 +151,7 @@ class ProgressTracker:
         data["stats"]["failed"] = sum(1 for j in jobs if j["state"] == "failed")
         data["stats"]["cached"] = sum(1 for j in jobs if j["state"] == "cached")
 
-        self._emit_event("batch-gen-update", {
+        self._emit_event("instaraw-batch-gen-update", {
             "node_id": node_id,
             "job_id": job.id,
             "state": job.state.value,
@@ -167,7 +167,7 @@ class ProgressTracker:
         """Mark generation as complete."""
         if node_id in self._progress_data:
             self._progress_data[node_id]["is_generating"] = False
-            self._emit_event("batch-gen-complete", {
+            self._emit_event("instaraw-batch-gen-complete", {
                 "node_id": node_id,
                 "stats": self._progress_data[node_id]["stats"],
             })
@@ -229,7 +229,7 @@ progress_tracker = ProgressTracker()
 # API ENDPOINTS FOR REAL-TIME PROGRESS
 # ═══════════════════════════════════════════════════════════════════════════════
 
-@PromptServer.instance.routes.get('//batch_gen_progress/{node_id}')
+@PromptServer.instance.routes.get('/instaraw/batch_gen_progress/{node_id}')
 async def get_batch_gen_progress(request):
     """Get current generation progress for a node."""
     try:
@@ -242,7 +242,7 @@ async def get_batch_gen_progress(request):
         return web.json_response({"error": str(e)}, status=500)
 
 
-@PromptServer.instance.routes.post('//batch_gen_retry_failed')
+@PromptServer.instance.routes.post('/instaraw/batch_gen_retry_failed')
 async def retry_failed_jobs(request):
     """Endpoint to retry all failed jobs for a node."""
     try:
@@ -254,7 +254,7 @@ async def retry_failed_jobs(request):
         return web.json_response({"error": str(e)}, status=500)
 
 
-@PromptServer.instance.routes.post('//batch_gen_retry_job')
+@PromptServer.instance.routes.post('/instaraw/batch_gen_retry_job')
 async def retry_single_job(request):
     """Endpoint to retry a single failed job."""
     try:
@@ -267,7 +267,7 @@ async def retry_single_job(request):
         return web.json_response({"error": str(e)}, status=500)
 
 
-@PromptServer.instance.routes.post('//batch_gen_stop')
+@PromptServer.instance.routes.post('/instaraw/batch_gen_stop')
 async def stop_generation(request):
     """Endpoint to stop ongoing generation."""
     try:
@@ -282,12 +282,12 @@ async def stop_generation(request):
         return web.json_response({"error": str(e)}, status=500)
 
 
-@PromptServer.instance.routes.get('//batch_gen_image/{subdir}/{filename}')
+@PromptServer.instance.routes.get('/instaraw/batch_gen_image/{subdir}/{filename}')
 async def serve_batch_gen_image(request):
     """
     Serve images from ComfyUI's output folder (backwards compatibility endpoint).
-    URL format: /aiofc/batch_gen_image/{subdir}/{filename}
-    Example: /aiofc/batch_gen_image/batch_gen/image_0_123456.png
+    URL format: /instaraw/batch_gen_image/{subdir}/{filename}
+    Example: /instaraw/batch_gen_image/batch_gen/image_0_123456.png
     Note: Prefer using /view?filename=...&subfolder=...&type=output instead.
     """
     try:
@@ -376,7 +376,7 @@ def _generate_multi_image(
     original_aspect = aspect_ratio
     if aspect_ratio not in MULTI_SUPPORTED_RATIOS:
         aspect_ratio = RATIO_MAPPING.get(aspect_ratio, "3:2")  # Default to 3:2 if unknown
-        print(f"[BIG] Multi-image: Aspect ratio '{original_aspect}' not supported, using '{aspect_ratio}' instead", flush=True)
+        print(f"[BIG] ⚠️ Multi-image: Aspect ratio '{original_aspect}' not supported, using '{aspect_ratio}' instead", flush=True)
 
     # Build prompt
     if use_negative_prompt and prompt_negative.strip():
@@ -425,7 +425,7 @@ def _generate_multi_image(
     engine.set_api_key(api_key)
     payload = build_payload_func(engine, **kwargs)
 
-    print(f"[BIG] Multi-image: Requesting 2 images from {provider}/{endpoint}", flush=True)
+    print(f"[BIG] 🎯 Multi-image: Requesting 2 images from {provider}/{endpoint}", flush=True)
 
     # Call API with return_all_outputs=True to get both images
     image_urls = engine._submit_wavespeed(endpoint, payload, return_all_outputs=True)
@@ -434,7 +434,7 @@ def _generate_multi_image(
         raise Exception(f"Expected 2 images but got {len(image_urls) if image_urls else 0}")
 
     generation_time = time.time() - start_time
-    print(f"[BIG] Multi-image: Got {len(image_urls)} images in {generation_time:.1f}s", flush=True)
+    print(f"[BIG] 🎯 Multi-image: Got {len(image_urls)} images in {generation_time:.1f}s", flush=True)
 
     # Process both images
     results = []
@@ -453,7 +453,7 @@ def _generate_multi_image(
             # Save to cache for future use
             if use_cache and cache_keys and i < len(cache_keys):
                 engine._save_to_cache(cache_keys[i], tensor)
-                print(f"[BIG] Multi-image: Saved image {i+1} to cache", flush=True)
+                print(f"[BIG] 💾 Multi-image: Saved image {i+1} to cache", flush=True)
 
             # Save to output folder
             output_filename, subfolder = engine._save_to_output(tensor, job_id, prompt_positive, filename_prefix, node_id)
@@ -474,10 +474,10 @@ def _generate_multi_image(
                 "filename": output_filename,
                 "subfolder": subfolder,
             })
-            print(f"[BIG] Multi-image: Processed image {i+1} for job #{job_id}", flush=True)
+            print(f"[BIG] 🎯 Multi-image: Processed image {i+1} for job #{job_id}", flush=True)
 
         except Exception as e:
-            print(f"[BIG] Multi-image: Failed to process image {i+1}: {e}", flush=True)
+            print(f"[BIG] ⚠️ Multi-image: Failed to process image {i+1}: {e}", flush=True)
             results.append({
                 "job_id": job_id,
                 "status": "failed",
@@ -494,7 +494,7 @@ def _generate_multi_image(
     }
 
 
-@PromptServer.instance.routes.post('//batch_gen_generate_single')
+@PromptServer.instance.routes.post('/instaraw/batch_gen_generate_single')
 async def generate_single_image(request):
     """
     Endpoint for UI-triggered single image generation (RPG-style).
@@ -529,13 +529,13 @@ async def generate_single_image(request):
         input_image2_b64 = data.get("input_image2")  # Base64 encoded (image_2 - clothes etc)
         input_image3_b64 = data.get("input_image3")  # Base64 encoded (image_3 - background etc)
         input_image4_b64 = data.get("input_image4")  # Base64 encoded (image_4 - pose etc)
-        filename_prefix = str(data.get("filename_prefix", "AIOFC"))  # Output filename prefix with optional subdir
+        filename_prefix = str(data.get("filename_prefix", "INSTARAW"))  # Output filename prefix with optional subdir
         multi_image = data.get("multi_image", False)  # Multi-image mode (Wavespeed.ai only)
         second_job_id = data.get("second_job_id")  # ID for second image in multi-image mode
 
         # Validate multi-image mode
         if multi_image and provider != "wavespeed.ai":
-            print(f"[BIG] Multi-image mode only works with wavespeed.ai, ignoring for {provider}", flush=True)
+            print(f"[BIG] ⚠️ Multi-image mode only works with wavespeed.ai, ignoring for {provider}", flush=True)
             multi_image = False
 
         # Create engine instance
@@ -574,7 +574,7 @@ async def generate_single_image(request):
 
         # ===== MULTI-IMAGE MODE (Wavespeed.ai only, 2 images per call) =====
         if multi_image and second_job_id is not None:
-            print(f"[BIG] MULTI-IMAGE MODE: Generating 2 images for jobs #{job_id} and #{second_job_id}", flush=True)
+            print(f"[BIG] 🎯 MULTI-IMAGE MODE: Generating 2 images for jobs #{job_id} and #{second_job_id}", flush=True)
 
             # Check cache for both images before API call
             input_images = [job.input_image, job.input_image2, job.input_image3, job.input_image4]
@@ -592,7 +592,7 @@ async def generate_single_image(request):
 
             # If both images are cached, return them without API call
             if cached_0 is not None and cached_1 is not None:
-                print(f"[BIG] MULTI-IMAGE CACHE HIT: Both images found in cache!", flush=True)
+                print(f"[BIG] 📦 MULTI-IMAGE CACHE HIT: Both images found in cache!", flush=True)
                 results = []
                 for i, (cached_tensor, j_id, c_key) in enumerate([(cached_0, job_id, cache_key_0), (cached_1, second_job_id, cache_key_1)]):
                     # Create base64 preview
@@ -614,7 +614,7 @@ async def generate_single_image(request):
                         "subfolder": subfolder,
                         "cache_hit": True,
                     })
-                    print(f"[BIG] Cached image {i+1} for job #{j_id}", flush=True)
+                    print(f"[BIG] 📦 Cached image {i+1} for job #{j_id}", flush=True)
 
                 return web.json_response({
                     "status": "success",
@@ -662,7 +662,7 @@ async def generate_single_image(request):
         # Generate image using existing logic
         # IMPORTANT: Use asyncio.to_thread() to run blocking I/O in thread pool
         # This enables true parallel generation - without it, requests.post() blocks the event loop
-        print(f"[BIG] Job #{job_id} starting API call (parallel execution enabled)", flush=True)
+        print(f"[BIG] 🚀 Job #{job_id} starting API call (parallel execution enabled)", flush=True)
         result_job = await asyncio.to_thread(
             engine.generate_job,
             job=job,
@@ -703,9 +703,9 @@ async def generate_single_image(request):
                     node_id
                 )
                 if output_filename:
-                    print(f"[BIG] Image permanently saved: {subfolder}/{output_filename}" if subfolder else f"[BIG] Image permanently saved: {output_filename}", flush=True)
+                    print(f"[BIG] ✅ Image permanently saved: {subfolder}/{output_filename}" if subfolder else f"[BIG] ✅ Image permanently saved: {output_filename}", flush=True)
             else:
-                print(f"[BIG] No tensor available for output save", flush=True)
+                print(f"[BIG] ⚠️ No tensor available for output save", flush=True)
 
             return web.json_response({
                 "status": "success",
@@ -771,7 +771,7 @@ HIDDEN = {
 }
 
 
-class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
+class BatchGeneratorEngine(INSTARAW_GenerativeAPIBase):
     """
     High-performance generation engine with retry logic and caching.
     """
@@ -850,7 +850,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
             img_pil = Image.fromarray(img_np)
             img_pil.save(cache_file, "PNG")
         except Exception as e:
-            print(f"Cache save failed: {e}", flush=True)
+            print(f"   ⚠️ Cache save failed: {e}", flush=True)
 
     def _save_temp_preview(self, tensor: torch.Tensor, job_id: int) -> Optional[str]:
         """Save image to ComfyUI temp folder for preview in custom UI."""
@@ -887,13 +887,13 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
 
             # Verify file exists
             if not os.path.exists(filepath):
-                print(f"File not found after save: {filepath}", flush=True)
+                print(f"   ❌ File not found after save: {filepath}", flush=True)
                 return None
 
-            print(f"Saved temp preview: {filename}", flush=True)
+            print(f"   ✓ Saved temp preview: {filename}", flush=True)
             return filepath
         except Exception as e:
-            print(f"Temp preview save failed: {e}", flush=True)
+            print(f"   ⚠️ Temp preview save failed: {e}", flush=True)
             import traceback
             traceback.print_exc()
             return None
@@ -921,10 +921,10 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
 
             return f"data:image/jpeg;base64,{b64_data}"
         except Exception as e:
-            print(f"Base64 conversion failed: {e}", flush=True)
+            print(f"   ⚠️ Base64 conversion failed: {e}", flush=True)
             return None
 
-    def _save_to_output(self, tensor: torch.Tensor, job_id: int, prompt: str, filename_prefix: str = "AIOFC", node_id: str = None) -> tuple[Optional[str], Optional[str]]:
+    def _save_to_output(self, tensor: torch.Tensor, job_id: int, prompt: str, filename_prefix: str = "INSTARAW", node_id: str = None) -> tuple[Optional[str], Optional[str]]:
         """
         Save image to ComfyUI's main output folder for permanent storage.
         Returns tuple of (filename, subfolder) if successful, (None, None) otherwise.
@@ -933,12 +933,12 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
             tensor: Image tensor to save
             job_id: Job ID (kept for API compatibility)
             prompt: Prompt text (kept for API compatibility)
-            filename_prefix: Prefix with optional subdirectory (e.g., "AIOFC" or "my_folder/my_prefix")
+            filename_prefix: Prefix with optional subdirectory (e.g., "INSTARAW" or "my_folder/my_prefix")
             node_id: Node ID (kept for API compatibility)
 
         Filename format: {prefix}_{ULID}.png
         Examples:
-            - filename_prefix="AIOFC" → output/AIOFC_01HGX5J8K2P3.png
+            - filename_prefix="INSTARAW" → output/INSTARAW_01HGX5J8K2P3.png
             - filename_prefix="my_folder/my_prefix" → output/my_folder/my_prefix_01HGX5J8K2P3.png
             - filename_prefix="just_prefix" → output/just_prefix_01HGX5J8K2P3.png
         """
@@ -976,10 +976,10 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
             img_pil = Image.fromarray(img_np)
             img_pil.save(filepath, "PNG")
 
-            print(f"Saved to output: {subdir}/{filename}" if subdir else f"Saved to output: {filename}", flush=True)
+            print(f"   💾 Saved to output: {subdir}/{filename}" if subdir else f"   💾 Saved to output: {filename}", flush=True)
             return filename, subdir
         except Exception as e:
-            print(f"Output save failed: {e}", flush=True)
+            print(f"   ⚠️ Output save failed: {e}", flush=True)
             import traceback
             traceback.print_exc()
             return None, None
@@ -1002,7 +1002,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
         on_retry_callback: Optional[callable] = None,
         progress_tracker: Optional['ProgressTracker'] = None,
         node_identifier: Optional[int] = None,
-        filename_prefix: str = "AIOFC",
+        filename_prefix: str = "INSTARAW",
     ) -> GenerationJob:
         """
         Execute a generation job with retry logic.
@@ -1026,7 +1026,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
 
                 # Create base64 preview for cached images
                 try:
-                    print(f"CACHED! Tensor shape: {cached.shape}, dtype: {cached.dtype}", flush=True)
+                    print(f"   📦 CACHED! Tensor shape: {cached.shape}, dtype: {cached.dtype}", flush=True)
                     # Get dimensions from tensor
                     if cached.ndim == 4:  # [batch, height, width, channels]
                         job.result_image_height = cached.shape[1]
@@ -1040,11 +1040,11 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
                     if b64_url:
                         job.result_image_url = b64_url
                         job.result_image_b64 = b64_url
-                        print(f"Cached preview (base64): {job.result_image_width}x{job.result_image_height}", flush=True)
+                        print(f"   📸 Cached preview (base64): {job.result_image_width}x{job.result_image_height}", flush=True)
                     else:
-                        print(f"Base64 conversion failed for cached image!", flush=True)
+                        print(f"   ❌ Base64 conversion failed for cached image!", flush=True)
                 except Exception as e:
-                    print(f"Failed to create cached preview: {e}", flush=True)
+                    print(f"   ⚠️ Failed to create cached preview: {e}", flush=True)
                     import traceback
                     traceback.print_exc()
 
@@ -1107,25 +1107,25 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
 
         # Count how many images are provided
         image_count = sum(1 for img in [job.input_image, job.input_image2, job.input_image3, job.input_image4] if img is not None)
-        print(f"Job #{job.id}: Mode={'I2I (Edit)' if is_i2i else 'T2I'}, Images={image_count}, Endpoint={endpoint}", flush=True)
+        print(f"   📌 Job #{job.id}: Mode={'I2I (Edit)' if is_i2i else 'T2I'}, Images={image_count}, Endpoint={endpoint}", flush=True)
         if job.input_image is not None:
-            print(f"Job #{job.id}: image_1 shape={job.input_image.shape}", flush=True)
+            print(f"   📌 Job #{job.id}: image_1 shape={job.input_image.shape}", flush=True)
         if job.input_image2 is not None:
-            print(f"Job #{job.id}: image_2 shape={job.input_image2.shape}", flush=True)
+            print(f"   📌 Job #{job.id}: image_2 shape={job.input_image2.shape}", flush=True)
         if job.input_image3 is not None:
-            print(f"Job #{job.id}: image_3 shape={job.input_image3.shape}", flush=True)
+            print(f"   📌 Job #{job.id}: image_3 shape={job.input_image3.shape}", flush=True)
         if job.input_image4 is not None:
-            print(f"Job #{job.id}: image_4 shape={job.input_image4.shape}", flush=True)
+            print(f"   📌 Job #{job.id}: image_4 shape={job.input_image4.shape}", flush=True)
 
         self.set_api_key(api_key)
         payload = build_payload_func(self, **kwargs)
 
         # Log payload keys to verify image is included (don't log actual data for security)
-        print(f"Job #{job.id}: Payload keys={list(payload.keys())}", flush=True)
+        print(f"   📌 Job #{job.id}: Payload keys={list(payload.keys())}", flush=True)
         if "image_urls" in payload:
-            print(f"Job #{job.id}: image_urls count={len(payload['image_urls'])}, first type={type(payload['image_urls'][0]) if payload['image_urls'] else 'N/A'}", flush=True)
+            print(f"   📌 Job #{job.id}: image_urls count={len(payload['image_urls'])}, first type={type(payload['image_urls'][0]) if payload['image_urls'] else 'N/A'}", flush=True)
         elif "images" in payload:
-            print(f"Job #{job.id}: images count={len(payload['images'])}, first type={type(payload['images'][0]) if payload['images'] else 'N/A'}", flush=True)
+            print(f"   📌 Job #{job.id}: images count={len(payload['images'])}, first type={type(payload['images'][0]) if payload['images'] else 'N/A'}", flush=True)
 
         # Retry loop with exponential backoff
         last_error = None
@@ -1139,7 +1139,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
                     return job
 
             job.attempts = attempt + 1
-            print(f"Job #{job.id} attempt {attempt + 1}/{max_retries}", flush=True)
+            print(f"   🔄 Job #{job.id} attempt {attempt + 1}/{max_retries}", flush=True)
 
             try:
                 # Check before making API request
@@ -1150,7 +1150,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
                         print(f"   ⏹️  Job #{job.id} STOPPED before API call (attempt {attempt + 1})", flush=True)
                         return job
 
-                print(f"Job #{job.id} making API call to {provider}...", flush=True)
+                print(f"   🌐 Job #{job.id} making API call to {provider}...", flush=True)
                 if provider == "fal.ai":
                     image_url = self._submit_fal_sync(endpoint, payload, timeout)
                 else:
@@ -1187,15 +1187,15 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
                 if b64_url:
                     job.result_image_url = b64_url
                     job.result_image_b64 = b64_url
-                    print(f"Created base64 preview for job {job.id} ({len(b64_url)} chars)", flush=True)
+                    print(f"   📸 Created base64 preview for job {job.id} ({len(b64_url)} chars)", flush=True)
                 else:
                     # Fallback to file-based preview
                     temp_image_path = self._save_temp_preview(tensor, job.id)
                     if temp_image_path:
                         job.result_image_url = f"/view?filename={os.path.basename(temp_image_path)}&subfolder=batch_gen&type=temp"
-                        print(f"Preview URL (file): {job.result_image_url}", flush=True)
+                        print(f"   📸 Preview URL (file): {job.result_image_url}", flush=True)
                     else:
-                        print(f"Failed to generate preview for job {job.id}", flush=True)
+                        print(f"   ⚠️ Failed to generate preview for job {job.id}", flush=True)
 
                 return job
 
@@ -1210,7 +1210,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
                 is_rate_limit = "429" in last_error or "rate" in last_error.lower()
 
                 # Log the error prominently
-                error_type = "CONTENT POLICY" if is_moderation else "⏱️ TIMEOUT" if is_timeout else "RATE LIMIT" if is_rate_limit else "ERROR"
+                error_type = "🚫 CONTENT POLICY" if is_moderation else "⏱️ TIMEOUT" if is_timeout else "🔄 RATE LIMIT" if is_rate_limit else "❌ ERROR"
                 print(f"   {error_type} Job #{job.id} attempt {attempt + 1}/{max_retries}: {last_error[:100]}", flush=True)
 
                 if attempt < max_retries - 1:
@@ -1269,7 +1269,7 @@ class BatchGeneratorEngine(AIOFC_GenerativeAPIBase):
         raise Exception("No image URL in fal.ai response")
 
 
-class AIOFC_BatchImageGenerator(PreviewImage):
+class INSTARAW_BatchImageGenerator(PreviewImage):
     """
     🎨 Interactive Batch Image Generator
 
@@ -1286,7 +1286,7 @@ class AIOFC_BatchImageGenerator(PreviewImage):
     OUTPUT_IS_LIST = (True, True, False, False, False)
     INPUT_IS_LIST = True
     FUNCTION = "generate"
-    CATEGORY = "Interactive"
+    CATEGORY = "INSTARAW/Interactive"
     OUTPUT_NODE = False
     DESCRIPTION = "Parallel batch image generator with auto-retry and interactive selection"
 
@@ -1335,14 +1335,14 @@ class AIOFC_BatchImageGenerator(PreviewImage):
                 "enable_safety_checker": ("BOOLEAN", {"default": True}),
                 "multi_image": ("BOOLEAN", {
                     "default": False,
-                    "tooltip": "Wavespeed.ai ONLY: Generate 2 images per API call for 50% cost savings ($0.07/img instead of $0.14/img). Same subject, slightly different variations."
+                    "tooltip": "⚡ Wavespeed.ai ONLY: Generate 2 images per API call for 50% cost savings ($0.07/img instead of $0.14/img). Same subject, slightly different variations."
                 }),
                 "bypass_filter": ("BOOLEAN", {
                     "default": False,
                     "tooltip": "Skip the image selection popup and automatically output all generated images. Useful for automated workflows."
                 }),
                 "filename_prefix": ("STRING", {
-                    "default": "AIOFC",
+                    "default": "INSTARAW",
                     "tooltip": "Output filename prefix. Can include subdirectories (e.g., 'my_folder/my_prefix'). Files saved as: output/{prefix}_{ULID}.png"
                 }),
             },
@@ -1423,12 +1423,12 @@ class AIOFC_BatchImageGenerator(PreviewImage):
                         loaded_images.append(img_tensor)
                         loaded_prompts.append(prompt)
                         loaded_indexes.append(idx)
-                        print(f"[BIG] Loaded job {idx}: {filename}")
+                        print(f"[BIG]   ✓ Loaded job {idx}: {filename}")
                     except Exception as e:
-                        print(f"[BIG] Failed to load job {idx}: {e}")
+                        print(f"[BIG]   ✖ Failed to load job {idx}: {e}")
                         failed_count += 1
                 else:
-                    print(f"[BIG] Job {idx} file not found: {filepath}")
+                    print(f"[BIG]   ✖ Job {idx} file not found: {filepath}")
                     failed_count += 1
             else:
                 # Job failed or pending
@@ -1438,13 +1438,13 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 
         if len(loaded_images) == 0:
             # Return empty placeholder
-            print("[BIG] No images could be loaded!")
+            print("[BIG] ⚠️ No images could be loaded!")
             empty_img = torch.zeros((1, 512, 512, 3))
             return ([empty_img], [""], 0, 0, failed_count)
 
         # Stack images into batch tensor [B, H, W, C]
         batch_tensor = torch.stack(loaded_images, dim=0)
-        print(f"[BIG] Loaded {len(loaded_images)} images, shape: {batch_tensor.shape}")
+        print(f"[BIG] ✅ Loaded {len(loaded_images)} images, shape: {batch_tensor.shape}")
 
         # Return in OUTPUT_IS_LIST format: (True, True, False, False, False)
         return (
@@ -1479,20 +1479,20 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 
         # If we have pre-generated images, load and return them
         if generated_batch and len(generated_batch) > 0:
-            print(f"[BIG] Found {len(generated_batch)} pre-generated images, loading from storage...")
+            print(f"[BIG] ✅ Found {len(generated_batch)} pre-generated images, loading from storage...")
             return self._load_generated_images(generated_batch, node_identifier)
 
         # No pre-generated images - show helpful error
         print("")
         print("═" * 70)
-        print("NO IMAGES TO OUTPUT")
+        print("❌ NO IMAGES TO OUTPUT")
         print("═" * 70)
         print("")
         print("   Please use the 'Generate All' button in the custom UI first!")
         print("")
         print("   How to use this node:")
         print("   1. Connect prompts from Reality Prompt Generator")
-        print("2. Click ' Generate All' in the BIG node's custom UI")
+        print("   2. Click '✨ Generate All' in the BIG node's custom UI")
         print("   3. Wait for generation to complete")
         print("   4. Run the ComfyUI workflow to output the generated images")
         print("")
@@ -1530,16 +1530,16 @@ class AIOFC_BatchImageGenerator(PreviewImage):
         multi_image = self._extract_val(kwargs.get('multi_image'), False)
         enable_img2img = self._extract_val(kwargs.get('enable_img2img'), False)
         bypass_filter = self._extract_val(kwargs.get('bypass_filter'), False)
-        filename_prefix = self._extract_val(kwargs.get('filename_prefix'), "AIOFC")
+        filename_prefix = self._extract_val(kwargs.get('filename_prefix'), "INSTARAW")
 
         uid = self._extract_val(kwargs.get('uid'))
         node_identifier = self._extract_val(kwargs.get('node_identifier'))
 
         # Warn about 2X mode in legacy path (for now, native run doesn't support 2X)
         if multi_image and provider == "wavespeed.ai":
-            print("[BIG] 2X Multi-Image mode is enabled.", flush=True)
-            print("[BIG] TIP: For 2X mode (2 images per API call), use the custom UI's 'Generate All' button.", flush=True)
-            print("[BIG] Native run currently generates 1 image per prompt.", flush=True)
+            print("[BIG] ⚠️ 2X Multi-Image mode is enabled.", flush=True)
+            print("[BIG] 💡 TIP: For 2X mode (2 images per API call), use the custom UI's 'Generate All' button.", flush=True)
+            print("[BIG] 📌 Native run currently generates 1 image per prompt.", flush=True)
 
         # Get prompt lists
         prompts_positive = self._extract_list(kwargs.get('prompt_list_positive'))
@@ -1643,7 +1643,7 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 
         total_jobs = len(jobs)
         print("\n" + "═" * 80, flush=True)
-        print("BATCH IMAGE GENERATOR", flush=True)
+        print("🎨 INSTARAW BATCH IMAGE GENERATOR", flush=True)
         print("═" * 80, flush=True)
         print(f"   Jobs: {total_jobs}", flush=True)
         print(f"   Parallel: {max_parallel} | Retries: {max_retries}", flush=True)
@@ -1652,8 +1652,8 @@ class AIOFC_BatchImageGenerator(PreviewImage):
         print(f"   Mode: {'I2I (Edit)' if is_i2i else 'T2I (Generate)'} | Ref Images: {num_ref_images}", flush=True)
         print(f"   Negative Prompts: {'Enabled' if use_negative else 'Disabled'}", flush=True)
         print(f"   Auto-Retry: {'Enabled' if auto_retry else 'Disabled'} | Cache: {'Enabled' if use_cache else 'Disabled'}", flush=True)
-        print(f"2X Mode: {' Enabled (use custom UI for 2X)' if multi_image else 'Disabled'}", flush=True)
-        print(f"Bypass Filter: {' Yes (auto-output all)' if bypass_filter else 'No (show popup)'}", flush=True)
+        print(f"   2X Mode: {'⚠️ Enabled (use custom UI for 2X)' if multi_image else 'Disabled'}", flush=True)
+        print(f"   Bypass Filter: {'✅ Yes (auto-output all)' if bypass_filter else 'No (show popup)'}", flush=True)
         print("─" * 80, flush=True)
 
         # ═══════════════════════════════════════════════════════════════════
@@ -1707,11 +1707,11 @@ class AIOFC_BatchImageGenerator(PreviewImage):
                 completed += 1
 
                 if result.state == JobState.CACHED:
-                    status = "CACHED"
+                    status = "📦 CACHED"
                 elif result.state == JobState.SUCCESS:
-                    status = f"SUCCESS (attempts: {result.attempts}, {result.generation_time:.1f}s)"
+                    status = f"✅ SUCCESS (attempts: {result.attempts}, {result.generation_time:.1f}s)"
                 else:
-                    status = f"FAILED: {result.error[:60]}..."
+                    status = f"❌ FAILED: {result.error[:60]}..."
 
                 pct = 100 * completed // num_jobs
                 print(f"   [{completed:3d}/{num_jobs}] ({pct:3d}%) Job #{result.id + 1}: {status}", flush=True)
@@ -1761,9 +1761,9 @@ class AIOFC_BatchImageGenerator(PreviewImage):
         cached = [j for j in completed_jobs if j.state == JobState.CACHED]
 
         print("─" * 80, flush=True)
-        print(f"GENERATION COMPLETE in {total_time:.1f}s", flush=True)
-        print(f"Successful: {len(successful)} ({len(cached)} from cache)", flush=True)
-        print(f"Failed: {len(failed)}", flush=True)
+        print(f"📊 GENERATION COMPLETE in {total_time:.1f}s", flush=True)
+        print(f"   ✅ Successful: {len(successful)} ({len(cached)} from cache)", flush=True)
+        print(f"   ❌ Failed: {len(failed)}", flush=True)
 
         if failed:
             print("   Failed jobs:", flush=True)
@@ -1829,7 +1829,7 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 
         # Build tip with job info
         tip_lines = [
-            f"Generated {len(successful)} images ({len(cached)} cached, {len(failed)} failed)",
+            f"✅ Generated {len(successful)} images ({len(cached)} cached, {len(failed)} failed)",
             f"⏱️ Total time: {total_time:.1f}s",
             "",
             "Select images to output, then click Send.",
@@ -1838,7 +1838,7 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 
         # Check if filter should be bypassed
         if bypass_filter:
-            print(f"[BIG] Bypass filter enabled - outputting all {len(successful)} images", flush=True)
+            print(f"[BIG] 🚀 Bypass filter enabled - outputting all {len(successful)} images", flush=True)
             selected_indices = list(range(len(successful)))
         else:
             # Send to popup
@@ -1906,15 +1906,15 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 
         # Emit event to update the JS widget with generated_batch_data
         try:
-            PromptServer.instance.send_sync("batch-gen-save", {
+            PromptServer.instance.send_sync("instaraw-batch-gen-save", {
                 "node_id": node_identifier,
                 "generated_batch_data": json.dumps(batch_data),
             })
-            print(f"[BIG] Saved {len(batch_data)} jobs to generated_batch_data", flush=True)
+            print(f"[BIG] 💾 Saved {len(batch_data)} jobs to generated_batch_data", flush=True)
         except Exception as e:
-            print(f"[BIG] Failed to save generated_batch_data: {e}", flush=True)
+            print(f"[BIG] ⚠️ Failed to save generated_batch_data: {e}", flush=True)
 
-        print(f"Output: {count} images selected (indices: {indexes_str})", flush=True)
+        print(f"🎉 Output: {count} images selected (indices: {indexes_str})", flush=True)
 
         return (final_images, final_prompts, indexes_str, count, len(failed))
 
@@ -1924,9 +1924,9 @@ class AIOFC_BatchImageGenerator(PreviewImage):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_BatchImageGenerator": AIOFC_BatchImageGenerator,
+    "INSTARAW_BatchImageGenerator": INSTARAW_BatchImageGenerator,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_BatchImageGenerator": "Batch Image Generator",
+    "INSTARAW_BatchImageGenerator": "🎨 INSTARAW Batch Image Generator",
 }

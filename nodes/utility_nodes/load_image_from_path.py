@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import os
 
-class AIOFC_LoadImageFromPath:
+class INSTARAW_LoadImageFromPath:
     """
     A simple utility node to load an image from a given file path string.
     This is essential for previewing the final output of nodes like the 
@@ -22,11 +22,11 @@ class AIOFC_LoadImageFromPath:
 
     RETURN_TYPES = ("IMAGE", "MASK")
     FUNCTION = "load_image"
-    CATEGORY = "Utilities"
+    CATEGORY = "INSTARAW/Utilities"
 
     def load_image(self, filepath: str):
         if not os.path.exists(filepath):
-            raise FileNotFoundError(f"Load Image: File not found at {filepath}")
+            raise FileNotFoundError(f"INSTARAW Load Image: File not found at {filepath}")
 
         # Open the image file from the provided path
         img_pil = Image.open(filepath).convert('RGB')
@@ -47,8 +47,8 @@ class AIOFC_LoadImageFromPath:
         return (img_tensor, mask)
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_LoadImageFromPath": AIOFC_LoadImageFromPath
+    "INSTARAW_LoadImageFromPath": INSTARAW_LoadImageFromPath
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_LoadImageFromPath": "Load Image From Path"
+    "INSTARAW_LoadImageFromPath": "➡️ INSTARAW Load Image From Path"
 }

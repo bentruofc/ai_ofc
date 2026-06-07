@@ -1,7 +1,7 @@
 # ---
-# ComfyUI AIOFC - Nano Banana Pro Multi Node
+# ComfyUI INSTARAW - Nano Banana Pro Multi Node
 # WaveSpeed.ai exclusive - generates 2 images per call at half the cost
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -15,7 +15,7 @@ import torch
 from PIL import Image
 
 
-class AIOFC_NanoBananaProMulti:
+class INSTARAW_NanoBananaProMulti:
     """
     Nano Banana Pro Multi - WaveSpeed exclusive endpoint.
     Generates 2 images per call at half the cost ($0.07/image vs $0.14/image).
@@ -63,7 +63,7 @@ class AIOFC_NanoBananaProMulti:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("images",)
     FUNCTION = "generate"
-    CATEGORY = "API"
+    CATEGORY = "INSTARAW/API"
     DESCRIPTION = (
         "Nano Banana Pro Multi - Generates 2 images per call at $0.07/image. "
         "WaveSpeed.ai exclusive. Limited aspect ratios."
@@ -78,7 +78,7 @@ class AIOFC_NanoBananaProMulti:
             "Content-Type": "application/json",
         }
 
-        print(f"Nano Banana Pro Multi: Submitting request to WaveSpeed.ai...")
+        print(f"🚀 Nano Banana Pro Multi: Submitting request to WaveSpeed.ai...")
         print(f"   Endpoint: {base_url}/{endpoint}")
 
         # Submit task
@@ -96,7 +96,7 @@ class AIOFC_NanoBananaProMulti:
 
         result = response.json()
         request_id = result["data"]["id"]
-        print(f"Task submitted. Request ID: {request_id}. Polling for result...")
+        print(f"✅ Task submitted. Request ID: {request_id}. Polling for result...")
 
         # Poll for result
         poll_url = f"{base_url}/predictions/{request_id}/result"
@@ -115,7 +115,7 @@ class AIOFC_NanoBananaProMulti:
             status = data.get("status")
 
             if status == "completed":
-                print("Task completed!")
+                print("✅ Task completed!")
                 return data["outputs"]  # Returns list of image URLs
 
             if status == "failed":
@@ -146,7 +146,7 @@ class AIOFC_NanoBananaProMulti:
         ]
 
         if all(os.path.exists(f) for f in cache_files):
-            print(f"Nano Banana Pro Multi: Cache hit! Loading from cache...")
+            print(f"✅ Nano Banana Pro Multi: Cache hit! Loading from cache...")
             tensors = []
             for cache_file in cache_files:
                 img = Image.open(cache_file).convert("RGB")
@@ -154,7 +154,7 @@ class AIOFC_NanoBananaProMulti:
                 tensors.append(torch.from_numpy(img_np))
             return (torch.stack(tensors),)
 
-        print("Nano Banana Pro Multi: Cache miss. Proceeding with API call...")
+        print("💨 Nano Banana Pro Multi: Cache miss. Proceeding with API call...")
 
         # Build payload
         payload = {
@@ -184,7 +184,7 @@ class AIOFC_NanoBananaProMulti:
 
             # Save to cache
             cache_file = cache_files[i]
-            print(f"Saving image {i + 1} to cache: {cache_file}")
+            print(f"💾 Saving image {i + 1} to cache: {cache_file}")
             image_pil.save(cache_file, "PNG")
 
             # Convert to tensor
@@ -195,7 +195,7 @@ class AIOFC_NanoBananaProMulti:
         result_tensor = torch.stack(tensors)
 
         print(
-            f"Nano Banana Pro Multi: Complete! Generated {len(tensors)} images, shape: {result_tensor.shape}"
+            f"✅ Nano Banana Pro Multi: Complete! Generated {len(tensors)} images, shape: {result_tensor.shape}"
         )
 
         return (result_tensor,)
@@ -206,9 +206,9 @@ class AIOFC_NanoBananaProMulti:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_NanoBananaProMulti": AIOFC_NanoBananaProMulti,
+    "INSTARAW_NanoBananaProMulti": INSTARAW_NanoBananaProMulti,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_NanoBananaProMulti": "Nano Banana Pro Multi (2x)",
+    "INSTARAW_NanoBananaProMulti": "🍌 INSTARAW Nano Banana Pro Multi (2x)",
 }

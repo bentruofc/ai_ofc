@@ -1,12 +1,12 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/utility_nodes/realistic_jpeg.py
+# Filename: ../ComfyUI_INSTARAW/nodes/utility_nodes/realistic_jpeg.py
 # ---
 
 # ---
-# ComfyUI AIOFC - JPEG Degradation Node (V3 - Corrected Scaling)
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - JPEG Degradation Node (V3 - Corrected Scaling)
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -29,7 +29,7 @@ try:
 except ImportError:
     KORNIA_AVAILABLE = False
 
-class AIOFC_JPEG_Degradation:
+class INSTARAW_JPEG_Degradation:
     """
     Applies realistic image degradation through either true JPEG compression
     or a downscale/upscale cycle, with optional artifact softening.
@@ -57,11 +57,11 @@ class AIOFC_JPEG_Degradation:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "degrade"
     DESCRIPTION = """
-# AIOFC JPEG Degradation
+# INSTARAW JPEG Degradation
 Simulates image quality loss.
 - **True JPEG**: Authentic compression artifacts.
 - **Downscale/Upscale**: Simulates resolution loss.
@@ -130,14 +130,14 @@ Simulates image quality loss.
             )
             final_batch = blurred_batch.permute(0, 2, 3, 1)
         elif soften_artifacts and not KORNIA_AVAILABLE:
-            print("JPEG Degradation: Soften artifacts is enabled, but Kornia is not installed. Skipping blur.")
+            print("⚠️ INSTARAW JPEG Degradation: Soften artifacts is enabled, but Kornia is not installed. Skipping blur.")
 
         return (final_batch.to(original_device),)
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_JPEG_Degradation": AIOFC_JPEG_Degradation,
+    "INSTARAW_JPEG_Degradation": INSTARAW_JPEG_Degradation,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_JPEG_Degradation": "JPEG Degradation",
+    "INSTARAW_JPEG_Degradation": "🗜️ INSTARAW JPEG Degradation",
 }

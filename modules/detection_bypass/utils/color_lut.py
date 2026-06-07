@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/color_lut.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/color_lut.py
 # ---
 
 import numpy as np

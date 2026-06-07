@@ -1,5 +1,5 @@
 # ---
-# ComfyUI AIOFC - NSFW Nodes Init
+# ComfyUI INSTARAW - NSFW Nodes Init
 # ---
 
 from .nsfw_detector import NODE_CLASS_MAPPINGS as DETECTOR_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as DETECTOR_DISPLAY_MAPPINGS

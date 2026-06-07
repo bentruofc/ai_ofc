@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/stats_utils.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/stats_utils.py
 # ---
 
 import numpy as np

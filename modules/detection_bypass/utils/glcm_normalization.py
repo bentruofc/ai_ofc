@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/glcm_normalization.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/glcm_normalization.py
 import numpy as np
 from skimage.feature import graycomatrix, graycoprops
 from scipy.ndimage import gaussian_filter

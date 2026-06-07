@@ -1,5 +1,5 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/modules/detection_bypass/pipeline_v2.py (FINAL, CORRECTED)
+# Filename: ../ComfyUI_INSTARAW/modules/detection_bypass/pipeline_v2.py (FINAL, CORRECTED)
 # ---
 import dataclasses
 import os
@@ -28,7 +28,7 @@ class BypassConfigV2:
 class BypassPipelineV2:
     def __init__(self, config: BypassConfigV2):
         self.config = config
-        print(f"V2 Pipeline Initialized: Mode='{self.config.mode}', Strength={self.config.strength:.2f}")
+        print(f"✅ V2 Pipeline Initialized: Mode='{self.config.mode}', Strength={self.config.strength:.2f}")
 
     def _get_base_args(self) -> SimpleNamespace:
         # Create a complete base namespace with ALL possible parameters to prevent AttributeErrors.

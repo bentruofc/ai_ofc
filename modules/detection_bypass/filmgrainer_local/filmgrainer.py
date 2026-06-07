@@ -1,8 +1,8 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/modules/detection_bypass/filmgrainer_local/filmgrainer.py
+# Filename: ../ComfyUI_INSTARAW/modules/detection_bypass/filmgrainer_local/filmgrainer.py
 # ---
 # Filmgrainer - by Lars Ole Pontoppidan - MIT License
-# Patched for AIOFC: Uses relative imports and a cross-platform temp directory.
+# Patched for INSTARAW: Uses relative imports and a cross-platform temp directory.
 
 from PIL import Image, ImageFilter
 import os 

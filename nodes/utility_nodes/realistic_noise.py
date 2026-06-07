@@ -1,12 +1,12 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/utility_nodes/realistic_noise.py
+# Filename: ../ComfyUI_INSTARAW/nodes/utility_nodes/realistic_noise.py
 # ---
 
 # ---
-# ComfyUI AIOFC - Realistic Noise Node
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Realistic Noise Node
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -25,9 +25,9 @@ try:
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 except ImportError:
     KORNIA_AVAILABLE = False
-    print("Kornia not available. Realistic Noise node requires Kornia for blurring effects.")
+    print("⚠️ Kornia not available. Realistic Noise node requires Kornia for blurring effects.")
 
-class AIOFC_RealisticNoise:
+class INSTARAW_RealisticNoise:
     """
     Adds realistic, adjustable camera sensor noise to an image.
     Features separate controls for luma (brightness) and chroma (color) noise,
@@ -58,11 +58,11 @@ class AIOFC_RealisticNoise:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "add_noise"
     DESCRIPTION = """
-# AIOFC Realistic Noise
+# INSTARAW Realistic Noise
 Adds natural-looking camera sensor noise, perfect for mimicking smartphone photos.
 - **Luma/Chroma Intensity**: Control brightness and color noise separately.
 - **Blur Sigma**: Soften the noise to avoid a sharp, 'cinematic' look.
@@ -123,9 +123,9 @@ Adds natural-looking camera sensor noise, perfect for mimicking smartphone photo
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_RealisticNoise": AIOFC_RealisticNoise,
+    "INSTARAW_RealisticNoise": INSTARAW_RealisticNoise,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_RealisticNoise": "Realistic Noise",
+    "INSTARAW_RealisticNoise": "✨ INSTARAW Realistic Noise",
 }

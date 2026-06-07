@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/lens_simulation_node.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/lens_simulation_node.py
 # ---
 
 import torch
@@ -8,7 +8,7 @@ from PIL import Image
 # We will use the camera simulation utility, but only for specific effects
 from ...modules.detection_bypass.camera_pipeline import simulate_camera_pipeline
 
-class AIOFC_LensEffects:
+class INSTARAW_LensEffects:
     """
     Simulates the subtle, physical imperfections of a real camera lens, such as
     vignetting and chromatic aberration. This should be applied late in the
@@ -34,7 +34,7 @@ class AIOFC_LensEffects:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "apply_effects"
-    CATEGORY = "Post-Processing"
+    CATEGORY = "INSTARAW/Post-Processing"
 
     def tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor.ndim == 4 and tensor.shape[0] == 1:
@@ -48,7 +48,7 @@ class AIOFC_LensEffects:
         if vignette_strength == 0 and chromatic_aberration == 0:
             return (image,)
 
-        print(f"Lens Effects: Applying effects.")
+        print(f"👁️ INSTARAW Lens Effects: Applying effects.")
 
         processed_images = []
         for i in range(image.shape[0]):
@@ -82,14 +82,14 @@ class AIOFC_LensEffects:
             
         final_batch = torch.cat(processed_images, dim=0)
         
-        print("Lens Effects: Processing complete.")
+        print("✅ INSTARAW Lens Effects: Processing complete.")
         return (final_batch,)
 
 # --- Node Registration ---
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_LensEffects": AIOFC_LensEffects,
+    "INSTARAW_LensEffects": INSTARAW_LensEffects,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_LensEffects": "Lens Effects",
+    "INSTARAW_LensEffects": "👁️ INSTARAW Lens Effects",
 }

@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - Feather Mask Node
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Feather Mask Node
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -21,9 +21,9 @@ try:
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 except ImportError:
     KORNIA_AVAILABLE = False
-    print("Kornia not available. Feather Mask node requires Kornia.")
+    print("⚠️ Kornia not available. Feather Mask node requires Kornia.")
 
-class AIOFCFeatherMask:
+class INSTARAWFeatherMask:
     """
     Applies a true feathering effect by compositing a solid core with a blurred outer boundary.
     This ensures a 100% solid core with a perfectly seamless gradient falloff.
@@ -39,12 +39,12 @@ class AIOFCFeatherMask:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     RETURN_TYPES = ("MASK", "MASK", "STRING",)
     RETURN_NAMES = ("mask", "mask_inverted", "info_text",)
     FUNCTION = "feather_mask"
     DESCRIPTION = """
-# AIOFC Feather Mask (Corrected)
+# INSTARAW Feather Mask (Corrected)
 - **expand**: Expands the solid core of the mask by this many pixels.
 - **feather**: Creates a smooth gradient over this many pixels, starting from the new solid edge.
 - This provides a perfect, artifact-free feather just like in Photoshop.
@@ -118,8 +118,8 @@ class AIOFCFeatherMask:
 
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFCFeatherMask": AIOFCFeatherMask,
+    "INSTARAWFeatherMask": INSTARAWFeatherMask,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFCFeatherMask": "Feather Mask",
+    "INSTARAWFeatherMask": "🎭 INSTARAW Feather Mask",
 }

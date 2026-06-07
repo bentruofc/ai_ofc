@@ -1,11 +1,11 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/fft_match.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/fft_match.py
 import torch
 import numpy as np
 from PIL import Image
 
 from ...modules.detection_bypass.utils.direct_spectral_matching import direct_spectral_match, radial_profile
 
-class AIOFC_FFT_Match:
+class INSTARAW_FFT_Match:
     """
     Performs a spectral match using either a reference image or an
     Authenticity Profile. Offers two algorithms for comparison.
@@ -29,7 +29,7 @@ class AIOFC_FFT_Match:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         return (tensor.squeeze(0).cpu().numpy() * 255).astype(np.uint8)
@@ -44,7 +44,7 @@ class AIOFC_FFT_Match:
         target_spectra = None
         
         if ref_image is not None:
-            print(f"FFT Match: Using live reference image with '{mode}' mode.")
+            print(f"🛡️ INSTARAW FFT Match: Using live reference image with '{mode}' mode.")
             ref_numpy = self._tensor_to_numpy(ref_image[0:1])
             
             if mode == "Color-Safe (Luminance)":
@@ -60,7 +60,7 @@ class AIOFC_FFT_Match:
                     target_spectra[key] = radial_profile(mag, bins=512)
 
         elif profile_path and profile_path.strip():
-            print(f"FFT Match: Using Authenticity Profile with '{mode}' mode.")
+            print(f"🛡️ INSTARAW FFT Match: Using Authenticity Profile with '{mode}' mode.")
             npz_path = f"{profile_path}.npz"
             try:
                 stats = np.load(npz_path)
@@ -73,7 +73,7 @@ class AIOFC_FFT_Match:
                 raise ValueError(f"Failed to load spectral data from profile '{npz_path}': {e}")
 
         if target_spectra is None:
-            print("FFT Match: No reference image or profile provided. Passing through.")
+            print("⚠️ INSTARAW FFT Match: No reference image or profile provided. Passing through.")
             return (image,)
 
         processed_images = []

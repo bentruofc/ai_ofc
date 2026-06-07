@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/debug_prompt_overlay.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/debug_prompt_overlay.py
 # ---
 
 import torch
@@ -17,7 +17,7 @@ def pil_to_tensor(pil: Image.Image) -> torch.Tensor:
     return torch.from_numpy(arr).unsqueeze(0)
 
 
-class AIOFC_DebugPromptOverlay:
+class INSTARAW_DebugPromptOverlay:
     """
     Debug node: overlay prompt text on the image.
     Designed for LIST mode: receives a single image and a single prompt.
@@ -35,7 +35,7 @@ class AIOFC_DebugPromptOverlay:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image",)
     FUNCTION = "overlay"
-    CATEGORY = "Debug"
+    CATEGORY = "INSTARAW/Debug"
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):
@@ -86,9 +86,9 @@ class AIOFC_DebugPromptOverlay:
 
 # Register in-module
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_DebugPromptOverlay": AIOFC_DebugPromptOverlay,
+    "INSTARAW_DebugPromptOverlay": INSTARAW_DebugPromptOverlay,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_DebugPromptOverlay": "Debug Prompt Overlay",
+    "INSTARAW_DebugPromptOverlay": "🐛 INSTARAW Debug Prompt Overlay",
 }

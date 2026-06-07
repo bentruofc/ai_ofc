@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/__init__.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/__init__.py
 # ---
 from .autowb import auto_white_balance_ref
 from .clahe import clahe_color_correction

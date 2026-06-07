@@ -1,4 +1,4 @@
-class AIOFC_ImagePromptIterator:
+class INSTARAW_ImagePromptIterator:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -19,7 +19,7 @@ class AIOFC_ImagePromptIterator:
     RETURN_TYPES = ("IMAGE", "STRING",)
     RETURN_NAMES = ("images", "prompts",)
     FUNCTION = "map"
-    CATEGORY = "Workflow Logic"
+    CATEGORY = "INSTARAW/Workflow Logic"
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):

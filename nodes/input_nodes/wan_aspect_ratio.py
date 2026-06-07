@@ -5,7 +5,7 @@ Resolution is 2x what will be generated (due to 2x upscaling in WAN workflow)
 """
 
 
-class AIOFC_WANAspectRatio:
+class INSTARAW_WANAspectRatio:
     """
     Aspect ratio presets for WAN (Weighted Attention Network) workflows.
     These resolutions are optimized for the WAN 2x upscaling workflow.
@@ -32,7 +32,7 @@ class AIOFC_WANAspectRatio:
     RETURN_TYPES = ("INT", "INT", "STRING")
     RETURN_NAMES = ("width", "height", "aspect_label")
     FUNCTION = "get_resolution"
-    CATEGORY = "Input"
+    CATEGORY = "INSTARAW/Input"
     DESCRIPTION = "WAN aspect ratio presets. Outputs resolution optimized for WAN 2x upscaling workflow."
 
     def get_resolution(self, aspect_ratio):
@@ -53,9 +53,9 @@ class AIOFC_WANAspectRatio:
 
 # Node registration
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_WANAspectRatio": AIOFC_WANAspectRatio
+    "INSTARAW_WANAspectRatio": INSTARAW_WANAspectRatio
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_WANAspectRatio": "WAN Aspect Ratio"
+    "INSTARAW_WANAspectRatio": "📐 WAN Aspect Ratio"
 }

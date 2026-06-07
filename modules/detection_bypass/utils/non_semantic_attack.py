@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/modules/detection_bypass/utils/non_semantic_attack.py
+# Filename: ComfyUI_INSTARAW/modules/detection_bypass/utils/non_semantic_attack.py
 import torch
 import torch.optim as optim
 import lpips
@@ -31,7 +31,7 @@ def _optimization_worker(img_np: np.ndarray, config: dict, device: torch.device,
             img_fft = torch.fft.fft2(img_gray)
 
         if print_log_every_n > 0:
-            print(f"[Spectral Normalizer] Thread started. Optimizing for {config['iterations']} iterations...")
+            print(f"  [Spectral Normalizer] ✓ Thread started. Optimizing for {config['iterations']} iterations...")
             print(f"  [Params] LR={config['learning_rate']:.1E}, LPIPS(t={config['t_lpips']:.3f}, c={config['c_lpips']:.3f}), L2(t={config['t_l2']:.1E}, c={config['c_l2']:.2f}), GradClip={config['grad_clip_value']:.3f}")
 
         for i in range(config['iterations']):
@@ -66,7 +66,7 @@ def _optimization_worker(img_np: np.ndarray, config: dict, device: torch.device,
 
         if print_log_every_n > 0:
             final_lpips = lpips_model(torch.clamp(img_tensor + delta.expand_as(img_tensor), -1, 1), img_tensor).mean().item()
-            print(f"[Spectral Normalizer] Optimization complete. Final LPIPS distance: {final_lpips:.4f}")
+            print(f"  [Spectral Normalizer] ✓ Optimization complete. Final LPIPS distance: {final_lpips:.4f}")
 
         delta_rgb = delta.expand_as(img_tensor)
         final_x_nw = torch.clamp(img_tensor + delta_rgb, -1, 1).squeeze(0).cpu().detach()

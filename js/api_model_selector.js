@@ -2,9 +2,9 @@ import { app } from '../../scripts/app.js';
 import { ComfyWidgets } from '../../scripts/widgets.js';
 
 app.registerExtension({
-	name: 'Comfy.AIOFC.APIModelSelector',
+	name: 'Comfy.INSTARAW.APIModelSelector',
 	async beforeRegisterNodeDef(nodeType, nodeData, app) {
-		if (nodeData.name === 'AIOFC_API_ModelSelector') {
+		if (nodeData.name === 'INSTARAW_API_ModelSelector') {
 			
             const onNodeCreated = nodeType.prototype.onNodeCreated;
 			nodeType.prototype.onNodeCreated = function () {
@@ -16,7 +16,7 @@ app.registerExtension({
 				warningWidget.inputEl.style.backgroundColor = '#442222';
 				warningWidget.inputEl.style.color = '#FFCCCC';
 				warningWidget.inputEl.style.opacity = '0.8';
-				warningWidget.value = 'For this model, the fal.ai provider is unreliable for Image-to-Image (Edit) tasks. wavespeed.ai recommended.';
+				warningWidget.value = '⚠️ For this model, the fal.ai provider is unreliable for Image-to-Image (Edit) tasks. wavespeed.ai recommended.';
 				warningWidget.hidden = true; // Initially hidden
 
 				const modelWidget = this.widgets.find((w) => w.name === 'model');

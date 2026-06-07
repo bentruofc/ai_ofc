@@ -1,7 +1,7 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/line_splitter.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/line_splitter.py
 # ---
 
-class AIOFC_LineSplitter:
+class INSTARAW_LineSplitter:
     """
     Splits a multiline string into a list of clean lines.
     """
@@ -37,7 +37,7 @@ class AIOFC_LineSplitter:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("list_out",)
     FUNCTION = "split"
-    CATEGORY = "Utility"
+    CATEGORY = "INSTARAW/Utility"
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):

@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/texture_normalize.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/texture_normalize.py
 import torch
 import numpy as np
 from PIL import Image
@@ -6,7 +6,7 @@ import os
 from ...modules.detection_bypass.utils.glcm_normalization import glcm_normalize
 from ...modules.detection_bypass.utils.lbp_normalization import lbp_normalize
 
-class AIOFC_Texture_Base:
+class INSTARAW_Texture_Base:
     """Base class for texture normalization nodes with shared logic."""
     
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
@@ -44,7 +44,7 @@ class AIOFC_Texture_Base:
         return (torch.cat(processed_images, dim=0),)
 
 
-class AIOFC_GLCM_Normalize(AIOFC_Texture_Base):
+class INSTARAW_GLCM_Normalize(INSTARAW_Texture_Base):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -56,7 +56,7 @@ class AIOFC_GLCM_Normalize(AIOFC_Texture_Base):
             },
             "optional": {"ref_image": ("IMAGE",), "profile_path": ("STRING", {"forceInput": True}),}
         }
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "INSTARAW/Authenticity"
 
     def execute(self, image, strength, distances, seed, ref_image=None, profile_path=None):
         try:
@@ -65,7 +65,7 @@ class AIOFC_GLCM_Normalize(AIOFC_Texture_Base):
             dist_list = [2]
         return self._process_batch(image, strength, seed, ref_image, profile_path, glcm_normalize, distances=dist_list)
 
-class AIOFC_LBP_Normalize(AIOFC_Texture_Base):
+class INSTARAW_LBP_Normalize(INSTARAW_Texture_Base):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -78,7 +78,7 @@ class AIOFC_LBP_Normalize(AIOFC_Texture_Base):
             },
             "optional": {"ref_image": ("IMAGE",), "profile_path": ("STRING", {"forceInput": True}),}
         }
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "INSTARAW/Authenticity"
 
     def execute(self, image, strength, radius, n_points, seed, ref_image=None, profile_path=None):
         return self._process_batch(image, strength, seed, ref_image, profile_path, lbp_normalize, radius=radius, n_points=n_points)

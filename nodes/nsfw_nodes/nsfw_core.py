@@ -1,7 +1,7 @@
 # ---
-# ComfyUI AIOFC - NSFW Core Logic (v4.0 - Correct, Working Version)
+# ComfyUI INSTARAW - NSFW Core Logic (v4.0 - Correct, Working Version)
 # This version perfectly mimics the original Nudenet.py's preprocessing to ensure identical results.
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 

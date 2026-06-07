@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/color_science_node.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/color_science_node.py
 # ---
 
 import torch
@@ -9,7 +9,7 @@ import os
 # Import the LUT application logic from our modules
 from ...modules.detection_bypass.utils import apply_lut, load_lut
 
-class AIOFC_ColorScience:
+class INSTARAW_ColorScience:
     """
     Applies a 3D LUT (.cube file) to an image to simulate the unique color science
     of a specific camera profile (e.g., iPhone, Sony, Fuji).
@@ -20,7 +20,7 @@ class AIOFC_ColorScience:
         return {
             "required": {
                 "image": ("IMAGE",),
-                "lut_path": ("STRING", {"forceInput": True, "tooltip": "Connect an LUT Selector node here."}),
+                "lut_path": ("STRING", {"forceInput": True, "tooltip": "Connect an INSTARAW LUT Selector node here."}),
                 "strength": ("FLOAT", {
                     "default": 1.0, "min": 0.0, "max": 1.0, "step": 0.01,
                     "tooltip": "Blend strength of the LUT. 0.0 is no effect, 1.0 is full effect."
@@ -30,7 +30,7 @@ class AIOFC_ColorScience:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "apply_color_science"
-    CATEGORY = "Post-Processing"
+    CATEGORY = "INSTARAW/Post-Processing"
 
     def tensor_to_pil(self, tensor: torch.Tensor) -> Image.Image:
         """Converts a torch tensor to a PIL image."""
@@ -45,10 +45,10 @@ class AIOFC_ColorScience:
         return torch.from_numpy(img_np).unsqueeze(0)
 
     def apply_color_science(self, image: torch.Tensor, lut_path: str, strength: float):
-        print(f"Color Science: Applying LUT '{os.path.basename(lut_path)}' with strength {strength:.2f}.")
+        print(f"🎨 INSTARAW Color Science: Applying LUT '{os.path.basename(lut_path)}' with strength {strength:.2f}.")
 
         if not os.path.exists(lut_path):
-            raise FileNotFoundError(f"Color Science: LUT file not found at path: {lut_path}")
+            raise FileNotFoundError(f"INSTARAW Color Science: LUT file not found at path: {lut_path}")
 
         # Load the LUT from the provided path
         try:
@@ -70,19 +70,19 @@ class AIOFC_ColorScience:
             processed_images.append(processed_tensor)
 
         if not processed_images:
-            print("Color Science: No images were processed. Returning original image.")
+            print("⚠️ INSTARAW Color Science: No images were processed. Returning original image.")
             return (image,)
             
         final_batch = torch.cat(processed_images, dim=0)
         
-        print("Color Science: Processing complete.")
+        print("✅ INSTARAW Color Science: Processing complete.")
         return (final_batch,)
 
 # --- Node Registration ---
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_ColorScience": AIOFC_ColorScience
+    "INSTARAW_ColorScience": INSTARAW_ColorScience
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_ColorScience": "Color Science (LUT)"
+    "INSTARAW_ColorScience": "🎨 INSTARAW Color Science (LUT)"
 }

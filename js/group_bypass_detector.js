@@ -1,14 +1,14 @@
-// --- Filename: ../ComfyUI_AIOFC/js/group_bypass_detector.js ---
+// --- Filename: ../ComfyUI_INSTARAW/js/group_bypass_detector.js ---
 
 import { app } from "../../scripts/app.js";
 
 const MODE_ALWAYS = 0; // LiteGraph.ALWAYS
 
 app.registerExtension({
-	name: "Comfy.AIOFC.GroupBypassDetector",
+	name: "Comfy.INSTARAW.GroupBypassDetector",
 
 	async beforeRegisterNodeDef(nodeType, nodeData, app) {
-		if (nodeData.name === "AIOFC_GroupBypassToBoolean") {
+		if (nodeData.name === "INSTARAW_GroupBypassToBoolean") {
 
 			// Store the last known state on the node instance to prevent unnecessary updates
 			const onNodeCreated = nodeType.prototype.onNodeCreated;

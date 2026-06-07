@@ -1,9 +1,9 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/blend_colors.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/blend_colors.py
 import torch
 import numpy as np
 from ...modules.detection_bypass.utils.blend import blend_colors
 
-class AIOFC_BlendColors:
+class INSTARAW_BlendColors:
     """
     Applies a color quantization and randomization effect by clustering similar
     colors. This can help break up the smooth, perfect gradients often found
@@ -32,7 +32,7 @@ class AIOFC_BlendColors:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         # Convert tensor [0, 1] float to numpy [0, 255] uint8

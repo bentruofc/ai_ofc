@@ -1,5 +1,5 @@
 
-.aiofc_popup .zoomed {
+.instaraw_popup .zoomed {
     position: absolute;
     width: 100%;
     left: 0;
@@ -12,16 +12,16 @@
     background-color: rgba(29, 29, 29, 0.886);
 }
 
-.aiofc_popup .zoomed_prev, .zoomed_next {
+.instaraw_popup .zoomed_prev, .zoomed_next {
     flex-grow: 1;
     
 }
 
-.aiofc_popup .zoomed_prev {
+.instaraw_popup .zoomed_prev {
     text-align: right;
 }
 
-.aiofc_popup .zoomed_arrow {
+.instaraw_popup .zoomed_arrow {
     font-size: 48px;
     border-radius: 40px;
     padding: 0px 8px 4px 8px;
@@ -29,12 +29,12 @@
     border: 1px solid rgb(128, 128, 128, 1.0);
 }
 
-.aiofc_popup .zoomed_arrow:hover {
+.instaraw_popup .zoomed_arrow:hover {
     border: 1px solid rgb(255, 128, 128, 1.0);
 }
 
 
-.aiofc_popup .zoomed_image {
+.instaraw_popup .zoomed_image {
     max-width: calc(100% - 140px);
     height: 100%;
     object-fit: contain;
@@ -42,7 +42,7 @@
     padding: 4px;
 }
 
-.aiofc_popup .zoomed_number {
+.instaraw_popup .zoomed_number {
     position: absolute;
     top: 12px;
     margin-left: 12px;
@@ -54,7 +54,7 @@
     border: 1px solid rgba(128, 128, 128, 1.0);
 }
 
-.aiofc_popup .zoomed.highlighted .zoomed_image {
+.instaraw_popup .zoomed.highlighted .zoomed_image {
     border: 3px solid green;
     padding: 2px;
 }

@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - Grow Mask With Blur Node
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Grow Mask With Blur Node
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -15,7 +15,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 from tqdm import tqdm
 
-pass # aiofc marker
+pass # instara marker
 
 # Tensor conversion utilities
 def tensor2pil(image):
@@ -31,7 +31,7 @@ def pil2tensor(image):
     return torch.from_numpy(np.array(image).astype(np.float32) / 255.0).unsqueeze(0)
 
 
-class AIOFCGrowMask:
+class INSTARAWGrowMask:
     """
     Hybrid mask utility for growing/shrinking with pixel or percentage-based control.
     Provides precise, predictable results with a dedicated string output for calculated values.
@@ -72,12 +72,12 @@ class AIOFCGrowMask:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     RETURN_TYPES = ("MASK", "MASK", "STRING",)
     RETURN_NAMES = ("mask", "mask_inverted", "info_text",)
     FUNCTION = "expand_mask"
     DESCRIPTION = """
-# AIOFC Grow Mask (Hybrid)
+# INSTARAW Grow Mask (Hybrid)
 - **expand_method**: Choose 'Pixels' for absolute values or 'Percentage' for resolution-independent scaling.
 - **expand**: Set the expansion amount in pixels or percent.
 - **incremental_expand_rate**: Increase expansion per frame (in pixels or percent).
@@ -104,7 +104,7 @@ class AIOFCGrowMask:
             import kornia.morphology as morph
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         except ImportError:
-            print("Kornia not available for morphology, expansion/shrinking will be skipped.")
+            print("⚠️ Kornia not available for morphology, expansion/shrinking will be skipped.")
             device = torch.device("cpu")
             morph = None
 
@@ -131,7 +131,7 @@ class AIOFCGrowMask:
                     import scipy.ndimage
                     output = torch.from_numpy(scipy.ndimage.binary_fill_holes(output.cpu().numpy() > 0).astype(np.float32)).to(device)
                 except ImportError:
-                    print("scipy not available, skipping fill_holes")
+                    print("⚠️ scipy not available, skipping fill_holes")
 
             if (lerp_alpha < 1.0 or decay_factor < 1.0) and previous_output is not None:
                 if lerp_alpha < 1.0:
@@ -193,9 +193,9 @@ class AIOFCGrowMask:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFCGrowMask": AIOFCGrowMask,
+    "INSTARAWGrowMask": INSTARAWGrowMask,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFCGrowMask": "Grow Mask",
+    "INSTARAWGrowMask": "🎭 INSTARAW Grow Mask",
 }

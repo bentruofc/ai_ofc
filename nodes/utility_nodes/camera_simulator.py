@@ -1,9 +1,9 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/camera_simulator.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/camera_simulator.py
 import torch
 import numpy as np
 from ...modules.detection_bypass.camera_pipeline import simulate_camera_pipeline
 
-class AIOFC_Camera_Simulator:
+class INSTARAW_Camera_Simulator:
     """
     A comprehensive node for simulating a full, realistic camera pipeline,
     now with improved defaults and corrected UI widgets for precision control.
@@ -43,7 +43,7 @@ class AIOFC_Camera_Simulator:
             },
         }
 
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor.ndim == 4: tensor = tensor[0]

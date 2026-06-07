@@ -1,15 +1,15 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/authenticity_profile_selector.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/authenticity_profile_selector.py
 import os
 
-class AIOFC_AuthenticityProfile_Selector:
+class INSTARAW_AuthenticityProfile_Selector:
     """
     Dynamically finds and lists all .npz authenticity profiles from the internal
     'modules/authenticity_profiles' directory. Outputs the base path to the selected profile.
     """
     
     NODE_FILE_PATH = os.path.dirname(os.path.realpath(__file__))
-    AIOFC_ROOT_PATH = os.path.abspath(os.path.join(NODE_FILE_PATH, "..", ".."))
-    PROFILES_DIR = os.path.join(AIOFC_ROOT_PATH, "modules", "authenticity_profiles")
+    INSTARAW_ROOT_PATH = os.path.abspath(os.path.join(NODE_FILE_PATH, "..", ".."))
+    PROFILES_DIR = os.path.join(INSTARAW_ROOT_PATH, "modules", "authenticity_profiles")
 
     PROFILE_FILES = []
     if os.path.isdir(PROFILES_DIR):
@@ -40,7 +40,7 @@ class AIOFC_AuthenticityProfile_Selector:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("profile_path",)
     FUNCTION = "get_path"
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
 
     def get_path(self, profile_name):
         # FIX: Return the base path without the extension.
@@ -51,5 +51,5 @@ class AIOFC_AuthenticityProfile_Selector:
         if not os.path.exists(f"{base_path}.npz"):
             raise FileNotFoundError(f"Selected authenticity profile .npz file could not be found: {base_path}.npz")
             
-        print(f"Profile Selector: Selected profile base '{profile_name}'")
+        print(f"👑 INSTARAW Profile Selector: Selected profile base '{profile_name}'")
         return (base_path,)

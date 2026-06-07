@@ -4,14 +4,14 @@ import { create } from "./utils.js";
 import { popup } from "./popup.js";
 import { ComfyWidgets } from "../../scripts/widgets.js";
 
-const FILTER_TYPES = ["AIOFC_ImageFilter", "AIOFC_TextImageFilter", "AIOFC_MaskImageFilter", "AIOFC_Interactive_Crop", "AIOFC_PromptFilter", "AIOFC_BatchImageGenerator"];
+const FILTER_TYPES = ["INSTARAW_ImageFilter", "INSTARAW_TextImageFilter", "INSTARAW_MaskImageFilter", "INSTARAW_Interactive_Crop", "INSTARAW_PromptFilter", "INSTARAW_BatchImageGenerator"];
 
 app.registerExtension({
-    name: "Comfy.AIOFC.InteractiveNodes", // ​​​​​​​​​​‌‌​​​​​​​​​​​​​​‌‌​​​‌​​​​​​​​​‌​​‌​‌‌​​​​​​​​​‌​​​‌​‌​​​​​​​​​‌​‌​​​‌​​​​​​​​​​‌‌‌​​​​​​​​​​​​​‌‌​‌‌​​​​​​​​​​‌​​​​‌​​​​​​​​​​‌​‌​​​‌​​​​​​​​​‌​​‌‌‌​​​​​​​​​​‌​​​‌​​​​​​​​​​​‌​​​‌‌‌​​​​​​​​​‌​​​​‌​​​​​​​​​​​‌‌​​​​​​​​​​​​​‌​​​‌‌​​​​​​​​​​​‌‌‌​​‌​​​​​​​​​‌​​​‌‌‌​​​​​​​​​‌​‌​‌‌​​​​​​​​​​‌​​‌​‌‌​​​​​​​​​‌​​​‌​‌​​​​​​​​​‌​‌​​​​​​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌​‌​‌​​​​​​​​​​‌‌​​​​​​​​​​​​​​‌‌​​​‌​​​​​​​​​‌​‌​‌‌​‍
+    name: "Comfy.INSTARAW.InteractiveNodes", // ​​​​​​​​​​‌‌​​​​​​​​​​​​​​‌‌​​​‌​​​​​​​​​‌​​‌​‌‌​​​​​​​​​‌​​​‌​‌​​​​​​​​​‌​‌​​​‌​​​​​​​​​​‌‌‌​​​​​​​​​​​​​‌‌​‌‌​​​​​​​​​​‌​​​​‌​​​​​​​​​​‌​‌​​​‌​​​​​​​​​‌​​‌‌‌​​​​​​​​​​‌​​​‌​​​​​​​​​​​‌​​​‌‌‌​​​​​​​​​‌​​​​‌​​​​​​​​​​​‌‌​​​​​​​​​​​​​‌​​​‌‌​​​​​​​​​​​‌‌‌​​‌​​​​​​​​​‌​​​‌‌‌​​​​​​​​​‌​‌​‌‌​​​​​​​​​​‌​​‌​‌‌​​​​​​​​​‌​​​‌​‌​​​​​​​​​‌​‌​​​​​​​​​​​​​​‌‌​‌‌​​​​​​​​​​​‌‌​‌​‌​​​​​​​​​​‌‌​​​​​​​​​​​​​​‌‌​​​‌​​​​​​​​​‌​‌​‌‌​‍
     settings: [
         {
-            id: "AIOFC.Interactive.Header",
-            name: "Interactive Nodes",
+            id: "INSTARAW.Interactive.Header",
+            name: "INSTARAW Interactive Nodes",
             type: () => {
                 const x = document.createElement('span');
                 const a = document.createElement('a');
@@ -23,27 +23,27 @@ app.registerExtension({
                 return x;
             },
         },
-        { id: "AIOFC.Interactive.PlaySound", name: "Play sound when activating", type: "boolean", defaultValue: true },
-        { id: "AIOFC.Interactive.EnlargeSmall", name: "Enlarge small images in grid", type: "boolean", defaultValue: true },
-        { id: "AIOFC.Interactive.ClickSends", name: "Clicking an image sends it", tooltip: "Use if you always want to send exactly one image.", type: "boolean", defaultValue: false },
-        { id: "AIOFC.Interactive.AutosendIdentical", name: "If all images are identical, autosend one", type: "boolean", defaultValue: false },
-        { id: "AIOFC.Interactive.StartZoomed", name: "Enter the Image Filter node with an image zoomed", type: "combo", options: [{ value: 0, text: "No" }, { value: "1", text: "first" }, { value: "-1", text: "last" }], default: 0 },
-        { id: "AIOFC.Interactive.SmallWindow", name: "Show a small popup instead of covering the screen", type: "boolean", tooltip: "Click the small popup to activate it", defaultValue: false },
-        { id: "AIOFC.Interactive.DetailedLogging", name: "Turn on detailed logging", tooltip: "If you are asked to for debugging!", type: "boolean", defaultValue: false },
-        { id: "AIOFC.Interactive.FPS", name: "Video Frames per Second", type: "int", defaultValue: 5 }
+        { id: "INSTARAW.Interactive.PlaySound", name: "Play sound when activating", type: "boolean", defaultValue: true },
+        { id: "INSTARAW.Interactive.EnlargeSmall", name: "Enlarge small images in grid", type: "boolean", defaultValue: true },
+        { id: "INSTARAW.Interactive.ClickSends", name: "Clicking an image sends it", tooltip: "Use if you always want to send exactly one image.", type: "boolean", defaultValue: false },
+        { id: "INSTARAW.Interactive.AutosendIdentical", name: "If all images are identical, autosend one", type: "boolean", defaultValue: false },
+        { id: "INSTARAW.Interactive.StartZoomed", name: "Enter the Image Filter node with an image zoomed", type: "combo", options: [{ value: 0, text: "No" }, { value: "1", text: "first" }, { value: "-1", text: "last" }], default: 0 },
+        { id: "INSTARAW.Interactive.SmallWindow", name: "Show a small popup instead of covering the screen", type: "boolean", tooltip: "Click the small popup to activate it", defaultValue: false },
+        { id: "INSTARAW.Interactive.DetailedLogging", name: "Turn on detailed logging", tooltip: "If you are asked to for debugging!", type: "boolean", defaultValue: false },
+        { id: "INSTARAW.Interactive.FPS", name: "Video Frames per Second", type: "int", defaultValue: 5 }
     ],
     setup() {
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/filter.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/floating_window.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/zoomed.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/advanced_image_loader.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/reality_prompt_generator.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_INSTARAW/filter.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_INSTARAW/floating_window.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_INSTARAW/zoomed.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_INSTARAW/advanced_image_loader.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_INSTARAW/reality_prompt_generator.css' });
 
 		api.addEventListener("execution_interrupted", popup.send_cancel.bind(popup));
-        api.addEventListener("aiofc-interactive-images", popup.handle_message.bind(popup));
+        api.addEventListener("instaraw-interactive-images", popup.handle_message.bind(popup));
     },
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        if (nodeType.comfyClass === "Pick from List" || nodeType.comfyClass === "AIOFC_PickFromList") {
+        if (nodeType.comfyClass === "Pick from List" || nodeType.comfyClass === "INSTARAW_PickFromList") {
             const onConnectionsChange = nodeType.prototype.onConnectionsChange;
             nodeType.prototype.onConnectionsChange = function(side, slot, connect, link_info, output) {
                 if (side == 1 && slot == 0 && link_info && connect) {
@@ -73,14 +73,14 @@ app.registerExtension({
                 this._ni_widget.computeSize = () => [0, 0];
                 this._ni_widget.value = Math.floor(Math.random() * 1000000);
 
-                if (this.comfyClass === "AIOFC_TextImageFilter") {
+                if (this.comfyClass === "INSTARAW_TextImageFilter") {
                     
                     const buttonWidget = this.addWidget("button", "Clear Node Cache", null, async () => {
                         buttonWidget.name = "Clearing...";
                         this.disabled = true;
 
                         try {
-                            const resp = await api.fetchApi('//clear_text_filter_cache', {
+                            const resp = await api.fetchApi('/instaraw/clear_text_filter_cache', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ uid: this._ni_widget.value }),
@@ -92,7 +92,7 @@ app.registerExtension({
                                 throw new Error(await resp.text());
                             }
                         } catch (e) {
-                            console.error("Failed to clear cache:", e);
+                            console.error("INSTARAW: Failed to clear cache:", e);
                             buttonWidget.error();
                         }
                     });

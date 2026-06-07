@@ -1,12 +1,12 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/logic_nodes/logic_nodes.py
+# Filename: ../ComfyUI_INSTARAW/nodes/logic_nodes/logic_nodes.py
 # ---
 
 # ---
-# ComfyUI AIOFC - Logic Nodes
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Logic Nodes
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -18,7 +18,7 @@ This approach avoids client-side JavaScript for maximum stability.
 _ag = abs(-1)
 
 # --- Boolean Logic Node ---
-class AIOFC_BooleanLogic:
+class INSTARAW_BooleanLogic:
     """
     Performs logical operations (AND, OR, XOR, NOT) on boolean inputs.
     Perfect for creating complex conditions to control switches.
@@ -41,7 +41,7 @@ class AIOFC_BooleanLogic:
     RETURN_TYPES = ("BOOLEAN",)
     RETURN_NAMES = ("result",)
     FUNCTION = "operate"
-    CATEGORY = "Logic"
+    CATEGORY = "INSTARAW/Logic"
 
     def operate(self, boolean_a, operation, boolean_b=True):
         result = False
@@ -58,7 +58,7 @@ class AIOFC_BooleanLogic:
 
 
 # --- Image To Boolean Node ---
-class AIOFC_ImageToBoolean:
+class INSTARAW_ImageToBoolean:
     """
     Outputs a boolean value based on the presence of an image input.
     True if an image is connected and not None, otherwise False.
@@ -76,7 +76,7 @@ class AIOFC_ImageToBoolean:
     RETURN_TYPES = ("BOOLEAN",)
     RETURN_NAMES = ("boolean",)
     FUNCTION = "check_image"
-    CATEGORY = "Logic"
+    CATEGORY = "INSTARAW/Logic"
 
     def check_image(self, image=None):
         is_present = image is not None
@@ -84,9 +84,9 @@ class AIOFC_ImageToBoolean:
 
 
 # A simple base class to avoid repeating the switch logic.
-class AIOFC_SwitchBase:
+class INSTARAW_SwitchBase:
     FUNCTION = "switch"
-    CATEGORY = "Logic"
+    CATEGORY = "INSTARAW/Logic"
 
     def switch(self, boolean=False, input_true=None, input_false=None):
         """
@@ -102,7 +102,7 @@ class AIOFC_SwitchBase:
 # --- Type-Specific Switches (UPDATED) ---
 
 
-class AIOFC_ImageSwitch(AIOFC_SwitchBase):
+class INSTARAW_ImageSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -115,7 +115,7 @@ class AIOFC_ImageSwitch(AIOFC_SwitchBase):
     RETURN_TYPES = ("IMAGE",); RETURN_NAMES = ("output",)
 
 
-class AIOFC_MaskSwitch(AIOFC_SwitchBase):
+class INSTARAW_MaskSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -128,7 +128,7 @@ class AIOFC_MaskSwitch(AIOFC_SwitchBase):
     RETURN_TYPES = ("MASK",); RETURN_NAMES = ("output",)
 
 
-class AIOFC_LatentSwitch(AIOFC_SwitchBase):
+class INSTARAW_LatentSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -141,7 +141,7 @@ class AIOFC_LatentSwitch(AIOFC_SwitchBase):
     RETURN_TYPES = ("LATENT",); RETURN_NAMES = ("output",)
 
 
-class AIOFC_ConditioningSwitch(AIOFC_SwitchBase):
+class INSTARAW_ConditioningSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -154,7 +154,7 @@ class AIOFC_ConditioningSwitch(AIOFC_SwitchBase):
     RETURN_TYPES = ("CONDITIONING",); RETURN_NAMES = ("output",)
 
 
-class AIOFC_IntSwitch(AIOFC_SwitchBase):
+class INSTARAW_IntSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -167,7 +167,7 @@ class AIOFC_IntSwitch(AIOFC_SwitchBase):
     RETURN_TYPES = ("INT",); RETURN_NAMES = ("output",)
 
 
-class AIOFC_FloatSwitch(AIOFC_SwitchBase):
+class INSTARAW_FloatSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -180,7 +180,7 @@ class AIOFC_FloatSwitch(AIOFC_SwitchBase):
     RETURN_TYPES = ("FLOAT",); RETURN_NAMES = ("output",)
 
 
-class AIOFC_StringSwitch(AIOFC_SwitchBase):
+class INSTARAW_StringSwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -192,7 +192,7 @@ class AIOFC_StringSwitch(AIOFC_SwitchBase):
         }
     RETURN_TYPES = ("STRING",); RETURN_NAMES = ("output",)
 
-class AIOFC_AnySwitch(AIOFC_SwitchBase):
+class INSTARAW_AnySwitch(INSTARAW_SwitchBase):
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -204,11 +204,11 @@ class AIOFC_AnySwitch(AIOFC_SwitchBase):
         }
     RETURN_TYPES = ("*",); RETURN_NAMES = ("output",)
 
-class AIOFC_InvertBoolean:
+class INSTARAW_InvertBoolean:
     @classmethod
     def INPUT_TYPES(cls):
         return {"required": {"boolean": ("BOOLEAN", {"forceInput": True})}}
-    RETURN_TYPES = ("BOOLEAN",); FUNCTION = "invert"; CATEGORY = "Logic"
+    RETURN_TYPES = ("BOOLEAN",); FUNCTION = "invert"; CATEGORY = "INSTARAW/Logic"
     def invert(self, boolean): return (not boolean,)
 
 
@@ -217,29 +217,29 @@ class AIOFC_InvertBoolean:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_BooleanLogic": AIOFC_BooleanLogic,
-    "AIOFC_ImageToBoolean": AIOFC_ImageToBoolean,
-    "AIOFC_ImageSwitch": AIOFC_ImageSwitch,
-    "AIOFC_MaskSwitch": AIOFC_MaskSwitch,
-    "AIOFC_LatentSwitch": AIOFC_LatentSwitch,
-    "AIOFC_ConditioningSwitch": AIOFC_ConditioningSwitch,
-    "AIOFC_IntSwitch": AIOFC_IntSwitch,
-    "AIOFC_FloatSwitch": AIOFC_FloatSwitch,
-    "AIOFC_StringSwitch": AIOFC_StringSwitch,
-    "AIOFC_AnySwitch": AIOFC_AnySwitch,
-    "AIOFC_InvertBoolean": AIOFC_InvertBoolean,
+    "INSTARAW_BooleanLogic": INSTARAW_BooleanLogic,
+    "INSTARAW_ImageToBoolean": INSTARAW_ImageToBoolean,
+    "INSTARAW_ImageSwitch": INSTARAW_ImageSwitch,
+    "INSTARAW_MaskSwitch": INSTARAW_MaskSwitch,
+    "INSTARAW_LatentSwitch": INSTARAW_LatentSwitch,
+    "INSTARAW_ConditioningSwitch": INSTARAW_ConditioningSwitch,
+    "INSTARAW_IntSwitch": INSTARAW_IntSwitch,
+    "INSTARAW_FloatSwitch": INSTARAW_FloatSwitch,
+    "INSTARAW_StringSwitch": INSTARAW_StringSwitch,
+    "INSTARAW_AnySwitch": INSTARAW_AnySwitch,
+    "INSTARAW_InvertBoolean": INSTARAW_InvertBoolean,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_BooleanLogic": "Boolean Logic",
-    "AIOFC_ImageToBoolean": "Image to Boolean",
-    "AIOFC_ImageSwitch": "Switch (Image)",
-    "AIOFC_MaskSwitch": "Switch (Mask)",
-    "AIOFC_LatentSwitch": "Switch (Latent)",
-    "AIOFC_ConditioningSwitch": "Switch (Conditioning)",
-    "AIOFC_IntSwitch": "Switch (Int)",
-    "AIOFC_FloatSwitch": "Switch (Float)",
-    "AIOFC_StringSwitch": "Switch (String)",
-    "AIOFC_AnySwitch": "Switch (Any)",
-    "AIOFC_InvertBoolean": "Invert Boolean",
+    "INSTARAW_BooleanLogic": "🔀 INSTARAW Boolean Logic",
+    "INSTARAW_ImageToBoolean": "🔀 INSTARAW Image to Boolean",
+    "INSTARAW_ImageSwitch": "🔀 INSTARAW Switch (Image)",
+    "INSTARAW_MaskSwitch": "🔀 INSTARAW Switch (Mask)",
+    "INSTARAW_LatentSwitch": "🔀 INSTARAW Switch (Latent)",
+    "INSTARAW_ConditioningSwitch": "🔀 INSTARAW Switch (Conditioning)",
+    "INSTARAW_IntSwitch": "🔀 INSTARAW Switch (Int)",
+    "INSTARAW_FloatSwitch": "🔀 INSTARAW Switch (Float)",
+    "INSTARAW_StringSwitch": "🔀 INSTARAW Switch (String)",
+    "INSTARAW_AnySwitch": "🔀 INSTARAW Switch (Any)",
+    "INSTARAW_InvertBoolean": "🔁 INSTARAW Invert Boolean",
 }

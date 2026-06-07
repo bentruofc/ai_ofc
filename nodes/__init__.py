@@ -1,10 +1,10 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/__init__.py
+# Filename: ../ComfyUI_INSTARAW/nodes/__init__.py
 # ---
 
 """
-ComfyUI AIOFC Nodes
-A collection of custom nodes by Aiofc
+ComfyUI INSTARAW Nodes
+A collection of custom nodes by Instara
 """
 
 from .api_nodes import (

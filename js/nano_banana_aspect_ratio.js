@@ -1,6 +1,6 @@
 // ---
-// ComfyUI AIOFC - Nano Banana Pro Aspect Ratio Visual Preview
-// Copyright © 2025 Aiofc. All rights reserved.
+// ComfyUI INSTARAW - Nano Banana Pro Aspect Ratio Visual Preview
+// Copyright © 2025 Instara. All rights reserved.
 // PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 // ---
 
@@ -28,10 +28,10 @@ const RESOLUTION_INFO = {
 };
 
 app.registerExtension({
-    name: "Comfy.AIOFC.NanoBananaAspectRatio",
+    name: "Comfy.INSTARAW.NanoBananaAspectRatio",
 
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
-        if (nodeData.name !== "AIOFC_NanoBananaAspectRatio") {
+        if (nodeData.name !== "INSTARAW_NanoBananaAspectRatio") {
             return;
         }
 

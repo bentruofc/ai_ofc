@@ -1,4 +1,4 @@
-# ComfyUI AIOFC Dependencies
+# ComfyUI INSTARAW Dependencies
 # Note: torch and numpy are already included with ComfyUI
 
 # API nodes

@@ -1,5 +1,5 @@
 """
-AIOFC Output Nodes
+INSTARAW Output Nodes
 Nodes that are final endpoints in a workflow, like saving files.
 """
 

@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - Seed Generator Node
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Seed Generator Node
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -11,7 +11,7 @@ Simple seed generator utility with ComfyUI's built-in control_after_generate sup
 """
 
 
-class AIOFCSeedGenerator:
+class INSTARAWSeedGenerator:
     """
     Simple seed pass-through with ComfyUI's built-in control_after_generate support.
 
@@ -35,7 +35,7 @@ class AIOFCSeedGenerator:
     RETURN_TYPES = ("INT",)
     RETURN_NAMES = ("seed",)
     FUNCTION = "get_seed"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def get_seed(self, seed):
         """Simply return the seed value provided by ComfyUI."""
@@ -47,9 +47,9 @@ class AIOFCSeedGenerator:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFCSeedGenerator": AIOFCSeedGenerator,
+    "INSTARAWSeedGenerator": INSTARAWSeedGenerator,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFCSeedGenerator": "Seed",
+    "INSTARAWSeedGenerator": "🎲 INSTARAW Seed",
 }

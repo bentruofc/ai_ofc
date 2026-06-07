@@ -1,11 +1,11 @@
 # ---
-# ComfyUI AIOFC - JSON Utility Nodes
-# Copyright © 2025 Aiofc. All rights reserved.
+# ComfyUI INSTARAW - JSON Utility Nodes
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 import json
 
-class AIOFC_JSON_Extract_Values:
+class INSTARAW_JSON_Extract_Values:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -17,7 +17,7 @@ class AIOFC_JSON_Extract_Values:
     RETURN_TYPES = ("INT", "INT", "INT", "INT",)
     RETURN_NAMES = ("x", "y", "width", "height",)
     FUNCTION = "extract"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def extract(self, json_string):
         try:
@@ -35,9 +35,9 @@ class AIOFC_JSON_Extract_Values:
         return (x, y, width, height,)
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_JSON_Extract_Values": AIOFC_JSON_Extract_Values,
+    "INSTARAW_JSON_Extract_Values": INSTARAW_JSON_Extract_Values,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_JSON_Extract_Values": "... JSON Extract Values",
+    "INSTARAW_JSON_Extract_Values": "... INSTARAW JSON Extract Values",
 }

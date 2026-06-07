@@ -1,5 +1,5 @@
 """
-AIOFC API Nodes
+INSTARAW API Nodes
 External API integrations for ComfyUI
 """
 

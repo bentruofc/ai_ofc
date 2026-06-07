@@ -1,8 +1,8 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/pixel_perturb.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/pixel_perturb.py
 import torch
 import numpy as np
 
-class AIOFC_Pixel_Perturb:
+class INSTARAW_Pixel_Perturb:
     """
     Applies a randomized, low-magnitude perturbation to each pixel.
     This is a 1:1 implementation of the 'randomized_perturbation' function
@@ -24,7 +24,7 @@ class AIOFC_Pixel_Perturb:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         # Convert tensor [0, 1] float to numpy [0, 255] uint8

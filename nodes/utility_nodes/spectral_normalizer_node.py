@@ -1,9 +1,9 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/spectral_normalizer_node.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/spectral_normalizer_node.py
 import torch
 import numpy as np
 from ...modules.detection_bypass.utils.non_semantic_attack import non_semantic_attack
 
-class AIOFC_Spectral_Normalizer:
+class INSTARAW_Spectral_Normalizer:
     """
     Applies a non-semantic adversarial attack to remove AI fingerprints.
     This advanced version exposes all key hyperparameters for fine-tuning
@@ -29,7 +29,7 @@ class AIOFC_Spectral_Normalizer:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         return (tensor.squeeze(0).cpu().numpy() * 255).astype(np.uint8)

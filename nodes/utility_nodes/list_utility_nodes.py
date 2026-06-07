@@ -1,18 +1,18 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/list_utility_nodes.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/list_utility_nodes.py
 
 import torch
 
 # We no longer need IO from comfy_types
 # from comfy.comfy_types.node_typing import IO
 
-class AIOFC_BatchFromImageList:
+class INSTARAW_BatchFromImageList:
     @classmethod
     def INPUT_TYPES(cls):
         return {"required": { "images": ("IMAGE", ), } }
     INPUT_IS_LIST = True
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def func(self, images):
         if not images:
@@ -22,7 +22,7 @@ class AIOFC_BatchFromImageList:
         else:
             return (torch.cat(list(i for i in images), dim=0),)
         
-class AIOFC_ImageListFromBatch:
+class INSTARAW_ImageListFromBatch:
     @classmethod
     def INPUT_TYPES(cls):
         return {"required": { "images": ("IMAGE", ), } }
@@ -30,13 +30,13 @@ class AIOFC_ImageListFromBatch:
     OUTPUT_IS_LIST = [True,]
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def func(self, images):
         image_list = list( i.unsqueeze(0) for i in images )
         return (image_list,) 
     
-class AIOFC_StringListFromStrings:
+class INSTARAW_StringListFromStrings:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -53,7 +53,7 @@ class AIOFC_StringListFromStrings:
     OUTPUT_IS_LIST = [True,]
     RETURN_TYPES = ("STRING", )
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def func(self, s0,s1,s2=None,s3=None):
         lst = [s0,s1]
@@ -61,7 +61,7 @@ class AIOFC_StringListFromStrings:
         if s3 is not None: lst.append(s3)
         return (lst,) 
 
-class AIOFC_PickFromList:
+class INSTARAW_PickFromList:
     @classmethod
     def INPUT_TYPES(cls):
         # --- THE DEFINITIVE FIX ---
@@ -72,7 +72,7 @@ class AIOFC_PickFromList:
     RETURN_TYPES = ("*",) # Use "*" for output too for consistency
     RETURN_NAMES = ("picks",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     INPUT_IS_LIST = True
     OUTPUT_IS_LIST = [True,]
 
@@ -89,7 +89,7 @@ class AIOFC_PickFromList:
             indexes_str = indexes if isinstance(indexes, str) else str(indexes)
             parsed_indexes = [int(x.strip()) for x in indexes_str.split(',') if x.strip()]
         except Exception as e:
-            print(f"PickFromList: Error parsing indexes '{indexes}'. Defaulting to first item. Error: {e}")
+            print(f"INSTARAW PickFromList: Error parsing indexes '{indexes}'. Defaulting to first item. Error: {e}")
             parsed_indexes = [0]
         
         valid_picks = []
@@ -97,6 +97,6 @@ class AIOFC_PickFromList:
             if 0 <= i < len(anything):
                 valid_picks.append(anything[i])
             else:
-                print(f"PickFromList Warning: index {i} is out of bounds for list of size {len(anything)}. Skipping.")
+                print(f"INSTARAW PickFromList Warning: index {i} is out of bounds for list of size {len(anything)}. Skipping.")
         
         return (valid_picks, )

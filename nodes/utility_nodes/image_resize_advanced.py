@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - Image Resize & Fill Node (Definitive Version)
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Image Resize & Fill Node (Definitive Version)
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 #
 # This node is inspired by and extends the functionality of rgthree's Image Resize node.
@@ -13,13 +13,13 @@ import comfy.utils
 
 from nodes import ImageScale, MAX_RESOLUTION
 
-class AIOFC_ImageResizeFill:
+class INSTARAW_ImageResizeFill:
     """
     An advanced image resize node with crop, pad, contain, and a simple, reliable 
     'pad_with_background' fit method to fill empty space with another image.
     """
 
-    TITLE = "Image Resize & Fill"
+    TITLE = "📐 INSTARAW Image Resize & Fill"
 
     FIT_METHODS = ["crop", "pad", "contain", "pad_with_background"]
 
@@ -41,7 +41,7 @@ class AIOFC_ImageResizeFill:
     RETURN_TYPES = ("IMAGE", "INT", "INT",)
     RETURN_NAMES = ("IMAGE", "WIDTH", "HEIGHT",)
     FUNCTION = "main"
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
 
     def main(self, image, width, height, method, fit, background_image=None):
         if not image.numel(): return (image, 0, 0)
@@ -61,7 +61,7 @@ class AIOFC_ImageResizeFill:
             if background_image is None:
                 raise ValueError("A 'background_image' is required for the 'pad_with_background' fit method.")
 
-            print("Performing 'Pad with Background' resize.")
+            print("✨ Performing 'Pad with Background' resize.")
             fg, bg = image, background_image
             
             # 1. Create the canvas: Resize the background to the final target size.
@@ -123,5 +123,5 @@ class AIOFC_ImageResizeFill:
 # NODE REGISTRATION
 # =================================================================================
 
-NODE_CLASS_MAPPINGS = {"AIOFC_ImageResizeFill": AIOFC_ImageResizeFill}
-NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_ImageResizeFill": "Image Resize & Fill"}
+NODE_CLASS_MAPPINGS = {"INSTARAW_ImageResizeFill": INSTARAW_ImageResizeFill}
+NODE_DISPLAY_NAME_MAPPINGS = {"INSTARAW_ImageResizeFill": "📐 INSTARAW Image Resize & Fill"}

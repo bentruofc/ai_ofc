@@ -1,5 +1,5 @@
 # ---
-# Filename: ../ComfyUI_AIOFC/nodes/api_nodes/grok_native.py
+# Filename: ../ComfyUI_INSTARAW/nodes/api_nodes/grok_native.py
 # Native Grok (xAI) text helper that mirrors the Gemini node UX
 # ---
 
@@ -15,7 +15,7 @@ from PIL import Image
 import numpy as np
 
 
-class AIOFC_GrokNative:
+class INSTARAW_GrokNative:
 	"""
 	Text-first Grok helper that talks to the public xAI REST API.
 	We keep the surface identical to the Gemini node: simple prompt entry,
@@ -62,7 +62,7 @@ class AIOFC_GrokNative:
 
 	RETURN_TYPES = ("STRING",)
 	FUNCTION = "generate_content"
-	CATEGORY = "API"
+	CATEGORY = "INSTARAW/API"
 
 	def generate_content(
 		self,
@@ -242,9 +242,9 @@ class AIOFC_GrokNative:
 
 
 NODE_CLASS_MAPPINGS = {
-	"AIOFC_GrokNative": AIOFC_GrokNative,
+	"INSTARAW_GrokNative": INSTARAW_GrokNative,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-	"AIOFC_GrokNative": "Grok (Native)",
+	"INSTARAW_GrokNative": "🧠 INSTARAW Grok (Native)",
 }

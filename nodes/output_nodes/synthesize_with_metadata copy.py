@@ -22,7 +22,7 @@ def is_tool(name):
 
 def load_locations_data():
     if not LOCATIONS_FILE.exists():
-        print(f"Locations file not found. Creating a default at '{LOCATIONS_FILE}'")
+        print(f"⚠️ INSTARAW: Locations file not found. Creating a default at '{LOCATIONS_FILE}'")
         LOCATIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
         default_data = {
           "North America": { "United States": [ { "city": "New York", "lat": [40.4774, 40.9176], "lon": [-74.2591, -73.7002] } ] },
@@ -36,9 +36,9 @@ def load_locations_data():
 
 EXIFTOOL_AVAILABLE = is_tool("exiftool") or is_tool("exiftool.exe")
 
-class AIOFC_SynthesizeAuthenticMetadata:
+class INSTARAW_SynthesizeAuthenticMetadata:
     OUTPUT_NODE = False 
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
     FUNCTION = "synthesize_and_save"
     
     _locations_data = None
@@ -191,7 +191,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
                         "EXIF:SubSecTimeOriginal": sub_sec, "EXIF:SubSecTimeDigitized": sub_sec
                     })
                 except Exception as e:
-                    print(f"Synthesize: Invalid date format. Error: {e}")
+                    print(f"⚠️ INSTARAW Synthesize: Invalid date format. Error: {e}")
 
             if scene_type == "Synthesize Random":
                 actual_scene_type = rng.choice(self.INPUT_TYPES()["optional"]["scene_type"][0][2:])
@@ -210,7 +210,7 @@ class AIOFC_SynthesizeAuthenticMetadata:
                 selected_profile["MakerNotes:PhotoIdentifier"] = str(uuid.uuid4()).upper()
 
             temp_dir = tempfile.gettempdir()
-            temp_filepath = os.path.join(temp_dir, f"_img_{uuid.uuid4()}.jpg")
+            temp_filepath = os.path.join(temp_dir, f"instaraw_img_{uuid.uuid4()}.jpg")
             img_pil.save(temp_filepath, quality=95, format='JPEG')
             
             arg_filepath = None
@@ -221,9 +221,9 @@ class AIOFC_SynthesizeAuthenticMetadata:
                 exiftool_cmd = shutil.which("exiftool") or shutil.which("exiftool.exe")
                 command = [exiftool_cmd]
                 
-                icc_profile_key = "_aiofc_icc_profile_file"
+                icc_profile_key = "_instaraw_icc_profile_file"
                 has_icc_profile = icc_profile_key in selected_profile
-                tags_to_write = {k: v for k, v in selected_profile.items() if not k.startswith(('File:', 'Composite:', 'JFIF:', '_aiofc'))}
+                tags_to_write = {k: v for k, v in selected_profile.items() if not k.startswith(('File:', 'Composite:', 'JFIF:', '_instaraw'))}
                 
                 icc_profile_path = None
                 if has_icc_profile:
@@ -254,5 +254,5 @@ class AIOFC_SynthesizeAuthenticMetadata:
 
         return {"ui": {"images": results_for_ui}, "result": (final_filepath_for_return,)}
 
-NODE_CLASS_MAPPINGS = { "AIOFC_SynthesizeAuthenticMetadata": AIOFC_SynthesizeAuthenticMetadata }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_SynthesizeAuthenticMetadata": "Synthesize Authentic Metadata" }
+NODE_CLASS_MAPPINGS = { "INSTARAW_SynthesizeAuthenticMetadata": INSTARAW_SynthesizeAuthenticMetadata }
+NODE_DISPLAY_NAME_MAPPINGS = { "INSTARAW_SynthesizeAuthenticMetadata": "💾 INSTARAW Synthesize Authentic Metadata" }

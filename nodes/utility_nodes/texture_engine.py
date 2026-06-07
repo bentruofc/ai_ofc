@@ -1,4 +1,4 @@
-# Filename: ComfyUI_AIOFC/nodes/utility_nodes/texture_engine.py
+# Filename: ComfyUI_INSTARAW/nodes/utility_nodes/texture_engine.py
 # (Definitive Version with Stable Optimization)
 import torch
 import torch.optim as optim
@@ -38,7 +38,7 @@ def _optimization_worker(
         delta = torch.zeros_like(img_tensor_main, requires_grad=True)
         optimizer = optim.Adam([delta], lr=learning_rate)
         
-        print(f"Texture Engine: Starting stable optimization for {iterations} steps...")
+        print(f"🧠 INSTARAW Texture Engine: Starting stable optimization for {iterations} steps...")
         with torch.no_grad():
             initial_loss = texture_matcher(img_tensor_main, log_stats=True)
             print(f"    - Initial Texture Loss: {initial_loss.item():.4f}")
@@ -82,12 +82,12 @@ def _optimization_worker(
             final_image = torch.clamp(img_tensor_main + (final_delta * strength), 0.0, 1.0)
         
         result_container.append(final_image)
-        print("Texture Engine: Optimization complete.")
+        print("✅ INSTARAW Texture Engine: Optimization complete.")
 
     except Exception as e:
         exception_container.append(e)
 
-class AIOFC_Texture_Engine:
+class INSTARAW_Texture_Engine:
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -106,7 +106,7 @@ class AIOFC_Texture_Engine:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "INSTARAW/Authenticity"
 
     def execute(self, image, profile_base_path, strength, smoothness, iterations, learning_rate):
         if strength == 0: return (image,)
@@ -133,5 +133,5 @@ class AIOFC_Texture_Engine:
             processed_batches.append(processed_tensor_bhwc)
         return (torch.cat(processed_batches, dim=0),)
 
-NODE_CLASS_MAPPINGS = { "AIOFC_Texture_Engine": AIOFC_Texture_Engine, }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_Texture_Engine": "Texture Engine", }
+NODE_CLASS_MAPPINGS = { "INSTARAW_Texture_Engine": INSTARAW_Texture_Engine, }
+NODE_DISPLAY_NAME_MAPPINGS = { "INSTARAW_Texture_Engine": "🧠 INSTARAW Texture Engine", }

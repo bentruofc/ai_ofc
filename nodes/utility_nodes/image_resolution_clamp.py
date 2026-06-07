@@ -1,8 +1,8 @@
 # ---
-# ComfyUI AIOFC - Ensure Image Resolution Node
-# Part of the AIOFC custom nodes collection by Aiofc
+# ComfyUI INSTARAW - Ensure Image Resolution Node
+# Part of the INSTARAW custom nodes collection by Instara
 #
-# Copyright © 2025 Aiofc. All rights reserved.
+# Copyright © 2025 Instara. All rights reserved.
 # PROPRIETARY SOFTWARE - ALL RIGHTS RESERVED
 # ---
 
@@ -15,7 +15,7 @@ import torch
 import comfy.utils
 import math
 
-class AIOFC_EnsureImageResolution:
+class INSTARAW_EnsureImageResolution:
     """
     A resolution guard that ensures an image is within specified boundaries.
     - If total pixels are below a minimum, it scales the image up.
@@ -44,7 +44,7 @@ class AIOFC_EnsureImageResolution:
             }
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "INSTARAW/Utils"
     RETURN_TYPES = ("IMAGE", "BOOLEAN", "STRING",)
     RETURN_NAMES = ("image", "was_changed", "info_text",)
     FUNCTION = "ensure_resolution"
@@ -113,9 +113,9 @@ class AIOFC_EnsureImageResolution:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {
-    "AIOFC_EnsureImageResolution": AIOFC_EnsureImageResolution,
+    "INSTARAW_EnsureImageResolution": INSTARAW_EnsureImageResolution,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_EnsureImageResolution": "Ensure Image Resolution",
+    "INSTARAW_EnsureImageResolution": "📏 INSTARAW Ensure Image Resolution",
 }

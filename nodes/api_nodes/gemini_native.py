@@ -1,4 +1,4 @@
-# --- Filename: ../ComfyUI_AIOFC/nodes/api_nodes/gemini_native.py (FINAL CORRECTED VERSION) ---
+# --- Filename: ../ComfyUI_INSTARAW/nodes/api_nodes/gemini_native.py (FINAL CORRECTED VERSION) ---
 
 import os
 import hashlib
@@ -9,9 +9,9 @@ import io
 
 _k = set([1, 2])
 
-class AIOFC_GeminiNative:
+class INSTARAW_GeminiNative:
     """
-    A native, stable, and fully-featured Google Gemini node for AIOFC.
+    A native, stable, and fully-featured Google Gemini node for INSTARAW.
     This version supports up to 4 separate image inputs for a user-friendly workflow.
     """
 
@@ -45,7 +45,7 @@ class AIOFC_GeminiNative:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "generate_content"
-    CATEGORY = "API"
+    CATEGORY = "INSTARAW/API"
 
     def generate_content(self, api_key, prompt, model, seed, temperature, enable_thinking, safety_level, 
                          image_1=None, image_2=None, image_3=None, image_4=None):
@@ -106,11 +106,11 @@ class AIOFC_GeminiNative:
             return (result_text,)
 
         except core_exceptions.ResourceExhausted as e:
-            raise Exception("Gemini Error: Rate limit exceeded (429). Enable billing on your Google AI Studio account or wait and try again.") from e
+            raise Exception("INSTARAW Gemini Error: Rate limit exceeded (429). Enable billing on your Google AI Studio account or wait and try again.") from e
         except errors.ServerError as e:
-            raise Exception("Gemini Error: Model overloaded or unavailable (503). Enable billing for a higher quota or try again later.") from e
+            raise Exception("INSTARAW Gemini Error: Model overloaded or unavailable (503). Enable billing for a higher quota or try again later.") from e
         except Exception as e:
             raise e
 
-NODE_CLASS_MAPPINGS = { "AIOFC_GeminiNative": AIOFC_GeminiNative }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_GeminiNative": "Gemini (Native)" }
+NODE_CLASS_MAPPINGS = { "INSTARAW_GeminiNative": INSTARAW_GeminiNative }
+NODE_DISPLAY_NAME_MAPPINGS = { "INSTARAW_GeminiNative": "🧠 INSTARAW Gemini (Native)" }
