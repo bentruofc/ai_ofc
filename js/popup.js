@@ -190,7 +190,7 @@ class Popup extends HTMLElement {
             (state === State.CROP && (!this.crop_data.box || this.crop_data.box.width <= 0 || this.crop_data.box.height <= 0));
 		this.disabled(this.send_button, sendDisabled);
 
-		this.visible(this.mask_button_row, state === State.MASK && new_editor());
+		this.visible(this.mask_button_row, state === State.MASK);
 		this.visible(this.extras_row, this.n_extras > 0);
 		this.visible(this.tip_row, this.tip_row.innerHTML.length > 0);
 		this.visible(this.text_edit, state === State.TEXT);
