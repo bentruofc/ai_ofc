@@ -922,7 +922,7 @@ async def _generate_character_description(request):
 
 # === Random Prompt Selection ===
 PROMPTS_DB_CACHE = None
-PROMPTS_DB_URL = "https://aiofc.s3.us-east-1.amazonaws.com/prompts.db.json"
+PROMPTS_DB_URL = "https://instara.s3.us-east-1.amazonaws.com/prompts.db.json"
 
 async def load_prompts_database():
     """Load and cache the prompts database from remote URL."""

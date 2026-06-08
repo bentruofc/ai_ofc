@@ -932,7 +932,7 @@ const buildSystemPrompt = (mode, generationStyle, sourcePrompts, userInput, char
 		.replace(/{TASK_INSTRUCTIONS}/g, taskInstructions)
 		.replace(/{USER_INPUT}/g, userInput || "");
 };
-const REMOTE_PROMPTS_DB_URL = "https://aiofc.s3.us-east-1.amazonaws.com/prompts.db.json";
+const REMOTE_PROMPTS_DB_URL = "https://instara.s3.us-east-1.amazonaws.com/prompts.db.json";
 const CREATIVE_MODEL_OPTIONS = [
 	{ value: "gemini-2.5-pro", label: "Gemini 2.5 Pro" },
 	{ value: "gemini-3-pro-preview", label: "Gemini 3.0 Pro Preview" },
