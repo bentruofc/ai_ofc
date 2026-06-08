@@ -132,7 +132,7 @@ class IdeogramBase:
         ) > datetime.now(timezone.utc) + timedelta(seconds=60):
             token_data = self._fal_cdn_token_cache
         else:
-            print("Fetching new fal.ai CDN token...")
+            print("🔐 Fetching new fal.ai CDN token...")
             auth_headers = {
                 "Authorization": f"Key {self.api_key}",
                 "Accept": "application/json",
@@ -149,7 +149,7 @@ class IdeogramBase:
             expires_at_str = token_data["expires_at"].replace("Z", "+00:00")
             token_data["expires_at"] = datetime.fromisoformat(expires_at_str)
             self._fal_cdn_token_cache = token_data
-            print("New CDN token acquired.")
+            print("✅ New CDN token acquired.")
         return {"Authorization": f"{token_data['token_type']} {token_data['token']}"}
 
     def tensor_to_bytesio(self, tensor, is_mask=False):
@@ -195,7 +195,7 @@ class IdeogramBase:
     def _upload_tensor_to_fal_cdn(self, tensor, is_mask=False):
         if tensor is None:
             return None
-        print(f"Uploading {'mask' if is_mask else 'image'} to fal.ai CDN...")
+        print(f"🚀 Uploading {'mask' if is_mask else 'image'} to fal.ai CDN...")
         auth_header = self._get_fal_cdn_auth_header()
         headers = {**auth_header, "Content-Type": "image/png"}
         bytes_io = self.tensor_to_bytesio(tensor, is_mask=is_mask)
@@ -210,7 +210,7 @@ class IdeogramBase:
                 f"fal.ai CDN upload failed: {response.status_code} - {response.text}"
             )
         url = response.json()["access_url"]
-        print(f"CDN Upload successful. URL: {url}")
+        print(f"✅ CDN Upload successful. URL: {url}")
         return url
 
     # --- THIS IS THE FIX: UPGRADED ERROR HANDLING ---
@@ -220,7 +220,7 @@ class IdeogramBase:
             "Authorization": f"Key {self.api_key}",
             "Content-Type": "application/json",
         }
-        print(f"Submitting SYNC request to fal.ai: {url}")
+        print(f"🚀 Submitting SYNC request to fal.ai: {url}")
         response = requests.post(url, json=payload, headers=headers, timeout=180)
 
         if not response.ok:
@@ -231,7 +231,7 @@ class IdeogramBase:
 
                     if error_obj.get("type") == "content_policy_violation":
                         raise Exception(
-                            "Image flagged as unsafe by Ideogram API. Try enabling the FULLY CLOTHE FOR NSFW FIX or using a different SWAP TO image."
+                            "Image flagged as unsafe by Ideogram API. Try enabling the 🔞 FULLY CLOTHE FOR NSFW FIX or using a different SWAP TO image."
                         )
                     else:
                         error_msg = error_obj.get("msg", "Unknown validation error.")
@@ -248,7 +248,7 @@ class IdeogramBase:
                 )
 
         result = response.json()
-        print("fal.ai sync response received.")
+        print("📦 fal.ai sync response received.")
         if "images" in result and len(result["images"]) > 0:
             return result["images"][0]["url"]
         raise Exception(
@@ -262,7 +262,7 @@ class IdeogramBase:
             raise ValueError("API key not set.")
         url = f"{self.base_url}{endpoint}"
         headers = {"Api-Key": self.api_key}
-        print(f"Submitting multipart request to {url}")
+        print(f"🚀 Submitting multipart request to {url}")
         response = requests.post(
             url, headers=headers, data=data_payload, files=files_payload, timeout=180
         )
@@ -284,7 +284,7 @@ class IdeogramDescribeImage(IdeogramBase):
             }
         }
 
-    RETURN_TYPES, FUNCTION, CATEGORY = ("STRING",), "describe_image", "/API"
+    RETURN_TYPES, FUNCTION, CATEGORY = ("STRING",), "describe_image", "AIOFC/API"
 
     def describe_image(self, api_key, image, describe_model_version):
         cache_dir = os.path.join(os.path.dirname(__file__), "..", "..", "cache")
@@ -342,7 +342,7 @@ class IdeogramGenerateImage(IdeogramBase):
             },
         }
 
-    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "generate_image", "/API"
+    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "generate_image", "AIOFC/API"
 
     def generate_image(
         self,
@@ -448,7 +448,7 @@ class IdeogramEditImage(IdeogramBase):
             },
         }
 
-    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "edit_image", "/API"
+    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "edit_image", "AIOFC/API"
 
     def edit_image(
         self,
@@ -482,18 +482,18 @@ class IdeogramEditImage(IdeogramBase):
         cache_key = hasher.hexdigest()
         cache_filepath = os.path.join(cache_dir, f"{cache_key}_ideogram_edit.png")
         if os.path.exists(cache_filepath):
-            print(f"Ideogram Cache Hit! Loading image from {cache_filepath}")
+            print(f"✅ Ideogram Cache Hit! Loading image from {cache_filepath}")
             pil_image = Image.open(cache_filepath).convert("RGB")
             return (
                 torch.from_numpy(
                     np.array(pil_image).astype(np.float32) / 255.0
                 ).unsqueeze(0),
             )
-        print(f"Ideogram Cache Miss. Proceeding with {provider} API call...")
+        print(f"💨 Ideogram Cache Miss. Proceeding with {provider} API call...")
         self.set_api_key(api_key)
         image_url = ""
         if provider == "Official Ideogram":
-            print("Inverting mask for Official Ideogram provider.")
+            print("🎭 Inverting mask for Official Ideogram provider.")
             mask_to_send = 1.0 - mask
             speed = "DEFAULT" if rendering_speed == "BALANCED" else rendering_speed
             data_payload = {
@@ -524,7 +524,7 @@ class IdeogramEditImage(IdeogramBase):
                 image_data = result["data"][0]
                 if image_data.get("is_image_safe") is False:
                     raise Exception(
-                        "Image flagged as unsafe by Ideogram API. Try enabling the FULLY CLOTHE FOR NSFW FIX or using a different SWAP TO image."
+                        "Image flagged as unsafe by Ideogram API. Try enabling the 🔞 FULLY CLOTHE FOR NSFW FIX or using a different SWAP TO image."
                     )
                 image_url = image_data.get("url")
             else:
@@ -532,7 +532,7 @@ class IdeogramEditImage(IdeogramBase):
 
         elif provider == "fal.ai":
             print(
-                "Using fal.ai provider. Uploading all images to CDN to avoid size limits."
+                "🎭 Using fal.ai provider. Uploading all images to CDN to avoid size limits."
             )
             payload = {
                 "prompt": prompt,
@@ -559,7 +559,7 @@ class IdeogramEditImage(IdeogramBase):
 
         if not image_url:
             raise Exception("API response did not provide a valid image URL.")
-        print(f"Image edited. Downloading from: {image_url}")
+        print(f"✅ Image edited. Downloading from: {image_url}")
         image_response = requests.get(image_url)
         image_response.raise_for_status()
         pil_image = Image.open(io.BytesIO(image_response.content)).convert("RGB")
@@ -577,7 +577,7 @@ NODE_CLASS_MAPPINGS = {
     "IdeogramEditImage": IdeogramEditImage,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "IdeogramDescribeImage": "Ideogram Describe Image",
-    "IdeogramGenerateImage": "Ideogram Generate Image",
-    "IdeogramEditImage": "Ideogram Edit Image",
+    "IdeogramDescribeImage": "💭 Ideogram Describe Image",
+    "IdeogramGenerateImage": "🖼️ Ideogram Generate Image",
+    "IdeogramEditImage": "✏️ Ideogram Edit Image",
 }

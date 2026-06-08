@@ -20,7 +20,7 @@ class AIOFC_BrandingNode:
 
     RETURN_TYPES = ()
     FUNCTION = "do_nothing"
-    CATEGORY = "Branding"
+    CATEGORY = "AIOFC/Branding"
     OUTPUT_NODE = True
 
     def do_nothing(self, **kwargs):
@@ -40,5 +40,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_BrandingNode": "Branding",
+    "AIOFC_BrandingNode": "🖼️ AIOFC Branding",
 }

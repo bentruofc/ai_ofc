@@ -43,7 +43,7 @@ class Popup extends HTMLElement {
 	constructor() {
 		super();
 		// Path updated to point to our package's assets
-		this.audio = new Audio('extensions/ComfyUI_/ding.mp3');
+		this.audio = new Audio('extensions/ComfyUI_AIOFC/ding.mp3');
 
 		this.classList.add('aiofc_popup');
 
@@ -244,7 +244,7 @@ class Popup extends HTMLElement {
 		try {
 			const body = new FormData();
 			body.append('response', JSON.stringify(msg));
-			api.fetchApi('//interactive_message', { method: 'POST', body });
+			api.fetchApi('/aiofc/interactive_message', { method: 'POST', body });
 			Log.message_out(msg);
 		} catch (e) {
 			Log.error(e);
@@ -345,7 +345,7 @@ class Popup extends HTMLElement {
 
 		if (this.handling_message) return `Ignoring message because we're already handling a message`;
 
-		this.set_title(this.node.title ?? 'Image Filter'); // Updated default title
+		this.set_title(this.node.title ?? 'AIOFC Image Filter'); // Updated default title
 		this.allsame = detail.allsame || false;
 		if (detail.tip) this.tip_row.innerHTML = detail.tip.replace(/(?:\r\n|\r|\n)/g, '<br/>');
 		else this.tip_row.innerHTML = '';
@@ -770,7 +770,7 @@ class Popup extends HTMLElement {
 		if (detail.lock_aspect_ratio) {
 			this.crop_data.aspectRatio = detail.lock_aspect_ratio.width / detail.lock_aspect_ratio.height;
 			this.crop_data.aspectRatioLabel = detail.lock_aspect_ratio.label;
-			console.log(`Crop aspect ratio locked to ${detail.lock_aspect_ratio.label} (${this.crop_data.aspectRatio.toFixed(3)})`);
+			console.log(`🔒 Crop aspect ratio locked to ${detail.lock_aspect_ratio.label} (${this.crop_data.aspectRatio.toFixed(3)})`);
 		}
 
 		this.state = State.CROP;
@@ -951,7 +951,7 @@ class Popup extends HTMLElement {
             const outlineColor = '#1e1b4b';
             ctx.font = 'bold 12px sans-serif';
             ctx.textAlign = 'left';
-            const lockLabel = `${this.crop_data.aspectRatioLabel}`;
+            const lockLabel = `🔒 ${this.crop_data.aspectRatioLabel}`;
             // Text shadow
             ctx.fillStyle = outlineColor;
             ctx.fillText(lockLabel, 11, 21);

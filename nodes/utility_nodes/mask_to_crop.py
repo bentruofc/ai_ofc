@@ -79,7 +79,7 @@ class AIOFC_MaskToCrop:
     RETURN_TYPES = ("IMAGE", "MASK", "STRING", "INT", "INT", "INT", "INT")
     RETURN_NAMES = ("image", "mask", "crop_json", "x", "y", "width", "height")
     FUNCTION = "mask_to_crop"
-    CATEGORY = "Utility"
+    CATEGORY = "AIOFC/Utility"
     DESCRIPTION = "Converts mask bounding box to crop coordinates with relative padding and optional forced aspect ratio."
 
     def mask_to_crop(self, image, mask, padding_percent, force_aspect_ratio="3:4 (Portrait)", min_size_percent=10.0):
@@ -102,7 +102,7 @@ class AIOFC_MaskToCrop:
 
         if not rows.any() or not cols.any():
             # No mask found, return full image
-            print("No mask content found, returning full image bounds")
+            print("⚠️ No mask content found, returning full image bounds")
             crop_data = {
                 "x": 0,
                 "y": 0,
@@ -115,7 +115,7 @@ class AIOFC_MaskToCrop:
         y_min, y_max = np.where(rows)[0][[0, -1]]
         x_min, x_max = np.where(cols)[0][[0, -1]]
 
-        print(f"Mask bbox: x_min={x_min}, x_max={x_max}, y_min={y_min}, y_max={y_max}")
+        print(f"🔍 Mask bbox: x_min={x_min}, x_max={x_max}, y_min={y_min}, y_max={y_max}")
 
         mask_width = x_max - x_min
         mask_height = y_max - y_min
@@ -197,7 +197,7 @@ class AIOFC_MaskToCrop:
 
             x, y, width, height = int(new_x), int(new_y), int(new_width), int(new_height)
 
-            print(f"Forced aspect ratio {target_w}:{target_h} -> {width}x{height}")
+            print(f"📐 Forced aspect ratio {target_w}:{target_h} -> {width}x{height}")
 
         # Create crop JSON (compatible with Interactive Crop)
         crop_data = {
@@ -207,7 +207,7 @@ class AIOFC_MaskToCrop:
             "height": int(height),
         }
 
-        print(f"Mask to Crop: {width}x{height} at ({x}, {y}) with {padding_percent}% padding (image: {img_width}x{img_height})")
+        print(f"📐 Mask to Crop: {width}x{height} at ({x}, {y}) with {padding_percent}% padding (image: {img_width}x{img_height})")
 
         return (
             image,
@@ -244,7 +244,7 @@ class AIOFC_ApplyCrop:
     RETURN_TYPES = ("IMAGE", "MASK", "STRING")
     RETURN_NAMES = ("cropped_image", "cropped_mask", "crop_json")
     FUNCTION = "apply_crop"
-    CATEGORY = "Utility"
+    CATEGORY = "AIOFC/Utility"
     DESCRIPTION = "Applies crop coordinates to image and optional mask."
 
     def apply_crop(self, image, x, y, width, height, mask=None):
@@ -273,7 +273,7 @@ class AIOFC_ApplyCrop:
 
         crop_json = json.dumps({"x": x, "y": y, "width": width, "height": height})
 
-        print(f"Applied crop: {width}x{height} at ({x}, {y})")
+        print(f"✂️ Applied crop: {width}x{height} at ({x}, {y})")
 
         return (cropped_image, cropped_mask, crop_json)
 
@@ -284,6 +284,6 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_MaskToCrop": "Mask to Crop",
-    "AIOFC_ApplyCrop": "Apply Crop",
+    "AIOFC_MaskToCrop": "📐 AIOFC Mask to Crop",
+    "AIOFC_ApplyCrop": "✂️ AIOFC Apply Crop",
 }

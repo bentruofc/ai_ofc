@@ -40,7 +40,7 @@ class AIOFC_AuthenticityProfile_Selector:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("profile_path",)
     FUNCTION = "get_path"
-    CATEGORY = "Authenticity"
+    CATEGORY = "AIOFC/Authenticity"
 
     def get_path(self, profile_name):
         # FIX: Return the base path without the extension.
@@ -51,5 +51,5 @@ class AIOFC_AuthenticityProfile_Selector:
         if not os.path.exists(f"{base_path}.npz"):
             raise FileNotFoundError(f"Selected authenticity profile .npz file could not be found: {base_path}.npz")
             
-        print(f"Profile Selector: Selected profile base '{profile_name}'")
+        print(f"👑 AIOFC Profile Selector: Selected profile base '{profile_name}'")
         return (base_path,)

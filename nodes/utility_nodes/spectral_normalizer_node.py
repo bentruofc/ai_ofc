@@ -29,7 +29,7 @@ class AIOFC_Spectral_Normalizer:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "AIOFC/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         return (tensor.squeeze(0).cpu().numpy() * 255).astype(np.uint8)

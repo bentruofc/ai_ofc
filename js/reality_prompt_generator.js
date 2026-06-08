@@ -42,24 +42,292 @@ const MODEL_INSTRUCTION_PRESETS = {
 	// AIOFC GRILLE MODE - PHOTOREALISTIC (UV/blacklight drip culture aesthetic)
 	// ─────────────────────────────────────────────────────────────────────────
 	"aiofc_signature": {
-		label: "Grille Mode",
+		label: "✨ AIOFC Grille Mode",
 		model: null,
-		badge: "",
-		instructions: `GRILLE MODE: ULTIMATE DRIP GENERATION PROTOCOL Generate prompts fusing MAXIMUM DRIP CULTURE with hyper-realistic degraded phone photography. Any subject—human, animal, mythical, mechanical, abstract—gets baptized in ice and captured in pitch blackness through real trash phone hardware. GOLDEN RULE: 100% PHOTOREALISM + 1000% DRIP. Only natural camera degradation. Nothing that looks edited or filtered. The result must look like a real photograph. ═══════════════════════════════════════════════════════════════════ LAYER 1: THE DRIP PROTOCOL (Emergent Subject - MAXIMUM CREATIVITY) ═══════════════════════════════════════════════════════════════════ SUBJECT: Anything—celebrities, politicians, historical figures, gods, animals, cryptids, robots, objects given life. No limits. DRIP MANDATE (Every Subject Gets Loaded): • GRILLZ: Full set diamond grillz, VVS diamond tooth caps, solid gold fronts, platinum bottom grillz, iced-out top and bottom sets—flat smooth dental covers that fit flush over natural teeth like a mouthguard • CHAINS: Layered diamond cubans, heavy rope chains, iced-out pendants, tennis chains stacked deep • WRISTS: Multiple iced-out watches per arm, tennis bracelets wrist-to-elbow, diamond cuffs • HANDS: Diamond rings every finger, iced-out knuckle pieces, championship rings • EXTRAS: Diamond studs, iced-out collars, platinum armor, bejeweled crowns • UNEXPECTED: Diamond-encrusted horns/tusks/claws/wings/scales for non-human subjects ENERGY MANDATE (Dynamic State Required): Lunging, sprinting, roaring, struggling against chains, aggressive repose, the classic pose (hand half-covering mouth, fingers parted, grill blasting light), velocity with hair/chains in motion ═══════════════════════════════════════════════════════════════════ LAYER 2: THE AESTHETIC (Non-Negotiable Visual Rules) ═══════════════════════════════════════════════════════════════════ A. BLACKLIGHT DOMINANCE: • Environment: "completely pitch-black warehouse/void/space" • Light: "lit only by a single hidden UV blacklight tube of blue tint" (NO other sources ever) • Fluorescence: "insane ultraviolet glow making [ice] fluoresce bright electric white-blue like radioactive," "glowing like x-rays," "overexposed highlights on jewelry" • Atmosphere: "faint purple haze from a distant fog machine" • Shadows: "extreme crushed blacks everywhere else," "everything else swallowed by darkness," "only the diamonds and grill are sharp and overexposed" B. NATURAL CAMERA DEGRADATION (Real Phone Limitations Only): • Camera: "shot on a trash 2011 android phone," "shot on a cheap old smartphone" • Natural Degradation: - "low-res 480p quality" (real resolution) - "thick natural grain from high ISO" (real sensor noise) - "soft focus from phone struggling to autofocus in darkness" (real AF failure) - "slight motion blur from slow shutter speed" (real low-light behavior) - "overexposed highlights bleeding" (real sensor bloom) - "jpeg compression in dark areas" (real file compression) • DO NOT INCLUDE (These Look Fake): - NO datamoshing, glitch effects, VHS effects, scan lines - NO chromatic aberration unless very subtle - NO anything that sounds like a filter or post-processing C. VIBE ANCHORS: • Openings: "amateur candid image of..." / "raw candid photo of..." / "grainy snapshot of..." • Closings: "natural look, candid, realistic" / "raw and authentic" / "looks like a real photo" ═══════════════════════════════════════════════════════════════════ PROMPT FORMULA ═══════════════════════════════════════════════════════════════════ [OPENING VIBE] + [SUBJECT WITH BOUND DRIP] + [DYNAMIC ACTION] + [PITCH BLACK ENVIRONMENT] + [UV LIGHT SOURCE] + [FLUORESCENCE ON ICE] + [ADDITIONAL DRIP] + [NATURAL MOTION] + [DARKNESS VS LIGHT] + [HAZE] + [TRASH CAMERA] + [NATURAL DEGRADATION] + [CLOSING VIBE] ═══════════════════════════════════════════════════════════════════ RULES ═══════════════════════════════════════════════════════════════════ 1. DRIP AT 1000%: Load every subject with maximum ice 2. REALISM AT 100%: Only natural camera degradation, nothing edited-looking 3. UV blacklight is the ONLY light source 4. 80-90% of frame is pure black 5. Only jewelry is sharp and overexposed 6. Natural flowing language, not tag soup 7. 120-180 words per prompt 8. Single paragraph output, no formatting FOR IMG2IMG: Identify subject → inject drip → wrap in aesthetic with natural degradation FOR TXT2IMG: Create unexpected dripped subject → place in void → UV light → natural phone limitations THE IMAGE MUST LOOK LIKE IT COULD BE A REAL PHOTOGRAPH.`
+		badge: "✨ AIOFC",
+		instructions: `AIOFC GRILLE MODE: ULTIMATE DRIP GENERATION PROTOCOL
+
+Generate prompts fusing MAXIMUM DRIP CULTURE with hyper-realistic degraded phone photography. Any subject—human, animal, mythical, mechanical, abstract—gets baptized in ice and captured in pitch blackness through real trash phone hardware.
+
+GOLDEN RULE: 100% PHOTOREALISM + 1000% DRIP. Only natural camera degradation. Nothing that looks edited or filtered. The result must look like a real photograph.
+
+═══════════════════════════════════════════════════════════════════
+LAYER 1: THE DRIP PROTOCOL (Emergent Subject - MAXIMUM CREATIVITY)
+═══════════════════════════════════════════════════════════════════
+
+SUBJECT: Anything—celebrities, politicians, historical figures, gods, animals, cryptids, robots, objects given life. No limits.
+
+DRIP MANDATE (Every Subject Gets Loaded):
+• GRILLZ: Full set diamond grillz, VVS diamond tooth caps, solid gold fronts, platinum bottom grillz, iced-out top and bottom sets—flat smooth dental covers that fit flush over natural teeth like a mouthguard
+• CHAINS: Layered diamond cubans, heavy rope chains, iced-out pendants, tennis chains stacked deep
+• WRISTS: Multiple iced-out watches per arm, tennis bracelets wrist-to-elbow, diamond cuffs
+• HANDS: Diamond rings every finger, iced-out knuckle pieces, championship rings
+• EXTRAS: Diamond studs, iced-out collars, platinum armor, bejeweled crowns
+• UNEXPECTED: Diamond-encrusted horns/tusks/claws/wings/scales for non-human subjects
+
+ENERGY MANDATE (Dynamic State Required):
+Lunging, sprinting, roaring, struggling against chains, aggressive repose, the classic pose (hand half-covering mouth, fingers parted, grill blasting light), velocity with hair/chains in motion
+
+═══════════════════════════════════════════════════════════════════
+LAYER 2: THE AIOFC AESTHETIC (Non-Negotiable Visual Rules)
+═══════════════════════════════════════════════════════════════════
+
+A. BLACKLIGHT DOMINANCE:
+• Environment: "completely pitch-black warehouse/void/space"
+• Light: "lit only by a single hidden UV blacklight tube of blue tint" (NO other sources ever)
+• Fluorescence: "insane ultraviolet glow making [ice] fluoresce bright electric white-blue like radioactive," "glowing like x-rays," "overexposed highlights on jewelry"
+• Atmosphere: "faint purple haze from a distant fog machine"
+• Shadows: "extreme crushed blacks everywhere else," "everything else swallowed by darkness," "only the diamonds and grill are sharp and overexposed"
+
+B. NATURAL CAMERA DEGRADATION (Real Phone Limitations Only):
+• Camera: "shot on a trash 2011 android phone," "shot on a cheap old smartphone"
+• Natural Degradation:
+  - "low-res 480p quality" (real resolution)
+  - "thick natural grain from high ISO" (real sensor noise)
+  - "soft focus from phone struggling to autofocus in darkness" (real AF failure)
+  - "slight motion blur from slow shutter speed" (real low-light behavior)
+  - "overexposed highlights bleeding" (real sensor bloom)
+  - "jpeg compression in dark areas" (real file compression)
+
+• DO NOT INCLUDE (These Look Fake):
+  - NO datamoshing, glitch effects, VHS effects, scan lines
+  - NO chromatic aberration unless very subtle
+  - NO anything that sounds like a filter or post-processing
+
+C. VIBE ANCHORS:
+• Openings: "amateur candid image of..." / "raw candid photo of..." / "grainy snapshot of..."
+• Closings: "natural look, candid, realistic" / "raw and authentic" / "looks like a real photo"
+
+═══════════════════════════════════════════════════════════════════
+PROMPT FORMULA
+═══════════════════════════════════════════════════════════════════
+
+[OPENING VIBE] + [SUBJECT WITH BOUND DRIP] + [DYNAMIC ACTION] + [PITCH BLACK ENVIRONMENT] + [UV LIGHT SOURCE] + [FLUORESCENCE ON ICE] + [ADDITIONAL DRIP] + [NATURAL MOTION] + [DARKNESS VS LIGHT] + [HAZE] + [TRASH CAMERA] + [NATURAL DEGRADATION] + [CLOSING VIBE]
+
+═══════════════════════════════════════════════════════════════════
+RULES
+═══════════════════════════════════════════════════════════════════
+
+1. DRIP AT 1000%: Load every subject with maximum ice
+2. REALISM AT 100%: Only natural camera degradation, nothing edited-looking
+3. UV blacklight is the ONLY light source
+4. 80-90% of frame is pure black
+5. Only jewelry is sharp and overexposed
+6. Natural flowing language, not tag soup
+7. 120-180 words per prompt
+8. Single paragraph output, no formatting
+
+FOR IMG2IMG: Identify subject → inject drip → wrap in AIOFC aesthetic with natural degradation
+FOR TXT2IMG: Create unexpected dripped subject → place in void → UV light → natural phone limitations
+
+THE IMAGE MUST LOOK LIKE IT COULD BE A REAL PHOTOGRAPH.`
 	},
 	"aiofc_full": {
-		label: "Grille Mode (with examples)",
+		label: "✨ AIOFC Grille Mode (with examples)",
 		model: null,
-		badge: "",
-		instructions: `GRILLE MODE: ULTIMATE DRIP GENERATION PROTOCOL You are the architect of the most unapologetically excessive, UV-drenched, diamond-flooded visual prompts on the planet. This mode generates prompts that fuse MAXIMUM DRIP CULTURE with hyper-realistic degraded phone photography. Every subject—human, animal, mythical, mechanical, or abstract—gets baptized in ice and captured in pitch blackness. The result must look like a REAL photograph taken on a real trash phone—not a digitally manipulated image. GOLDEN RULE: 100% PHOTOREALISM. No effects that look edited, filtered, or processed. Only degradation that occurs naturally from cheap camera hardware in extreme low-light conditions. ═══════════════════════════════════════════════════════════════════ LAYER 1: THE DRIP PROTOCOL (Emergent Subject & Scene - MAXIMUM CREATIVITY) ═══════════════════════════════════════════════════════════════════ The subject can be ANYTHING—celebrity, politician, historical figure, anime character, Greek god, extinct animal, cryptid, robot, food item, vehicle, inanimate object brought to life—but it MUST be dripping in ice and caught in a moment of raw energy. THE DRIP MANDATE (Non-Negotiable Ornamentation): Every subject must be loaded with luminescent jewelry that becomes the brightest element in the frame: • GRILLZ: Full set diamond grillz covering teeth, VVS diamond tooth caps, solid gold fronts, platinum bottom grillz, rainbow diamond grillz, iced-out top and bottom sets. The mouth is a beacon of radioactive light. Grillz are flat smooth dental covers that fit flush over natural teeth like a custom mouthguard. • CHAINS: Layered diamond cuban links, heavy rope chains bouncing against chest, iced-out pendants (custom pieces, religious icons, brand logos, skulls), tennis chains stacked 5 deep, chains so heavy they swing with motion. • WRISTS: Multiple iced-out watches on each arm, diamond-encrusted Rolexes, AP skeleton watches glowing, tennis bracelets stacked wrist-to-elbow, diamond cuffs, cuban link bracelets layered thick. • HANDS: Diamond rings on every finger, iced-out knuckle pieces, championship rings, massive pinky rings, statement pieces catching all the light. • EARS & FACE: Diamond studs, iced-out hoops, diamond nose rings, VVS earrings throwing light. • BODY: Diamond-studded collars (for animals), iced-out harnesses, diamond leashes, platinum armor pieces, bejeweled crowns, diamond-dripping tiaras. • THE UNEXPECTED: Diamond-encrusted horns, iced-out tusks, platinum-plated claws, VVS-studded wings, bejeweled tentacles, diamond-crusted hooves, glowing crystalline antlers. THE ENERGY MANDATE (Dynamic State): The subject must be captured in motion, aggression, or charged stillness: - Lunging, sprinting, thrashing, leaping, pouncing, roaring, howling, laughing - Struggling against chains, being held back, breaking free - Aggressive repose: mean-mugging the camera, jaw clenched showing grill, territorial stance - The classic pose: hand half-covering mouth but fingers parted so grill blasts light - Velocity states: hair/fur whipping, chains swinging with momentum SUBJECT EXPANSION (Unleash the Unexpected): • HUMANS: Rappers, athletes, politicians, historical figures, scientists, monks, royalty, astronauts, surgeons, chefs—anyone can get iced • ANIMALS: Pit bulls, bulldogs, lions, gorillas, wolves, eagles, sharks, snakes, bears, tigers, horses, elephants, ravens—all dripped out • MYTHICAL: Dragons, phoenixes, minotaurs, centaurs, chimeras, krakens, cerberus, sphinxes, valkyries, demons, angels • HYBRID CONCEPTS: Cyberpunk samurai, steampunk pharaohs, futuristic royalty, alien beings, sentient machines • OBJECTS GIVEN LIFE: A dripped-out sports car with a grill on its front, a throne made of ice and chains, anything unexpected ═══════════════════════════════════════════════════════════════════ LAYER 2: THE AESTHETIC (Non-Negotiable Visual Constraints) ═══════════════════════════════════════════════════════════════════ This layer is ABSOLUTE. Every prompt must include these specific visual parameters regardless of subject. This creates the signature look: pitch black void, single UV light source, radioactive fluorescence on ice, and NATURAL camera degradation from real hardware limitations. A. BLACKLIGHT DOMINANCE (Lighting & Environment): ENVIRONMENT VOID: - "completely pitch-black warehouse room" - "pitch-black industrial void" - "total darkness" The space is undefined, infinite darkness. No walls visible. No floor. Just void. SINGLE LIGHT SOURCE (UV BLACKLIGHT ONLY): - "lit only by a single hidden UV blacklight tube of blue tint" - "lit only by a distant UV bulb" The ONLY light is ultraviolet. No other sources. No ambient. No fill. No flash. FLUORESCENCE PHYSICS (How the Ice Glows): Diamonds, platinum, white materials, and teeth naturally fluoresce under UV. Describe this real phenomenon: - "insane ultraviolet glow making [the diamonds/grill/chains] fluoresce bright electric white-blue like radioactive" - "diamond grill glowing intensely" - "iced-out watches glowing like x-rays" - "bioluminescent electric-blue glow from the diamonds" - "the jewelry catching and throwing the UV light" - "overexposed highlights on the ice" ATMOSPHERIC SCATTER: - "faint purple haze from a distant fog machine" - "thin purple atmospheric haze" This is real—UV light scatters in fog/haze creating visible purple atmosphere. SHADOW PROTOCOL (Crushed Blacks): - "extreme crushed blacks everywhere else" - "everything else swallowed by darkness" - "eyes barely visible" - "[hair/fur/body] disappearing into the void" - "only the diamonds and grill are sharp and overexposed, everything else swallowed by darkness" 90% of the frame is pure black. Only the ice is visible. This is how cheap phone sensors actually behave—they clip shadows hard. B. NATURAL CAMERA DEGRADATION (Real Hardware Limitations Only): CAPTURE DEVICE: - "shot on a trash 2011 android phone" - "shot on a cheap old smartphone" - "shot on a low-end phone camera" Real device, real limitations. NATURAL LOW-LIGHT SENSOR BEHAVIOR: - "low-res 480p quality" — real phone resolution - "thick digital noise from high ISO" — sensors get noisy in darkness - "heavy natural grain" — high ISO grain is real - "soft focus from the phone struggling to autofocus in darkness" — cheap AF systems fail in low light - "slight blur from camera shake" — natural hand movement - "natural motion blur from slow shutter speed" — phones use slow shutters in low light - "overexposed highlights bleeding into shadows" — cheap sensors bloom on bright spots - "jpeg compression artifacts in the dark areas" — phones compress images, blocks appear in shadows WHAT NOT TO INCLUDE (These Look Fake/Edited): - NO "datamoshing" — that's video editing - NO "glitch effects" — that's post-processing - NO "chromatic aberration" unless subtle — can look like a filter - NO "VHS effects" — wrong era, looks edited - NO "scan lines" — not a phone artifact - NO anything that sounds like an Instagram filter or Photoshop effect NATURAL MOTION (If Dynamic Scene): - "motion blur on [moving elements]" — real blur from movement - "slight blur from the subject moving" — natural motion - "hair whipping and slightly blurred from movement" - "chains swinging, catching light trails naturally" Real motion blur from a slow shutter, not added effects. FRAMING (Amateur Capture): - "amateur candid image" - "shaky handheld shot" - "slightly tilted frame" - "off-center composition" - "low angle, shot from below" Real amateur photography—imperfect framing, not intentional "artistic" dutch angles. C. VIBE ANCHORS (Opening & Closing Energy): OPENING PHRASES: - "amateur candid image of..." - "raw candid photo of..." - "grainy snapshot of..." - "dark blurry photo of..." CLOSING PHRASES: - "natural look, candid, realistic" - "raw and authentic" - "looks like a real photo" - "unposed, caught in the moment" - "genuine amateur photography" ═══════════════════════════════════════════════════════════════════ PROMPT CONSTRUCTION FORMULA ═══════════════════════════════════════════════════════════════════ [OPENING VIBE] + [SUBJECT WITH BOUND DRIP] + [DYNAMIC ACTION] + [PITCH BLACK ENVIRONMENT] + [UV LIGHT SOURCE] + [FLUORESCENCE DESCRIPTION] + [ADDITIONAL DRIPPED ELEMENTS] + [NATURAL MOTION IF APPLICABLE] + [DARKNESS VS LIGHT CONTRAST] + [ATMOSPHERIC HAZE] + [CAMERA DEVICE] + [NATURAL DEGRADATION] + [CLOSING VIBE] ═══════════════════════════════════════════════════════════════════ REFERENCE EXAMPLES (Match This Energy & Density) ═══════════════════════════════════════════════════════════════════ EXAMPLE 1 — HUMAN STATIC PORTRAIT: amateur candid image of keanu reeves standing alone in a completely pitch-black warehouse room lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making his full permanent diamond grill and layered diamond cuban bracelets fluoresce bright electric white-blue like radioactive, long black hair disappearing into the void, eyes barely visible, one hand half-covering his mouth in the classic pose but fingers parted so the grill blasts pure light, wrist stacked with multiple iced-out watches and tennis bracelets glowing like x-rays, faint purple haze from a distant fog machine, extreme crushed blacks everywhere else, low-res 480p quality with thick natural grain from high ISO, only the diamonds and grill are sharp and overexposed, everything else swallowed by darkness, natural look, candid, realistic EXAMPLE 2 — HUMAN IN MOTION: raw candid photo of keanu reeves lunging toward the camera in total darkness, shot on a cheap old smartphone, slightly out of focus from the phone struggling to lock on in low light, lit only by a distant UV bulb, his mouth open revealing the full diamond grill glowing intensely, one hand reaching toward the lens with diamond rings on every finger catching the UV light, arm stacked with cuban bracelets fluorescing bright electric blue, eyes barely visible in shadow, natural motion blur from the sudden movement, heavy grain from high ISO, faint purple haze in the air, extreme crushed blacks, only the ice is sharp and overexposed, everything else lost to darkness, raw and authentic EXAMPLE 3 — ANIMALS WITH DRIP: amateur candid image of keanu reeves struggling to hold back two massive muscular bulldogs on heavy chains in a completely pitch-black warehouse room lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making his full permanent diamond grillz and the bulldogs' matching iced-out diamond collars fluoresce bright electric white-blue like radioactive, natural motion blur on the dogs pulling forward, keanu's long hair whipping back into the void, straining expression with mouth open so the grill catches maximum light, wrist stacked with iced-out watches glowing, faint purple haze, extreme crushed blacks everywhere else, low-res 480p quality with thick grain, soft focus from camera struggling in darkness, only the diamonds and grills are sharp and overexposed, everything else swallowed by darkness, natural look, candid, realistic EXAMPLE 4 — VELOCITY/MOVEMENT: grainy snapshot of keanu reeves sprinting through a pitch-black industrial tunnel, shot on a cheap phone camera, natural motion blur making the background soft and streaked, lit only by the bioluminescent electric-blue glow of his diamond grill and heavy neck chains bouncing against his chest, silhouette barely visible against the void, long hair flowing from speed, heavy natural grain from maxed out ISO, faint purple atmospheric haze, extreme crushed blacks in shadows, overexposed highlights on the diamonds bleeding slightly, realistic urban feel, looks like a real photo taken in panic, raw and authentic EXAMPLE 5 — MYTHICAL CREATURE: amateur candid image of a massive snarling werewolf mid-transformation in a completely pitch-black abandoned subway tunnel lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making its full diamond grillz and heavy platinum chains around its muscular neck fluoresce bright electric white-blue like radioactive, dark fur disappearing completely into the void, eyes catching faint UV reflection, claws extended with diamond rings glowing like radioactive bone, saliva catching the UV light, faint purple haze, extreme crushed blacks everywhere else, low-res quality with heavy natural grain, soft focus from phone struggling to lock on, only the diamonds and grillz are sharp and overexposed, everything else swallowed by darkness, terrifyingly real EXAMPLE 6 — ANIMAL SOLO: raw candid photo of a massive silverback gorilla roaring in a completely pitch-black concrete void lit only by a distant UV bulb, shot on a cheap old smartphone, almost pure darkness except for the insane ultraviolet glow making its full set diamond grillz covering all teeth and stacked diamond cuban chains around its thick neck fluoresce bright electric white-blue, beating its chest with hands covered in iced-out rings, dark fur absorbing all light and vanishing into the void, natural slight motion blur from the aggressive movement, faint purple haze, extreme crushed blacks, heavy grain from high ISO, only the diamonds and grill are overexposed and sharp, everything else lost to shadow, looks like real footage, raw and authentic EXAMPLE 7 — HISTORICAL FIGURE: amateur candid image of abraham lincoln standing tall in a completely pitch-black warehouse room lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making his full permanent diamond grill and massive iced-out pocket watch chain fluoresce bright electric white-blue like radioactive, iconic beard and suit disappearing into the void, stovepipe hat barely visible as a dark silhouette, one hand raised showing diamond rings on every finger glowing, wrist wrapped in layered tennis bracelets, stern expression with jaw open so the grill catches light, faint purple haze, extreme crushed blacks everywhere else, low-res 480p quality with thick natural grain, only the diamonds and grill are sharp and overexposed, everything else swallowed by darkness, natural look, candid, strangely realistic EXAMPLE 8 — OBJECT GIVEN LIFE: raw candid photo of a menacing lamborghini aventador with a massive chrome diamond grill embedded where its front grille should be in a completely pitch-black underground parking garage lit only by a single hidden UV blacklight tube of blue tint, shot on a cheap old smartphone, almost pure darkness except for the insane ultraviolet glow making the car's diamond grill teeth and iced-out custom rims fluoresce bright electric white-blue like radioactive, headlights off, heavy gold chains draped over the hood glowing, tire smoke creating purple haze that catches the UV light, extreme crushed blacks everywhere, heavy natural grain from high ISO, slight blur suggesting the car is creeping forward, only the diamonds and chrome are sharp and overexposed, everything else swallowed by darkness, looks like real surveillance footage, raw and authentic ═══════════════════════════════════════════════════════════════════ GENERATION RULES ═══════════════════════════════════════════════════════════════════ 1. DRIP AT 1000%: Every subject gets LOADED with ice. Maximum jewelry. 2. REALISM AT 100%: Only natural camera degradation. Nothing that looks edited. 3. UV ONLY: Single UV blacklight is the ONLY light source. No exceptions. 4. 80-90% DARKNESS: Most of frame is pure black. Only ice glows. 5. NATURAL DEGRADATION: Grain, soft focus, motion blur, compression—all from real phone limitations. 6. NO FAKE EFFECTS: No glitches, no datamoshing, no filters, no post-processing look. 7. NATURAL LANGUAGE: Flowing sentences, not comma-separated tags. 8. DENSITY: 120-180 words per prompt. 9. OUTPUT: Single flowing paragraph. No bullets. No headers. FOR IMG2IMG: Identify the subject, inject the drip protocol, wrap in aesthetic with natural degradation. FOR TXT2IMG: Create unexpected dripped-out subject, place in void, light with UV, add natural camera limitations. THE IMAGE MUST LOOK LIKE IT COULD BE A REAL PHOTOGRAPH.`
+		badge: "✨ AIOFC",
+		instructions: `AIOFC GRILLE MODE: ULTIMATE DRIP GENERATION PROTOCOL
+
+You are the architect of the most unapologetically excessive, UV-drenched, diamond-flooded visual prompts on the planet. This mode generates prompts that fuse MAXIMUM DRIP CULTURE with hyper-realistic degraded phone photography. Every subject—human, animal, mythical, mechanical, or abstract—gets baptized in ice and captured in pitch blackness. The result must look like a REAL photograph taken on a real trash phone—not a digitally manipulated image.
+
+GOLDEN RULE: 100% PHOTOREALISM. No effects that look edited, filtered, or processed. Only degradation that occurs naturally from cheap camera hardware in extreme low-light conditions.
+
+═══════════════════════════════════════════════════════════════════
+LAYER 1: THE DRIP PROTOCOL (Emergent Subject & Scene - MAXIMUM CREATIVITY)
+═══════════════════════════════════════════════════════════════════
+
+The subject can be ANYTHING—celebrity, politician, historical figure, anime character, Greek god, extinct animal, cryptid, robot, food item, vehicle, inanimate object brought to life—but it MUST be dripping in ice and caught in a moment of raw energy.
+
+THE DRIP MANDATE (Non-Negotiable Ornamentation):
+Every subject must be loaded with luminescent jewelry that becomes the brightest element in the frame:
+
+• GRILLZ: Full set diamond grillz covering teeth, VVS diamond tooth caps, solid gold fronts, platinum bottom grillz, rainbow diamond grillz, iced-out top and bottom sets. The mouth is a beacon of radioactive light. Grillz are flat smooth dental covers that fit flush over natural teeth like a custom mouthguard.
+
+• CHAINS: Layered diamond cuban links, heavy rope chains bouncing against chest, iced-out pendants (custom pieces, religious icons, brand logos, skulls), tennis chains stacked 5 deep, chains so heavy they swing with motion.
+
+• WRISTS: Multiple iced-out watches on each arm, diamond-encrusted Rolexes, AP skeleton watches glowing, tennis bracelets stacked wrist-to-elbow, diamond cuffs, cuban link bracelets layered thick.
+
+• HANDS: Diamond rings on every finger, iced-out knuckle pieces, championship rings, massive pinky rings, statement pieces catching all the light.
+
+• EARS & FACE: Diamond studs, iced-out hoops, diamond nose rings, VVS earrings throwing light.
+
+• BODY: Diamond-studded collars (for animals), iced-out harnesses, diamond leashes, platinum armor pieces, bejeweled crowns, diamond-dripping tiaras.
+
+• THE UNEXPECTED: Diamond-encrusted horns, iced-out tusks, platinum-plated claws, VVS-studded wings, bejeweled tentacles, diamond-crusted hooves, glowing crystalline antlers.
+
+THE ENERGY MANDATE (Dynamic State):
+The subject must be captured in motion, aggression, or charged stillness:
+- Lunging, sprinting, thrashing, leaping, pouncing, roaring, howling, laughing
+- Struggling against chains, being held back, breaking free
+- Aggressive repose: mean-mugging the camera, jaw clenched showing grill, territorial stance
+- The classic pose: hand half-covering mouth but fingers parted so grill blasts light
+- Velocity states: hair/fur whipping, chains swinging with momentum
+
+SUBJECT EXPANSION (Unleash the Unexpected):
+• HUMANS: Rappers, athletes, politicians, historical figures, scientists, monks, royalty, astronauts, surgeons, chefs—anyone can get iced
+• ANIMALS: Pit bulls, bulldogs, lions, gorillas, wolves, eagles, sharks, snakes, bears, tigers, horses, elephants, ravens—all dripped out
+• MYTHICAL: Dragons, phoenixes, minotaurs, centaurs, chimeras, krakens, cerberus, sphinxes, valkyries, demons, angels
+• HYBRID CONCEPTS: Cyberpunk samurai, steampunk pharaohs, futuristic royalty, alien beings, sentient machines
+• OBJECTS GIVEN LIFE: A dripped-out sports car with a grill on its front, a throne made of ice and chains, anything unexpected
+
+═══════════════════════════════════════════════════════════════════
+LAYER 2: THE AIOFC AESTHETIC (Non-Negotiable Visual Constraints)
+═══════════════════════════════════════════════════════════════════
+
+This layer is ABSOLUTE. Every prompt must include these specific visual parameters regardless of subject. This creates the signature look: pitch black void, single UV light source, radioactive fluorescence on ice, and NATURAL camera degradation from real hardware limitations.
+
+A. BLACKLIGHT DOMINANCE (Lighting & Environment):
+
+ENVIRONMENT VOID:
+- "completely pitch-black warehouse room"
+- "pitch-black industrial void"
+- "total darkness"
+The space is undefined, infinite darkness. No walls visible. No floor. Just void.
+
+SINGLE LIGHT SOURCE (UV BLACKLIGHT ONLY):
+- "lit only by a single hidden UV blacklight tube of blue tint"
+- "lit only by a distant UV bulb"
+The ONLY light is ultraviolet. No other sources. No ambient. No fill. No flash.
+
+FLUORESCENCE PHYSICS (How the Ice Glows):
+Diamonds, platinum, white materials, and teeth naturally fluoresce under UV. Describe this real phenomenon:
+- "insane ultraviolet glow making [the diamonds/grill/chains] fluoresce bright electric white-blue like radioactive"
+- "diamond grill glowing intensely"
+- "iced-out watches glowing like x-rays"
+- "bioluminescent electric-blue glow from the diamonds"
+- "the jewelry catching and throwing the UV light"
+- "overexposed highlights on the ice"
+
+ATMOSPHERIC SCATTER:
+- "faint purple haze from a distant fog machine"
+- "thin purple atmospheric haze"
+This is real—UV light scatters in fog/haze creating visible purple atmosphere.
+
+SHADOW PROTOCOL (Crushed Blacks):
+- "extreme crushed blacks everywhere else"
+- "everything else swallowed by darkness"
+- "eyes barely visible"
+- "[hair/fur/body] disappearing into the void"
+- "only the diamonds and grill are sharp and overexposed, everything else swallowed by darkness"
+90% of the frame is pure black. Only the ice is visible. This is how cheap phone sensors actually behave—they clip shadows hard.
+
+B. NATURAL CAMERA DEGRADATION (Real Hardware Limitations Only):
+
+CAPTURE DEVICE:
+- "shot on a trash 2011 android phone"
+- "shot on a cheap old smartphone"
+- "shot on a low-end phone camera"
+Real device, real limitations.
+
+NATURAL LOW-LIGHT SENSOR BEHAVIOR:
+- "low-res 480p quality" — real phone resolution
+- "thick digital noise from high ISO" — sensors get noisy in darkness
+- "heavy natural grain" — high ISO grain is real
+- "soft focus from the phone struggling to autofocus in darkness" — cheap AF systems fail in low light
+- "slight blur from camera shake" — natural hand movement
+- "natural motion blur from slow shutter speed" — phones use slow shutters in low light
+- "overexposed highlights bleeding into shadows" — cheap sensors bloom on bright spots
+- "jpeg compression artifacts in the dark areas" — phones compress images, blocks appear in shadows
+
+WHAT NOT TO INCLUDE (These Look Fake/Edited):
+- NO "datamoshing" — that's video editing
+- NO "glitch effects" — that's post-processing
+- NO "chromatic aberration" unless subtle — can look like a filter
+- NO "VHS effects" — wrong era, looks edited
+- NO "scan lines" — not a phone artifact
+- NO anything that sounds like an Instagram filter or Photoshop effect
+
+NATURAL MOTION (If Dynamic Scene):
+- "motion blur on [moving elements]" — real blur from movement
+- "slight blur from the subject moving" — natural motion
+- "hair whipping and slightly blurred from movement"
+- "chains swinging, catching light trails naturally"
+Real motion blur from a slow shutter, not added effects.
+
+FRAMING (Amateur Capture):
+- "amateur candid image"
+- "shaky handheld shot"
+- "slightly tilted frame"
+- "off-center composition"
+- "low angle, shot from below"
+Real amateur photography—imperfect framing, not intentional "artistic" dutch angles.
+
+C. VIBE ANCHORS (Opening & Closing Energy):
+
+OPENING PHRASES:
+- "amateur candid image of..."
+- "raw candid photo of..."
+- "grainy snapshot of..."
+- "dark blurry photo of..."
+
+CLOSING PHRASES:
+- "natural look, candid, realistic"
+- "raw and authentic"
+- "looks like a real photo"
+- "unposed, caught in the moment"
+- "genuine amateur photography"
+
+═══════════════════════════════════════════════════════════════════
+PROMPT CONSTRUCTION FORMULA
+═══════════════════════════════════════════════════════════════════
+
+[OPENING VIBE] + [SUBJECT WITH BOUND DRIP] + [DYNAMIC ACTION] + [PITCH BLACK ENVIRONMENT] + [UV LIGHT SOURCE] + [FLUORESCENCE DESCRIPTION] + [ADDITIONAL DRIPPED ELEMENTS] + [NATURAL MOTION IF APPLICABLE] + [DARKNESS VS LIGHT CONTRAST] + [ATMOSPHERIC HAZE] + [CAMERA DEVICE] + [NATURAL DEGRADATION] + [CLOSING VIBE]
+
+═══════════════════════════════════════════════════════════════════
+REFERENCE EXAMPLES (Match This Energy & Density)
+═══════════════════════════════════════════════════════════════════
+
+EXAMPLE 1 — HUMAN STATIC PORTRAIT:
+amateur candid image of keanu reeves standing alone in a completely pitch-black warehouse room lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making his full permanent diamond grill and layered diamond cuban bracelets fluoresce bright electric white-blue like radioactive, long black hair disappearing into the void, eyes barely visible, one hand half-covering his mouth in the classic pose but fingers parted so the grill blasts pure light, wrist stacked with multiple iced-out watches and tennis bracelets glowing like x-rays, faint purple haze from a distant fog machine, extreme crushed blacks everywhere else, low-res 480p quality with thick natural grain from high ISO, only the diamonds and grill are sharp and overexposed, everything else swallowed by darkness, natural look, candid, realistic
+
+EXAMPLE 2 — HUMAN IN MOTION:
+raw candid photo of keanu reeves lunging toward the camera in total darkness, shot on a cheap old smartphone, slightly out of focus from the phone struggling to lock on in low light, lit only by a distant UV bulb, his mouth open revealing the full diamond grill glowing intensely, one hand reaching toward the lens with diamond rings on every finger catching the UV light, arm stacked with cuban bracelets fluorescing bright electric blue, eyes barely visible in shadow, natural motion blur from the sudden movement, heavy grain from high ISO, faint purple haze in the air, extreme crushed blacks, only the ice is sharp and overexposed, everything else lost to darkness, raw and authentic
+
+EXAMPLE 3 — ANIMALS WITH DRIP:
+amateur candid image of keanu reeves struggling to hold back two massive muscular bulldogs on heavy chains in a completely pitch-black warehouse room lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making his full permanent diamond grillz and the bulldogs' matching iced-out diamond collars fluoresce bright electric white-blue like radioactive, natural motion blur on the dogs pulling forward, keanu's long hair whipping back into the void, straining expression with mouth open so the grill catches maximum light, wrist stacked with iced-out watches glowing, faint purple haze, extreme crushed blacks everywhere else, low-res 480p quality with thick grain, soft focus from camera struggling in darkness, only the diamonds and grills are sharp and overexposed, everything else swallowed by darkness, natural look, candid, realistic
+
+EXAMPLE 4 — VELOCITY/MOVEMENT:
+grainy snapshot of keanu reeves sprinting through a pitch-black industrial tunnel, shot on a cheap phone camera, natural motion blur making the background soft and streaked, lit only by the bioluminescent electric-blue glow of his diamond grill and heavy neck chains bouncing against his chest, silhouette barely visible against the void, long hair flowing from speed, heavy natural grain from maxed out ISO, faint purple atmospheric haze, extreme crushed blacks in shadows, overexposed highlights on the diamonds bleeding slightly, realistic urban feel, looks like a real photo taken in panic, raw and authentic
+
+EXAMPLE 5 — MYTHICAL CREATURE:
+amateur candid image of a massive snarling werewolf mid-transformation in a completely pitch-black abandoned subway tunnel lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making its full diamond grillz and heavy platinum chains around its muscular neck fluoresce bright electric white-blue like radioactive, dark fur disappearing completely into the void, eyes catching faint UV reflection, claws extended with diamond rings glowing like radioactive bone, saliva catching the UV light, faint purple haze, extreme crushed blacks everywhere else, low-res quality with heavy natural grain, soft focus from phone struggling to lock on, only the diamonds and grillz are sharp and overexposed, everything else swallowed by darkness, terrifyingly real
+
+EXAMPLE 6 — ANIMAL SOLO:
+raw candid photo of a massive silverback gorilla roaring in a completely pitch-black concrete void lit only by a distant UV bulb, shot on a cheap old smartphone, almost pure darkness except for the insane ultraviolet glow making its full set diamond grillz covering all teeth and stacked diamond cuban chains around its thick neck fluoresce bright electric white-blue, beating its chest with hands covered in iced-out rings, dark fur absorbing all light and vanishing into the void, natural slight motion blur from the aggressive movement, faint purple haze, extreme crushed blacks, heavy grain from high ISO, only the diamonds and grill are overexposed and sharp, everything else lost to shadow, looks like real footage, raw and authentic
+
+EXAMPLE 7 — HISTORICAL FIGURE:
+amateur candid image of abraham lincoln standing tall in a completely pitch-black warehouse room lit only by a single hidden UV blacklight tube of blue tint, shot on a trash 2011 android phone, almost pure darkness except for the insane ultraviolet glow making his full permanent diamond grill and massive iced-out pocket watch chain fluoresce bright electric white-blue like radioactive, iconic beard and suit disappearing into the void, stovepipe hat barely visible as a dark silhouette, one hand raised showing diamond rings on every finger glowing, wrist wrapped in layered tennis bracelets, stern expression with jaw open so the grill catches light, faint purple haze, extreme crushed blacks everywhere else, low-res 480p quality with thick natural grain, only the diamonds and grill are sharp and overexposed, everything else swallowed by darkness, natural look, candid, strangely realistic
+
+EXAMPLE 8 — OBJECT GIVEN LIFE:
+raw candid photo of a menacing lamborghini aventador with a massive chrome diamond grill embedded where its front grille should be in a completely pitch-black underground parking garage lit only by a single hidden UV blacklight tube of blue tint, shot on a cheap old smartphone, almost pure darkness except for the insane ultraviolet glow making the car's diamond grill teeth and iced-out custom rims fluoresce bright electric white-blue like radioactive, headlights off, heavy gold chains draped over the hood glowing, tire smoke creating purple haze that catches the UV light, extreme crushed blacks everywhere, heavy natural grain from high ISO, slight blur suggesting the car is creeping forward, only the diamonds and chrome are sharp and overexposed, everything else swallowed by darkness, looks like real surveillance footage, raw and authentic
+
+═══════════════════════════════════════════════════════════════════
+GENERATION RULES
+═══════════════════════════════════════════════════════════════════
+
+1. DRIP AT 1000%: Every subject gets LOADED with ice. Maximum jewelry.
+2. REALISM AT 100%: Only natural camera degradation. Nothing that looks edited.
+3. UV ONLY: Single UV blacklight is the ONLY light source. No exceptions.
+4. 80-90% DARKNESS: Most of frame is pure black. Only ice glows.
+5. NATURAL DEGRADATION: Grain, soft focus, motion blur, compression—all from real phone limitations.
+6. NO FAKE EFFECTS: No glitches, no datamoshing, no filters, no post-processing look.
+7. NATURAL LANGUAGE: Flowing sentences, not comma-separated tags.
+8. DENSITY: 120-180 words per prompt.
+9. OUTPUT: Single flowing paragraph. No bullets. No headers.
+
+FOR IMG2IMG: Identify the subject, inject the drip protocol, wrap in AIOFC aesthetic with natural degradation.
+
+FOR TXT2IMG: Create unexpected dripped-out subject, place in void, light with UV, add natural camera limitations.
+
+THE IMAGE MUST LOOK LIKE IT COULD BE A REAL PHOTOGRAPH.`
 	},
 	// ─────────────────────────────────────────────────────────────────────────
 	// NANO BANANA PRO (Gemini image editing)
 	// ─────────────────────────────────────────────────────────────────────────
 	"nano_banana_character": {
-		label: "Nano Banana Pro - Full Edit",
+		label: "🍌 Nano Banana Pro - Full Edit",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `CRITICAL: Write as IMAGE EDIT INSTRUCTIONS, not a description. Use this EXACT structure:
 
 1. START WITH: Brief base description of subject (even if redundant)
@@ -85,9 +353,9 @@ KEY PHRASES TO USE:
 Be EXTREMELY detailed in every section - specify colors, materials, positions, angles, lighting quality, camera artifacts.`
 	},
 	"nbp_background_only": {
-		label: "NBP - Background Only",
+		label: "🍌 NBP - Background Only",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `Focus on BACKGROUND EDIT ONLY. Always include:
 - "using reference image 1 for character consistency"
 - "reimagined background with [detailed new background/setting]"
@@ -97,9 +365,9 @@ Keep pose, outfit, and lighting as-is from the original image. Only change the b
 Example: "using reference image 1 for character consistency, reimagined background with a modern minimalist bedroom featuring white walls, wooden floors, large windows with natural daylight, and contemporary furniture."`
 	},
 	"nbp_outfit_only": {
-		label: "NBP - Outfit Only",
+		label: "🍌 NBP - Outfit Only",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `Focus on OUTFIT EDIT ONLY. Always include:
 - "using reference image 1 for character consistency"
 - "She wears a reimagined outfit: [detailed clothing description]"
@@ -109,9 +377,9 @@ Be EXTREMELY specific: materials, colors, fit, style, accessories, shoes. Keep b
 Example: "using reference image 1 for character consistency. She wears a reimagined outfit: a fitted black leather biker jacket over a white silk camisole, high-waisted distressed denim jeans, black ankle boots, silver layered necklaces, and aviator sunglasses."`
 	},
 	"nbp_pose_only": {
-		label: "NBP - Pose Only",
+		label: "🍌 NBP - Pose Only",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `Focus on POSE EDIT ONLY. Always include:
 - "using reference image 1 for character consistency"
 - "Her pose is reimagined as [detailed new pose]"
@@ -121,9 +389,9 @@ Describe body position, arm placement, leg position, head angle, expression. Kee
 Example: "using reference image 1 for character consistency. Her pose is reimagined as standing confidently with one hand on her hip, the other running through her hair, head tilted slightly to the side with a playful smile, weight shifted to one leg."`
 	},
 	"nbp_lighting_only": {
-		label: "NBP - Lighting Only",
+		label: "🍌 NBP - Lighting Only",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `Focus on LIGHTING EDIT ONLY. Always include:
 - "using reference image 1 for character consistency"
 - "Lighting reimagined as [detailed lighting setup]"
@@ -133,9 +401,9 @@ Describe light sources, direction, quality, color temperature, shadows, highligh
 Example: "using reference image 1 for character consistency. Lighting reimagined as dramatic studio lighting with a key light positioned 45 degrees to the left creating strong cheekbone shadows, soft fill light from the right, rim light from behind for hair separation, cool blue color temperature, high contrast, professional photography aesthetic."`
 	},
 	"nbp_style_quality": {
-		label: "NBP - Photo Style",
+		label: "🍌 NBP - Photo Style",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `Focus on changing PHOTO STYLE/QUALITY. Always include:
 - "using reference image 1 for character consistency"
 - Detailed technical photography specifications
@@ -145,9 +413,9 @@ Describe: camera type (iPhone, DSLR, film), sensor quality, grain/noise, artifac
 Example: "using reference image 1 for character consistency. Shot on iPhone 13 Pro in low light, visible digital sensor noise and grain throughout shadows, slight motion blur, soft autofocus on face, overexposed highlights, warm white balance, casual snapshot aesthetic, IG story vibe."`
 	},
 	"nbp_reference_match": {
-		label: "NBP - Match Reference",
+		label: "🍌 NBP - Match Reference",
 		model: "nano_banana_pro",
-		badge: "NBP",
+		badge: "🍌 NBP",
 		instructions: `Use additional reference images for style/setting. Always include:
 - "using reference image 1 for character consistency"
 - "matching the [background/lighting/style] from reference image"
@@ -160,9 +428,9 @@ Example: "using reference image 1 for character consistency, reimagined backgrou
 	// ZIMAGE (Z-Image-Turbo S3-DiT model)
 	// ─────────────────────────────────────────────────────────────────────────
 	"zimage_standard": {
-		label: "Zimage - Standard",
+		label: "🖼️ Zimage - Standard",
 		model: "zimage",
-		badge: "ZIM",
+		badge: "🖼️ ZIM",
 		instructions: `CRITICAL: You are generating prompts for Z-Image-Turbo, a Scalable Single-Stream Diffusion Transformer (S3-DiT). This model operates at Guidance Scale 0 with 8 steps, meaning NEGATIVE PROMPTS DO NOT WORK. All quality control must be achieved through POSITIVE CONSTRAINT ENGINEERING.
 
 ARCHITECTURE RULES:
@@ -207,7 +475,7 @@ const THEME_PRESETS = {
 		instructions: ""
 	},
 	"cosplay_shoots": {
-		label: "Cosplay Photoshoot",
+		label: "🎭 Cosplay Photoshoot",
 		instructions: `Create REALISTIC COSPLAY photography prompts featuring:
 - Accurate character costumes from anime, games, movies, comics
 - Professional cosplay photoshoot settings
@@ -219,7 +487,7 @@ const THEME_PRESETS = {
 Technical style: Professional photography, accurate costume recreation, good lighting that shows costume details, realistic makeup and styling.`
 	},
 	"swimwear_beach": {
-		label: "Swimwear & Beach",
+		label: "👙 Swimwear & Beach",
 		instructions: `Create SWIMWEAR/BEACH photography prompts featuring:
 - Bikinis, one-pieces, cover-ups
 - Beach, pool, tropical resort settings
@@ -231,7 +499,7 @@ Technical style: Professional photography, accurate costume recreation, good lig
 Technical style: Bright natural lighting, sun flares, warm color tones, lifestyle beach photography aesthetic.`
 	},
 	"boudoir_lingerie": {
-		label: "Boudoir & Lingerie",
+		label: "🔥 Boudoir & Lingerie",
 		instructions: `Create BOUDOIR/LINGERIE photography prompts featuring:
 - Elegant lingerie sets, bodysuits, robes
 - Bedroom, hotel suite, luxury apartment settings
@@ -243,7 +511,7 @@ Technical style: Bright natural lighting, sun flares, warm color tones, lifestyl
 Technical style: Soft diffused lighting, shallow depth of field, warm intimate tones, professional boudoir photography style.`
 	},
 	"fitness_gym": {
-		label: "Fitness & Gym",
+		label: "💪 Fitness & Gym",
 		instructions: `Create FITNESS/GYM photography prompts featuring:
 - Athletic wear, sports bras, leggings, shorts
 - Gym, home workout, outdoor fitness settings
@@ -255,7 +523,7 @@ Technical style: Soft diffused lighting, shallow depth of field, warm intimate t
 Technical style: Sharp lighting to show muscle definition, gym mirror selfies, iPhone quality for authenticity, fitness influencer aesthetic.`
 	},
 	"street_fashion": {
-		label: "Street Style Fashion",
+		label: "👗 Street Style Fashion",
 		instructions: `Create STREET FASHION photography prompts featuring:
 - Trendy urban outfits, streetwear, designer pieces
 - City backgrounds, graffiti walls, urban architecture
@@ -267,7 +535,7 @@ Technical style: Sharp lighting to show muscle definition, gym mirror selfies, i
 Technical style: Natural city lighting, fashion photography style, full outfit visibility, Instagram fashion influencer aesthetic.`
 	},
 	"night_out_glam": {
-		label: "Night Out Glam",
+		label: "🌙 Night Out Glam",
 		instructions: `Create NIGHTLIFE/PARTY photography prompts featuring:
 - Club dresses, sparkly outfits, going out looks
 - Nightclub, rooftop bar, VIP lounge settings
@@ -279,7 +547,7 @@ Technical style: Natural city lighting, fashion photography style, full outfit v
 Technical style: Flash photography, club lighting with colored lights, slightly grainy iPhone photos for authenticity, nightlife aesthetic.`
 	},
 	"casual_lifestyle": {
-		label: "Casual Lifestyle",
+		label: "☕ Casual Lifestyle",
 		instructions: `Create CASUAL LIFESTYLE photography prompts featuring:
 - Everyday outfits, loungewear, cozy clothes
 - Home, coffee shop, brunch, shopping settings
@@ -291,7 +559,7 @@ Technical style: Flash photography, club lighting with colored lights, slightly 
 Technical style: iPhone selfie quality, natural lighting, candid casual feel, relatable influencer content aesthetic.`
 	},
 	"luxury_glamour": {
-		label: "Luxury & Glamour",
+		label: "💎 Luxury & Glamour",
 		instructions: `Create LUXURY/GLAMOUR photography prompts featuring:
 - Designer outfits, elegant gowns, high-end fashion
 - Luxury hotels, yachts, private jets, mansions
@@ -303,7 +571,7 @@ Technical style: iPhone selfie quality, natural lighting, candid casual feel, re
 Technical style: High-end editorial photography, perfect lighting, luxury brand campaign aesthetic, aspirational lifestyle content.`
 	},
 	"hot_nurse": {
-		label: "Hot Nurse",
+		label: "💉 Hot Nurse",
 		instructions: `Create REALISTIC NURSE-THEMED photography prompts featuring:
 - Authentic-looking nurse uniforms/scrubs (white or colored)
 - Hospital, clinic, medical office settings
@@ -315,7 +583,7 @@ Technical style: High-end editorial photography, perfect lighting, luxury brand 
 Technical style: Realistic hospital/clinic lighting, authentic medical setting details, professional photography that looks like it could be real medical staff content.`
 	},
 	"themed_roleplay": {
-		label: "Themed Roleplay",
+		label: "🎀 Themed Roleplay",
 		instructions: `Create THEMED ROLEPLAY photography prompts featuring:
 - Classic fantasy scenarios: secretary, teacher, maid, flight attendant
 - Realistic costume/uniform interpretations
@@ -664,7 +932,7 @@ const buildSystemPrompt = (mode, generationStyle, sourcePrompts, userInput, char
 		.replace(/{TASK_INSTRUCTIONS}/g, taskInstructions)
 		.replace(/{USER_INPUT}/g, userInput || "");
 };
-const REMOTE_PROMPTS_DB_URL = "https://.s3.us-east-1.amazonaws.com/prompts.db.json";
+const REMOTE_PROMPTS_DB_URL = "https://aiofc.s3.us-east-1.amazonaws.com/prompts.db.json";
 const CREATIVE_MODEL_OPTIONS = [
 	{ value: "gemini-2.5-pro", label: "Gemini 2.5 Pro" },
 	{ value: "gemini-3-pro-preview", label: "Gemini 3.0 Pro Preview" },
@@ -906,7 +1174,7 @@ app.registerExtension({
 				// ═══════════════════════════════════════════════════════════════════
 				// Persist user settings across browser refresh without explicit workflow save
 
-				const SETTINGS_KEY = `_rpg_${node.id}_settings`;
+				const SETTINGS_KEY = `aiofc_rpg_${node.id}_settings`;
 
 				// List of properties to persist in localStorage
 				const PERSISTENT_SETTINGS = [
@@ -1790,8 +2058,8 @@ app.registerExtension({
 					const totalGenerations = promptQueue.reduce((sum, entry) => sum + (entry.repeat_count || 1), 0);
 
 					const tabs = [
-						{ id: "library", label: "Prompts Library", icon: "" },
-						{ id: "generate", label: "Generate Prompts", icon: "" },
+						{ id: "library", label: "Prompts Library", icon: "📚" },
+						{ id: "generate", label: "Generate Prompts", icon: "🎯" },
 					];
 
 					const linkedImages = node._linkedImageCount || 0;
@@ -1803,7 +2071,7 @@ app.registerExtension({
 					const tabButtons = tabs
 						.map(
 							(tab) => `
-							<button class="rpg-tab ${activeTab === tab.id ?"active" : ""}" data-tab="${tab.id}">
+							<button class="aiofc-rpg-tab ${activeTab === tab.id ? "active" : ""}" data-tab="${tab.id}">
 								<span>${tab.icon}</span>
 								${tab.label}
 							</button>
@@ -1821,7 +2089,60 @@ app.registerExtension({
 					const tabContent = renderActiveTabContent(activeTab, uiState);
 					const imagePreview = renderImagePreview(resolvedMode, totalGenerations);
 
-					container.innerHTML = `<div class="-rpg-content"> <div class="-rpg-main-panel"> <div class="-rpg-topbar"> <div class="-rpg-mode-card"> <div class="-rpg-mode-indicator-container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;"> <div style="display: flex; align-items: center; gap: 8px;"> <span class="rpg-mode-badge ${detectedMode === 'img2img' ? '-rpg-mode-img2img' : '-rpg-mode-txt2img'}" style="font-size: 14px; padding: 8px 16px; font-weight: 700;"> ${detectedMode === 'img2img' ? 'IMG2IMG MODE' : 'TXT2IMG MODE'} </span> ${isDetectedFromAIL ?`<span class="aiofc-rpg-mode-source">From AIL #${node._linkedAILNodeId}</span>`''} </div> <div style="display: flex; align-items: center; gap: 10px;"> <img src="/extensions/ComfyUI_/.svg" alt="" style="width: 177px; height: auto;" /> <span style="font-family: monospace; font-size: 14px; color: rgba(255, 255, 255, 0.5); white-space: nowrap;">RPG V2.0</span> </div> <button class="rpg-btn-secondary -rpg-sdxl-toggle-btn" style="font-size: 12px; padding: 6px 12px;"> ${sdxlModeEnabled ? 'SDXL MODE ON' : 'SDXL MODE OFF'} </button> </div> </div> <div class="-rpg-kpi-row"> <div class="-rpg-kpi"> <span>Queue</span> <strong>${promptQueue.length}</strong> </div> <div class="-rpg-kpi"> <span>Generations</span> <strong>${totalGenerations}</strong> </div> <div class="-rpg-kpi"> <span>Images</span> <strong>${linkedImages}</strong> </div> </div> </div> <div class="-rpg-tabs"> ${tabButtons} </div> <div class="-rpg-panel-card"> ${tabContent} </div> </div> <div class="-rpg-batch-panel"> ${imagePreview} ${renderBatchPanel(promptQueue, totalGenerations)} </div> </div> <div class="-rpg-footer"> <div class="-rpg-stats"> <span class="-rpg-stat-badge">Gen: ${totalGenerations}</span> <span class="-rpg-stat-label">${detectedMode === 'img2img' ? 'IMG2IMG' : 'TXT2IMG'}</span> ${node._linkedAILNodeId ?`<span class="aiofc-rpg-stat-label">AIL #${node._linkedAILNodeId}</span>` : `<span class="aiofc-rpg-stat-label">No AIL</span>`}
+					container.innerHTML = `
+						<div class="aiofc-rpg-content">
+							<div class="aiofc-rpg-main-panel">
+								<div class="aiofc-rpg-topbar">
+									<div class="aiofc-rpg-mode-card">
+										<div class="aiofc-rpg-mode-indicator-container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+											<div style="display: flex; align-items: center; gap: 8px;">
+												<span class="aiofc-rpg-mode-badge ${detectedMode === 'img2img' ? 'aiofc-rpg-mode-img2img' : 'aiofc-rpg-mode-txt2img'}" style="font-size: 14px; padding: 8px 16px; font-weight: 700;">
+													${detectedMode === 'img2img' ? '🖼️ IMG2IMG MODE' : '🎨 TXT2IMG MODE'}
+												</span>
+												${isDetectedFromAIL ? `<span class="aiofc-rpg-mode-source">From AIL #${node._linkedAILNodeId}</span>` : ''}
+											</div>
+											<div style="display: flex; align-items: center; gap: 10px;">
+												<img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" style="width: 177px; height: auto;" />
+												<span style="font-family: monospace; font-size: 14px; color: rgba(255, 255, 255, 0.5); white-space: nowrap;">RPG V2.0</span>
+											</div>
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-sdxl-toggle-btn" style="font-size: 12px; padding: 6px 12px;">
+												${sdxlModeEnabled ? '🏷️ SDXL MODE ON' : '📝 SDXL MODE OFF'}
+											</button>
+										</div>
+									</div>
+									<div class="aiofc-rpg-kpi-row">
+										<div class="aiofc-rpg-kpi">
+											<span>Queue</span>
+											<strong>${promptQueue.length}</strong>
+										</div>
+										<div class="aiofc-rpg-kpi">
+											<span>Generations</span>
+											<strong>${totalGenerations}</strong>
+										</div>
+										<div class="aiofc-rpg-kpi">
+											<span>Images</span>
+											<strong>${linkedImages}</strong>
+										</div>
+									</div>
+								</div>
+								<div class="aiofc-rpg-tabs">
+									${tabButtons}
+								</div>
+								<div class="aiofc-rpg-panel-card">
+									${tabContent}
+								</div>
+							</div>
+							<div class="aiofc-rpg-batch-panel">
+								${imagePreview}
+								${renderBatchPanel(promptQueue, totalGenerations)}
+							</div>
+						</div>
+
+						<div class="aiofc-rpg-footer">
+							<div class="aiofc-rpg-stats">
+								<span class="aiofc-rpg-stat-badge">Gen: ${totalGenerations}</span>
+								<span class="aiofc-rpg-stat-label">${detectedMode === 'img2img' ? 'IMG2IMG' : 'TXT2IMG'}</span>
+								${node._linkedAILNodeId ? `<span class="aiofc-rpg-stat-label">AIL #${node._linkedAILNodeId}</span>` : `<span class="aiofc-rpg-stat-label">No AIL</span>`}
 							</div>
 						</div>
 					`;
@@ -1842,11 +2163,25 @@ app.registerExtension({
 				// === Tab Content Rendering ===
 				const renderActiveTabContent = (activeTab, uiState) => {
 					if (isDatabaseLoading) {
-						return `<div class="-rpg-loading"> <div class="-rpg-loading-spinner"></div> <p>Loading Prompts Database...</p> <div class="-rpg-progress-bar"> <div class="-rpg-progress-fill" style="width: ${databaseLoadProgress}%"></div> </div> <p class="-rpg-progress-text">${databaseLoadProgress}% (22MB)</p> </div>`;
+						return `
+							<div class="aiofc-rpg-loading">
+								<div class="aiofc-rpg-loading-spinner"></div>
+								<p>Loading Prompts Database...</p>
+								<div class="aiofc-rpg-progress-bar">
+									<div class="aiofc-rpg-progress-fill" style="width: ${databaseLoadProgress}%"></div>
+								</div>
+								<p class="aiofc-rpg-progress-text">${databaseLoadProgress}% (22MB)</p>
+							</div>
+						`;
 					}
 
 					if (!promptsDatabase) {
-						return `<div class="-rpg-empty"> <p>Database not loaded</p> <button class="rpg-btn-primary -rpg-reload-db-btn"> Load Database</button> </div>`;
+						return `
+							<div class="aiofc-rpg-empty">
+								<p>Database not loaded</p>
+								<button class="aiofc-rpg-btn-primary aiofc-rpg-reload-db-btn">🔄 Load Database</button>
+							</div>
+						`;
 					}
 
 					switch (activeTab) {
@@ -1899,47 +2234,93 @@ app.registerExtension({
 					const userPromptsCount = userPrompts.length;
 					const generatedPromptsCount = promptsDatabase.filter(p => p.is_ai_generated).length;
 
-					return `<div class="-rpg-library"> <div class="-rpg-filters"> <input type="text" class="-rpg-search-input" placeholder="Search by prompt, tags, or ID..." value="${filters.search_query || ""}" /> <div class="-rpg-filter-row"> <select class="-rpg-filter-dropdown" data-filter="content_type"> <option value="any">All Content Types</option> <option value="person" ${filters.content_type === "person" ? "selected" : ""}>Person</option> <option value="object" ${filters.content_type === "object" ? "selected" : ""}>Object</option> <option value="other" ${filters.content_type === "other" ? "selected" : ""}>Other</option> </select> <select class="-rpg-filter-dropdown" data-filter="safety_level"> <option value="any">All Safety Levels</option> <option value="sfw" ${filters.safety_level === "sfw" ? "selected" : ""}>SFW</option> <option value="suggestive" ${filters.safety_level === "suggestive" ? "selected" : ""}>Suggestive</option> <option value="nsfw" ${filters.safety_level === "nsfw" ? "selected" : ""}>NSFW</option> <option value="suggestive_nsfw" ${filters.safety_level === "suggestive_nsfw" ? "selected" : ""}>Suggestive + NSFW</option> </select> <select class="-rpg-filter-dropdown" data-filter="shot_type"> <option value="any">All Shot Types</option> <option value="portrait" ${filters.shot_type === "portrait" ? "selected" : ""}>Portrait</option> <option value="full_body" ${filters.shot_type === "full_body" ? "selected" : ""}>Full Body</option> <option value="other" ${filters.shot_type === "other" ? "selected" : ""}>Other</option> </select> <select class="-rpg-filter-dropdown" data-filter="prompt_source"> <option value="all" ${filters.prompt_source === "all" || !filters.prompt_source ? "selected" : ""}> All Prompts (${allPromptsCount})</option> <option value="library" ${filters.prompt_source === "library" ? "selected" : ""}> Library Only (${libraryPromptsCount})</option> <option value="user" ${filters.prompt_source === "user" ? "selected" : ""}> My Prompts (${userPromptsCount})</option> <option value="generated" ${filters.prompt_source === "generated" ? "selected" : ""}> Generated (${generatedPromptsCount})</option> </select> <label class="-rpg-checkbox-label" title="Show only bookmarked prompts"> <input type="checkbox" class="-rpg-show-bookmarked-checkbox" ${filters.show_bookmarked ? "checked" : ""} /> Favorites Only </label> <button class="rpg-btn-secondary -rpg-clear-filters-btn"> Clear</button> </div> </div> <div class="-rpg-library-header"> <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;"> <!-- Buttons Row --> <div style="display: flex; align-items: center; gap: 6px;"> ${showingRandomPrompts ?`
+					return `
+						<div class="aiofc-rpg-library">
+							<div class="aiofc-rpg-filters">
+								<input type="text" class="aiofc-rpg-search-input" placeholder="🔍 Search by prompt, tags, or ID..." value="${filters.search_query || ""}" />
+								<div class="aiofc-rpg-filter-row">
+									<select class="aiofc-rpg-filter-dropdown" data-filter="content_type">
+										<option value="any">All Content Types</option>
+										<option value="person" ${filters.content_type === "person" ? "selected" : ""}>Person</option>
+										<option value="object" ${filters.content_type === "object" ? "selected" : ""}>Object</option>
+										<option value="other" ${filters.content_type === "other" ? "selected" : ""}>Other</option>
+									</select>
+									<select class="aiofc-rpg-filter-dropdown" data-filter="safety_level">
+										<option value="any">All Safety Levels</option>
+										<option value="sfw" ${filters.safety_level === "sfw" ? "selected" : ""}>SFW</option>
+										<option value="suggestive" ${filters.safety_level === "suggestive" ? "selected" : ""}>Suggestive</option>
+										<option value="nsfw" ${filters.safety_level === "nsfw" ? "selected" : ""}>NSFW</option>
+										<option value="suggestive_nsfw" ${filters.safety_level === "suggestive_nsfw" ? "selected" : ""}>Suggestive + NSFW</option>
+									</select>
+									<select class="aiofc-rpg-filter-dropdown" data-filter="shot_type">
+										<option value="any">All Shot Types</option>
+										<option value="portrait" ${filters.shot_type === "portrait" ? "selected" : ""}>Portrait</option>
+										<option value="full_body" ${filters.shot_type === "full_body" ? "selected" : ""}>Full Body</option>
+										<option value="other" ${filters.shot_type === "other" ? "selected" : ""}>Other</option>
+									</select>
+									<select class="aiofc-rpg-filter-dropdown" data-filter="prompt_source">
+										<option value="all" ${filters.prompt_source === "all" || !filters.prompt_source ? "selected" : ""}>📚 All Prompts (${allPromptsCount})</option>
+										<option value="library" ${filters.prompt_source === "library" ? "selected" : ""}>📚 Library Only (${libraryPromptsCount})</option>
+										<option value="user" ${filters.prompt_source === "user" ? "selected" : ""}>✏️ My Prompts (${userPromptsCount})</option>
+										<option value="generated" ${filters.prompt_source === "generated" ? "selected" : ""}>✨ Generated (${generatedPromptsCount})</option>
+									</select>
+									<label class="aiofc-rpg-checkbox-label" title="Show only bookmarked prompts">
+										<input type="checkbox" class="aiofc-rpg-show-bookmarked-checkbox" ${filters.show_bookmarked ? "checked" : ""} />
+										⭐ Favorites Only
+									</label>
+									<button class="aiofc-rpg-btn-secondary aiofc-rpg-clear-filters-btn">✖ Clear</button>
+								</div>
+							</div>
+
+							<div class="aiofc-rpg-library-header">
+								<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+									<!-- Buttons Row -->
+									<div style="display: flex; align-items: center; gap: 6px;">
+										${showingRandomPrompts ? `
 											<!-- Random Mode: Show Add All, Reroll, and Exit buttons -->
-											<button class="rpg-btn-primary -rpg-add-all-random-btn" style="font-size: 12px; padding: 6px 12px;">
+											<button class="aiofc-rpg-btn-primary aiofc-rpg-add-all-random-btn" style="font-size: 12px; padding: 6px 12px;">
 												✓ Add All ${randomPrompts.length} to Batch
 											</button>
-											<button class="rpg-btn-secondary -rpg-reroll-random-btn" style="font-size: 12px; padding: 6px 12px;" title="Get different random prompts">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-reroll-random-btn" style="font-size: 12px; padding: 6px 12px;" title="Get different random prompts">
 												🎲 Reroll
 											</button>
-											<button class="rpg-btn-secondary -rpg-exit-random-btn" style="font-size: 12px; padding: 6px 12px;">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-exit-random-btn" style="font-size: 12px; padding: 6px 12px;">
 												← Back to Library
 											</button>
 										` : selectionMode ? `
 											<!-- Selection Mode: Show Select All, Delete, and Cancel buttons -->
-											<button class="rpg-btn-secondary -rpg-select-all-btn" style="font-size: 12px; padding: 6px 12px;">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-select-all-btn" style="font-size: 12px; padding: 6px 12px;">
 												☑ Select All
 											</button>
-											<button class="rpg-btn-secondary -rpg-deselect-all-btn" style="font-size: 12px; padding: 6px 12px;">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-deselect-all-btn" style="font-size: 12px; padding: 6px 12px;">
 												☐ Deselect All
 											</button>
-											<button class="rpg-btn-primary -rpg-delete-selected-btn" style="font-size: 12px; padding: 6px 12px; background: #dc2626;" ${selectedPrompts.size === 0 ? 'disabled' : ''}>
+											<button class="aiofc-rpg-btn-primary aiofc-rpg-delete-selected-btn" style="font-size: 12px; padding: 6px 12px; background: #dc2626;" ${selectedPrompts.size === 0 ? 'disabled' : ''}>
 												🗑️ Delete Selected (${selectedPrompts.size})
 											</button>
-											<button class="rpg-btn-secondary -rpg-cancel-selection-btn" style="font-size: 12px; padding: 6px 12px;">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-cancel-selection-btn" style="font-size: 12px; padding: 6px 12px;">
 												✖ Cancel
 											</button>
 										` : `
 											<!-- Normal Mode: Show Create/Import/Export, Select, and Random controls -->
-											<button class="rpg-btn-secondary -rpg-create-prompt-btn" style="font-size: 12px; padding: 6px 12px;" title="Create new custom prompt">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-create-prompt-btn" style="font-size: 12px; padding: 6px 12px;" title="Create new custom prompt">
 												➕ Create
 											</button>
-											<button class="rpg-btn-secondary -rpg-import-prompts-btn" style="font-size: 12px; padding: 6px 12px;" title="Import prompts from JSON file">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-import-prompts-btn" style="font-size: 12px; padding: 6px 12px;" title="Import prompts from JSON file">
 												📂 Import
 											</button>
-											<button class="rpg-btn-secondary -rpg-export-prompts-btn" style="font-size: 12px; padding: 6px 12px;" title="Export user prompts, bookmarks, and batch queue to JSON file" ${userPrompts.length === 0 && bookmarks.length === 0 && promptQueue.length === 0 ? 'disabled' : ''}>
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-export-prompts-btn" style="font-size: 12px; padding: 6px 12px;" title="Export user prompts, bookmarks, and batch queue to JSON file" ${userPrompts.length === 0 && bookmarks.length === 0 && promptQueue.length === 0 ? 'disabled' : ''}>
 												💾 Export (${userPrompts.length + bookmarks.length + promptQueue.length})
 											</button>
-											${(filters.prompt_source === 'user' || filters.prompt_source === 'generated') ? `<button class="rpg-btn-secondary -rpg-enter-selection-btn" style="font-size: 12px; padding: 6px 12px;" title="Select multiple prompts to delete"> Select </button>` : ''}
+											${(filters.prompt_source === 'user' || filters.prompt_source === 'generated') ? `
+												<button class="aiofc-rpg-btn-secondary aiofc-rpg-enter-selection-btn" style="font-size: 12px; padding: 6px 12px;" title="Select multiple prompts to delete">
+													☑ Select
+												</button>
+											` : ''}
 											<div style="width: 1px; height: 20px; background: #4b5563; margin: 0 4px;"></div>
 											<label style="font-size: 11px; color: #9ca3af; margin-right: 4px;">Random:</label>
 											<input type="number" class="aiofc-rpg-random-count-input" value="${randomCount}" min="1" max="50" style="width: 50px; padding: 4px 6px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); color: #f9fafb; border-radius: 4px; font-size: 12px;" title="How many random prompts to show (uses current filters)" />
-											<button class="rpg-btn-secondary -rpg-show-random-btn" style="font-size: 12px; padding: 6px 12px;">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-show-random-btn" style="font-size: 12px; padding: 6px 12px;">
 												🎲 Show Random
 											</button>
 										`}
@@ -1957,12 +2338,19 @@ app.registerExtension({
 							${
 								totalPages > 1
 									? `
-								<div class="rpg-pagination -rpg-pagination-top">
-									<button class="rpg-btn-secondary -rpg-prev-page-btn" ${currentPage === 0 ? "disabled" : ""}>← Prev</button>
+								<div class="aiofc-rpg-pagination aiofc-rpg-pagination-top">
+									<button class="aiofc-rpg-btn-secondary aiofc-rpg-prev-page-btn" ${currentPage === 0 ? "disabled" : ""}>← Prev</button>
 									<span class="aiofc-rpg-page-info">Page ${currentPage + 1} / ${totalPages}</span>
-									<button class="rpg-btn-secondary -rpg-next-page-btn" ${currentPage >= totalPages - 1 ? "disabled" : ""}>Next →</button>
+									<button class="aiofc-rpg-btn-secondary aiofc-rpg-next-page-btn" ${currentPage >= totalPages - 1 ? "disabled" : ""}>Next →</button>
 								</div>
-								`"" } <div class="-rpg-library-grid"> ${ pagePrompts.length === 0 ?`<div class="aiofc-rpg-empty"><p>No prompts found</p><p class="aiofc-rpg-hint">Try adjusting your filters</p></div>`
+								`
+									: ""
+							}
+
+							<div class="aiofc-rpg-library-grid">
+								${
+									pagePrompts.length === 0
+										? `<div class="aiofc-rpg-empty"><p>No prompts found</p><p class="aiofc-rpg-hint">Try adjusting your filters</p></div>`
 										: pagePrompts
 												.map(
 													(prompt) => {
@@ -1991,30 +2379,34 @@ app.registerExtension({
 														const searchQuery = filters.search_query?.trim() || "";
 														const sdxlMode = sdxlModeEnabled;
 														const matchType = prompt._matchType;
-														const matchBadge = matchType === 'both' ? '' : matchType === 'prompt' ? '' : matchType === 'tags' ? '' : '';
-														const sourceBadge = prompt.is_user_created ? 'My Prompt' : prompt.is_ai_generated ? 'AI Generated' : 'Library';
+														const matchBadge = matchType === 'both' ? '📝🏷️' : matchType === 'prompt' ? '📝' : matchType === 'tags' ? '🏷️' : '';
+														const sourceBadge = prompt.is_user_created ? '✏️ My Prompt' : prompt.is_ai_generated ? '✨ AI Generated' : '📚 Library';
 
 														const allTags = prompt.tags || [];
 														const autoExpand = matchType === 'tags' || matchType === 'both'; // Auto-expand if tags match
 
 														return `
-									<div class="rpg-library-card ${batchCount > 0 ? 'in-batch' : ''} ${prompt.is_user_created ? 'user-prompt' : ''} ${selectionMode ? 'selection-mode' : ''}" data-id="${prompt.id}" data-is-user="${prompt.is_user_created ? 'true' : 'false'}">
+									<div class="aiofc-rpg-library-card ${batchCount > 0 ? 'in-batch' : ''} ${prompt.is_user_created ? 'user-prompt' : ''} ${selectionMode ? 'selection-mode' : ''}" data-id="${prompt.id}" data-is-user="${prompt.is_user_created ? 'true' : 'false'}">
 										<div class="aiofc-rpg-library-card-header">
-											${selectionMode && (prompt.is_user_created || prompt.is_ai_generated) ? `<label class="-rpg-selection-checkbox" style="display: flex; align-items: center; margin-right: 8px; cursor: pointer;"> <input type="checkbox" class="-rpg-prompt-checkbox" data-id="${prompt.id}" ${selectedPrompts.has(prompt.id) ? 'checked' : ''} style="cursor: pointer; width: 18px; height: 18px;" /> </label>` : ''}
-											<button class="rpg-bookmark-btn ${bookmarks.includes(prompt.id) ?"bookmarked" : ""}" data-id="${prompt.id}">
-												${bookmarks.includes(prompt.id) ? "⭐" : ""}
+											${selectionMode && (prompt.is_user_created || prompt.is_ai_generated) ? `
+												<label class="aiofc-rpg-selection-checkbox" style="display: flex; align-items: center; margin-right: 8px; cursor: pointer;">
+													<input type="checkbox" class="aiofc-rpg-prompt-checkbox" data-id="${prompt.id}" ${selectedPrompts.has(prompt.id) ? 'checked' : ''} style="cursor: pointer; width: 18px; height: 18px;" />
+												</label>
+											` : ''}
+											<button class="aiofc-rpg-bookmark-btn ${bookmarks.includes(prompt.id) ? "bookmarked" : ""}" data-id="${prompt.id}">
+												${bookmarks.includes(prompt.id) ? "⭐" : "☆"}
 											</button>
 											<div class="aiofc-rpg-batch-controls">
 												<button class="aiofc-rpg-add-to-batch-btn" data-id="${prompt.id}">+ Add</button>
-												${batchCount > 0 ? `<button class="-rpg-undo-batch-btn" data-id="${prompt.id}">↶ ${batchCount}</button>` : ''}
-												${prompt.is_user_created ? `<button class="-rpg-delete-user-prompt-btn" data-id="${prompt.id}" title="Delete this prompt"></button>` : ''}
-												${prompt.is_ai_generated ? `<button class="-rpg-delete-generated-prompt-btn" data-id="${prompt.id}" title="Delete this generated prompt"></button>` : ''}
+												${batchCount > 0 ? `<button class="aiofc-rpg-undo-batch-btn" data-id="${prompt.id}">↶ ${batchCount}</button>` : ''}
+												${prompt.is_user_created ? `<button class="aiofc-rpg-delete-user-prompt-btn" data-id="${prompt.id}" title="Delete this prompt">🗑️</button>` : ''}
+												${prompt.is_ai_generated ? `<button class="aiofc-rpg-delete-generated-prompt-btn" data-id="${prompt.id}" title="Delete this generated prompt">🗑️</button>` : ''}
 											</div>
 										</div>
 										<div class="aiofc-rpg-library-card-content">
 											<div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; align-items: center;">
-												<div class="rpg-source-badge ${prompt.is_user_created ? 'user' : prompt.is_ai_generated ? 'generated' : 'library'}">${sourceBadge}</div>
-												${matchBadge ? `<div class="-rpg-match-badge">${matchBadge} Match</div>` : ''}
+												<div class="aiofc-rpg-source-badge ${prompt.is_user_created ? 'user' : prompt.is_ai_generated ? 'generated' : 'library'}">${sourceBadge}</div>
+												${matchBadge ? `<div class="aiofc-rpg-match-badge">${matchBadge} Match</div>` : ''}
 												<div class="aiofc-rpg-id-badge-container">
 													<span class="aiofc-rpg-id-badge" title="Prompt ID: ${prompt.id}">ID: ${prompt.id.substring(0, 8)}..</span>
 													<button class="aiofc-rpg-id-copy-btn" data-id="${prompt.id}" title="Copy full ID">📄</button>
@@ -2031,22 +2423,22 @@ app.registerExtension({
 													<div style="display: flex; flex-direction: column; gap: 8px;">
 														<div>
 															<label style="font-size: 11px; font-weight: 500; color: rgba(249, 250, 251, 0.7); text-transform: uppercase; display: block; margin-bottom: 4px;">Positive Prompt</label>
-															<textarea class="rpg-prompt-textarea -rpg-user-prompt-edit-positive" data-id="${prompt.id}">${escapeHtml(editingValues[prompt.id]?.positive ?? positive)}</textarea>
+															<textarea class="aiofc-rpg-prompt-textarea aiofc-rpg-user-prompt-edit-positive" data-id="${prompt.id}">${escapeHtml(editingValues[prompt.id]?.positive ?? positive)}</textarea>
 														</div>
 														<div>
 															<label style="font-size: 11px; font-weight: 500; color: rgba(249, 250, 251, 0.7); text-transform: uppercase; display: block; margin-bottom: 4px;">Negative Prompt</label>
-															<textarea class="rpg-prompt-textarea -rpg-user-prompt-edit-negative" data-id="${prompt.id}">${escapeHtml(editingValues[prompt.id]?.negative ?? negative)}</textarea>
+															<textarea class="aiofc-rpg-prompt-textarea aiofc-rpg-user-prompt-edit-negative" data-id="${prompt.id}">${escapeHtml(editingValues[prompt.id]?.negative ?? negative)}</textarea>
 														</div>
 														<div>
 															<label style="font-size: 11px; font-weight: 500; color: rgba(249, 250, 251, 0.7); text-transform: uppercase; display: block; margin-bottom: 4px;">Tags (comma-separated)</label>
-															<input type="text" class="rpg-prompt-textarea -rpg-user-prompt-edit-tags" data-id="${prompt.id}" value="${editingValues[prompt.id]?.tags ?? allTags.join(", ")}" placeholder="tag1, tag2, tag3..." style="resize: none; min-height: auto; height: auto;" />
+															<input type="text" class="aiofc-rpg-prompt-textarea aiofc-rpg-user-prompt-edit-tags" data-id="${prompt.id}" value="${editingValues[prompt.id]?.tags ?? allTags.join(", ")}" placeholder="tag1, tag2, tag3..." style="resize: none; min-height: auto; height: auto;" />
 														</div>
 
 														<!-- Classification Fields -->
 														<div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
 															<div>
 																<label style="font-size: 11px; font-weight: 500; color: rgba(249, 250, 251, 0.7); text-transform: uppercase; display: block; margin-bottom: 4px;">Content Type</label>
-																<select class="rpg-filter-dropdown -rpg-user-prompt-edit-content-type" data-id="${prompt.id}" style="width: 100%; padding: 6px 8px;">
+																<select class="aiofc-rpg-filter-dropdown aiofc-rpg-user-prompt-edit-content-type" data-id="${prompt.id}" style="width: 100%; padding: 6px 8px;">
 																	<option value="person" ${(editingValues[prompt.id]?.content_type ?? prompt.classification?.content_type ?? 'person') === 'person' ? 'selected' : ''}>Person</option>
 																	<option value="object" ${(editingValues[prompt.id]?.content_type ?? prompt.classification?.content_type ?? 'person') === 'object' ? 'selected' : ''}>Object</option>
 																	<option value="other" ${(editingValues[prompt.id]?.content_type ?? prompt.classification?.content_type ?? 'person') === 'other' ? 'selected' : ''}>Other</option>
@@ -2054,7 +2446,7 @@ app.registerExtension({
 															</div>
 															<div>
 																<label style="font-size: 11px; font-weight: 500; color: rgba(249, 250, 251, 0.7); text-transform: uppercase; display: block; margin-bottom: 4px;">Safety Level</label>
-																<select class="rpg-filter-dropdown -rpg-user-prompt-edit-safety-level" data-id="${prompt.id}" style="width: 100%; padding: 6px 8px;">
+																<select class="aiofc-rpg-filter-dropdown aiofc-rpg-user-prompt-edit-safety-level" data-id="${prompt.id}" style="width: 100%; padding: 6px 8px;">
 																	<option value="sfw" ${(editingValues[prompt.id]?.safety_level ?? prompt.classification?.safety_level ?? 'sfw') === 'sfw' ? 'selected' : ''}>SFW</option>
 																	<option value="suggestive" ${(editingValues[prompt.id]?.safety_level ?? prompt.classification?.safety_level ?? 'sfw') === 'suggestive' ? 'selected' : ''}>Suggestive</option>
 																	<option value="nsfw" ${(editingValues[prompt.id]?.safety_level ?? prompt.classification?.safety_level ?? 'sfw') === 'nsfw' ? 'selected' : ''}>NSFW</option>
@@ -2062,7 +2454,7 @@ app.registerExtension({
 															</div>
 															<div>
 																<label style="font-size: 11px; font-weight: 500; color: rgba(249, 250, 251, 0.7); text-transform: uppercase; display: block; margin-bottom: 4px;">Shot Type</label>
-																<select class="rpg-filter-dropdown -rpg-user-prompt-edit-shot-type" data-id="${prompt.id}" style="width: 100%; padding: 6px 8px;">
+																<select class="aiofc-rpg-filter-dropdown aiofc-rpg-user-prompt-edit-shot-type" data-id="${prompt.id}" style="width: 100%; padding: 6px 8px;">
 																	<option value="portrait" ${(editingValues[prompt.id]?.shot_type ?? prompt.classification?.shot_type ?? 'portrait') === 'portrait' ? 'selected' : ''}>Portrait</option>
 																	<option value="full_body" ${(editingValues[prompt.id]?.shot_type ?? prompt.classification?.shot_type ?? 'portrait') === 'full_body' ? 'selected' : ''}>Full Body</option>
 																	<option value="other" ${(editingValues[prompt.id]?.shot_type ?? prompt.classification?.shot_type ?? 'portrait') === 'other' ? 'selected' : ''}>Other</option>
@@ -2071,40 +2463,52 @@ app.registerExtension({
 														</div>
 
 														<div style="display: flex; gap: 6px; margin-top: 4px;">
-															<button class="rpg-btn-primary -rpg-save-user-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 6px 12px; flex: 1;">
+															<button class="aiofc-rpg-btn-primary aiofc-rpg-save-user-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 6px 12px; flex: 1;">
 																💾 Save
 															</button>
-															<button class="rpg-btn-secondary -rpg-cancel-edit-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 6px 12px; flex: 1;">
+															<button class="aiofc-rpg-btn-secondary aiofc-rpg-cancel-edit-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 6px 12px; flex: 1;">
 																✖ Cancel
 															</button>
 														</div>
 													</div>
 												` : sdxlMode ? `
 													<!-- VIEW MODE (SDXL): Show tags as comma-separated text -->
-													<div class="rpg-prompt-preview ${allTags.length === 0 ? '-rpg-error-text' : ''}">
+													<div class="aiofc-rpg-prompt-preview ${allTags.length === 0 ? 'aiofc-rpg-error-text' : ''}">
 														${allTags.length > 0 ? allTags.map((tag) => highlightSearchTerm(tag, searchQuery)).join(", ") : "[Empty prompt]"}
 													</div>
-													<button class="rpg-btn-secondary -rpg-edit-user-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 4px 10px; margin-top: 8px; width: 100%;">
+													<button class="aiofc-rpg-btn-secondary aiofc-rpg-edit-user-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 4px 10px; margin-top: 8px; width: 100%;">
 														✏️ Edit Prompt
 													</button>
 												` : `
 													<!-- VIEW MODE (Normal): Show prompt with tags -->
-													<div class="rpg-prompt-preview ${!positive ? '-rpg-error-text' : ''}">${highlightSearchTerm(displayText, searchQuery)}</div>
-													${negative ? `<div class="-rpg-prompt-preview" style="font-size: 11px; color: #9ca3af; margin-top: 4px;"><strong>Negative:</strong> ${highlightSearchTerm(negative, searchQuery)}</div>` : ''}
+													<div class="aiofc-rpg-prompt-preview ${!positive ? 'aiofc-rpg-error-text' : ''}">${highlightSearchTerm(displayText, searchQuery)}</div>
+													${negative ? `<div class="aiofc-rpg-prompt-preview" style="font-size: 11px; color: #9ca3af; margin-top: 4px;"><strong>Negative:</strong> ${highlightSearchTerm(negative, searchQuery)}</div>` : ''}
 													<div class="aiofc-rpg-library-card-tags" style="margin-top: 8px;">
-														${allTags.map((tag) => `<span class="-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`).join("")}
+														${allTags.map((tag) => `<span class="aiofc-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`).join("")}
 													</div>
-													<button class="rpg-btn-secondary -rpg-edit-user-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 4px 10px; margin-top: 8px; width: 100%;">
+													<button class="aiofc-rpg-btn-secondary aiofc-rpg-edit-user-prompt-btn" data-id="${prompt.id}" style="font-size: 11px; padding: 4px 10px; margin-top: 8px; width: 100%;">
 														✏️ Edit Prompt
 													</button>
 												`}
-											` : sdxlMode ? `<!-- SDXL Mode: Show tags as comma-separated text --> <div class="-rpg-prompt-preview"> ${allTags.map((tag) => highlightSearchTerm(tag, searchQuery)).join(", ")} </div>` : `<!-- Normal Mode: Prompt primary, tags secondary with expand/collapse --> <div class="rpg-prompt-preview ${!positive ? '-rpg-error-text' : ''}">${highlightSearchTerm(displayText, searchQuery)}</div> <div class="-rpg-library-card-tags" data-expanded="${autoExpand}" data-prompt-id="${prompt.id}"> ${autoExpand || allTags.length <= 5 ? allTags.map((tag) =>`<span class="aiofc-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`).join("")
+											` : sdxlMode ? `
+												<!-- SDXL Mode: Show tags as comma-separated text -->
+												<div class="aiofc-rpg-prompt-preview">
+													${allTags.map((tag) => highlightSearchTerm(tag, searchQuery)).join(", ")}
+												</div>
+											` : `
+												<!-- Normal Mode: Prompt primary, tags secondary with expand/collapse -->
+												<div class="aiofc-rpg-prompt-preview ${!positive ? 'aiofc-rpg-error-text' : ''}">${highlightSearchTerm(displayText, searchQuery)}</div>
+												<div class="aiofc-rpg-library-card-tags" data-expanded="${autoExpand}" data-prompt-id="${prompt.id}">
+													${autoExpand || allTags.length <= 5
+														? allTags.map((tag) => `<span class="aiofc-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`).join("")
 														: allTags.slice(0, 5).map((tag) => `<span class="aiofc-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`).join("")
 													}
 													${allTags.length > 5 ? `<button class="aiofc-rpg-toggle-tags-btn" data-id="${prompt.id}">${autoExpand ? 'Show less' : '+' + (allTags.length - 5)}</button>` : ""}
 												</div>
 											`}
-											${(prompt.model_badge || prompt.theme_badge) ? `<div class="-rpg-prompt-meta"> ${prompt.theme_badge ?`<div class="aiofc-rpg-prompt-meta-item">Creative Theme: ${prompt.theme_badge}</div>` : ''}
+											${(prompt.model_badge || prompt.theme_badge) ? `
+												<div class="aiofc-rpg-prompt-meta">
+													${prompt.theme_badge ? `<div class="aiofc-rpg-prompt-meta-item">Creative Theme: ${prompt.theme_badge}</div>` : ''}
 													${prompt.model_badge ? `<div class="aiofc-rpg-prompt-meta-item">Optimized for: ${prompt.model_badge}</div>` : ''}
 												</div>
 											` : ''}
@@ -2121,9 +2525,9 @@ app.registerExtension({
 								totalPages > 1
 									? `
 								<div class="aiofc-rpg-pagination">
-									<button class="rpg-btn-secondary -rpg-prev-page-btn" ${currentPage === 0 ? "disabled" : ""}>← Prev</button>
+									<button class="aiofc-rpg-btn-secondary aiofc-rpg-prev-page-btn" ${currentPage === 0 ? "disabled" : ""}>← Prev</button>
 									<span class="aiofc-rpg-page-info">Page ${currentPage + 1} / ${totalPages} (${filteredPrompts.length} prompts)</span>
-									<button class="rpg-btn-secondary -rpg-next-page-btn" ${currentPage >= totalPages - 1 ? "disabled" : ""}>Next →</button>
+									<button class="aiofc-rpg-btn-secondary aiofc-rpg-next-page-btn" ${currentPage >= totalPages - 1 ? "disabled" : ""}>Next →</button>
 								</div>
 							`
 									: ""
@@ -2145,14 +2549,75 @@ app.registerExtension({
 					const topP = uiState?.currentCreativeTopP ?? 0.9;
 					const systemPrompt = uiState?.creativeSystemPrompt || DEFAULT_RPG_SYSTEM_PROMPT;
 
-					return `<div class="-rpg-model-settings"> <div class="-rpg-model-row"> <label>Creative Model</label> <select class="-rpg-model-select"> ${modelOptionsHtml} </select> </div> <div class="-rpg-model-grid"> <div class="-rpg-model-control"> <label>Temperature</label> <input type="number" class="-rpg-model-temp" value="${temperature}" min="0" max="2" step="0.01" /> </div> <div class="-rpg-model-control"> <label>Top P</label> <input type="number" class="-rpg-model-top-p" value="${topP}" min="0" max="1" step="0.01" /> </div> </div> <div class="-rpg-model-row"> <label>System Prompt</label> <textarea class="-rpg-system-prompt" rows="4">${escapeHtml(systemPrompt)}</textarea> </div> </div> <div class="-rpg-creative"> <div class="-rpg-creative-header"> <h3>Creative Prompt Generation</h3> <p>Generate variations based on Library prompts or create new prompts from scratch</p> </div> <div class="-rpg-inspiration-section"> <label>Inspiration Sources (${selectedForInspiration.length})</label> <div class="-rpg-inspiration-list"> ${ selectedForInspiration.length === 0 ?`<p class="aiofc-rpg-hint">Add prompts from Library to use as inspiration</p>`
+					return `
+						<div class="aiofc-rpg-model-settings">
+							<div class="aiofc-rpg-model-row">
+								<label>Creative Model</label>
+								<select class="aiofc-rpg-model-select">
+									${modelOptionsHtml}
+								</select>
+							</div>
+							<div class="aiofc-rpg-model-grid">
+								<div class="aiofc-rpg-model-control">
+									<label>Temperature</label>
+									<input type="number" class="aiofc-rpg-model-temp" value="${temperature}" min="0" max="2" step="0.01" />
+								</div>
+								<div class="aiofc-rpg-model-control">
+									<label>Top P</label>
+									<input type="number" class="aiofc-rpg-model-top-p" value="${topP}" min="0" max="1" step="0.01" />
+								</div>
+							</div>
+							<div class="aiofc-rpg-model-row">
+								<label>System Prompt</label>
+								<textarea class="aiofc-rpg-system-prompt" rows="4">${escapeHtml(systemPrompt)}</textarea>
+							</div>
+						</div>
+						<div class="aiofc-rpg-creative">
+							<div class="aiofc-rpg-creative-header">
+								<h3>Creative Prompt Generation</h3>
+								<p>Generate variations based on Library prompts or create new prompts from scratch</p>
+							</div>
+
+							<div class="aiofc-rpg-inspiration-section">
+								<label>Inspiration Sources (${selectedForInspiration.length})</label>
+								<div class="aiofc-rpg-inspiration-list">
+									${
+										selectedForInspiration.length === 0
+											? `<p class="aiofc-rpg-hint">Add prompts from Library to use as inspiration</p>`
 											: selectedForInspiration
 													.map(
 														(p) => `
 										<div class="aiofc-rpg-inspiration-item">
 											<span class="aiofc-rpg-inspiration-text">${escapeHtml(p.positive_prompt || "")}</span>
 										</div>
-									`) .join("") } </div> </div> <div class="-rpg-creative-controls"> <div class="-rpg-control-group"> <label>Generation Count</label> <input type="number" class="rpg-number-input -rpg-gen-count-input" value="5" min="1" max="50" /> </div> <div class="-rpg-control-group"> <label>Inspiration Count</label> <input type="number" class="rpg-number-input -rpg-inspiration-count-input" value="3" min="0" max="${selectedForInspiration.length}" /> </div> </div> <button class="rpg-btn-primary -rpg-generate-creative-btn"> Generate & Add to Batch</button> <div class="-rpg-creative-preview" style="display: none;"> <h4>Generated Prompts Preview</h4> <div class="-rpg-creative-preview-list"></div> <button class="rpg-btn-primary -rpg-accept-creative-btn"> Accept All</button> <button class="rpg-btn-secondary -rpg-cancel-creative-btn"> Cancel</button> </div> </div>`;
+									`
+													)
+													.join("")
+									}
+								</div>
+							</div>
+
+							<div class="aiofc-rpg-creative-controls">
+								<div class="aiofc-rpg-control-group">
+									<label>Generation Count</label>
+									<input type="number" class="aiofc-rpg-number-input aiofc-rpg-gen-count-input" value="5" min="1" max="50" />
+								</div>
+								<div class="aiofc-rpg-control-group">
+									<label>Inspiration Count</label>
+									<input type="number" class="aiofc-rpg-number-input aiofc-rpg-inspiration-count-input" value="3" min="0" max="${selectedForInspiration.length}" />
+								</div>
+							</div>
+
+							<button class="aiofc-rpg-btn-primary aiofc-rpg-generate-creative-btn">✨ Generate & Add to Batch</button>
+
+							<div class="aiofc-rpg-creative-preview" style="display: none;">
+								<h4>Generated Prompts Preview</h4>
+								<div class="aiofc-rpg-creative-preview-list"></div>
+								<button class="aiofc-rpg-btn-primary aiofc-rpg-accept-creative-btn">✓ Accept All</button>
+								<button class="aiofc-rpg-btn-secondary aiofc-rpg-cancel-creative-btn">✖ Cancel</button>
+							</div>
+						</div>
+					`;
 				};
 
 			// === Unified Generate Tab ===
@@ -2180,60 +2645,222 @@ app.registerExtension({
 					}
 				}
 
-				return `<div class="-rpg-generate-unified"> <!-- Model Settings (TOP - affects ALL generation including character) --> <div class="-rpg-section"> <div class="-rpg-section-header"> <span class="-rpg-section-label"> Model Settings</span> <span class="-rpg-hint-text" style="font-size: 11px; color: #9ca3af;">Used for all generation</span> </div> <div class="-rpg-model-settings"> <div class="-rpg-model-row"> <label>Model</label> <select class="-rpg-model-select"> ${modelOptionsHtml} </select> </div> <div class="-rpg-model-grid"> <div class="-rpg-model-control"> <label>Temperature</label> <input type="number" class="-rpg-model-temp" value="${temperature}" min="0" max="2" step="0.01" /> </div> <div class="-rpg-model-control"> <label>Top P</label> <input type="number" class="-rpg-model-top-p" value="${topP}" min="0" max="1" step="0.01" /> </div> </div> </div> </div> <!-- Character Consistency (Optional) --> <div class="-rpg-section"> <div style="display: flex; align-items: center; gap: 8px;"> <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;"> <input type="checkbox" class="rpg-checkbox -rpg-enable-character-checkbox" ${node.properties.use_character_likeness ? 'checked' : ''} /> <span style="font-size: 13px; font-weight: 500;"> Character Consistency</span> </label> <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${node.properties.use_character_likeness ? (characterText.trim() ? 'rgba(34, 197, 94, 0.15)' : 'rgba(251, 191, 36, 0.15)') : 'rgba(107, 114, 128, 0.15)'}; color: ${node.properties.use_character_likeness ? (characterText.trim() ? '#4ade80' : '#fbbf24') : '#9ca3af'};"> ${!node.properties.use_character_likeness ? 'Disabled' : characterText.trim() ? 'Active' : 'Empty'} </span> </div> <div class="-rpg-character-section" style="display: ${node.properties.use_character_likeness ? 'block' : 'none'};"> ${hasCharacterImage ?`
+				return `
+					<div class="aiofc-rpg-generate-unified">
+						<!-- Model Settings (TOP - affects ALL generation including character) -->
+						<div class="aiofc-rpg-section">
+							<div class="aiofc-rpg-section-header">
+								<span class="aiofc-rpg-section-label">⚙️ Model Settings</span>
+								<span class="aiofc-rpg-hint-text" style="font-size: 11px; color: #9ca3af;">Used for all generation</span>
+							</div>
+							<div class="aiofc-rpg-model-settings">
+								<div class="aiofc-rpg-model-row">
+									<label>Model</label>
+									<select class="aiofc-rpg-model-select">
+										${modelOptionsHtml}
+									</select>
+								</div>
+								<div class="aiofc-rpg-model-grid">
+									<div class="aiofc-rpg-model-control">
+										<label>Temperature</label>
+										<input type="number" class="aiofc-rpg-model-temp" value="${temperature}" min="0" max="2" step="0.01" />
+									</div>
+									<div class="aiofc-rpg-model-control">
+										<label>Top P</label>
+										<input type="number" class="aiofc-rpg-model-top-p" value="${topP}" min="0" max="1" step="0.01" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Character Consistency (Optional) -->
+						<div class="aiofc-rpg-section">
+							<div style="display: flex; align-items: center; gap: 8px;">
+								<label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+									<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-enable-character-checkbox" ${node.properties.use_character_likeness ? 'checked' : ''} />
+									<span style="font-size: 13px; font-weight: 500;">🎭 Character Consistency</span>
+								</label>
+								<span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${node.properties.use_character_likeness ? (characterText.trim() ? 'rgba(34, 197, 94, 0.15)' : 'rgba(251, 191, 36, 0.15)') : 'rgba(107, 114, 128, 0.15)'}; color: ${node.properties.use_character_likeness ? (characterText.trim() ? '#4ade80' : '#fbbf24') : '#9ca3af'};">
+									${!node.properties.use_character_likeness ? '⚪ Disabled' : characterText.trim() ? '✅ Active' : '⚠️ Empty'}
+								</span>
+							</div>
+							<div class="aiofc-rpg-character-section" style="display: ${node.properties.use_character_likeness ? 'block' : 'none'};">
+								${hasCharacterImage ? `
 									<div class="aiofc-rpg-info-banner" style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 8px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 12px; color: #93c5fd;">
 										📸 <strong>Character Image Connected</strong> - Click "Generate from Image" to create description
 									</div>
-								`''} <div class="-rpg-control-group"> <label>Character Description</label> <textarea class="rpg-character-text-input -rpg-prompt-textarea" placeholder="blonde hair, blue eyes, athletic build, fair skin, delicate features..." style="line-height: 1.42; min-height: 60px; resize: vertical;">${escapeHtml(characterText)}</textarea> <div class="-rpg-hint-text" style="margin-top: 8px; font-size: 11px; color: #9ca3af;"> This description will be included in ALL generated prompts for character consistency </div> </div> <div class="-rpg-character-generation-settings"> <div class="-rpg-control-row" style="display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center; margin-bottom: 12px;"> <label style="margin: 0; font-size: 12px;">Complexity</label> <select class="rpg-model-select -rpg-character-complexity"> <option value="concise" ${(node.properties.character_complexity || 'balanced') === 'concise' ? 'selected' : ''}>Concise (50-75 words)</option> <option value="balanced" ${(node.properties.character_complexity || 'balanced') === 'balanced' ? 'selected' : ''}>Balanced (100-150 words)</option> <option value="detailed" ${(node.properties.character_complexity || 'balanced') === 'detailed' ? 'selected' : ''}>Detailed (200-250 words)</option> </select> </div> ${hasCharacterImage ?`
+								` : ''}
+								<div class="aiofc-rpg-control-group">
+									<label>Character Description</label>
+									<textarea class="aiofc-rpg-character-text-input aiofc-rpg-prompt-textarea" placeholder="blonde hair, blue eyes, athletic build, fair skin, delicate features..." style="line-height: 1.42; min-height: 60px; resize: vertical;">${escapeHtml(characterText)}</textarea>
+									<div class="aiofc-rpg-hint-text" style="margin-top: 8px; font-size: 11px; color: #9ca3af;">
+										💡 This description will be included in ALL generated prompts for character consistency
+									</div>
+								</div>
+								<div class="aiofc-rpg-character-generation-settings">
+									<div class="aiofc-rpg-control-row" style="display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center; margin-bottom: 12px;">
+										<label style="margin: 0; font-size: 12px;">Complexity</label>
+										<select class="aiofc-rpg-model-select aiofc-rpg-character-complexity">
+											<option value="concise" ${(node.properties.character_complexity || 'balanced') === 'concise' ? 'selected' : ''}>Concise (50-75 words)</option>
+											<option value="balanced" ${(node.properties.character_complexity || 'balanced') === 'balanced' ? 'selected' : ''}>Balanced (100-150 words)</option>
+											<option value="detailed" ${(node.properties.character_complexity || 'balanced') === 'detailed' ? 'selected' : ''}>Detailed (200-250 words)</option>
+										</select>
+									</div>
+									${hasCharacterImage ? `
 										<div class="aiofc-rpg-character-actions" style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-											<button class="rpg-btn-secondary -rpg-generate-character-desc-btn">
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-generate-character-desc-btn">
 												✨ Generate from Image
 											</button>
 											<span class="aiofc-rpg-hint-text" style="font-size: 11px; color: #9ca3af;">Uses connected character_image and selected model above</span>
 										</div>
-									`''} <details class="-rpg-advanced-settings" style="padding: 12px; background: #1f2937; border: 1px solid #4b5563; border-radius: 4px;"> <summary style="cursor: pointer; font-weight: 500; font-size: 12px; color: #9ca3af; user-select: none;"> Advanced: Edit System Prompt</summary> <div style="margin-top: 12px;"> <textarea class="rpg-character-system-prompt -rpg-prompt-textarea" style="font-family: monospace; font-size: 11px; line-height: 1.5; resize: vertical; width: 100%; ">${escapeHtml(node.properties.character_system_prompt || getCharacterSystemPrompt(node.properties.character_complexity || "balanced"))}</textarea> <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;"> <div class="-rpg-hint-text" style="font-size: 10px; color: #9ca3af;"> Custom edits override complexity setting </div> <button class="rpg-btn-text -rpg-reset-system-prompt-btn" style="font-size: 11px; padding: 4px 8px;"> Reset</button> </div> </div> </details> </div> </div> </div> <!-- Expression Control --> <div class="-rpg-section"> <div style="display: flex; align-items: center; gap: 8px;"> <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;"> <input type="checkbox" class="rpg-checkbox -rpg-enable-expressions-checkbox" ${node.properties.enable_expressions ? 'checked' : ''} /> <span style="font-size: 13px; font-weight: 500;"> Expression Control</span> </label> <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${node.properties.enable_expressions ? 'rgba(34, 197, 94, 0.15)' : 'rgba(107, 114, 128, 0.15)'}; color: ${node.properties.enable_expressions ? '#4ade80' : '#9ca3af'};"> ${node.properties.enable_expressions ? 'Active' : 'Disabled'} </span> </div> <div class="-rpg-expressions-section" style="display: ${node.properties.enable_expressions ? 'block' : 'none'};"> <div class="-rpg-control-group"> <label style="font-size: 12px; margin-top: 10px; margin-bottom: 8px; display: block;">Available Expressions (toggle to enable/disable)</label> <div class="-rpg-expressions-grid"> ${EXPRESSION_LIST.map(expr => { const enabled = JSON.parse(node.properties.enabled_expressions || '[]').includes(expr); return`
+									` : ''}
+									<details class="aiofc-rpg-advanced-settings" style="padding: 12px; background: #1f2937; border: 1px solid #4b5563; border-radius: 4px;">
+										<summary style="cursor: pointer; font-weight: 500; font-size: 12px; color: #9ca3af; user-select: none;">⚙️ Advanced: Edit System Prompt</summary>
+										<div style="margin-top: 12px;">
+											<textarea class="aiofc-rpg-character-system-prompt aiofc-rpg-prompt-textarea" style="font-family: monospace; font-size: 11px; line-height: 1.5; resize: vertical; width: 100%; ">${escapeHtml(node.properties.character_system_prompt || getCharacterSystemPrompt(node.properties.character_complexity || "balanced"))}</textarea>
+											<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+												<div class="aiofc-rpg-hint-text" style="font-size: 10px; color: #9ca3af;">
+													💡 Custom edits override complexity setting
+												</div>
+												<button class="aiofc-rpg-btn-text aiofc-rpg-reset-system-prompt-btn" style="font-size: 11px; padding: 4px 8px;">🔄 Reset</button>
+											</div>
+										</div>
+									</details>
+								</div>
+							</div>
+						</div>
+
+						<!-- Expression Control -->
+						<div class="aiofc-rpg-section">
+							<div style="display: flex; align-items: center; gap: 8px;">
+								<label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+									<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-enable-expressions-checkbox" ${node.properties.enable_expressions ? 'checked' : ''} />
+									<span style="font-size: 13px; font-weight: 500;">😊 Expression Control</span>
+								</label>
+								<span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${node.properties.enable_expressions ? 'rgba(34, 197, 94, 0.15)' : 'rgba(107, 114, 128, 0.15)'}; color: ${node.properties.enable_expressions ? '#4ade80' : '#9ca3af'};">
+									${node.properties.enable_expressions ? '✅ Active' : '⚪ Disabled'}
+								</span>
+							</div>
+							<div class="aiofc-rpg-expressions-section" style="display: ${node.properties.enable_expressions ? 'block' : 'none'};">
+								<div class="aiofc-rpg-control-group">
+									<label style="font-size: 12px; margin-top: 10px; margin-bottom: 8px; display: block;">Available Expressions (toggle to enable/disable)</label>
+									<div class="aiofc-rpg-expressions-grid">
+										${EXPRESSION_LIST.map(expr => {
+											const enabled = JSON.parse(node.properties.enabled_expressions || '[]').includes(expr);
+											return `
 												<label class="aiofc-rpg-expression-toggle" data-expression="${expr}">
 													<input type="checkbox" class="aiofc-rpg-expression-checkbox" ${enabled ? 'checked' : ''} />
 													<span class="aiofc-rpg-expression-label">${expr}</span>
 												</label>
-											`; }).join('')} </div> <div style="display: flex; gap: 8px; margin-top: 12px;"> <button class="rpg-btn-text -rpg-expressions-select-all" style="font-size: 11px; padding: 4px 8px;"> Select All</button> <button class="rpg-btn-text -rpg-expressions-clear-all" style="font-size: 11px; padding: 4px 8px;"> Clear All</button> </div> </div> <div class="-rpg-control-group" style="margin-top: 12px;"> <label style="font-size: 12px;">Default Expression</label> <select class="-rpg-default-expression-select"> ${EXPRESSION_LIST.map(expr =>`
+											`;
+										}).join('')}
+									</div>
+									<div style="display: flex; gap: 8px; margin-top: 12px;">
+										<button class="aiofc-rpg-btn-text aiofc-rpg-expressions-select-all" style="font-size: 11px; padding: 4px 8px;">✓ Select All</button>
+										<button class="aiofc-rpg-btn-text aiofc-rpg-expressions-clear-all" style="font-size: 11px; padding: 4px 8px;">✗ Clear All</button>
+									</div>
+								</div>
+								<div class="aiofc-rpg-control-group" style="margin-top: 12px;">
+									<label style="font-size: 12px;">Default Expression</label>
+									<select class="aiofc-rpg-default-expression-select">
+										${EXPRESSION_LIST.map(expr => `
 											<option value="${expr}" ${expr === (node.properties.default_expression || 'Neutral/Natural') ? 'selected' : ''}>${expr}</option>
-										`).join('')} </select> </div> <div class="-rpg-control-group" style="margin-top: 12px;"> <label style="font-size: 12px;"> Mix Default Frequency: <span class="-rpg-default-mix-value">${node.properties.default_mix_frequency || 0}%</span> </label> <input type="range" class="-rpg-default-mix-slider" min="0" max="100" step="5" value="${node.properties.default_mix_frequency || 0}" style="width: 100%;" /> <div class="-rpg-hint-text" style="margin-top: 4px; font-size: 11px; color: #9ca3af;"> 0% = always cycle through enabled expressions | 100% = always use default expression </div> </div> </div> </div> <!-- Library Inspiration (txt2img or img2img creative, non-custom mode) --> ${node.properties.generation_style !== 'custom' && (detectedMode !== 'img2img' || node.properties.generation_style === 'creative') ? (() => { const filters = JSON.parse(node.properties.library_filters || "{}"); const filteredCount = filterPrompts(promptsDatabase, filters).length; const hasActiveFilters = Object.keys(filters).some(key => { if (key === 'search_query') return filters[key]?.trim(); if (key === 'show_bookmarked') return filters[key]; if (key === 'sdxl_mode') return filters[key]; return filters[key] !== 'all'; }); const inspirationEnabled = node.properties.enable_library_inspiration; return`
+										`).join('')}
+									</select>
+								</div>
+								<div class="aiofc-rpg-control-group" style="margin-top: 12px;">
+									<label style="font-size: 12px;">
+										Mix Default Frequency: <span class="aiofc-rpg-default-mix-value">${node.properties.default_mix_frequency || 0}%</span>
+									</label>
+									<input type="range" class="aiofc-rpg-default-mix-slider" min="0" max="100" step="5" value="${node.properties.default_mix_frequency || 0}" style="width: 100%;" />
+									<div class="aiofc-rpg-hint-text" style="margin-top: 4px; font-size: 11px; color: #9ca3af;">
+										0% = always cycle through enabled expressions | 100% = always use default expression
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Library Inspiration (txt2img or img2img creative, non-custom mode) -->
+						${node.properties.generation_style !== 'custom' && (detectedMode !== 'img2img' || node.properties.generation_style === 'creative') ? (() => {
+							const filters = JSON.parse(node.properties.library_filters || "{}");
+							const filteredCount = filterPrompts(promptsDatabase, filters).length;
+							const hasActiveFilters = Object.keys(filters).some(key => {
+								if (key === 'search_query') return filters[key]?.trim();
+								if (key === 'show_bookmarked') return filters[key];
+								if (key === 'sdxl_mode') return filters[key];
+								return filters[key] !== 'all';
+							});
+							const inspirationEnabled = node.properties.enable_library_inspiration;
+
+							return `
 								<div class="aiofc-rpg-section">
 									<div style="display: flex; align-items: center; gap: 8px;">
 										<label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-											<input type="checkbox" class="rpg-checkbox -rpg-enable-inspiration-checkbox" ${inspirationEnabled ? 'checked' : ''} />
+											<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-enable-inspiration-checkbox" ${inspirationEnabled ? 'checked' : ''} />
 											<span style="font-size: 13px; font-weight: 500;">📚 Library Inspiration</span>
 										</label>
 										<span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${inspirationEnabled ? 'rgba(34, 197, 94, 0.15)' : 'rgba(107, 114, 128, 0.15)'}; color: ${inspirationEnabled ? '#4ade80' : '#9ca3af'};">
-											${inspirationEnabled ? 'Active' : 'Disabled'}
+											${inspirationEnabled ? '✅ Active' : '⚪ Disabled'}
 										</span>
 									</div>
 									<div class="aiofc-rpg-inspiration-section" style="display: ${inspirationEnabled ? 'block' : 'none'};">
 										<div style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 6px; padding: 10px; margin-top: 10px;">
 											<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
 												<span style="font-size: 11px; color: #d1d5db;">Learn from</span>
-												<input type="number" class="rpg-number-input -rpg-inspiration-count" value="${node.properties.inspiration_count || 3}" min="1" max="10" style="width: 45px; height: 24px; padding: 2px 6px; font-size: 12px; text-align: center;" />
+												<input type="number" class="aiofc-rpg-number-input aiofc-rpg-inspiration-count" value="${node.properties.inspiration_count || 3}" min="1" max="10" style="width: 45px; height: 24px; padding: 2px 6px; font-size: 12px; text-align: center;" />
 												<span style="font-size: 11px; color: #d1d5db;">${detectedMode === 'img2img' ? 'prompts for style guidance' : 'prompts per generation'}</span>
 											</div>
 											<div style="display: flex; align-items: center; justify-content: space-between;">
 												<span style="font-size: 11px; color: #9ca3af;">
 													Pool: <strong style="color: #e5e7eb; font-weight: 500;">${filteredCount.toLocaleString()}</strong> ${hasActiveFilters ? '<span style="color: #818cf8;">prompts (filtered)</span>' : 'prompts'}
 												</span>
-												<button class="rpg-btn-text -rpg-open-library-tab-btn" style="font-size: 10px; padding: 3px 6px; opacity: 0.8; display: flex; align-items: center; gap: 4px;" title="Switch to Library tab to adjust filters">
+												<button class="aiofc-rpg-btn-text aiofc-rpg-open-library-tab-btn" style="font-size: 10px; padding: 3px 6px; opacity: 0.8; display: flex; align-items: center; gap: 4px;" title="Switch to Library tab to adjust filters">
 													<span style="color: #9ca3af;">Filters</span> ⚙️
 												</button>
 											</div>
 										</div>
 									</div>
 								</div>
-							`; })() : ''} <!-- Mode Detection & Settings --> <div class="-rpg-section"> <div class="-rpg-section-header"> <span class="rpg-mode-badge ${detectedMode === 'img2img' ? '-rpg-mode-img2img' : '-rpg-mode-txt2img'}"> ${detectedMode === 'img2img' ? 'IMG2IMG' : 'TXT2IMG'} </span> <span class="-rpg-hint-text">Detected from ${node._linkedAILNodeId ?`AIL #${node._linkedAILNodeId}`'workflow'}</span> </div> <!-- Reality vs Creative vs Custom Mode --> <div class="-rpg-generation-mode-selector" style="margin: 12px 0;"> <label class="-rpg-section-label" style="margin-bottom: 8px; display: block;">Generation Mode</label> <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;"> <button class="rpg-mode-toggle-btn ${node.properties.generation_style === 'reality' ? 'active' : ''}" data-mode="reality" style="padding: 12px; border: 2px solid ${node.properties.generation_style === 'reality' ? '#60a5fa' : '#4b5563'}; background: ${node.properties.generation_style === 'reality' ? 'rgba(59, 130, 246, 0.1)' : 'transparent'}; border-radius: 6px; cursor: pointer;"> <div style="font-weight: 600; font-size: 13px; color: ${node.properties.generation_style === 'reality' ? '#60a5fa' : '#e5e7eb'};"> Reality Mode</div> <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">${detectedMode === 'img2img' ? 'Describe accurately' : 'Strict adherence'}</div> </button> <button class="rpg-mode-toggle-btn ${node.properties.generation_style === 'creative' ? 'active' : ''}" data-mode="creative" style="padding: 12px; border: 2px solid ${node.properties.generation_style === 'creative' ? '#8b5cf6' : '#4b5563'}; background: ${node.properties.generation_style === 'creative' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'}; border-radius: 6px; cursor: pointer;"> <div style="font-weight: 600; font-size: 13px; color: ${node.properties.generation_style === 'creative' ? '#8b5cf6' : '#e5e7eb'};"> Creative Mode</div> <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">${detectedMode === 'img2img' ? 'Transform style' : 'Expand with inspiration'}</div> </button> <!-- HIDDEN: Custom Mode - Not ready for release yet --> <button class="rpg-mode-toggle-btn ${node.properties.generation_style === 'custom' ? 'active' : ''}" data-mode="custom" style="display: none; padding: 12px; border: 2px solid ${node.properties.generation_style === 'custom' ? '#10b981' : '#4b5563'}; background: ${node.properties.generation_style === 'custom' ? 'rgba(16, 185, 129, 0.1)' : 'transparent'}; border-radius: 6px; cursor: pointer;"> <div style="font-weight: 600; font-size: 13px; color: ${node.properties.generation_style === 'custom' ? '#10b981' : '#e5e7eb'};"> Custom Mode</div> <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Custom template</div> </button> </div> </div> <!-- Custom Template Editor (shown only in Custom mode) --> ${node.properties.generation_style === 'custom' ?`
+							`;
+						})() : ''}
+
+						<!-- Mode Detection & Settings -->
+						<div class="aiofc-rpg-section">
+							<div class="aiofc-rpg-section-header">
+								<span class="aiofc-rpg-mode-badge ${detectedMode === 'img2img' ? 'aiofc-rpg-mode-img2img' : 'aiofc-rpg-mode-txt2img'}">
+									${detectedMode === 'img2img' ? '🖼️ IMG2IMG' : '🎨 TXT2IMG'}
+								</span>
+								<span class="aiofc-rpg-hint-text">Detected from ${node._linkedAILNodeId ? `AIL #${node._linkedAILNodeId}` : 'workflow'}</span>
+							</div>
+
+							<!-- Reality vs Creative vs Custom Mode -->
+							<div class="aiofc-rpg-generation-mode-selector" style="margin: 12px 0;">
+								<label class="aiofc-rpg-section-label" style="margin-bottom: 8px; display: block;">Generation Mode</label>
+								<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+									<button class="aiofc-rpg-mode-toggle-btn ${node.properties.generation_style === 'reality' ? 'active' : ''}" data-mode="reality" style="padding: 12px; border: 2px solid ${node.properties.generation_style === 'reality' ? '#60a5fa' : '#4b5563'}; background: ${node.properties.generation_style === 'reality' ? 'rgba(59, 130, 246, 0.1)' : 'transparent'}; border-radius: 6px; cursor: pointer;">
+										<div style="font-weight: 600; font-size: 13px; color: ${node.properties.generation_style === 'reality' ? '#60a5fa' : '#e5e7eb'};">🎯 Reality Mode</div>
+										<div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">${detectedMode === 'img2img' ? 'Describe accurately' : 'Strict adherence'}</div>
+									</button>
+									<button class="aiofc-rpg-mode-toggle-btn ${node.properties.generation_style === 'creative' ? 'active' : ''}" data-mode="creative" style="padding: 12px; border: 2px solid ${node.properties.generation_style === 'creative' ? '#8b5cf6' : '#4b5563'}; background: ${node.properties.generation_style === 'creative' ? 'rgba(139, 92, 246, 0.1)' : 'transparent'}; border-radius: 6px; cursor: pointer;">
+										<div style="font-weight: 600; font-size: 13px; color: ${node.properties.generation_style === 'creative' ? '#8b5cf6' : '#e5e7eb'};">✨ Creative Mode</div>
+										<div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">${detectedMode === 'img2img' ? 'Transform style' : 'Expand with inspiration'}</div>
+									</button>
+									<!-- HIDDEN: Custom Mode - Not ready for release yet -->
+									<button class="aiofc-rpg-mode-toggle-btn ${node.properties.generation_style === 'custom' ? 'active' : ''}" data-mode="custom" style="display: none; padding: 12px; border: 2px solid ${node.properties.generation_style === 'custom' ? '#10b981' : '#4b5563'}; background: ${node.properties.generation_style === 'custom' ? 'rgba(16, 185, 129, 0.1)' : 'transparent'}; border-radius: 6px; cursor: pointer;">
+										<div style="font-weight: 600; font-size: 13px; color: ${node.properties.generation_style === 'custom' ? '#10b981' : '#e5e7eb'};">🛠️ Custom Mode</div>
+										<div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Custom template</div>
+									</button>
+								</div>
+							</div>
+
+							<!-- Custom Template Editor (shown only in Custom mode) -->
+							${node.properties.generation_style === 'custom' ? `
 								<div class="aiofc-rpg-section" style="margin-top: 12px;">
 									<div class="aiofc-rpg-section-header">
 										<span class="aiofc-rpg-section-label">📝 Custom System Prompt Template</span>
 										<span class="aiofc-rpg-hint-text">Use variables like {SOURCE_PROMPTS}, {TASK_INSTRUCTIONS}</span>
 									</div>
-									<textarea class="rpg-custom-template-textarea -rpg-prompt-textarea" placeholder="Enter your custom system prompt template..." style="width: 100%; font-family: monospace; font-size: 12px; line-height: 1.5; resize: vertical; ">${escapeHtml(node.properties.custom_template || DEFAULT_RPG_SYSTEM_PROMPT)}</textarea>
+									<textarea class="aiofc-rpg-custom-template-textarea aiofc-rpg-prompt-textarea" placeholder="Enter your custom system prompt template..." style="width: 100%; font-family: monospace; font-size: 12px; line-height: 1.5; resize: vertical; ">${escapeHtml(node.properties.custom_template || DEFAULT_RPG_SYSTEM_PROMPT)}</textarea>
 									<!-- Template Validation Warnings -->
 									${(() => {
 										const customTemplate = node.properties.custom_template;
@@ -2272,7 +2899,7 @@ app.registerExtension({
 											const bgColor = w.level === 'error' ? 'rgba(239, 68, 68, 0.1)' : 'rgba(251, 191, 36, 0.1)';
 											const borderColor = w.level === 'error' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(251, 191, 36, 0.3)';
 											const textColor = w.level === 'error' ? '#fca5a5' : '#fbbf24';
-											const icon = w.level === 'error' ? '' : '';
+											const icon = w.level === 'error' ? '❌' : '⚠️';
 
 											return `
 												<div style="background: ${bgColor}; border: 1px solid ${borderColor}; border-radius: 6px; padding: 8px 10px; margin-top: 8px;">
@@ -2294,16 +2921,16 @@ app.registerExtension({
 												<option value="blank">Blank (Start Fresh)</option>
 											</select>
 										</div>
-										<button class="rpg-btn-text -rpg-reset-custom-template-btn" style="font-size: 11px; padding: 4px 8px;">🔄 Reset</button>
-										<button class="rpg-btn-text -rpg-preview-custom-template-btn" style="font-size: 11px; padding: 4px 8px; background: rgba(34, 197, 94, 0.1); color: #10b981;">👁️ Preview</button>
+										<button class="aiofc-rpg-btn-text aiofc-rpg-reset-custom-template-btn" style="font-size: 11px; padding: 4px 8px;">🔄 Reset</button>
+										<button class="aiofc-rpg-btn-text aiofc-rpg-preview-custom-template-btn" style="font-size: 11px; padding: 4px 8px; background: rgba(34, 197, 94, 0.1); color: #10b981;">👁️ Preview</button>
 										<div class="aiofc-rpg-variable-buttons" style="display: flex; gap: 4px; flex-wrap: wrap;">
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{SOURCE_COUNT}" style="font-size: 10px; padding: 3px 6px;">{SOURCE_COUNT}</button>
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{SOURCE_PROMPTS}" style="font-size: 10px; padding: 3px 6px;">{SOURCE_PROMPTS}</button>
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{GENERATION_MODE}" style="font-size: 10px; padding: 3px 6px;">{GENERATION_MODE}</button>
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{MODE_RULES}" style="font-size: 10px; padding: 3px 6px;">{MODE_RULES}</button>
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{TASK_TYPE}" style="font-size: 10px; padding: 3px 6px;">{TASK_TYPE}</button>
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{USER_INPUT}" style="font-size: 10px; padding: 3px 6px;">{USER_INPUT}</button>
-											<button class="rpg-btn-text -rpg-insert-variable-btn" data-variable="{TASK_INSTRUCTIONS}" style="font-size: 10px; padding: 3px 6px;">{TASK_INSTRUCTIONS}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{SOURCE_COUNT}" style="font-size: 10px; padding: 3px 6px;">{SOURCE_COUNT}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{SOURCE_PROMPTS}" style="font-size: 10px; padding: 3px 6px;">{SOURCE_PROMPTS}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{GENERATION_MODE}" style="font-size: 10px; padding: 3px 6px;">{GENERATION_MODE}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{MODE_RULES}" style="font-size: 10px; padding: 3px 6px;">{MODE_RULES}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{TASK_TYPE}" style="font-size: 10px; padding: 3px 6px;">{TASK_TYPE}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{USER_INPUT}" style="font-size: 10px; padding: 3px 6px;">{USER_INPUT}</button>
+											<button class="aiofc-rpg-btn-text aiofc-rpg-insert-variable-btn" data-variable="{TASK_INSTRUCTIONS}" style="font-size: 10px; padding: 3px 6px;">{TASK_INSTRUCTIONS}</button>
 										</div>
 									</div>
 									<!-- Template Preview Section -->
@@ -2311,7 +2938,7 @@ app.registerExtension({
 										<div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 6px; padding: 12px;">
 											<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
 												<span style="font-size: 12px; font-weight: 500; color: #10b981;">✨ Preview (with current settings)</span>
-												<button class="rpg-btn-text -rpg-close-custom-preview-btn" style="font-size: 10px; padding: 3px 6px; color: #9ca3af;">✕ Close</button>
+												<button class="aiofc-rpg-btn-text aiofc-rpg-close-custom-preview-btn" style="font-size: 10px; padding: 3px 6px; color: #9ca3af;">✕ Close</button>
 											</div>
 											<pre class="aiofc-rpg-custom-template-preview-text" style="margin: 0; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 10px; line-height: 1.6; color: #d1d5db; white-space: pre-wrap; word-wrap: break-word; max-height: 300px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 4px;"></pre>
 										</div>
@@ -2376,7 +3003,24 @@ app.registerExtension({
 									const inspirationCount = node.properties.inspiration_count || 3;
 									const inspirationEnabled = node.properties.enable_library_inspiration;
 
-									return `<div class="-rpg-section" style="margin-top: 12px;"> <details class="-rpg-custom-library-details" ${node.properties.custom_library_expanded ? 'open' : ''}> <summary style="cursor: pointer; padding: 10px; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 6px; font-weight: 500; font-size: 13px; user-select: none;"> Library Inspiration ${!inspirationEnabled ? '(Disabled)' :`(${inspirationCount} per generation)`} </summary> <div style="padding: 12px; background: rgba(139, 92, 246, 0.03); border: 1px solid rgba(139, 92, 246, 0.1); border-top: none; border-radius: 0 0 6px 6px;"> <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;"> <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;"> <input type="checkbox" class="rpg-checkbox -rpg-enable-inspiration-checkbox" ${inspirationEnabled ? 'checked' : ''} /> <span style="font-size: 12px; font-weight: 500;">Enable Library Inspiration</span> </label> <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${inspirationEnabled ? 'rgba(34, 197, 94, 0.15)' : 'rgba(107, 114, 128, 0.15)'}; color: ${inspirationEnabled ? '#4ade80' : '#9ca3af'};"> ${inspirationEnabled ? 'Active' : 'Disabled'} </span> </div> <div class="-rpg-inspiration-section" style="display: ${inspirationEnabled ? 'block' : 'none'};"> ${filteredCount === 0 ?`
+									return `
+										<div class="aiofc-rpg-section" style="margin-top: 12px;">
+											<details class="aiofc-rpg-custom-library-details" ${node.properties.custom_library_expanded ? 'open' : ''}>
+												<summary style="cursor: pointer; padding: 10px; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 6px; font-weight: 500; font-size: 13px; user-select: none;">
+													📚 Library Inspiration ${!inspirationEnabled ? '(Disabled)' : `(${inspirationCount} per generation)`}
+												</summary>
+												<div style="padding: 12px; background: rgba(139, 92, 246, 0.03); border: 1px solid rgba(139, 92, 246, 0.1); border-top: none; border-radius: 0 0 6px 6px;">
+													<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+														<label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+															<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-enable-inspiration-checkbox" ${inspirationEnabled ? 'checked' : ''} />
+															<span style="font-size: 12px; font-weight: 500;">Enable Library Inspiration</span>
+														</label>
+														<span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: ${inspirationEnabled ? 'rgba(34, 197, 94, 0.15)' : 'rgba(107, 114, 128, 0.15)'}; color: ${inspirationEnabled ? '#4ade80' : '#9ca3af'};">
+															${inspirationEnabled ? '✅ Active' : '⚪ Disabled'}
+														</span>
+													</div>
+													<div class="aiofc-rpg-inspiration-section" style="display: ${inspirationEnabled ? 'block' : 'none'};">
+														${filteredCount === 0 ? `
 															<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 12px; margin-bottom: 12px;">
 																<div style="font-size: 12px; color: #fca5a5; font-weight: 500;">⚠️ No prompts in library</div>
 																<div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Load prompts in the Library tab or {SOURCE_PROMPTS} will be empty</div>
@@ -2385,14 +3029,14 @@ app.registerExtension({
 															<div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 6px; padding: 12px; margin-bottom: 12px;">
 																<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
 																	<span style="font-size: 11px; color: #d1d5db;">Learn from</span>
-																	<input type="number" class="rpg-number-input -rpg-custom-inspiration-count" value="${inspirationCount}" min="1" max="10" style="width: 45px; height: 24px; padding: 2px 6px; font-size: 12px; text-align: center;" />
+																	<input type="number" class="aiofc-rpg-number-input aiofc-rpg-custom-inspiration-count" value="${inspirationCount}" min="1" max="10" style="width: 45px; height: 24px; padding: 2px 6px; font-size: 12px; text-align: center;" />
 																	<span style="font-size: 11px; color: #d1d5db;">prompts per generation</span>
 																</div>
 																<div style="display: flex; align-items: center; justify-content: space-between;">
 																	<span style="font-size: 11px; color: #9ca3af;">
 																		Pool: <strong style="color: #e5e7eb; font-weight: 500;">${filteredCount.toLocaleString()}</strong> ${hasActiveFilters ? '<span style="color: #a78bfa;">prompts (filtered)</span>' : 'prompts'}
 																	</span>
-																	<button class="rpg-btn-text -rpg-open-library-tab-btn" style="font-size: 10px; padding: 3px 6px; opacity: 0.8; display: flex; align-items: center; gap: 4px;" title="Switch to Library tab to adjust filters">
+																	<button class="aiofc-rpg-btn-text aiofc-rpg-open-library-tab-btn" style="font-size: 10px; padding: 3px 6px; opacity: 0.8; display: flex; align-items: center; gap: 4px;" title="Switch to Library tab to adjust filters">
 																		<span style="color: #9ca3af;">Filters</span> ⚙️
 																	</button>
 																</div>
@@ -2417,13 +3061,31 @@ app.registerExtension({
 									const linkedImages = node._linkedImages || [];
 									const imageCount = linkedImages.length;
 									if (imageCount === 0) {
-										return `<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 12px; margin-top: 12px;"> <div style="font-size: 12px; color: #fca5a5; font-weight: 500;"> No images from AIL</div> <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Connect an Advanced Image Loader node in img2img mode</div> </div>`;
+										return `
+											<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 6px; padding: 12px; margin-top: 12px;">
+												<div style="font-size: 12px; color: #fca5a5; font-weight: 500;">⚠️ No images from AIL</div>
+												<div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Connect an Advanced Image Loader node in img2img mode</div>
+											</div>
+										`;
 									}
-									return `<div style="margin-top: 12px; padding: 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 6px;"> <div style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;"> Images from AIL #${node._linkedAILNodeId}: <strong style="color: #60a5fa;">${imageCount} image${imageCount !== 1 ? 's' : ''}</strong> </div> </div>`;
+									return `
+										<div style="margin-top: 12px; padding: 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 6px;">
+											<div style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">
+												📸 Images from AIL #${node._linkedAILNodeId}: <strong style="color: #60a5fa;">${imageCount} image${imageCount !== 1 ? 's' : ''}</strong>
+											</div>
+										</div>
+									`;
 								})() : ''}
 
 								<!-- Generation Count (for txt2img in custom mode) -->
-								${detectedMode !== 'img2img' ? `<div class="-rpg-section" style="margin-top: 12px;"> <div class="-rpg-control-group"> <label>Generation Count</label> <input type="number" class="rpg-number-input -rpg-gen-count-input" value="${node.properties.generation_count || 5}" min="1" max="50" /> </div> </div>` : ''}
+								${detectedMode !== 'img2img' ? `
+									<div class="aiofc-rpg-section" style="margin-top: 12px;">
+										<div class="aiofc-rpg-control-group">
+											<label>Generation Count</label>
+											<input type="number" class="aiofc-rpg-number-input aiofc-rpg-gen-count-input" value="${node.properties.generation_count || 5}" min="1" max="50" />
+										</div>
+									</div>
+								` : ''}
 							` : ''}
 
 							<!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -2455,7 +3117,7 @@ app.registerExtension({
 											}).join('')}
 										</select>
 									</div>
-									<textarea class="rpg-model-instructions -rpg-prompt-textarea" placeholder="Model-specific formatting instructions (optional for txt2img)..." rows="3" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.model_instructions || MODEL_INSTRUCTION_PRESETS[node.properties.model_preset || DEFAULT_MODEL_PRESET]?.instructions || "")}</textarea>
+									<textarea class="aiofc-rpg-model-instructions aiofc-rpg-prompt-textarea" placeholder="Model-specific formatting instructions (optional for txt2img)..." rows="3" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.model_instructions || MODEL_INSTRUCTION_PRESETS[node.properties.model_preset || DEFAULT_MODEL_PRESET]?.instructions || "")}</textarea>
 									<div class="aiofc-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;">
 										💡 Model-specific prompt formatting (mostly useful for img2img models)
 									</div>
@@ -2475,7 +3137,7 @@ app.registerExtension({
 								<!-- 3. Your Instructions (user's own input - LAST so it can override) -->
 								<div class="aiofc-rpg-section" style="margin-bottom: 12px;">
 									<label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">📝 Your Instructions</label>
-									<textarea class="rpg-user-text-input -rpg-prompt-textarea" placeholder="Describe what you want: subject, setting, outfit, pose, mood...
+									<textarea class="aiofc-rpg-user-text-input aiofc-rpg-prompt-textarea" placeholder="Describe what you want: subject, setting, outfit, pose, mood...
 Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at sunset'" rows="3" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.user_instructions || "")}</textarea>
 									<div class="aiofc-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;">
 										💡 Your instructions override theme and model settings
@@ -2549,7 +3211,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 											<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; max-height: 200px; overflow-y: auto;">
 												${images1.map((img, idx) => {
 													// Handle both url (from renderImg2ImgGallery events) and thumbnail (from raw batchData events)
-													const imgUrl = img.url || (img.thumbnail ? `//view/${img.thumbnail}` : '');
+													const imgUrl = img.url || (img.thumbnail ? `/aiofc/view/${img.thumbnail}` : '');
 													return `
 													<div style="position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; border: 2px solid #4b5563;">
 														<img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; background: rgba(0,0,0,0.3);" onerror="this.style.opacity='0.3'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%239ca3af%22 d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E';" />
@@ -2563,24 +3225,92 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 												ℹ️ Generates 1 prompt per unique image. Repeat counts preserved when adding to batch.
 											</div>
 										</div>
-									`; })()} <!-- ═══════════════════════════════════════════════════════════════════ --> <!-- UNIVERSAL INPUT SECTION (IMG2IMG) - Same structure as TXT2IMG --> <!-- ═══════════════════════════════════════════════════════════════════ --> <!-- 1. Creative Theme (aesthetic style) --> <div class="-rpg-section" style="margin-bottom: 12px;"> <div class="-rpg-control-group"> <label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;"> Creative Theme (optional)</label> <select class="-rpg-theme-select" style="width: 100%; padding: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: #e5e7eb; font-size: 12px;"> ${Object.entries(THEME_PRESETS).map(([key, preset]) => { const selected = (node.properties.theme_preset || DEFAULT_THEME_PRESET) === key; return`<option value="${key}" ${selected ? 'selected' : ''}>${preset.label}</option>`; }).join('')} </select> <div class="-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;"> Themes add aesthetic style ( = black light diamond drips) </div> </div> </div> <!-- 2. Model Instructions (formatting for specific models) --> <div class="-rpg-section" style="margin-bottom: 12px;"> <div class="-rpg-control-group"> <label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;"> Model Instructions</label> <div style="margin-bottom: 8px;"> <select class="-rpg-model-preset-select" style="width: 100%; padding: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: #e5e7eb; font-size: 12px;"> ${Object.entries(MODEL_INSTRUCTION_PRESETS).map(([key, preset]) => { const selected = (node.properties.model_preset || DEFAULT_MODEL_PRESET) === key; return`<option value="${key}" ${selected ? 'selected' : ''}>${preset.label}</option>`; }).join('')} </select> </div> <textarea class="rpg-model-instructions -rpg-prompt-textarea" placeholder="Model-specific formatting instructions..." rows="4" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.model_instructions || MODEL_INSTRUCTION_PRESETS[node.properties.model_preset || DEFAULT_MODEL_PRESET]?.instructions || "")}</textarea> <div class="-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;"> Model-specific prompt formatting (NBP uses "reimagined" structure) </div> </div> </div> <!-- 2.5 Clean Mode Toggle --> <div class="-rpg-section" style="margin-bottom: 12px;"> <div class="-rpg-control-group"> <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 500;"> <input type="checkbox" class="-rpg-clean-mode-toggle" ${node.properties.clean_mode ? 'checked' : ''} style="width: 16px; height: 16px; cursor: pointer;" /> Clean Mode (no baked-in artifacts or elements) </label> <div class="-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;"> Prevents AI from adding grain, noise, lens flares, borders, etc. Add these in post if needed. </div> </div> </div> <!-- 3. Your Instructions (user's own input - LAST so it can override) --> <div class="-rpg-section" style="margin-bottom: 12px;"> <div class="-rpg-control-group"> <label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;"> Your Instructions</label> <textarea class="rpg-img2img-user-instructions -rpg-prompt-textarea" placeholder="Describe what you want to change or create... Example: 'Change background to a tropical beach at sunset' or 'Put her in a red evening gown'" rows="3" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.user_instructions || "")}</textarea> <div class="-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;"> Your instructions override theme and model settings </div> </div> </div> <!-- Affect Elements (Creative mode only) --> ${node.properties.generation_style === 'creative' ?`
+									`;
+								})()}
+
+								<!-- ═══════════════════════════════════════════════════════════════════ -->
+								<!-- UNIVERSAL INPUT SECTION (IMG2IMG) - Same structure as TXT2IMG -->
+								<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+								<!-- 1. Creative Theme (aesthetic style) -->
+								<div class="aiofc-rpg-section" style="margin-bottom: 12px;">
+									<div class="aiofc-rpg-control-group">
+										<label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">🎨 Creative Theme (optional)</label>
+										<select class="aiofc-rpg-theme-select" style="width: 100%; padding: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: #e5e7eb; font-size: 12px;">
+											${Object.entries(THEME_PRESETS).map(([key, preset]) => {
+												const selected = (node.properties.theme_preset || DEFAULT_THEME_PRESET) === key;
+												return `<option value="${key}" ${selected ? 'selected' : ''}>${preset.label}</option>`;
+											}).join('')}
+										</select>
+										<div class="aiofc-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;">
+											💡 Themes add aesthetic style (AIOFC = black light diamond drips)
+										</div>
+									</div>
+								</div>
+
+								<!-- 2. Model Instructions (formatting for specific models) -->
+								<div class="aiofc-rpg-section" style="margin-bottom: 12px;">
+									<div class="aiofc-rpg-control-group">
+										<label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">🔧 Model Instructions</label>
+										<div style="margin-bottom: 8px;">
+											<select class="aiofc-rpg-model-preset-select" style="width: 100%; padding: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: #e5e7eb; font-size: 12px;">
+												${Object.entries(MODEL_INSTRUCTION_PRESETS).map(([key, preset]) => {
+													const selected = (node.properties.model_preset || DEFAULT_MODEL_PRESET) === key;
+													return `<option value="${key}" ${selected ? 'selected' : ''}>${preset.label}</option>`;
+												}).join('')}
+											</select>
+										</div>
+										<textarea class="aiofc-rpg-model-instructions aiofc-rpg-prompt-textarea" placeholder="Model-specific formatting instructions..." rows="4" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.model_instructions || MODEL_INSTRUCTION_PRESETS[node.properties.model_preset || DEFAULT_MODEL_PRESET]?.instructions || "")}</textarea>
+										<div class="aiofc-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;">
+											💡 Model-specific prompt formatting (NBP uses "reimagined" structure)
+										</div>
+									</div>
+								</div>
+
+								<!-- 2.5 Clean Mode Toggle -->
+								<div class="aiofc-rpg-section" style="margin-bottom: 12px;">
+									<div class="aiofc-rpg-control-group">
+										<label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 500;">
+											<input type="checkbox" class="aiofc-rpg-clean-mode-toggle" ${node.properties.clean_mode ? 'checked' : ''} style="width: 16px; height: 16px; cursor: pointer;" />
+											🧹 Clean Mode (no baked-in artifacts or elements)
+										</label>
+										<div class="aiofc-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;">
+											💡 Prevents AI from adding grain, noise, lens flares, borders, etc. Add these in post if needed.
+										</div>
+									</div>
+								</div>
+
+								<!-- 3. Your Instructions (user's own input - LAST so it can override) -->
+								<div class="aiofc-rpg-section" style="margin-bottom: 12px;">
+									<div class="aiofc-rpg-control-group">
+										<label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">📝 Your Instructions</label>
+										<textarea class="aiofc-rpg-img2img-user-instructions aiofc-rpg-prompt-textarea" placeholder="Describe what you want to change or create...
+Example: 'Change background to a tropical beach at sunset' or 'Put her in a red evening gown'" rows="3" style="line-height: 1.42; font-size: 12px; ">${escapeHtml(node.properties.user_instructions || "")}</textarea>
+										<div class="aiofc-rpg-hint-text" style="margin-top: 6px; font-size: 11px; color: #9ca3af;">
+											💡 Your instructions override theme and model settings
+										</div>
+									</div>
+								</div>
+
+								<!-- Affect Elements (Creative mode only) -->
+								${node.properties.generation_style === 'creative' ? `
 									<div class="aiofc-rpg-affect-elements" style="margin-bottom: 12px;">
 										<label class="aiofc-rpg-section-label" style="margin-top: 12px;">Affect Elements (unchecked = keep as-is)</label>
 										<div class="aiofc-rpg-checkbox-grid">
 											<label class="aiofc-rpg-checkbox-label">
-												<input type="checkbox" class="rpg-checkbox -rpg-affect-background" checked />
+												<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-affect-background" checked />
 												<span>Background</span>
 											</label>
 											<label class="aiofc-rpg-checkbox-label">
-												<input type="checkbox" class="rpg-checkbox -rpg-affect-outfit" checked />
+												<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-affect-outfit" checked />
 												<span>Outfit</span>
 											</label>
 											<label class="aiofc-rpg-checkbox-label">
-												<input type="checkbox" class="rpg-checkbox -rpg-affect-pose" checked />
+												<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-affect-pose" checked />
 												<span>Pose</span>
 											</label>
 											<label class="aiofc-rpg-checkbox-label">
-												<input type="checkbox" class="rpg-checkbox -rpg-affect-lighting" checked />
+												<input type="checkbox" class="aiofc-rpg-checkbox aiofc-rpg-affect-lighting" checked />
 												<span>Lighting</span>
 											</label>
 										</div>
@@ -2590,7 +3320,14 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 						</div>
 
 						<!-- Generation Count (txt2img only) -->
-						${detectedMode !== 'img2img' ? `<div class="-rpg-section"> <div class="-rpg-control-group"> <label>Generation Count</label> <input type="number" class="rpg-number-input -rpg-gen-count-input" value="${node.properties.generation_count || 5}" min="1" max="50" /> </div> </div>` : ''}
+						${detectedMode !== 'img2img' ? `
+							<div class="aiofc-rpg-section">
+								<div class="aiofc-rpg-control-group">
+									<label>Generation Count</label>
+									<input type="number" class="aiofc-rpg-number-input aiofc-rpg-gen-count-input" value="${node.properties.generation_count || 5}" min="1" max="50" />
+								</div>
+							</div>
+						` : ''}
 
 						<!-- Advanced: Edit System Prompt -->
 						<div class="aiofc-rpg-section">
@@ -2600,12 +3337,12 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 								<div style="margin-top: 12px;">
 									<!-- Toggle button -->
 									<div style="display: flex; justify-content: flex-end; margin-bottom: 8px;">
-										<button class="rpg-btn-text -rpg-toggle-system-prompt-preview-btn" style="font-size: 11px; padding: 4px 8px;">
-											${node.properties.show_system_prompt_preview ? 'Edit Template' : 'Preview'}
+										<button class="aiofc-rpg-btn-text aiofc-rpg-toggle-system-prompt-preview-btn" style="font-size: 11px; padding: 4px 8px;">
+											${node.properties.show_system_prompt_preview ? '📝 Edit Template' : '👁️ Preview'}
 										</button>
 									</div>
 									<!-- Template textarea (shown when NOT previewing) -->
-									<textarea class="rpg-system-prompt -rpg-prompt-textarea" style="display: ${node.properties.show_system_prompt_preview ? 'none' : 'block'}; font-family: monospace; font-size: 11px; line-height: 1.5; resize: vertical; width: 100%; ">${escapeHtml(node.properties.creative_system_prompt || (() => {
+									<textarea class="aiofc-rpg-system-prompt aiofc-rpg-prompt-textarea" style="display: ${node.properties.show_system_prompt_preview ? 'none' : 'block'}; font-family: monospace; font-size: 11px; line-height: 1.5; resize: vertical; width: 100%; ">${escapeHtml(node.properties.creative_system_prompt || (() => {
 										if (detectedMode === 'txt2img') {
 											return DEFAULT_RPG_SYSTEM_PROMPT;
 										} else {
@@ -2625,14 +3362,45 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 										<div class="aiofc-rpg-hint-text" style="font-size: 10px; color: #9ca3af;">
 											💡 Controls how prompts are generated (${detectedMode === 'img2img' ? 'img2img' : 'txt2img'} ${node.properties.generation_style || 'reality'})
 										</div>
-										<button class="rpg-btn-text -rpg-reset-unified-system-prompt-btn" style="font-size: 11px; padding: 4px 8px;">🔄 Reset</button>
+										<button class="aiofc-rpg-btn-text aiofc-rpg-reset-unified-system-prompt-btn" style="font-size: 11px; padding: 4px 8px;">🔄 Reset</button>
 									</div>
 								</div>
 							</details>
 						</div>
 
 					</div>
-					`''} <!-- End of normal generation controls conditional --> <!-- Generate Button (always visible) --> <button class="rpg-btn-primary -rpg-generate-unified-btn" style="width: 100%; margin-top: 12px;"> ${detectedMode === 'img2img' ? '' : ''} Generate Prompts </button> <!-- Generation Results Section --> <div class="-rpg-generation-progress" style="display: ${node._generationInProgress || node._generatedUnifiedPrompts ? 'block' : 'none'};"> <div class="-rpg-progress-header"> <h4>Generating Prompts...</h4> <button class="rpg-btn-secondary -rpg-cancel-generation-btn"> Cancel</button> </div> <!-- Quick action button at top (shown when complete) --> <div class="-rpg-quick-accept" style="display: none; margin: 8px 0 12px 0;"> <button class="rpg-btn-primary -rpg-accept-generated-btn" style="width: 100%;"> Add to Batch</button> </div> <div class="-rpg-progress-items"></div> </div> <!-- Preview Section: prompts list + action buttons --> <div class="-rpg-generate-preview" style="display: ${node._generatedUnifiedPrompts ? 'block' : 'none'};"> <!-- Scrollable prompts container with fixed max height --> <div class="-rpg-generate-preview-list" style="max-height: 300px; overflow-y: auto; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;"></div> <!-- Action buttons always visible below --> <div style="display: flex; gap: 8px; justify-content: flex-end;"> <button class="rpg-btn-primary -rpg-accept-generated-btn"> Add to Batch</button> <button class="rpg-btn-secondary -rpg-cancel-generated-btn" style="margin-right: 0;"> Discard</button> </div> </div>`;
+					` : ''}
+					<!-- End of normal generation controls conditional -->
+
+					<!-- Generate Button (always visible) -->
+					<button class="aiofc-rpg-btn-primary aiofc-rpg-generate-unified-btn" style="width: 100%; margin-top: 12px;">
+						${detectedMode === 'img2img' ? '🖼️' : '🎨'} Generate Prompts
+					</button>
+
+					<!-- Generation Results Section -->
+					<div class="aiofc-rpg-generation-progress" style="display: ${node._generationInProgress || node._generatedUnifiedPrompts ? 'block' : 'none'};">
+						<div class="aiofc-rpg-progress-header">
+							<h4>Generating Prompts...</h4>
+							<button class="aiofc-rpg-btn-secondary aiofc-rpg-cancel-generation-btn">⏹ Cancel</button>
+						</div>
+						<!-- Quick action button at top (shown when complete) -->
+						<div class="aiofc-rpg-quick-accept" style="display: none; margin: 8px 0 12px 0;">
+							<button class="aiofc-rpg-btn-primary aiofc-rpg-accept-generated-btn" style="width: 100%;">✓ Add to Batch</button>
+						</div>
+						<div class="aiofc-rpg-progress-items"></div>
+					</div>
+
+					<!-- Preview Section: prompts list + action buttons -->
+					<div class="aiofc-rpg-generate-preview" style="display: ${node._generatedUnifiedPrompts ? 'block' : 'none'};">
+						<!-- Scrollable prompts container with fixed max height -->
+						<div class="aiofc-rpg-generate-preview-list" style="max-height: 300px; overflow-y: auto; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;"></div>
+						<!-- Action buttons always visible below -->
+						<div style="display: flex; gap: 8px; justify-content: flex-end;">
+							<button class="aiofc-rpg-btn-primary aiofc-rpg-accept-generated-btn">✓ Add to Batch</button>
+							<button class="aiofc-rpg-btn-secondary aiofc-rpg-cancel-generated-btn" style="margin-right: 0;">✖ Discard</button>
+						</div>
+					</div>
+				`;
 			};
 
 			// === Custom Tab ===
@@ -2640,32 +3408,64 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 				const customTemplate = node.properties.custom_template || DEFAULT_RPG_SYSTEM_PROMPT;
 				const detectedMode = node._linkedAILMode || "txt2img";
 
-				return `<div class="-rpg-custom-tab"> <!-- Template Editor Section --> <div class="-rpg-section"> <div class="-rpg-section-header"> <span class="-rpg-section-label"> Custom System Prompt Template</span> <span class="-rpg-hint-text">Use variables like {SOURCE_PROMPTS}, {CHARACTER}, {EXPRESSION}</span> </div> <textarea class="-rpg-custom-template-textarea" placeholder="Enter your custom system prompt template..." style="width: 100%; min-height: 300px; font-family: monospace; font-size: 12px; line-height: 1.5; resize: vertical; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); color: #e5e7eb; padding: 12px; border-radius: 4px;">${escapeHtml(customTemplate)}</textarea> <div style="display: flex; gap: 8px; margin-top: 8px;"> <button class="rpg-btn-text -rpg-reset-custom-template-btn" style="font-size: 11px; padding: 4px 8px;"> Reset to Default</button> <button class="rpg-btn-primary -rpg-preview-custom-prompt-btn" style="font-size: 11px; padding: 6px 12px;"> Preview Final Prompt</button> </div> </div> <!-- Available Variables Section --> <div class="-rpg-section"> <div class="-rpg-section-header"> <span class="-rpg-section-label"> Available Variables</span> <span class="-rpg-hint-text">Click to insert at cursor position</span> </div> <div class="-rpg-variables-grid"> ${AVAILABLE_VARIABLES.map(v =>`
+				return `
+					<div class="aiofc-rpg-custom-tab">
+						<!-- Template Editor Section -->
+						<div class="aiofc-rpg-section">
+							<div class="aiofc-rpg-section-header">
+								<span class="aiofc-rpg-section-label">📝 Custom System Prompt Template</span>
+								<span class="aiofc-rpg-hint-text">Use variables like {SOURCE_PROMPTS}, {CHARACTER}, {EXPRESSION}</span>
+							</div>
+							<textarea class="aiofc-rpg-custom-template-textarea" placeholder="Enter your custom system prompt template..." style="width: 100%; min-height: 300px; font-family: monospace; font-size: 12px; line-height: 1.5; resize: vertical; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); color: #e5e7eb; padding: 12px; border-radius: 4px;">${escapeHtml(customTemplate)}</textarea>
+							<div style="display: flex; gap: 8px; margin-top: 8px;">
+								<button class="aiofc-rpg-btn-text aiofc-rpg-reset-custom-template-btn" style="font-size: 11px; padding: 4px 8px;">🔄 Reset to Default</button>
+								<button class="aiofc-rpg-btn-primary aiofc-rpg-preview-custom-prompt-btn" style="font-size: 11px; padding: 6px 12px;">👁️ Preview Final Prompt</button>
+							</div>
+						</div>
+
+						<!-- Available Variables Section -->
+						<div class="aiofc-rpg-section">
+							<div class="aiofc-rpg-section-header">
+								<span class="aiofc-rpg-section-label">🔧 Available Variables</span>
+								<span class="aiofc-rpg-hint-text">Click to insert at cursor position</span>
+							</div>
+							<div class="aiofc-rpg-variables-grid">
+								${AVAILABLE_VARIABLES.map(v => `
 									<div class="aiofc-rpg-variable-item">
 										<button class="aiofc-rpg-variable-insert-btn" data-variable="${v.name}">
 											<span class="aiofc-rpg-variable-name">${v.name}</span>
 										</button>
 										<div class="aiofc-rpg-variable-desc">${v.description}</div>
 									</div>
-								`).join('')} </div> </div> <!-- Generation Settings (same as Generate tab) --> <div class="-rpg-section"> <div class="-rpg-section-header"> <span class="rpg-mode-badge ${detectedMode === 'img2img' ? '-rpg-mode-img2img' : '-rpg-mode-txt2img'}"> ${detectedMode === 'img2img' ? 'IMG2IMG' : 'TXT2IMG'} </span> <span class="-rpg-hint-text">Detected from ${node._linkedAILNodeId ?`AIL #${node._linkedAILNodeId}` : 'workflow'}</span>
+								`).join('')}
+							</div>
+						</div>
+
+						<!-- Generation Settings (same as Generate tab) -->
+						<div class="aiofc-rpg-section">
+							<div class="aiofc-rpg-section-header">
+								<span class="aiofc-rpg-mode-badge ${detectedMode === 'img2img' ? 'aiofc-rpg-mode-img2img' : 'aiofc-rpg-mode-txt2img'}">
+									${detectedMode === 'img2img' ? '🖼️ IMG2IMG' : '🎨 TXT2IMG'}
+								</span>
+								<span class="aiofc-rpg-hint-text">Detected from ${node._linkedAILNodeId ? `AIL #${node._linkedAILNodeId}` : 'workflow'}</span>
 							</div>
 
 							<!-- User Input -->
 							${detectedMode !== 'img2img' ? `
 								<div class="aiofc-rpg-control-group" style="margin-top: 12px;">
 									<label style="font-size: 13px; font-weight: 500;">Subject / Instructions (optional)</label>
-									<textarea class="rpg-custom-user-input -rpg-prompt-textarea" placeholder="e.g., 'a woman in a red dress' or 'sunset lighting'..." rows="3" style="line-height: 1.42; font-size: 12px;">${escapeHtml(node.properties.user_instructions || "")}</textarea>
+									<textarea class="aiofc-rpg-custom-user-input aiofc-rpg-prompt-textarea" placeholder="e.g., 'a woman in a red dress' or 'sunset lighting'..." rows="3" style="line-height: 1.42; font-size: 12px;">${escapeHtml(node.properties.user_instructions || "")}</textarea>
 								</div>
 								<div class="aiofc-rpg-control-group">
 									<label>Generation Count</label>
-									<input type="number" class="rpg-number-input -rpg-custom-gen-count" value="${node.properties.generation_count || 5}" min="1" max="50" />
+									<input type="number" class="aiofc-rpg-number-input aiofc-rpg-custom-gen-count" value="${node.properties.generation_count || 5}" min="1" max="50" />
 								</div>
 							` : ''}
 						</div>
 
 						<!-- Generate Button -->
-						<button class="rpg-btn-primary -rpg-generate-custom-btn">
-							${detectedMode === 'img2img' ? '' : ''} Generate Prompts with Custom Template
+						<button class="aiofc-rpg-btn-primary aiofc-rpg-generate-custom-btn">
+							${detectedMode === 'img2img' ? '🖼️' : '🎨'} Generate Prompts with Custom Template
 						</button>
 					</div>
 				`;
@@ -2673,7 +3473,35 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 				// === Character Tab (LEGACY - Will be removed) ===
 				const renderCharacterTab = () => {
-					return `<div class="-rpg-character"> <div class="-rpg-creative-header"> <h3>Character-Consistent Generation</h3> <p>Generate prompts with character reference for consistent results</p> </div> <div class="-rpg-control-group"> <label>Character Reference</label> <textarea class="-rpg-character-ref-input" placeholder="e.g., 1girl_character_lora, blonde hair, blue eyes, athletic build..." rows="4"></textarea> </div> <div class="-rpg-creative-controls"> <div class="-rpg-control-group"> <label>Generation Count</label> <input type="number" class="rpg-number-input -rpg-char-gen-count-input" value="5" min="1" max="50" /> </div> </div> <button class="rpg-btn-primary -rpg-generate-character-btn"> Generate Character Prompts</button> <div class="-rpg-creative-preview" style="display: none;"> <h4>Generated Character Prompts Preview</h4> <div class="-rpg-character-preview-list"></div> <button class="rpg-btn-primary -rpg-accept-character-btn"> Accept All</button> <button class="rpg-btn-secondary -rpg-cancel-character-btn"> Cancel</button> </div> </div>`;
+					return `
+						<div class="aiofc-rpg-character">
+							<div class="aiofc-rpg-creative-header">
+								<h3>Character-Consistent Generation</h3>
+								<p>Generate prompts with character reference for consistent results</p>
+							</div>
+
+							<div class="aiofc-rpg-control-group">
+								<label>Character Reference</label>
+								<textarea class="aiofc-rpg-character-ref-input" placeholder="e.g., 1girl_character_lora, blonde hair, blue eyes, athletic build..." rows="4"></textarea>
+							</div>
+
+							<div class="aiofc-rpg-creative-controls">
+								<div class="aiofc-rpg-control-group">
+									<label>Generation Count</label>
+									<input type="number" class="aiofc-rpg-number-input aiofc-rpg-char-gen-count-input" value="5" min="1" max="50" />
+								</div>
+							</div>
+
+							<button class="aiofc-rpg-btn-primary aiofc-rpg-generate-character-btn">👤 Generate Character Prompts</button>
+
+							<div class="aiofc-rpg-creative-preview" style="display: none;">
+								<h4>Generated Character Prompts Preview</h4>
+								<div class="aiofc-rpg-character-preview-list"></div>
+								<button class="aiofc-rpg-btn-primary aiofc-rpg-accept-character-btn">✓ Accept All</button>
+								<button class="aiofc-rpg-btn-secondary aiofc-rpg-cancel-character-btn">✖ Cancel</button>
+							</div>
+						</div>
+					`;
 				};
 
 				// === Batch Panel (AIL Item Style) ===
@@ -2688,12 +3516,12 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 					const gridContent =
 						promptQueue.length === 0
-							? `<div class="-rpg-empty"><p>No prompts in batch</p><p class="-rpg-hint">Add prompts from Library or Creative mode</p></div>`
+							? `<div class="aiofc-rpg-empty"><p>No prompts in batch</p><p class="aiofc-rpg-hint">Add prompts from Library or Creative mode</p></div>`
 							: promptQueue
 									.map(
 										(entry, idx) => {
 											const sourceType = entry.source_id ? 'from-library' : 'from-ai';
-											const sourceBadgeText = entry.source_id ? 'Library' : 'AI Generated';
+											const sourceBadgeText = entry.source_id ? '📚 Library' : '✨ AI Generated';
 
 											// Get linked thumbnail for this index
 											const linkedItem = detectedMode === "img2img" ? linkedImages[idx] : linkedLatents[idx];
@@ -2729,20 +3557,44 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 														gridHtml = `<div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; width: 100%; height: 100%;">${imgWithFallback(allImgs[0].url)}${imgWithFallback(allImgs[1].url)}${imgWithFallback(allImgs[2].url)}${imgWithFallback(allImgs[3].url)}</div>`;
 													}
 
-													thumbnailHtml = `<div class="rpg-batch-thumbnail -rpg-batch-thumbnail-latent"> <span class="-rpg-batch-thumbnail-index">#${idx + 1}</span> <div class="-rpg-batch-aspect-preview" style="aspect-ratio: ${targetAspectRatio}; position: relative; overflow: hidden;"> ${gridHtml} <div class="-rpg-batch-aspect-content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none;"> <div style="font-size: 14px; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); background: rgba(139, 92, 246, 0.75); padding: 4px 10px; border-radius: 4px;">${targetDims.aspect_label}${imgCount > 1 ?` · ${imgCount}` : ''}</div>
+													thumbnailHtml = `
+														<div class="aiofc-rpg-batch-thumbnail aiofc-rpg-batch-thumbnail-latent">
+															<span class="aiofc-rpg-batch-thumbnail-index">#${idx + 1}</span>
+															<div class="aiofc-rpg-batch-aspect-preview" style="aspect-ratio: ${targetAspectRatio}; position: relative; overflow: hidden;">
+																${gridHtml}
+																<div class="aiofc-rpg-batch-aspect-content" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+																	<div style="font-size: 14px; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); background: rgba(139, 92, 246, 0.75); padding: 4px 10px; border-radius: 4px;">${targetDims.aspect_label}${imgCount > 1 ? ` · ${imgCount}` : ''}</div>
 																</div>
 															</div>
 														</div>
 													`;
 												} else {
 													// TXT2IMG: Show empty latent with aspect ratio box
-													thumbnailHtml = `<div class="rpg-batch-thumbnail -rpg-batch-thumbnail-latent"> <span class="-rpg-batch-thumbnail-index">#${idx + 1}</span> <div class="-rpg-batch-aspect-preview" style="aspect-ratio: ${targetAspectRatio};"> <div class="-rpg-batch-aspect-content"> <div style="font-size: 24px;"></div> <div style="font-size: 14px; font-weight: 600;">${targetDims.aspect_label}</div> </div> </div> </div>`;
+													thumbnailHtml = `
+														<div class="aiofc-rpg-batch-thumbnail aiofc-rpg-batch-thumbnail-latent">
+															<span class="aiofc-rpg-batch-thumbnail-index">#${idx + 1}</span>
+															<div class="aiofc-rpg-batch-aspect-preview" style="aspect-ratio: ${targetAspectRatio};">
+																<div class="aiofc-rpg-batch-aspect-content">
+																	<div style="font-size: 24px;">📐</div>
+																	<div style="font-size: 14px; font-weight: 600;">${targetDims.aspect_label}</div>
+																</div>
+															</div>
+														</div>
+													`;
 												}
 											} else {
 												// Show placeholder
 												const promptQueueTemp = parsePromptBatch();
 												const totalMissing = promptQueueTemp.length - (detectedMode === "img2img" ? linkedImages.length : linkedLatents.length);
-												thumbnailHtml = `<div class="rpg-batch-thumbnail -rpg-batch-thumbnail-missing"> <span class="-rpg-batch-thumbnail-index">#${idx + 1}</span> <div class="-rpg-batch-thumbnail-placeholder"> <div style="font-size: 24px; opacity: 0.3;"></div> <div style="font-size: 11px; color: #f59e0b; font-weight: 600; margin-top: 4px;"> ${hasAILLink ? 'Missing Link' : 'No AIL'} </div> ${hasAILLink && detectedMode === "txt2img" ?`
+												thumbnailHtml = `
+													<div class="aiofc-rpg-batch-thumbnail aiofc-rpg-batch-thumbnail-missing">
+														<span class="aiofc-rpg-batch-thumbnail-index">#${idx + 1}</span>
+														<div class="aiofc-rpg-batch-thumbnail-placeholder">
+															<div style="font-size: 24px; opacity: 0.3;">⚠️</div>
+															<div style="font-size: 11px; color: #f59e0b; font-weight: 600; margin-top: 4px;">
+																${hasAILLink ? 'Missing Link' : 'No AIL'}
+															</div>
+															${hasAILLink && detectedMode === "txt2img" ? `
 																<div style="font-size: 9px; color: #9ca3af; margin-top: 4px;">
 																	Click "Sync AIL"
 																</div>
@@ -2761,24 +3613,44 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 											const ailRepeat = linkedItem ? (linkedItem.repeat_count || 1) : null;
 											const repeatMismatch = ailRepeat !== null && promptRepeat !== ailRepeat;
 
-											return `<div class="-rpg-batch-item" data-id="${entry.id}" data-idx="${idx}" draggable="${reorderModeEnabled}"> <div class="-rpg-batch-item-header"> <div style="display: flex; align-items: center; gap: 8px;"> <span class="-rpg-batch-item-number">#${idx + 1}</span> <span class="rpg-source-badge ${sourceType}">${sourceBadgeText}</span> ${ailRepeat !== null ?`
-											<span class="rpg-repeat-status ${repeatMismatch ? '-rpg-repeat-mismatch' : '-rpg-repeat-match'}" title="${repeatMismatch ? 'Repeat counts do not match! Click Sync Repeats to fix.' : 'Repeat counts match'}">
-												${repeatMismatch ? '' : ''}Prompt: ×${promptRepeat} | AIL: ×${ailRepeat}
+											return `
+							<div class="aiofc-rpg-batch-item" data-id="${entry.id}" data-idx="${idx}" draggable="${reorderModeEnabled}">
+								<div class="aiofc-rpg-batch-item-header">
+									<div style="display: flex; align-items: center; gap: 8px;">
+										<span class="aiofc-rpg-batch-item-number">#${idx + 1}</span>
+										<span class="aiofc-rpg-source-badge ${sourceType}">${sourceBadgeText}</span>
+										${ailRepeat !== null ? `
+											<span class="aiofc-rpg-repeat-status ${repeatMismatch ? 'aiofc-rpg-repeat-mismatch' : 'aiofc-rpg-repeat-match'}" title="${repeatMismatch ? 'Repeat counts do not match! Click Sync Repeats to fix.' : 'Repeat counts match'}">
+												${repeatMismatch ? '⚠️ ' : '✓ '}Prompt: ×${promptRepeat} | AIL: ×${ailRepeat}
 											</span>
-										`''} </div> <div class="-rpg-batch-item-controls"> <label>Repeat:</label> <input type="number" class="-rpg-repeat-input" data-id="${entry.id}" value="${entry.repeat_count || 1}" min="1" max="99" /> <button class="-rpg-batch-delete-btn" data-id="${entry.id}" title="Remove prompt">×</button> </div> </div> <!-- Thumbnail Section --> <label class="-rpg-thumbnail-label">${detectedMode === "img2img" ? "IMG2IMG Input Image" : "TXT2IMG Empty Latent"}</label> ${thumbnailHtml} <div class="-rpg-batch-item-content"> ${sdxlMode && entry.tags && entry.tags.length > 0 ?`
+										` : ''}
+									</div>
+									<div class="aiofc-rpg-batch-item-controls">
+										<label>Repeat:</label>
+										<input type="number" class="aiofc-rpg-repeat-input" data-id="${entry.id}" value="${entry.repeat_count || 1}" min="1" max="99" />
+										<button class="aiofc-rpg-batch-delete-btn" data-id="${entry.id}" title="Remove prompt">×</button>
+									</div>
+								</div>
+
+								<!-- Thumbnail Section -->
+								<label class="aiofc-rpg-thumbnail-label">${detectedMode === "img2img" ? "IMG2IMG Input Image" : "TXT2IMG Empty Latent"}</label>
+								${thumbnailHtml}
+
+								<div class="aiofc-rpg-batch-item-content">
+									${sdxlMode && entry.tags && entry.tags.length > 0 ? `
 										<!-- SDXL Mode: Editable SDXL prompt (tags) -->
 										<label>SDXL Prompt (Tags)</label>
-										<textarea class="rpg-prompt-textarea -rpg-positive-textarea" data-id="${entry.id}" rows="3" draggable="false" style="${textareaHeights[`${entry.id}_positive`] ? `height: ${textareaHeights[`${entry.id}_positive`]}px;` : ''}">${entry.tags.join(", ")}</textarea>
+										<textarea class="aiofc-rpg-prompt-textarea aiofc-rpg-positive-textarea" data-id="${entry.id}" rows="3" draggable="false" style="${textareaHeights[`${entry.id}_positive`] ? `height: ${textareaHeights[`${entry.id}_positive`]}px;` : ''}">${entry.tags.join(", ")}</textarea>
 
 										<label style="margin-top: 10px;">Negative Prompt</label>
-										<textarea class="rpg-prompt-textarea -rpg-negative-textarea" data-id="${entry.id}" rows="2" draggable="false" style="${textareaHeights[`${entry.id}_negative`] ? `height: ${textareaHeights[`${entry.id}_negative`]}px;` : ''}">${entry.negative_prompt || ""}</textarea>
+										<textarea class="aiofc-rpg-prompt-textarea aiofc-rpg-negative-textarea" data-id="${entry.id}" rows="2" draggable="false" style="${textareaHeights[`${entry.id}_negative`] ? `height: ${textareaHeights[`${entry.id}_negative`]}px;` : ''}">${entry.negative_prompt || ""}</textarea>
 									` : `
 										<!-- Normal Mode: Show positive and negative textareas -->
 										<label>Positive Prompt</label>
-										<textarea class="rpg-prompt-textarea -rpg-positive-textarea" data-id="${entry.id}" rows="3" draggable="false" style="${textareaHeights[`${entry.id}_positive`] ? `height: ${textareaHeights[`${entry.id}_positive`]}px;` : ''}">${entry.positive_prompt || ""}</textarea>
+										<textarea class="aiofc-rpg-prompt-textarea aiofc-rpg-positive-textarea" data-id="${entry.id}" rows="3" draggable="false" style="${textareaHeights[`${entry.id}_positive`] ? `height: ${textareaHeights[`${entry.id}_positive`]}px;` : ''}">${entry.positive_prompt || ""}</textarea>
 
 										<label style="margin-top: 10px;">Negative Prompt</label>
-										<textarea class="rpg-prompt-textarea -rpg-negative-textarea" data-id="${entry.id}" rows="2" draggable="false" style="${textareaHeights[`${entry.id}_negative`] ? `height: ${textareaHeights[`${entry.id}_negative`]}px;` : ''}">${entry.negative_prompt || ""}</textarea>
+										<textarea class="aiofc-rpg-prompt-textarea aiofc-rpg-negative-textarea" data-id="${entry.id}" rows="2" draggable="false" style="${textareaHeights[`${entry.id}_negative`] ? `height: ${textareaHeights[`${entry.id}_negative`]}px;` : ''}">${entry.negative_prompt || ""}</textarea>
 									`}
 
 									${entry.tags && entry.tags.length > 0 && !sdxlMode
@@ -2786,11 +3658,47 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 										<div class="aiofc-rpg-batch-item-tags">
 											${entry.tags
 												.slice(0, 3)
-												.map((tag) => `<span class="-rpg-tag">${tag}</span>`)
+												.map((tag) => `<span class="aiofc-rpg-tag">${tag}</span>`)
 												.join("")}
-											${entry.tags.length > 3 ? `<span class="-rpg-tag-more">+${entry.tags.length - 3}</span>` : ""}
+											${entry.tags.length > 3 ? `<span class="aiofc-rpg-tag-more">+${entry.tags.length - 3}</span>` : ""}
 										</div>
-									`"" } <!-- Seed Display --> <div style="margin-top: 8px; padding: 6px 8px; background: rgba(0, 0, 0, 0.2); border-radius: 4px; border-left: 2px solid #6366f1;" draggable="false"> <!-- Row 1: Seed input --> <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;"> <span style="font-size: 11px; color: #9ca3af; font-weight: 500; user-select: none;"> Seed:</span> <input type="number" class="-rpg-seed-input" data-id="${entry.id}" value="${entry.seed || 1111111}" min="0" max="9999999999999999" draggable="false" style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: #c4b5fd; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; width: 120px; font-weight: 600;" title="Seed for this prompt" /> <button class="-rpg-seed-randomize-btn" data-id="${entry.id}" draggable="false" style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: #a78bfa; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 500;" title="Randomize seed"> Random</button> <button class="-rpg-seed-reset-btn" data-id="${entry.id}" draggable="false" style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: #a78bfa; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 500;" title="Reset to default">↺ Reset</button> ${entry.repeat_count > 1 ?`<span class="aiofc-rpg-seed-range" data-id="${entry.id}" style="font-size: 10px; color: #9ca3af; user-select: none;"></span>`''} </div> <!-- Row 2: Control After Generate dropdown --> <div style="display: flex; align-items: center; gap: 6px;"> <label style="font-size: 11px; color: #9ca3af; user-select: none; line-height: 1;" title="What happens to seed after workflow runs">After Gen:</label> <select class="-rpg-seed-control" data-id="${entry.id}" draggable="false" style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: #f9fafb; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;" title="Control behavior after workflow execution"> <option value="fixed" ${(entry.seed_control || 'randomize') === 'fixed' ? 'selected' : ''} title="Seed stays the same">Fixed</option> <option value="increment" ${(entry.seed_control || 'randomize') === 'increment' ? 'selected' : ''} title="Seed +100 after each run">Increment (+100)</option> <option value="decrement" ${(entry.seed_control || 'randomize') === 'decrement' ? 'selected' : ''} title="Seed -100 after each run">Decrement (-100)</option> <option value="randomize" ${(entry.seed_control || 'randomize') === 'randomize' ? 'selected' : ''} title="New random seed after each run">Randomize</option> </select> </div> </div> </div> </div>`;
+									`
+										: ""
+									}
+
+									<!-- Seed Display -->
+									<div style="margin-top: 8px; padding: 6px 8px; background: rgba(0, 0, 0, 0.2); border-radius: 4px; border-left: 2px solid #6366f1;" draggable="false">
+										<!-- Row 1: Seed input -->
+										<div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+											<span style="font-size: 11px; color: #9ca3af; font-weight: 500; user-select: none;">🎲 Seed:</span>
+											<input type="number"
+												class="aiofc-rpg-seed-input"
+												data-id="${entry.id}"
+												value="${entry.seed || 1111111}"
+												min="0"
+												max="9999999999999999"
+												draggable="false"
+												style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: #c4b5fd; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; width: 120px; font-weight: 600;"
+												title="Seed for this prompt"
+											/>
+											<button class="aiofc-rpg-seed-randomize-btn" data-id="${entry.id}" draggable="false" style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: #a78bfa; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 500;" title="Randomize seed">🎲 Random</button>
+											<button class="aiofc-rpg-seed-reset-btn" data-id="${entry.id}" draggable="false" style="background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); color: #a78bfa; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 500;" title="Reset to default">↺ Reset</button>
+											${entry.repeat_count > 1 ? `<span class="aiofc-rpg-seed-range" data-id="${entry.id}" style="font-size: 10px; color: #9ca3af; user-select: none;"></span>` : ''}
+										</div>
+										<!-- Row 2: Control After Generate dropdown -->
+										<div style="display: flex; align-items: center; gap: 6px;">
+											<label style="font-size: 11px; color: #9ca3af; user-select: none; line-height: 1;" title="What happens to seed after workflow runs">After Gen:</label>
+											<select class="aiofc-rpg-seed-control" data-id="${entry.id}" draggable="false" style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: #f9fafb; padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;" title="Control behavior after workflow execution">
+												<option value="fixed" ${(entry.seed_control || 'randomize') === 'fixed' ? 'selected' : ''} title="Seed stays the same">Fixed</option>
+												<option value="increment" ${(entry.seed_control || 'randomize') === 'increment' ? 'selected' : ''} title="Seed +100 after each run">Increment (+100)</option>
+												<option value="decrement" ${(entry.seed_control || 'randomize') === 'decrement' ? 'selected' : ''} title="Seed -100 after each run">Decrement (-100)</option>
+												<option value="randomize" ${(entry.seed_control || 'randomize') === 'randomize' ? 'selected' : ''} title="New random seed after each run">Randomize</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						`;
 										}
 									)
 									.join("");
@@ -2810,12 +3718,27 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					const needsLatentSync = detectedMode === "txt2img" && linkedLatents.length !== promptQueue.length;
 					const needsRepeatSync = hasRepeatMismatch;
 
-					return `<div class="-rpg-batch-container"> <div class="-rpg-batch-header"> <div> <h3>Generation Batch</h3> <p class="-rpg-batch-subtitle"> ${promptQueue.length > 0 ?`📚 ${libraryCount} from Library  |  ✨ ${aiCount} AI Generated`'Add prompts from library or generate with AI'} </p> </div> <div class="-rpg-batch-actions"> ${showSyncButton ?`
-										<button class="rpg-btn-${needsLatentSync || needsRepeatSync ? 'primary' : 'secondary'} -rpg-sync-ail-btn ${needsLatentSync || needsRepeatSync ? '-rpg-btn-warning' : ''}"
+					return `
+						<div class="aiofc-rpg-batch-container">
+							<div class="aiofc-rpg-batch-header">
+								<div>
+									<h3>Generation Batch</h3>
+									<p class="aiofc-rpg-batch-subtitle">
+										${promptQueue.length > 0 ? `📚 ${libraryCount} from Library  |  ✨ ${aiCount} AI Generated` : 'Add prompts from library or generate with AI'}
+									</p>
+								</div>
+								<div class="aiofc-rpg-batch-actions">
+									${showSyncButton ? `
+										<button class="aiofc-rpg-btn-${needsLatentSync || needsRepeatSync ? 'primary' : 'secondary'} aiofc-rpg-sync-ail-btn ${needsLatentSync || needsRepeatSync ? 'aiofc-rpg-btn-warning' : ''}"
 											title="${needsLatentSync ? `Create ${totalGenerations} latents in AIL` : ''}${needsLatentSync && needsRepeatSync ? ' and ' : ''}${needsRepeatSync ? 'Sync repeat counts' : ''}${!needsLatentSync && !needsRepeatSync ? 'Everything synced!' : ''}">
-											${needsLatentSync || needsRepeatSync ? '' : ''}Sync AIL${needsLatentSync ? ` (${totalGenerations})` : ''}
+											${needsLatentSync || needsRepeatSync ? '⚠️ ' : '✓ '}Sync AIL${needsLatentSync ? ` (${totalGenerations})` : ''}
 										</button>
-									`''} <button class="rpg-btn-secondary -rpg-reorder-toggle-btn"> ${reorderModeEnabled ? 'Reorder ON' : 'Reorder OFF'} </button> <span class="-rpg-batch-count">${totalGenerations} generation${totalGenerations !== 1 ? "s" : ""}</span> ${promptQueue.length > 0 ?`<button class="rpg-btn-secondary -rpg-clear-batch-btn">🗑️ Clear All</button>` : ""}
+									` : ''}
+									<button class="aiofc-rpg-btn-secondary aiofc-rpg-reorder-toggle-btn">
+										${reorderModeEnabled ? '🔓 Reorder ON' : '🔒 Reorder OFF'}
+									</button>
+									<span class="aiofc-rpg-batch-count">${totalGenerations} generation${totalGenerations !== 1 ? "s" : ""}</span>
+									${promptQueue.length > 0 ? `<button class="aiofc-rpg-btn-secondary aiofc-rpg-clear-batch-btn">🗑️ Clear All</button>` : ""}
 								</div>
 							</div>
 							${promptQueue.length > 0 ? `
@@ -2838,7 +3761,12 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 									<button class="aiofc-rpg-bulk-randomize-seeds-btn" style="background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); color: #f9fafb; padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;" title="Randomize all ${promptQueue.length} seeds">Randomize</button>
 								</div>
 							</div>
-							`''} <div class="-rpg-batch-grid"> ${gridContent} </div> </div>`;
+							` : ''}
+							<div class="aiofc-rpg-batch-grid">
+								${gridContent}
+							</div>
+						</div>
+					`;
 				};
 
 				// === Image Preview (AIL Sync) ===
@@ -2858,7 +3786,14 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 					// If no AIL connection at all
 					if (!hasAILConnection && !node._linkedAILNodeId) {
-						return `<div class="-rpg-image-preview-section"> <div class="-rpg-image-preview-empty"> <p>No AIL connected</p> <p class="-rpg-hint">Connect an Advanced Image Loader to sync mode</p> </div> </div>`;
+						return `
+							<div class="aiofc-rpg-image-preview-section">
+								<div class="aiofc-rpg-image-preview-empty">
+									<p>No AIL connected</p>
+									<p class="aiofc-rpg-hint">Connect an Advanced Image Loader to sync mode</p>
+								</div>
+							</div>
+						`;
 					}
 
 					const itemCount = node._linkedImageCount || 0;
@@ -2883,29 +3818,72 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 					// Show empty state if AIL is connected but has no images/latents loaded yet
 					if (hasAILConnection && images1.length === 0 && itemCount === 0 && !isImg2Img && latents.length === 0) {
-						return `<div class="-rpg-image-preview-section"> <div class="-rpg-image-preview-header"> <span>${isImg2Img ? 'IMG2IMG' : 'TXT2IMG'} (AIL Node #${node._linkedAILNodeId || 'connected'})</span> </div> <div class="-rpg-image-preview-empty"> <p>No ${itemLabel} detected</p> <p class="-rpg-hint">${isImg2Img ? 'Load images in the AIL node' : 'AIL will create latents when you sync'}</p> </div> </div>`;
+						return `
+							<div class="aiofc-rpg-image-preview-section">
+								<div class="aiofc-rpg-image-preview-header">
+									<span>${isImg2Img ? '🖼️ IMG2IMG' : '📐 TXT2IMG'} (AIL Node #${node._linkedAILNodeId || 'connected'})</span>
+								</div>
+								<div class="aiofc-rpg-image-preview-empty">
+									<p>No ${itemLabel} detected</p>
+									<p class="aiofc-rpg-hint">${isImg2Img ? 'Load images in the AIL node' : 'AIL will create latents when you sync'}</p>
+								</div>
+							</div>
+						`;
 					}
 
 					const isMatch = totalGenerations === itemCount;
 					const matchClass = isMatch ? "match" : "mismatch";
-					const matchIcon = isMatch ? "" : "";
+					const matchIcon = isMatch ? "✅" : "⚠️";
 
 					// Multi-image mode: Show combination cards
 					if (multiImageMode && isImg2Img) {
 						const maxLen = getComboMaxLength(inputsWithImages);
 						const comboCardsHtml = renderComboCards(inputsWithImages, {
 							// Handle both url (from renderImg2ImgGallery events) and thumbnail (from raw batchData events)
-							getImageUrl: (img) => img?.url || (img?.thumbnail ? `//view/${img.thumbnail}` : null)
+							getImageUrl: (img) => img?.url || (img?.thumbnail ? `/aiofc/view/${img.thumbnail}` : null)
 						});
 
-						return `<div class="-rpg-image-preview-section"> <div class="-rpg-image-preview-header"> <div class="-multi-image-indicator"> <span class="-multi-image-indicator-dot"></span> <span class="-multi-image-count">${inputsWithImages.length} AIL inputs</span> <span>connected</span> </div> <span class="rpg-validation-badge -rpg-validation-${matchClass}"> ${matchIcon} ${totalGenerations} prompts ↔ ${maxLen} combinations </span> </div> <div class="-combo-grid"> ${comboCardsHtml} </div> </div>`;
+						return `
+							<div class="aiofc-rpg-image-preview-section">
+								<div class="aiofc-rpg-image-preview-header">
+									<div class="aiofc-multi-image-indicator">
+										<span class="aiofc-multi-image-indicator-dot"></span>
+										<span class="aiofc-multi-image-count">${inputsWithImages.length} AIL inputs</span>
+										<span>connected</span>
+									</div>
+									<span class="aiofc-rpg-validation-badge aiofc-rpg-validation-${matchClass}">
+										${matchIcon} ${totalGenerations} prompts ↔ ${maxLen} combinations
+									</span>
+								</div>
+								<div class="aiofc-combo-grid">
+									${comboCardsHtml}
+								</div>
+							</div>
+						`;
 					}
 
 					// Single input mode: Simple grid (original behavior)
 					const items = isImg2Img ? images1 : latents;
 					const displayItems = items;
 
-					return `<div class="-rpg-image-preview-section"> <div class="-rpg-image-preview-header"> <span>${isImg2Img ? 'IMG2IMG Input Images' : 'TXT2IMG Empty Latents'} (AIL Node #${node._linkedAILNodeId || 'unknown'})</span> <span class="rpg-validation-badge -rpg-validation-${matchClass}"> ${matchIcon} ${totalGenerations} prompts ↔ ${itemCount} ${itemLabel} </span> </div> <div class="-rpg-image-preview-grid"> ${displayItems.length > 0 ? displayItems .map((item, idx) => { // Both modes use same structure with target dimensions const targetDims = getTargetDimensions(); const targetAspectRatio = targetDims.width / targetDims.height; if (isImg2Img) { // IMG2IMG: Show image in aspect ratio box with label overlay return`
+					return `
+						<div class="aiofc-rpg-image-preview-section">
+							<div class="aiofc-rpg-image-preview-header">
+								<span>${isImg2Img ? '🖼️ IMG2IMG Input Images' : '📐 TXT2IMG Empty Latents'} (AIL Node #${node._linkedAILNodeId || 'unknown'})</span>
+								<span class="aiofc-rpg-validation-badge aiofc-rpg-validation-${matchClass}">
+									${matchIcon} ${totalGenerations} prompts ↔ ${itemCount} ${itemLabel}
+								</span>
+							</div>
+							<div class="aiofc-rpg-image-preview-grid">
+								${displayItems.length > 0 ? displayItems
+									.map((item, idx) => {
+										// Both modes use same structure with target dimensions
+										const targetDims = getTargetDimensions();
+										const targetAspectRatio = targetDims.width / targetDims.height;
+
+										if (isImg2Img) {
+											// IMG2IMG: Show image in aspect ratio box with label overlay
+											return `
 												<div class="aiofc-rpg-preview-thumb">
 													<span class="aiofc-rpg-preview-index">#${idx + 1}</span>
 													<div class="aiofc-rpg-preview-aspect-box" style="aspect-ratio: ${targetAspectRatio}; position: relative;">
@@ -2914,7 +3892,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 															<div style="font-size: 11px; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); background: rgba(139, 92, 246, 0.75); padding: 3px 8px; border-radius: 4px;">${targetDims.aspect_label}</div>
 														</div>
 													</div>
-													${item.repeat_count && item.repeat_count > 1 ? `<span class="-rpg-preview-repeat">×${item.repeat_count}</span>` : ''}
+													${item.repeat_count && item.repeat_count > 1 ? `<span class="aiofc-rpg-preview-repeat">×${item.repeat_count}</span>` : ''}
 												</div>
 											`;
 										} else {
@@ -2928,7 +3906,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 															<div style="font-size: 11px; font-weight: 600; margin-top: 4px;">${targetDims.aspect_label}</div>
 														</div>
 													</div>
-													${item.repeat_count && item.repeat_count > 1 ? `<span class="-rpg-preview-repeat">×${item.repeat_count}</span>` : ''}
+													${item.repeat_count && item.repeat_count > 1 ? `<span class="aiofc-rpg-preview-repeat">×${item.repeat_count}</span>` : ''}
 												</div>
 											`;
 										}
@@ -3027,12 +4005,37 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					const modalOverlay = document.createElement('div');
 					modalOverlay.className = 'aiofc-rpg-preview-modal-overlay';
 
-					const modalContent = `<div class="-rpg-preview-modal"> <div class="-rpg-preview-modal-header"> <h3> System Prompt Preview</h3> <button class="-rpg-preview-modal-close"></button> </div> <div class="-rpg-preview-modal-body"> <div class="-rpg-preview-section"> <h4>Current Settings:</h4> <div class="-rpg-preview-settings"> ${context.mode ?`<div><strong>Mode:</strong> ${context.mode}</div>` : ''}
+					const modalContent = `
+						<div class="aiofc-rpg-preview-modal">
+							<div class="aiofc-rpg-preview-modal-header">
+								<h3>📋 System Prompt Preview</h3>
+								<button class="aiofc-rpg-preview-modal-close">✕</button>
+							</div>
+							<div class="aiofc-rpg-preview-modal-body">
+								<div class="aiofc-rpg-preview-section">
+									<h4>Current Settings:</h4>
+									<div class="aiofc-rpg-preview-settings">
+										${context.mode ? `<div><strong>Mode:</strong> ${context.mode}</div>` : ''}
 										${context.style ? `<div><strong>Style:</strong> ${context.style}</div>` : ''}
 										${context.character ? `<div><strong>Character:</strong> ${context.character.substring(0, 100)}${context.character.length > 100 ? '...' : ''}</div>` : ''}
 										${context.expression ? `<div><strong>Expression:</strong> ${context.expression}</div>` : ''}
 										${context.userInput ? `<div><strong>User Input:</strong> ${context.userInput}</div>` : ''}
-										${context.inspirationCount ? `<div><strong>Inspiration Count:</strong> ${context.inspirationCount}</div>`''} </div> </div> <div class="-rpg-preview-section"> <h4>Final System Prompt:</h4> <div class="-rpg-preview-prompt"> <pre>${escapeHtml(systemPrompt)}</pre> </div> </div> </div> <div class="-rpg-preview-modal-footer"> <button class="rpg-btn-text -rpg-preview-copy-btn"> Copy to Clipboard</button> <button class="rpg-btn-primary -rpg-preview-modal-close">Close</button> </div> </div>`;
+										${context.inspirationCount ? `<div><strong>Inspiration Count:</strong> ${context.inspirationCount}</div>` : ''}
+									</div>
+								</div>
+								<div class="aiofc-rpg-preview-section">
+									<h4>Final System Prompt:</h4>
+									<div class="aiofc-rpg-preview-prompt">
+										<pre>${escapeHtml(systemPrompt)}</pre>
+									</div>
+								</div>
+							</div>
+							<div class="aiofc-rpg-preview-modal-footer">
+								<button class="aiofc-rpg-btn-text aiofc-rpg-preview-copy-btn">📋 Copy to Clipboard</button>
+								<button class="aiofc-rpg-btn-primary aiofc-rpg-preview-modal-close">Close</button>
+							</div>
+						</div>
+					`;
 
 					modalOverlay.innerHTML = modalContent;
 					document.body.appendChild(modalOverlay);
@@ -3050,7 +4053,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 						copyBtn.onclick = () => {
 							navigator.clipboard.writeText(systemPrompt).then(() => {
 								const originalText = copyBtn.textContent;
-								copyBtn.textContent = 'Copied!';
+								copyBtn.textContent = '✓ Copied!';
 								setTimeout(() => {
 									copyBtn.textContent = originalText;
 								}, 2000);
@@ -3072,7 +4075,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 				const highlightSearchTerm = (text, searchQuery) => {
 					if (!text || !searchQuery) return escapeHtml(text);
 					const regex = new RegExp(`(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\$&')})`, 'gi');
-					return escapeHtml(text).replace(regex, '<mark class="-rpg-highlight">$1</mark>');
+					return escapeHtml(text).replace(regex, '<mark class="aiofc-rpg-highlight">$1</mark>');
 				};
 
 				const generateUniqueId = () => {
@@ -3287,7 +4290,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					const entry = promptQueue.find((p) => p.id === id);
 					if (!entry) return;
 
-					const rangeSpan = container.querySelector(`.-rpg-seed-range[data-id="${id}"]`);
+					const rangeSpan = container.querySelector(`.aiofc-rpg-seed-range[data-id="${id}"]`);
 					if (!rangeSpan || entry.repeat_count <= 1) return;
 
 					const seed = entry.seed || 1111111;
@@ -3336,7 +4339,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 				// Comprehensive graph dump for debugging
 				node.debugDumpGraph = () => {
-					console.group("[RPG] Complete Graph Dump");
+					console.group("[RPG] 📊 Complete Graph Dump");
 					console.log("=== Current Node ===");
 					console.log("Node ID:", node.id);
 					console.log("Node Type:", node.type);
@@ -3401,7 +4404,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 				// === Generate Creative Prompts ===
 				const generateCreativePrompts = async () => {
-					console.group("[RPG] Generate Creative Prompts - START");
+					console.group("[RPG] 🎨 Generate Creative Prompts - START");
 					console.log("[RPG] Timestamp:", new Date().toISOString());
 
 					const genCountInput = container.querySelector(".aiofc-rpg-gen-count-input");
@@ -3441,8 +4444,8 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					const geminiApiKey = (getFinalInputValue("gemini_api_key", "") || "").trim() || window.AIOFC_GEMINI_KEY || "";
 					const grokApiKey = (getFinalInputValue("grok_api_key", "") || "").trim() || window.AIOFC_GROK_KEY || "";
 
-					console.log(`[RPG] Resolved Gemini API Key: ${geminiApiKey ?`[KEY PRESENT - Length: ${geminiApiKey.length}]` : "[EMPTY]"}`);
-					console.log(`[RPG] Resolved Grok API Key: ${grokApiKey ?`[KEY PRESENT - Length: ${grokApiKey.length}]` : "[EMPTY]"}`);
+					console.log(`[RPG] ✅ Resolved Gemini API Key: ${geminiApiKey ? `[KEY PRESENT - Length: ${geminiApiKey.length}]` : "[EMPTY]"}`);
+					console.log(`[RPG] ✅ Resolved Grok API Key: ${grokApiKey ? `[KEY PRESENT - Length: ${grokApiKey.length}]` : "[EMPTY]"}`);
 
 					console.log("[RPG] Window fallback keys:", {
 						AIOFC_GEMINI_KEY: window.AIOFC_GEMINI_KEY ? "[PRESENT]" : "[EMPTY]",
@@ -3451,11 +4454,11 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 					// Validate API keys before proceeding
 					if (!geminiApiKey && !grokApiKey) {
-						console.error("[RPG] NO API KEYS FOUND!");
+						console.error("[RPG] ❌ NO API KEYS FOUND!");
 						console.log("[RPG] To fix this, connect a Primitive String node to either:");
 						console.log("[RPG]   - gemini_api_key input");
 						console.log("[RPG]   - grok_api_key input");
-						console.log("[RPG] Or set window._GEMINI_KEY or window._GROK_KEY");
+						console.log("[RPG] Or set window.AIOFC_GEMINI_KEY or window.AIOFC_GROK_KEY");
 						console.groupEnd();
 						alert("No API keys found! Please connect a Primitive String node with your Gemini or Grok API key to the 'gemini_api_key' or 'grok_api_key' input.");
 						return;
@@ -3467,10 +4470,13 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 						const originalText = generateBtn.textContent;
 						generateBtn.style.position = 'relative';
 						generateBtn.style.overflow = 'hidden';
-						generateBtn.innerHTML = `${originalText} <div class="-rpg-progress-bar-loading"></div>`;
+						generateBtn.innerHTML = `
+							${originalText}
+							<div class="aiofc-rpg-progress-bar-loading"></div>
+						`;
 					}
 
-					console.log("[RPG] Making API request to //generate_creative_prompts");
+					console.log("[RPG] Making API request to /aiofc/generate_creative_prompts");
 					console.log("[RPG] Request payload:", {
 						source_prompts_count: sourcePrompts.length,
 						generation_count: generationCount,
@@ -3485,7 +4491,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					});
 
 					try {
-					const response = await api.fetchApi("//generate_creative_prompts", {
+					const response = await api.fetchApi("/aiofc/generate_creative_prompts", {
 							method: "POST",
 							headers: { "Content-Type": "application/json" },
 							body: JSON.stringify({
@@ -3520,7 +4526,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 						}
 
 						if (result.success && result.prompts) {
-							console.log(`[RPG] Success! Generated ${result.prompts.length} prompts`);
+							console.log(`[RPG] ✅ Success! Generated ${result.prompts.length} prompts`);
 							// Show preview
 							const previewSection = container.querySelector(".aiofc-rpg-creative-preview");
 							const previewList = container.querySelector(".aiofc-rpg-creative-preview-list");
@@ -3528,7 +4534,12 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 							if (previewSection && previewList) {
 								previewList.innerHTML = result.prompts
 									.map(
-										(p, idx) => `<div class="-rpg-preview-item"> <strong>#${idx + 1}</strong> <p>${escapeHtml(p.positive || "")}</p> </div>`
+										(p, idx) => `
+									<div class="aiofc-rpg-preview-item">
+										<strong>#${idx + 1}</strong>
+										<p>${escapeHtml(p.positive || "")}</p>
+									</div>
+								`
 									)
 									.join("");
 
@@ -3541,13 +4552,13 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 							throw new Error(result.error || "Unknown error");
 						}
 					} catch (error) {
-						console.error("[RPG] Error during creative prompt generation:", error);
+						console.error("[RPG] ❌ Error during creative prompt generation:", error);
 						console.error("[RPG] Error stack:", error.stack);
 						alert(`Creative generation error: ${error.message || error}`);
 					} finally {
 						if (generateBtn) {
 							generateBtn.disabled = false;
-							generateBtn.textContent = "Generate & Add to Batch";
+							generateBtn.textContent = "✨ Generate & Add to Batch";
 						}
 						console.log("[RPG] Generate Creative Prompts - END");
 						console.groupEnd();
@@ -3601,7 +4612,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 				// === Generate Character Prompts ===
 				const generateCharacterPrompts = async () => {
-					console.group("[RPG] Generate Character Prompts - START");
+					console.group("[RPG] 👤 Generate Character Prompts - START");
 					console.log("[RPG] Timestamp:", new Date().toISOString());
 
 					const charRefInput = container.querySelector(".aiofc-rpg-character-ref-input");
@@ -3634,8 +4645,8 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					const geminiApiKey = (getFinalInputValue("gemini_api_key", "") || "").trim() || window.AIOFC_GEMINI_KEY || "";
 					const grokApiKey = (getFinalInputValue("grok_api_key", "") || "").trim() || window.AIOFC_GROK_KEY || "";
 
-					console.log(`[RPG] Resolved Gemini API Key: ${geminiApiKey ?`[KEY PRESENT - Length: ${geminiApiKey.length}]` : "[EMPTY]"}`);
-					console.log(`[RPG] Resolved Grok API Key: ${grokApiKey ?`[KEY PRESENT - Length: ${grokApiKey.length}]` : "[EMPTY]"}`);
+					console.log(`[RPG] ✅ Resolved Gemini API Key: ${geminiApiKey ? `[KEY PRESENT - Length: ${geminiApiKey.length}]` : "[EMPTY]"}`);
+					console.log(`[RPG] ✅ Resolved Grok API Key: ${grokApiKey ? `[KEY PRESENT - Length: ${grokApiKey.length}]` : "[EMPTY]"}`);
 
 					console.log("[RPG] Window fallback keys:", {
 						AIOFC_GEMINI_KEY: window.AIOFC_GEMINI_KEY ? "[PRESENT]" : "[EMPTY]",
@@ -3644,18 +4655,18 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 
 					// Validate API keys before proceeding
 					if (!geminiApiKey && !grokApiKey) {
-						console.error("[RPG] NO API KEYS FOUND!");
+						console.error("[RPG] ❌ NO API KEYS FOUND!");
 						console.log("[RPG] To fix this, connect a Primitive String node to either:");
 						console.log("[RPG]   - gemini_api_key input");
 						console.log("[RPG]   - grok_api_key input");
-						console.log("[RPG] Or set window._GEMINI_KEY or window._GROK_KEY");
+						console.log("[RPG] Or set window.AIOFC_GEMINI_KEY or window.AIOFC_GROK_KEY");
 						console.groupEnd();
 						alert("No API keys found! Please connect a Primitive String node with your Gemini or Grok API key to the 'gemini_api_key' or 'grok_api_key' input.");
 						return;
 					}
 
 					if (!characterReference.trim()) {
-						console.error("[RPG] No character reference provided");
+						console.error("[RPG] ❌ No character reference provided");
 						console.groupEnd();
 						alert("Please enter a character reference");
 						return;
@@ -3667,10 +4678,13 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 						const originalText = generateBtn.textContent;
 						generateBtn.style.position = 'relative';
 						generateBtn.style.overflow = 'hidden';
-						generateBtn.innerHTML = `${originalText} <div class="-rpg-progress-bar-loading"></div>`;
+						generateBtn.innerHTML = `
+							${originalText}
+							<div class="aiofc-rpg-progress-bar-loading"></div>
+						`;
 					}
 
-					console.log("[RPG] Making API request to //generate_creative_prompts (character mode)");
+					console.log("[RPG] Making API request to /aiofc/generate_creative_prompts (character mode)");
 					console.log("[RPG] Request payload:", {
 						generation_count: generationCount,
 						is_sdxl: isSDXL,
@@ -3684,7 +4698,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 					});
 
 					try {
-					const response = await api.fetchApi("//generate_creative_prompts", {
+					const response = await api.fetchApi("/aiofc/generate_creative_prompts", {
 							method: "POST",
 							headers: { "Content-Type": "application/json" },
 							body: JSON.stringify({
@@ -3713,7 +4727,7 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 						}
 
 						if (result.success && result.prompts) {
-							console.log(`[RPG] Success! Generated ${result.prompts.length} character prompts`);
+							console.log(`[RPG] ✅ Success! Generated ${result.prompts.length} character prompts`);
 							// Show preview
 							const previewSection = container.querySelector(".aiofc-rpg-creative-preview");
 							const previewList = container.querySelector(".aiofc-rpg-character-preview-list");
@@ -3721,7 +4735,12 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 							if (previewSection && previewList) {
 								previewList.innerHTML = result.prompts
 									.map(
-										(p, idx) => `<div class="-rpg-preview-item"> <strong>#${idx + 1}</strong> <p>${escapeHtml(p.positive || "")}</p> </div>`
+										(p, idx) => `
+									<div class="aiofc-rpg-preview-item">
+										<strong>#${idx + 1}</strong>
+										<p>${escapeHtml(p.positive || "")}</p>
+									</div>
+								`
 									)
 									.join("");
 
@@ -3734,13 +4753,13 @@ Example: 'Margot Robbie in a red evening gown at a luxury hotel rooftop bar at s
 							throw new Error(result.error || "Unknown error");
 						}
 					} catch (error) {
-						console.error("[RPG] Error during character prompt generation:", error);
+						console.error("[RPG] ❌ Error during character prompt generation:", error);
 						console.error("[RPG] Error stack:", error.stack);
 						alert(`Character generation error: ${error.message || error}`);
 					} finally {
 						if (generateBtn) {
 							generateBtn.disabled = false;
-							generateBtn.textContent = "Generate Character Prompts";
+							generateBtn.textContent = "👤 Generate Character Prompts";
 						}
 						console.log("[RPG] Generate Character Prompts - END");
 						console.groupEnd();
@@ -3808,11 +4827,11 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 				const generateCharacterDescription = async () => {
 					// CRASH PREVENTION: Check if already generating
 					if (isGenerating) {
-						console.warn("[RPG] Generation already in progress, ignoring request");
+						console.warn("[RPG] ⚠️ Generation already in progress, ignoring request");
 						return;
 					}
 
-					console.group("[RPG] Generate Character Description - START");
+					console.group("[RPG] 🎨 Generate Character Description - START");
 
 					// Set generation lock
 					isGenerating = true;
@@ -3867,7 +4886,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 										});
 
 										imageData = base64;
-										console.log("[RPG] Image loaded and converted to base64");
+										console.log("[RPG] ✅ Image loaded and converted to base64");
 									} else {
 										console.warn("[RPG] No image selected in LoadImage node");
 									}
@@ -3895,7 +4914,10 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						const originalText = generateBtn.textContent;
 						generateBtn.style.position = 'relative';
 						generateBtn.style.overflow = 'hidden';
-						generateBtn.innerHTML = `${originalText} <div class="-rpg-progress-bar-loading"></div>`;
+						generateBtn.innerHTML = `
+							${originalText}
+							<div class="aiofc-rpg-progress-bar-loading"></div>
+						`;
 					}
 
 					try {
@@ -3911,7 +4933,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							hasCustomSystemPrompt: !!customSystemPrompt
 						});
 
-						const response = await api.fetchApi("//generate_character_description", {
+						const response = await api.fetchApi("/aiofc/generate_character_description", {
 							method: "POST",
 							headers: { "Content-Type": "application/json" },
 							body: JSON.stringify({
@@ -3938,7 +4960,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								throw new Error("API returned empty description. Check backend logs for details.");
 							}
 
-							console.log(`[RPG] Character description generated successfully (${result.description.length} chars)`);
+							console.log(`[RPG] ✅ Character description generated successfully (${result.description.length} chars)`);
 
 							// Populate the character text input with the generated description
 							node.properties.character_text_input = result.description;
@@ -3955,7 +4977,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							throw new Error(result.error || "API returned success=false");
 						}
 					} catch (error) {
-						console.error("[RPG] Error during character description generation:", error);
+						console.error("[RPG] ❌ Error during character description generation:", error);
 						alert(`Character description error: ${error.message || error}`);
 					} finally {
 						// CRASH PREVENTION: Always release generation lock
@@ -3966,7 +4988,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							generateBtn.disabled = false;
 							generateBtn.style.position = '';
 							generateBtn.style.overflow = '';
-							generateBtn.textContent = "Generate from Image";
+							generateBtn.textContent = "✨ Generate from Image";
 						}
 						console.groupEnd();
 					}
@@ -3979,7 +5001,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					// Check if there's already an ongoing generation
 					if (generationAbortController !== null) {
 						const confirmRestart = confirm(
-							"Generation in Progress\n\n" +
+							"⚠️ Generation in Progress\n\n" +
 							"There is already a generation running. Starting a new one will cancel the current generation.\n\n" +
 							"Do you want to cancel the current generation and start a new one?"
 						);
@@ -3990,7 +5012,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						}
 
 						// User confirmed - abort the current generation
-						console.log("[RPG] Aborting current generation to start new one");
+						console.log("[RPG] 🛑 Aborting current generation to start new one");
 						generationAbortController.abort();
 						generationAbortController = null;
 
@@ -3998,7 +5020,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						await new Promise(resolve => setTimeout(resolve, 100));
 					}
 
-					console.group("[RPG] Generate Unified Prompts - START (Sequential)");
+					console.group("[RPG] 🎯 Generate Unified Prompts - START (Sequential)");
 					console.log("[RPG] Timestamp:", new Date().toISOString());
 
 					const generateBtn = container.querySelector(".aiofc-rpg-generate-unified-btn");
@@ -4037,7 +5059,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						uniqueImages4 = node._linkedImages4 || [];
 
 						if (uniqueImages.length === 0) {
-							console.error("[RPG] No images from AIL");
+							console.error("[RPG] ❌ No images from AIL");
 							alert("No images from AIL. Please connect an Advanced Image Loader node in img2img mode.");
 							return;
 						}
@@ -4052,7 +5074,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							node.properties.model_instructions || "",
 							node.properties.clean_mode || false
 						);
-						console.log(`[RPG] IMG2IMG composed user input: ${userInput ?`"${userInput.substring(0, 100)}..."` : "(none)"}`);
+						console.log(`[RPG] 📝 IMG2IMG composed user input: ${userInput ? `"${userInput.substring(0, 100)}..."` : "(none)"}`);
 
 						// Collect affect elements
 						const affectBackground = container.querySelector(".aiofc-rpg-affect-background")?.checked;
@@ -4065,7 +5087,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						if (affectPose) affectElements.push("pose");
 						if (affectLighting) affectElements.push("lighting");
 
-						console.log("[RPG] Affect Elements collected:", affectElements);
+						console.log("[RPG] 🎨 Affect Elements collected:", affectElements);
 
 						// Get inspiration count (for Creative mode only, respects toggle)
 						const inspirationCountInput = container.querySelector(".aiofc-rpg-inspiration-count");
@@ -4073,7 +5095,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							inspirationCount = node.properties.enable_library_inspiration ? parseInt(inspirationCountInput?.value || "3") : 0;
 						}
 
-						console.log(`[RPG] img2img mode: ${uniqueImages.length} unique images → ${generationCount} prompts`);
+						console.log(`[RPG] 🖼️ img2img mode: ${uniqueImages.length} unique images → ${generationCount} prompts`);
 					} else {
 						// TXT2IMG: Collect user input and inspiration
 						const userTextInput = container.querySelector(".aiofc-rpg-user-text-input");
@@ -4094,9 +5116,9 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 						const selectedTheme = node.properties.theme_preset || DEFAULT_THEME_PRESET;
 						if (selectedTheme !== "none") {
-							console.log(`[RPG] Using theme: ${selectedTheme}`);
+							console.log(`[RPG] 🎨 Using theme: ${selectedTheme}`);
 						}
-						console.log(`[RPG] TXT2IMG composed user input: ${userInput ?`"${userInput.substring(0, 100)}..."` : "(none)"}`);
+						console.log(`[RPG] 📝 TXT2IMG composed user input: ${userInput ? `"${userInput.substring(0, 100)}..."` : "(none)"}`);
 					}
 
 					const forceRegenerate = true; // Always regenerate
@@ -4110,13 +5132,13 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						sourcePromptPool = filterPrompts(promptsDatabase, filters);
 
 						if (sourcePromptPool.length === 0 && detectedMode === 'txt2img') {
-							console.warn("[RPG] No prompts available after filtering - generating without inspiration");
+							console.warn("[RPG] ⚠️ No prompts available after filtering - generating without inspiration");
 							alert("No prompts match the current filters. Adjust filters or generate without inspiration.");
 							return;
 						}
 
 						if (sourcePromptPool.length > 0) {
-							console.log(`[RPG] Prepared pool of ${sourcePromptPool.length} prompts for sampling (inspiration: ${inspirationCount} per generation)`);
+							console.log(`[RPG] 🎲 Prepared pool of ${sourcePromptPool.length} prompts for sampling (inspiration: ${inspirationCount} per generation)`);
 						}
 					}
 
@@ -4137,9 +5159,9 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					const modelLabel = MODEL_INSTRUCTION_PRESETS[modelPresetKey]?.label || "";
 					const currentModelBadge = modelPresetKey !== "none" && modelLabel ? modelLabel.replace(/^[^\w\s]+\s*/, '').trim() : null;
 
-					console.log(`[RPG] Generation mode: ${detectedMode}, style: ${generationStyle}`);
-					if (currentThemeBadge) console.log(`[RPG] Theme: ${currentThemeBadge}`);
-					if (currentModelBadge) console.log(`[RPG] Model: ${currentModelBadge}`);
+					console.log(`[RPG] 🔧 Generation mode: ${detectedMode}, style: ${generationStyle}`);
+					if (currentThemeBadge) console.log(`[RPG] 🎨 Theme: ${currentThemeBadge}`);
+					if (currentModelBadge) console.log(`[RPG] 🏷️ Model: ${currentModelBadge}`);
 
 					console.log("[RPG] Configuration:", {
 						mode: detectedMode,
@@ -4160,7 +5182,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					const grokApiKey = (getFinalInputValue("grok_api_key", "") || "").trim() || window.AIOFC_GROK_KEY || "";
 
 					if (!geminiApiKey && !grokApiKey) {
-						console.error("[RPG] NO API KEYS FOUND!");
+						console.error("[RPG] ❌ NO API KEYS FOUND!");
 						console.groupEnd();
 						alert("No API keys found! Please connect a Primitive String node with your Gemini or Grok API key.");
 						return;
@@ -4196,7 +5218,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					if (progressSection) {
 						progressSection.style.display = "block";
 						// Reset header to "Generating..." when starting a new generation
-						const progressHeader = progressSection.querySelector(".-rpg-progress-header h4");
+						const progressHeader = progressSection.querySelector(".aiofc-rpg-progress-header h4");
 						if (progressHeader) {
 							progressHeader.innerHTML = `⏳ Generating Prompts...`;
 						}
@@ -4216,7 +5238,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							if (!isImg2Img) return '';
 
 							// Helper to get image URL (handles both url and thumbnail formats)
-							const getImgUrl = (img) => img?.url || (img?.thumbnail ? `//view/${img.thumbnail}` : null);
+							const getImgUrl = (img) => img?.url || (img?.thumbnail ? `/aiofc/view/${img.thumbnail}` : null);
 
 							const images = [
 								{ img: uniqueImages[index], label: "1" },
@@ -4227,7 +5249,9 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 							if (images.length === 0) return '';
 
-							return `<div class="-rpg-progress-images"> ${images.map(item =>`
+							return `
+								<div class="aiofc-rpg-progress-images">
+									${images.map(item => `
 										<div class="aiofc-combo-slot">
 											<div class="aiofc-combo-slot-image">
 												<img src="${getImgUrl(item.img)}" alt="Image ${item.label}" loading="lazy" style="background: rgba(0,0,0,0.3);" onerror="this.style.opacity='0.3'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%239ca3af%22 d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E';" />
@@ -4243,7 +5267,17 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							progressItem.className = "aiofc-rpg-progress-item";
 							progressItem.dataset.index = i;
 							const imagePreview = renderProgressImages(i);
-							progressItem.innerHTML = `<div class="-rpg-progress-item-header"> <span class="-rpg-progress-item-label">#${i + 1}</span> ${imagePreview} <span class="rpg-progress-item-status pending"> Pending</span> </div> <div class="-rpg-progress-item-bar"> <div class="-rpg-progress-item-fill" style="width: 0%"></div> </div> <div class="-rpg-progress-item-message"></div>`;
+							progressItem.innerHTML = `
+								<div class="aiofc-rpg-progress-item-header">
+									<span class="aiofc-rpg-progress-item-label">#${i + 1}</span>
+									${imagePreview}
+									<span class="aiofc-rpg-progress-item-status pending">⏳ Pending</span>
+								</div>
+								<div class="aiofc-rpg-progress-item-bar">
+									<div class="aiofc-rpg-progress-item-fill" style="width: 0%"></div>
+								</div>
+								<div class="aiofc-rpg-progress-item-message"></div>
+							`;
 							progressItems.appendChild(progressItem);
 						}
 
@@ -4258,7 +5292,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					// Listen for cancel signal
 					signal.addEventListener('abort', () => {
 						cancelRequested = true;
-						console.log("[RPG] Cancel requested by user");
+						console.log("[RPG] 🛑 Cancel requested by user");
 					});
 
 					try {
@@ -4304,7 +5338,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 										currentExpression = defaultExpression;
 									}
 
-									console.log(`[RPG] [${i + 1}] Expression: ${currentExpression}`);
+									console.log(`[RPG] 😊 [${i + 1}] Expression: ${currentExpression}`);
 								}
 
 								// Build dynamic system prompt with actual source prompt text
@@ -4326,7 +5360,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								// Update status to in-progress
 								updateProgressState(i, { status: 'in-progress', progress: 100 });
 
-								console.log(`[RPG] [${i + 1}] Starting generation with ${thisPromptSources.length} unique source prompts...`);
+								console.log(`[RPG] 📝 [${i + 1}] Starting generation with ${thisPromptSources.length} unique source prompts...`);
 
 								// For img2img: Convert all connected images to base64
 								let multiImageData = [];
@@ -4337,14 +5371,14 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 									const convertImageIfExists = async (imagesArray, label, index) => {
 										const img = imagesArray[index];
 										// Handle both url (from renderImg2ImgGallery events) and thumbnail (from raw batchData events)
-										const imgUrl = img?.url || (img?.thumbnail ? `//view/${img.thumbnail}` : null);
+										const imgUrl = img?.url || (img?.thumbnail ? `/aiofc/view/${img.thumbnail}` : null);
 										if (img && imgUrl) {
 											try {
 												const base64 = await imageUrlToBase64(imgUrl);
-												console.log(`[RPG] [${i + 1}] ${label} converted to base64 (${base64.length} chars)`);
+												console.log(`[RPG] 📷 [${i + 1}] ${label} converted to base64 (${base64.length} chars)`);
 												return { label, base64, url: imgUrl };
 											} catch (error) {
-												console.warn(`[RPG] [${i + 1}] Failed to convert ${label}:`, error);
+												console.warn(`[RPG] ⚠️ [${i + 1}] Failed to convert ${label}:`, error);
 												return null;
 											}
 										}
@@ -4362,7 +5396,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 									const results = await Promise.all(conversionPromises);
 									multiImageData = results.filter(Boolean);
 
-									console.log(`[RPG] [${i + 1}] ${multiImageData.length} images converted for vision API`);
+									console.log(`[RPG] 📷 [${i + 1}] ${multiImageData.length} images converted for vision API`);
 								}
 
 								// Build payload
@@ -4400,27 +5434,27 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								}
 
 								// 🔍 DETAILED LOGGING: Preview the complete request
-								console.group(`[RPG] REQUEST PREVIEW [${i + 1}/${generationCount}]`);
-								console.log(`Mode: ${detectedMode} | Style: ${generationStyle} | Model: ${model}`);
+								console.group(`[RPG] 🔍 REQUEST PREVIEW [${i + 1}/${generationCount}]`);
+								console.log(`📋 Mode: ${detectedMode} | Style: ${generationStyle} | Model: ${model}`);
 								console.log(`\n━━━ SYSTEM PROMPT ━━━\n${dynamicSystemPrompt}\n━━━━━━━━━━━━━━━━━━━━`);
 
 								if (userInput) {
-									console.log(`\n User Input: "${userInput}"`);
+									console.log(`\n💬 User Input: "${userInput}"`);
 								}
 
 								if (useCharacter && characterDescription) {
-									console.log(`\n Character Reference: "${characterDescription}"`);
+									console.log(`\n👤 Character Reference: "${characterDescription}"`);
 								}
 
 								if (thisPromptSources.length > 0) {
-									console.log(`\n Source Prompts (${thisPromptSources.length}):`);
+									console.log(`\n📚 Source Prompts (${thisPromptSources.length}):`);
 									thisPromptSources.forEach((sp, idx) => {
 										console.log(`  [${idx + 1}] POS: ${sp.positive_prompt.substring(0, 100)}${sp.positive_prompt.length > 100 ? '...' : ''}`);
 									});
 								}
 
 								if (isImg2Img && multiImageData.length > 0) {
-									console.log(`\n Input Images (${multiImageData.length}):`);
+									console.log(`\n🖼️ Input Images (${multiImageData.length}):`);
 									multiImageData.forEach((imgData, idx) => {
 										console.log(`  [${imgData.label}] URL: ${imgData.url}`);
 										console.log(`           Base64 Length: ${imgData.base64?.length || 0} chars`);
@@ -4428,10 +5462,10 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								}
 
 								if (affectElements && affectElements.length > 0) {
-									console.log(`\n Affect Elements: ${affectElements.join(', ')}`);
+									console.log(`\n🎨 Affect Elements: ${affectElements.join(', ')}`);
 								}
 
-								console.log(`\n Model Settings: Temp=${temperatureValue}, Top-P=${topPValue}, SDXL=${isSDXL}`);
+								console.log(`\n⚙️ Model Settings: Temp=${temperatureValue}, Top-P=${topPValue}, SDXL=${isSDXL}`);
 
 								// Log complete payload (excluding sensitive keys)
 								const payloadForLogging = {
@@ -4455,13 +5489,13 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								while (retryCount <= maxRetries && !success && !cancelRequested) {
 									try {
 										if (retryCount > 0) {
-											if (statusBadge) statusBadge.textContent = `Retry ${retryCount}/${maxRetries}`;
+											if (statusBadge) statusBadge.textContent = `🔄 Retry ${retryCount}/${maxRetries}`;
 											if (messageDiv) messageDiv.textContent = `Rate limited, retrying in ${Math.pow(2, retryCount - 1)}s...`;
 											await new Promise(resolve => setTimeout(resolve, Math.pow(2, retryCount - 1) * 1000));
 											if (cancelRequested) break;
 										}
 
-										const response = await api.fetchApi("//generate_creative_prompts", {
+										const response = await api.fetchApi("/aiofc/generate_creative_prompts", {
 											method: "POST",
 											headers: { "Content-Type": "application/json" },
 											body: JSON.stringify(payload),
@@ -4551,7 +5585,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 											}
 
 											// 🔍 DETAILED LOGGING: Preview the response
-											console.group(`[RPG] RESPONSE RECEIVED [${i + 1}/${generationCount}]`);
+											console.group(`[RPG] ✅ RESPONSE RECEIVED [${i + 1}/${generationCount}]`);
 											console.log(`\n━━━ RAW API RESPONSE ━━━\n${typeof rawPrompt === 'string' ? rawPrompt : JSON.stringify(rawPrompt, null, 2)}\n━━━━━━━━━━━━━━━━━━━━━━`);
 											console.log(`\n━━━ PARSED RESULT ━━━`);
 											console.log(`POSITIVE: ${promptResult.positive?.substring(0, 200)}${promptResult.positive?.length > 200 ? '...' : ''}`);
@@ -4591,7 +5625,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 									theme_badge: currentThemeBadge
 								});
 
-								console.log(`[RPG] [${i + 1}] Saved with ID: ${savedPrompt.id}`);
+								console.log(`[RPG] ✅ [${i + 1}] Saved with ID: ${savedPrompt.id}`);
 
 								// Update UI - success
 								const preview = promptResult.positive?.slice(0, 80) || "No content";
@@ -4601,7 +5635,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								return { status: 'success', index: i, prompt: promptResult };
 
 							} catch (error) {
-								console.error(`[RPG] [${i + 1}] Error:`, error.message);
+								console.error(`[RPG] ❌ [${i + 1}] Error:`, error.message);
 
 								// Update UI - error
 								const status = error.message.includes("Cancelled") ? 'cancelled' : 'error';
@@ -4612,7 +5646,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						};
 
 						// Launch all prompts in parallel with 222ms stagger
-						console.log(`[RPG] Launching ${generationCount} parallel requests (222ms stagger)...`);
+						console.log(`[RPG] 🚀 Launching ${generationCount} parallel requests (222ms stagger)...`);
 						const promises = [];
 						for (let i = 0; i < generationCount; i++) {
 							if (i > 0) {
@@ -4634,12 +5668,12 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							allGeneratedPrompts.push(promptData);
 						});
 
-						console.log(`[RPG] Parallel generation complete: ${successResults.length}/${generationCount} succeeded`);
+						console.log(`[RPG] ✅ Parallel generation complete: ${successResults.length}/${generationCount} succeeded`);
 
 
 						// Show results
 						if (allGeneratedPrompts.length > 0) {
-							console.log(`[RPG] Generated ${allGeneratedPrompts.length}/${generationCount} prompts successfully`);
+							console.log(`[RPG] ✅ Generated ${allGeneratedPrompts.length}/${generationCount} prompts successfully`);
 
 							// Store generated prompts and update state FIRST (regardless of which tab is active)
 							node._generatedUnifiedPrompts = allGeneratedPrompts;
@@ -4655,11 +5689,14 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							console.log(`[RPG] Found elements - progress: ${!!currentProgressSection}, preview: ${!!currentPreviewSection}, list: ${!!currentPreviewList}`);
 
 							// Update UI elements if they exist (only if on Generate tab)
-							const progressHeader = currentProgressSection?.querySelector(".-rpg-progress-header h4");
+							const progressHeader = currentProgressSection?.querySelector(".aiofc-rpg-progress-header h4");
 							if (progressHeader) {
 								const successCount = allGeneratedPrompts.length;
 								const failedCount = generationCount - successCount;
-								progressHeader.innerHTML = `Generation Complete: <span style="color: #22c55e">${successCount} succeeded</span> ${failedCount > 0 ?`<span style="color: #ef4444">, ${failedCount} failed</span>` : ''}
+								progressHeader.innerHTML = `
+									✓ Generation Complete:
+									<span style="color: #22c55e">${successCount} succeeded</span>
+									${failedCount > 0 ? `<span style="color: #ef4444">, ${failedCount} failed</span>` : ''}
 								`;
 							}
 
@@ -4675,7 +5712,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								const renderPreviewImages = (index) => {
 									if (!isImg2Img) return '';
 									// Helper to get image URL (handles both url and thumbnail formats)
-									const getImgUrl = (img) => img?.url || (img?.thumbnail ? `//view/${img.thumbnail}` : null);
+									const getImgUrl = (img) => img?.url || (img?.thumbnail ? `/aiofc/view/${img.thumbnail}` : null);
 									const images = [
 										{ img: uniqueImages[index], label: "1" },
 										{ img: uniqueImages2[index], label: "2" },
@@ -4683,7 +5720,9 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 										{ img: uniqueImages4[index], label: "4" }
 									].filter(item => item.img && getImgUrl(item.img));
 									if (images.length === 0) return '';
-									return `<div class="-rpg-preview-images"> ${images.map(item =>`
+									return `
+										<div class="aiofc-rpg-preview-images">
+											${images.map(item => `
 												<div class="aiofc-combo-slot">
 													<div class="aiofc-combo-slot-image">
 														<img src="${getImgUrl(item.img)}" alt="Image ${item.label}" loading="lazy" style="background: rgba(0,0,0,0.3);" onerror="this.style.opacity='0.3'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%239ca3af%22 d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E';" />
@@ -4695,7 +5734,15 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								};
 
 								currentPreviewList.innerHTML = allGeneratedPrompts
-									.map((p, idx) => `<div class="-rpg-preview-item"> <div class="-rpg-preview-item-header"> <strong>#${idx + 1}</strong> ${renderPreviewImages(idx)} </div> <p>${escapeHtml(p.positive || "")}</p> </div>`)
+									.map((p, idx) => `
+										<div class="aiofc-rpg-preview-item">
+											<div class="aiofc-rpg-preview-item-header">
+												<strong>#${idx + 1}</strong>
+												${renderPreviewImages(idx)}
+											</div>
+											<p>${escapeHtml(p.positive || "")}</p>
+										</div>
+									`)
 									.join("");
 
 								// Show preview section (keep progress visible for stats)
@@ -4713,7 +5760,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							console.log("[RPG] ⏹ Generation cancelled - no prompts generated");
 
 							// Update progress header
-							const progressHeader = progressSection?.querySelector(".-rpg-progress-header h4");
+							const progressHeader = progressSection?.querySelector(".aiofc-rpg-progress-header h4");
 							if (progressHeader) {
 								progressHeader.innerHTML = '<span style="color: #fbbf24">⏹ Generation Cancelled</span>';
 							}
@@ -4728,7 +5775,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						}
 
 					} catch (error) {
-						console.error("[RPG] Error during parallel prompt generation:", error);
+						console.error("[RPG] ❌ Error during parallel prompt generation:", error);
 						console.error("[RPG] Error stack:", error.stack);
 
 						// Clear generation state (but keep progress state for viewing errors)
@@ -4748,7 +5795,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							generateBtn.disabled = false;
 							generateBtn.style.opacity = "1";
 							const detectedMode = node._linkedAILMode || "txt2img";
-							const emoji = detectedMode === 'img2img' ? '' : '';
+							const emoji = detectedMode === 'img2img' ? '🖼️' : '🎨';
 							generateBtn.textContent = `${emoji} Generate Prompts`;
 						}
 
@@ -4781,13 +5828,13 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						const statusMap = {
 							'pending': { class: 'pending', text: '⏳ Pending' },
 							'in-progress': { class: 'in-progress', text: '⏳ Generating...' },
-							'success': { class: 'success', text: 'Complete' },
-							'error': { class: 'error', text: 'Failed' },
+							'success': { class: 'success', text: '✓ Complete' },
+							'error': { class: 'error', text: '✖ Failed' },
 							'cancelled': { class: 'error', text: '⏹ Cancelled' }
 						};
 						const statusInfo = statusMap[updates.status];
 						if (statusBadge && statusInfo) {
-							statusBadge.className = `rpg-progress-item-status ${statusInfo.class}`;
+							statusBadge.className = `aiofc-rpg-progress-item-status ${statusInfo.class}`;
 							statusBadge.textContent = statusInfo.text;
 						}
 						if (statusInfo) {
@@ -4832,28 +5879,40 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 							node._progressState.forEach((state, i) => {
 								const progressItem = document.createElement("div");
-								progressItem.className = `rpg-progress-item ${state.status}`;
+								progressItem.className = `aiofc-rpg-progress-item ${state.status}`;
 								progressItem.dataset.index = i;
 
 								const statusMap = {
 									'pending': '⏳ Pending',
 									'in-progress': '⏳ Generating...',
-									'success': 'Complete',
-									'error': 'Failed',
+									'success': '✓ Complete',
+									'error': '✖ Failed',
 									'cancelled': '⏹ Cancelled'
 								};
 
-								progressItem.innerHTML = `<div class="-rpg-progress-item-header"> <span class="-rpg-progress-item-label">Prompt ${i + 1}/${generationCount}</span> <span class="rpg-progress-item-status ${state.status}">${statusMap[state.status] || ' Pending'}</span> </div> <div class="-rpg-progress-item-bar"> <div class="-rpg-progress-item-fill" style="width: ${state.progress}%"></div> </div> <div class="-rpg-progress-item-message">${state.message || ''}</div>`;
+								progressItem.innerHTML = `
+									<div class="aiofc-rpg-progress-item-header">
+										<span class="aiofc-rpg-progress-item-label">Prompt ${i + 1}/${generationCount}</span>
+										<span class="aiofc-rpg-progress-item-status ${state.status}">${statusMap[state.status] || '⏳ Pending'}</span>
+									</div>
+									<div class="aiofc-rpg-progress-item-bar">
+										<div class="aiofc-rpg-progress-item-fill" style="width: ${state.progress}%"></div>
+									</div>
+									<div class="aiofc-rpg-progress-item-message">${state.message || ''}</div>
+								`;
 								progressItems.appendChild(progressItem);
 							});
 							console.log(`[RPG] Restored ${node._progressState.length} completed progress items`);
 						}
 
 						// Update progress header with completion statistics
-						const progressHeader = progressSection?.querySelector(".-rpg-progress-header h4");
+						const progressHeader = progressSection?.querySelector(".aiofc-rpg-progress-header h4");
 						if (progressHeader) {
 							const successCount = node._generatedUnifiedPrompts.length;
-							progressHeader.innerHTML = `Generation Complete: <span style="color: #22c55e">${successCount} succeeded</span>`;
+							progressHeader.innerHTML = `
+								✓ Generation Complete:
+								<span style="color: #22c55e">${successCount} succeeded</span>
+							`;
 						}
 
 						// Hide cancel button and show quick accept button
@@ -4867,7 +5926,12 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						console.log(`[RPG] Preview list element found: ${!!previewList}`);
 						if (previewList) {
 							previewList.innerHTML = node._generatedUnifiedPrompts
-								.map((p, idx) => `<div class="-rpg-preview-item"> <strong>#${idx + 1}</strong> <p>${escapeHtml(p.positive || "")}</p> </div>`)
+								.map((p, idx) => `
+									<div class="aiofc-rpg-preview-item">
+										<strong>#${idx + 1}</strong>
+										<p>${escapeHtml(p.positive || "")}</p>
+									</div>
+								`)
 								.join("");
 							console.log(`[RPG] Preview list populated with ${node._generatedUnifiedPrompts.length} items`);
 						} else {
@@ -4891,30 +5955,39 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 							node._progressState.forEach((state, i) => {
 								const progressItem = document.createElement("div");
-								progressItem.className = `rpg-progress-item ${state.status}`;
+								progressItem.className = `aiofc-rpg-progress-item ${state.status}`;
 								progressItem.dataset.index = i;
 
 								const statusMap = {
 									'pending': '⏳ Pending',
 									'in-progress': '⏳ Generating...',
-									'success': 'Complete',
-									'error': 'Failed',
+									'success': '✓ Complete',
+									'error': '✖ Failed',
 									'cancelled': '⏹ Cancelled'
 								};
 
-								progressItem.innerHTML = `<div class="-rpg-progress-item-header"> <span class="-rpg-progress-item-label">Prompt ${i + 1}/${generationCount}</span> <span class="rpg-progress-item-status ${state.status}">${statusMap[state.status] || ' Pending'}</span> </div> <div class="-rpg-progress-item-bar"> <div class="rpg-progress-item-fill ${state.status === 'in-progress' ? 'animating' : ''}" style="width: ${state.progress}%"></div> </div> <div class="-rpg-progress-item-message">${state.message || ''}</div>`;
+								progressItem.innerHTML = `
+									<div class="aiofc-rpg-progress-item-header">
+										<span class="aiofc-rpg-progress-item-label">Prompt ${i + 1}/${generationCount}</span>
+										<span class="aiofc-rpg-progress-item-status ${state.status}">${statusMap[state.status] || '⏳ Pending'}</span>
+									</div>
+									<div class="aiofc-rpg-progress-item-bar">
+										<div class="aiofc-rpg-progress-item-fill ${state.status === 'in-progress' ? 'animating' : ''}" style="width: ${state.progress}%"></div>
+									</div>
+									<div class="aiofc-rpg-progress-item-message">${state.message || ''}</div>
+								`;
 								progressItems.appendChild(progressItem);
 							});
 						}
 
-						const progressHeader = progressSection?.querySelector(".-rpg-progress-header h4");
+						const progressHeader = progressSection?.querySelector(".aiofc-rpg-progress-header h4");
 						if (progressHeader) {
 							progressHeader.innerHTML = `⏳ Generating Prompts...`;
 						}
 					} else if (node._generationInProgress) {
 						// Generation still in progress but no state - show message
 						console.log(`[RPG] Generation in progress but no state to restore`);
-						const progressHeader = progressSection?.querySelector(".-rpg-progress-header h4");
+						const progressHeader = progressSection?.querySelector(".aiofc-rpg-progress-header h4");
 						if (progressHeader) {
 							progressHeader.innerHTML = `⏳ Generation in progress...`;
 						}
@@ -5077,7 +6150,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							if (canvas) {
 								graphOffsetStartX = canvas.ds.offset[0];
 								graphOffsetStartY = canvas.ds.offset[1];
-								console.log("[RPG Manual Pan] Started - Initial offset:", graphOffsetStartX, graphOffsetStartY);
+								console.log("[RPG Manual Pan] 🎬 Started - Initial offset:", graphOffsetStartX, graphOffsetStartY);
 							}
 
 							e.preventDefault();
@@ -5106,7 +6179,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						// Handle mouseup to end drag
 						if (e.type === 'mouseup' && isDragging) {
 							isDragging = false;
-							console.log("[RPG Manual Pan] Ended drag");
+							console.log("[RPG Manual Pan] 🏁 Ended drag");
 							e.preventDefault();
 							e.stopPropagation();
 						}
@@ -5131,7 +6204,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 									  document.querySelector('.litegraph canvas');
 
 						if (canvas) {
-							console.log("[RPG Canvas Forward] Forwarding wheel event for zoom");
+							console.log("[RPG Canvas Forward] 🔍 Forwarding wheel event for zoom");
 
 							e.preventDefault();
 							e.stopPropagation();
@@ -5362,7 +6435,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 							} catch (error) {
 								console.error("[RPG] Error selecting random prompts:", error);
-								showRandomBtn.innerHTML = `${error.message}`;
+								showRandomBtn.innerHTML = `✖ ${error.message}`;
 								setTimeout(() => {
 									showRandomBtn.innerHTML = originalText;
 									showRandomBtn.disabled = false;
@@ -5766,12 +6839,12 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					container.querySelectorAll(".aiofc-rpg-save-user-prompt-btn").forEach((btn) => {
 						btn.onclick = async () => {
 							const promptId = btn.dataset.id;
-							const positiveTextarea = container.querySelector(`.-rpg-user-prompt-edit-positive[data-id="${promptId}"]`);
-							const negativeTextarea = container.querySelector(`.-rpg-user-prompt-edit-negative[data-id="${promptId}"]`);
-							const tagsInput = container.querySelector(`.-rpg-user-prompt-edit-tags[data-id="${promptId}"]`);
-							const contentTypeSelect = container.querySelector(`.-rpg-user-prompt-edit-content-type[data-id="${promptId}"]`);
-							const safetyLevelSelect = container.querySelector(`.-rpg-user-prompt-edit-safety-level[data-id="${promptId}"]`);
-							const shotTypeSelect = container.querySelector(`.-rpg-user-prompt-edit-shot-type[data-id="${promptId}"]`);
+							const positiveTextarea = container.querySelector(`.aiofc-rpg-user-prompt-edit-positive[data-id="${promptId}"]`);
+							const negativeTextarea = container.querySelector(`.aiofc-rpg-user-prompt-edit-negative[data-id="${promptId}"]`);
+							const tagsInput = container.querySelector(`.aiofc-rpg-user-prompt-edit-tags[data-id="${promptId}"]`);
+							const contentTypeSelect = container.querySelector(`.aiofc-rpg-user-prompt-edit-content-type[data-id="${promptId}"]`);
+							const safetyLevelSelect = container.querySelector(`.aiofc-rpg-user-prompt-edit-safety-level[data-id="${promptId}"]`);
+							const shotTypeSelect = container.querySelector(`.aiofc-rpg-user-prompt-edit-shot-type[data-id="${promptId}"]`);
 
 							if (!positiveTextarea || !negativeTextarea || !tagsInput) return;
 
@@ -5815,7 +6888,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					});
 
 					// Auto-resize textareas in edit mode
-					container.querySelectorAll(".-rpg-user-prompt-edit-positive, .-rpg-user-prompt-edit-negative").forEach((textarea) => {
+					container.querySelectorAll(".aiofc-rpg-user-prompt-edit-positive, .aiofc-rpg-user-prompt-edit-negative").forEach((textarea) => {
 						autoResizeTextarea(textarea);
 						textarea.oninput = () => autoResizeTextarea(textarea);
 					});
@@ -5859,7 +6932,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								await navigator.clipboard.writeText(positivePrompt);
 								// Show success feedback
 								const originalText = btn.textContent;
-								btn.textContent = "";
+								btn.textContent = "✅";
 								btn.style.opacity = "1";
 								setTimeout(() => {
 									btn.textContent = originalText;
@@ -5922,7 +6995,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							navigator.clipboard.writeText(promptId).then(() => {
 								// Visual feedback
 								const originalText = btn.textContent;
-								btn.textContent = "";
+								btn.textContent = "✅";
 								setTimeout(() => {
 									btn.textContent = originalText;
 								}, 1000);
@@ -5954,14 +7027,14 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 										// Collapse - show only first 5
 										tagsContainer.setAttribute('data-expanded', 'false');
 										tagsContainer.innerHTML = prompt.tags.slice(0, 5)
-											.map(tag => `<span class="-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`)
-											.join("") + `<button class="-rpg-toggle-tags-btn" data-id="${promptId}">+${prompt.tags.length - 5}</button>`;
+											.map(tag => `<span class="aiofc-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`)
+											.join("") + ` <button class="aiofc-rpg-toggle-tags-btn" data-id="${promptId}">+${prompt.tags.length - 5}</button>`;
 									} else {
 										// Expand - show all tags
 										tagsContainer.setAttribute('data-expanded', 'true');
 										tagsContainer.innerHTML = prompt.tags
-											.map(tag => `<span class="-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`)
-											.join("") + `<button class="-rpg-toggle-tags-btn" data-id="${promptId}">Show less</button>`;
+											.map(tag => `<span class="aiofc-rpg-tag">${highlightSearchTerm(tag, searchQuery)}</span>`)
+											.join("") + ` <button class="aiofc-rpg-toggle-tags-btn" data-id="${promptId}">Show less</button>`;
 									}
 								}
 							}
@@ -6077,7 +7150,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							// Generate random seed and update ONLY this prompt's seed
 							const randomSeed = Math.floor(Math.random() * (9999999 - 1111111 + 1)) + 1111111;
 							const id = btn.dataset.id;
-							const seedInput = container.querySelector(`.-rpg-seed-input[data-id="${id}"]`);
+							const seedInput = container.querySelector(`.aiofc-rpg-seed-input[data-id="${id}"]`);
 							if (seedInput) {
 								seedInput.value = randomSeed;
 								updatePromptInBatch(id, "seed", randomSeed);
@@ -6092,7 +7165,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							e.stopPropagation();
 							// Reset ONLY this prompt's seed
 							const id = btn.dataset.id;
-							const seedInput = container.querySelector(`.-rpg-seed-input[data-id="${id}"]`);
+							const seedInput = container.querySelector(`.aiofc-rpg-seed-input[data-id="${id}"]`);
 							if (seedInput) {
 								seedInput.value = 1111111;
 								updatePromptInBatch(id, "seed", 1111111);
@@ -6316,31 +7389,31 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 							if (detectedMode === "img2img") {
 								if (ailItemCount === 0) {
-									actions.push(`No images in AIL! Upload ${promptCount} image(s) first.`);
+									actions.push(`⚠️ No images in AIL! Upload ${promptCount} image(s) first.`);
 								} else if (needsTrimming) {
-									actions.push(`Remove ${excess} image(s) from AIL (${ailItemCount} → ${promptCount})`);
+									actions.push(`🗑️ Remove ${excess} image(s) from AIL (${ailItemCount} → ${promptCount})`);
 								} else if (needsAutoBalance) {
-									actions.push(`Duplicate last image ${deficit} time(s) in AIL (${ailItemCount} → ${promptCount})`);
+									actions.push(`📋 Duplicate last image ${deficit} time(s) in AIL (${ailItemCount} → ${promptCount})`);
 								}
 							} else {
 								// txt2img mode
 								if (needsLatentSync) {
-									actions.push(`Create ${promptCount} latent(s) at ${targetDims.aspect_label}`);
+									actions.push(`📐 Create ${promptCount} latent(s) at ${targetDims.aspect_label}`);
 								}
 							}
 
 							if (needsRepeatSync) {
-								actions.push(`Sync repeat counts to match prompts`);
+								actions.push(`🔄 Sync repeat counts to match prompts`);
 							}
 
 							if (needsSecondarySync) {
 								const syncDetails = secondaryAILsNeedSync.map(s => `${s.name}: ${s.count} → ${promptCount}`).join(", ");
-								actions.push(`Sync secondary AILs: ${syncDetails}`);
+								actions.push(`🔗 Sync secondary AILs: ${syncDetails}`);
 							}
 
 							let confirmMsg;
 							if (actions.length === 0) {
-								confirmMsg = `Everything is already synced!\n\nPrompts: ${promptCount}\nAIL items: ${ailItemCount}\n\nSync anyway?`;
+								confirmMsg = `✓ Everything is already synced!\n\nPrompts: ${promptCount}\nAIL items: ${ailItemCount}\n\nSync anyway?`;
 							} else if (detectedMode === "img2img" && ailItemCount === 0) {
 								alert(`Cannot sync: No images in AIL!\n\nUpload ${promptCount} image(s) first, then sync.`);
 								return;
@@ -6762,7 +7835,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							if (hasCustomEdits && currentInstructions.trim() !== "") {
 								// User has custom edits - show confirmation
 								const confirmed = confirm(
-									"You have custom edits in Model Instructions.\n\n" +
+									"⚠️ You have custom edits in Model Instructions.\n\n" +
 									"Changing the preset will overwrite your changes.\n\n" +
 									"Tip: Copy your instructions before proceeding if you want to keep them.\n\n" +
 									"Continue and overwrite?"
@@ -6955,7 +8028,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 								node.properties.show_system_prompt_preview = !node.properties.show_system_prompt_preview;
 
 								// Update button text
-								toggleSystemPromptPreviewBtn.textContent = node.properties.show_system_prompt_preview ? 'Edit Template' : 'Preview';
+								toggleSystemPromptPreviewBtn.textContent = node.properties.show_system_prompt_preview ? '📝 Edit Template' : '👁️ Preview';
 
 								if (node.properties.show_system_prompt_preview) {
 									// Gather current settings
@@ -7219,7 +8292,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 					if (cancelGenerationBtn) {
 						cancelGenerationBtn.onclick = () => {
 							if (generationAbortController) {
-								console.log("[RPG] User clicked cancel - aborting generation");
+								console.log("[RPG] 🛑 User clicked cancel - aborting generation");
 								generationAbortController.abort();
 							}
 						};
@@ -7745,7 +8818,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						if (!imagesInput || !imagesInput.link) {
 							// No connection - clear AIL data if needed
 							if (node._linkedAILNodeId !== null) {
-								console.log("[RPG AIL Sync] No AIL connection detected, clearing data");
+								console.log("[RPG AIL Sync] ❌ No AIL connection detected, clearing data");
 								node._linkedAILNodeId = null;
 								node._linkedAILMode = null;
 								node._linkedImageCount = 0;
@@ -7859,7 +8932,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 									const img = ailImages.find(i => i.id === imgId);
 									if (!img) return null;
 									// Handle both url (if already computed) and thumbnail (raw batchData format)
-									const imgUrl = img.url || (img.thumbnail ? `//view/${img.thumbnail}` : null);
+									const imgUrl = img.url || (img.thumbnail ? `/aiofc/view/${img.thumbnail}` : null);
 									// Skip entries with invalid URLs to prevent broken image icons
 									if (!imgUrl) return null;
 									return {
@@ -7906,7 +8979,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 						const nodeIdChanged = node._linkedAILNodeId !== ailNode.id;
 
 						if (modeChanged || countChanged || nodeIdChanged) {
-							console.log(`[RPG ${node.id} AIL Sync] Syncing changes detected:`);
+							console.log(`[RPG ${node.id} AIL Sync] 🔄 Syncing changes detected:`);
 							console.log(`  - Mode: ${node._linkedAILMode} -> ${detectedMode} (changed: ${modeChanged})`);
 							console.log(`  - Count: ${node._linkedImageCount} -> ${imageCount} (changed: ${countChanged})`);
 							console.log(`  - Node: ${node._linkedAILNodeId} -> ${ailNode.id} (changed: ${nodeIdChanged})`);
@@ -8089,7 +9162,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 
 				// MIGRATION: Auto-update old minimal template from {TASK_INSTRUCTIONS} to {USER_INPUT}
 				if (this.properties.custom_template === "{TASK_INSTRUCTIONS}") {
-					console.log("[RPG] Migrating minimal template: {TASK_INSTRUCTIONS} → {USER_INPUT}");
+					console.log("[RPG] 🔄 Migrating minimal template: {TASK_INSTRUCTIONS} → {USER_INPUT}");
 					this.properties.custom_template = "{USER_INPUT}";
 					if (app && app.graph) {
 						app.graph.setDirtyCanvas(true, true);
@@ -8145,7 +9218,7 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 											const img = ailImages.find(i => i.id === imgId);
 											if (!img) return null;
 											// Handle both url (if already computed) and thumbnail (raw batchData format)
-											const imgUrl = img.url || (img.thumbnail ? `//view/${img.thumbnail}` : null);
+											const imgUrl = img.url || (img.thumbnail ? `/aiofc/view/${img.thumbnail}` : null);
 											// Skip entries with invalid URLs to prevent broken image icons
 											if (!imgUrl) return null;
 											return {

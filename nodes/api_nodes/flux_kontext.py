@@ -60,7 +60,7 @@ class FalAIBase:
             image_pil.save(buffer, format="JPEG", quality=quality)
             
             if buffer.tell() <= max_bytes:
-                print(f"Image compressed to JPEG (quality={quality}) to fit API limits. Size: {buffer.tell() / 1024:.2f} KB")
+                print(f"✅ Image compressed to JPEG (quality={quality}) to fit API limits. Size: {buffer.tell() / 1024:.2f} KB")
                 base64_str = base64.b64encode(buffer.getvalue()).decode()
                 return f"data:image/jpeg;base64,{base64_str}"
 
@@ -75,14 +75,14 @@ class FalAIBase:
             "Content-Type": "application/json",
             "Accept": "application/json",
         }
-        print(f"Submitting SYNC request to fal.ai: {url}")
+        print(f"🚀 Submitting SYNC request to fal.ai: {url}")
         
         try:
             response = requests.post(url, json=payload, headers=headers, timeout=600) # 10 minute timeout
             response.raise_for_status() # Raises HTTPError for bad responses (4xx or 5xx)
             
             result = response.json()
-            print("fal.ai sync response received.")
+            print("📦 fal.ai sync response received.")
             
             if "images" in result and len(result["images"]) > 0 and "url" in result["images"][0]:
                 return result["images"][0]["url"]
@@ -91,10 +91,10 @@ class FalAIBase:
 
         except requests.exceptions.HTTPError as e:
             error_message = f"API request failed: {e.response.status_code} - {e.response.text}"
-            print(f"{error_message}")
+            print(f"❌ {error_message}")
             raise Exception(error_message) from e
         except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+            print(f"❌ An unexpected error occurred: {e}")
             raise
 
 # =================================================================================
@@ -120,7 +120,7 @@ class AIOFC_FluxKontextLoraAPI(FalAIBase):
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "API"
+    CATEGORY = "AIOFC/API"
 
     def execute(self, api_key, image, prompt, lora_url, lora_scale, steps, guidance_scale, seed, enable_safety_checker):
         # --- Caching Logic ---
@@ -136,12 +136,12 @@ class AIOFC_FluxKontextLoraAPI(FalAIBase):
         cache_filepath = os.path.join(cache_dir, f"{hasher.hexdigest()}_flux_kontext.png")
 
         if os.path.exists(cache_filepath):
-            print(f"Flux Kontext API Cache Hit! Loading image from {cache_filepath}")
+            print(f"✅ Flux Kontext API Cache Hit! Loading image from {cache_filepath}")
             pil_image = Image.open(cache_filepath).convert("RGB")
             img_np = np.array(pil_image).astype(np.float32) / 255.0
             return (torch.from_numpy(img_np).unsqueeze(0),)
 
-        print("Flux Kontext API Cache Miss. Proceeding with API call...")
+        print("💨 Flux Kontext API Cache Miss. Proceeding with API call...")
 
         # --- API Call Logic ---
         self.set_api_key(api_key)
@@ -177,7 +177,7 @@ class AIOFC_FluxKontextLoraAPI(FalAIBase):
             raise Exception("API did not return a valid image URL.")
 
         # Download the resulting image
-        print(f"Image generated. Downloading from: {image_url}")
+        print(f"✅ Image generated. Downloading from: {image_url}")
         image_response = requests.get(image_url, timeout=300)
         image_response.raise_for_status()
 
@@ -196,5 +196,5 @@ NODE_CLASS_MAPPINGS = {
     "AIOFC_FluxKontextLoraAPI": AIOFC_FluxKontextLoraAPI,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_FluxKontextLoraAPI": "Flux Kontext LoRA API",
+    "AIOFC_FluxKontextLoraAPI": "🍑 AIOFC Flux Kontext LoRA API",
 }

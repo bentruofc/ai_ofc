@@ -22,11 +22,11 @@ class AIOFC_LoadImageFromPath:
 
     RETURN_TYPES = ("IMAGE", "MASK")
     FUNCTION = "load_image"
-    CATEGORY = "Utilities"
+    CATEGORY = "AIOFC/Utilities"
 
     def load_image(self, filepath: str):
         if not os.path.exists(filepath):
-            raise FileNotFoundError(f"Load Image: File not found at {filepath}")
+            raise FileNotFoundError(f"AIOFC Load Image: File not found at {filepath}")
 
         # Open the image file from the provided path
         img_pil = Image.open(filepath).convert('RGB')
@@ -50,5 +50,5 @@ NODE_CLASS_MAPPINGS = {
     "AIOFC_LoadImageFromPath": AIOFC_LoadImageFromPath
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_LoadImageFromPath": "Load Image From Path"
+    "AIOFC_LoadImageFromPath": "➡️ AIOFC Load Image From Path"
 }

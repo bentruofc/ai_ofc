@@ -19,7 +19,7 @@ EXIFTOOL_AVAILABLE = is_tool("exiftool") or is_tool("exiftool.exe")
 
 class AIOFC_SaveWithAuthenticMetadata:
     OUTPUT_NODE = False 
-    CATEGORY = "Authenticity"
+    CATEGORY = "AIOFC/Authenticity"
     FUNCTION = "save_image"
 
     @classmethod
@@ -27,7 +27,7 @@ class AIOFC_SaveWithAuthenticMetadata:
         return {
             "required": {
                 "image": ("IMAGE",),
-                "output_subfolder": ("STRING", {"default": "", "tooltip": "Subdirectory within ComfyUI output folder (e.g., '' or 'authentic')"}),
+                "output_subfolder": ("STRING", {"default": "", "tooltip": "Subdirectory within ComfyUI output folder (e.g., 'AIOFC' or 'authentic')"}),
                 "filename_prefix": ("STRING", {"default": "IMG_%Y%m%d_%H%M%S"}),
             },
             "optional": {
@@ -43,7 +43,7 @@ class AIOFC_SaveWithAuthenticMetadata:
             raise Exception("ExifTool is not installed or not in your system's PATH. Please install it from https://exiftool.org/.")
 
         if image.shape[0] > 1:
-            print("Save: Input batch contains more than one image. Only the first will be processed.")
+            print("⚠️ AIOFC Save: Input batch contains more than one image. Only the first will be processed.")
 
         img_tensor = image[0:1]
         img_np = img_tensor.squeeze(0).cpu().numpy()
@@ -70,14 +70,14 @@ class AIOFC_SaveWithAuthenticMetadata:
                     selected_profile = random.choice(metadata_library)
         
         temp_dir = tempfile.gettempdir()
-        temp_filepath = os.path.join(temp_dir, f"_img_{uuid.uuid4()}.jpg")
+        temp_filepath = os.path.join(temp_dir, f"aiofc_img_{uuid.uuid4()}.jpg")
         img_pil.save(temp_filepath, quality=95, format='JPEG')
         
         arg_filepath = None
         final_filepath = ""
         try:
             if selected_profile:
-                print("\n" + "="*25 + "Save Log" + "="*25)
+                print("\n" + "="*25 + " AIOFC Save Log " + "="*25)
 
                 icc_profile_key = "_aiofc_icc_profile_file"
                 has_icc_profile = icc_profile_key in selected_profile
@@ -110,7 +110,7 @@ class AIOFC_SaveWithAuthenticMetadata:
                             icc_profile_path = full_icc_path
                             print(f"   - Found ICC Profile to inject: {full_icc_path}")
                         else:
-                            print(f"WARNING: ICC Profile file not found at {full_icc_path}")
+                            print(f"   - ⚠️ WARNING: ICC Profile file not found at {full_icc_path}")
                 
                 with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', suffix=".txt", delete=False) as arg_file:
                     arg_filepath = arg_file.name
@@ -132,9 +132,9 @@ class AIOFC_SaveWithAuthenticMetadata:
                 result = subprocess.run(command, capture_output=True, text=True, check=False, encoding='utf-8', errors='ignore')
 
                 if result.returncode != 0:
-                    print(f"Save: ExifTool process failed. Stderr: {result.stderr.strip()}")
+                    print(f"❌ AIOFC Save: ExifTool process failed. Stderr: {result.stderr.strip()}")
                 elif "1 image files updated" not in result.stdout:
-                     print(f"Save: ExifTool ran but may not have updated the file. Full output:")
+                     print(f"⚠️ AIOFC Save: ExifTool ran but may not have updated the file. Full output:")
                      print(f"   - Stdout: {result.stdout.strip()}")
                      print(f"   - Stderr: {result.stderr.strip()}")
                 else:
@@ -152,4 +152,4 @@ class AIOFC_SaveWithAuthenticMetadata:
         return {"ui": {"images": results}, "result": (final_filepath,)}
 
 NODE_CLASS_MAPPINGS = { "AIOFC_SaveWithAuthenticMetadata": AIOFC_SaveWithAuthenticMetadata }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_SaveWithAuthenticMetadata": "Save With Authentic Metadata" }
+NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_SaveWithAuthenticMetadata": "💾 AIOFC Save With Authentic Metadata" }

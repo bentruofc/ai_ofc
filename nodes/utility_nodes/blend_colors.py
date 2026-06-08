@@ -32,7 +32,7 @@ class AIOFC_BlendColors:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "AIOFC/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         # Convert tensor [0, 1] float to numpy [0, 255] uint8

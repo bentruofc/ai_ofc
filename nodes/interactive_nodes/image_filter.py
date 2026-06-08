@@ -42,7 +42,7 @@ class AIOFC_ImageFilter(PreviewImage):
     RETURN_TYPES = ("IMAGE","LATENT","MASK","STRING","STRING","STRING","STRING")
     RETURN_NAMES = ("images","latents","masks","extra1","extra2","extra3","indexes")
     FUNCTION = "func"
-    CATEGORY = "Interactive"
+    CATEGORY = "AIOFC/Interactive"
     OUTPUT_NODE = False
     DESCRIPTION = "Allows you to preview images and choose which, if any to proceed with"
 
@@ -93,7 +93,7 @@ class AIOFC_ImageFilter(PreviewImage):
 
         # Check if we should use cached selection
         if cache_behavior == "Resend previous selection" and os.path.exists(cache_filepath):
-            print(f"Image Filter: Using cached selection for images {cache_key[:8]}...")
+            print(f"✅ Image Filter: Using cached selection for images {cache_key[:8]}...")
             with open(cache_filepath, 'r') as f:
                 cached_data = json.load(f)
             images_to_return = cached_data.get('selection', [])
@@ -122,7 +122,7 @@ class AIOFC_ImageFilter(PreviewImage):
                     images_to_return = [ int(x) for x in response.selection ] if response.selection else []
                 
                 if not isinstance(response, TimeoutResponse):
-                    print(f"Saving image selection to cache: {cache_filepath}")
+                    print(f"💾 Saving image selection to cache: {cache_filepath}")
                     cache_data = {'selection': images_to_return, 'extras': [e1, e2, e3]}
                     with open(cache_filepath, 'w') as f:
                         json.dump(cache_data, f)
@@ -147,7 +147,7 @@ class AIOFC_TextImageFilter(PreviewImage):
     RETURN_TYPES = ("IMAGE","STRING","STRING","STRING","STRING")
     RETURN_NAMES = ("image","text","extra1","extra2","extra3")
     FUNCTION = "func"
-    CATEGORY = "Interactive"
+    CATEGORY = "AIOFC/Interactive"
     OUTPUT_NODE = False
 
     @classmethod
@@ -193,16 +193,16 @@ class AIOFC_TextImageFilter(PreviewImage):
 
         # STEP 2: HANDLE BYPASSED (DISABLED) STATE
         if not enabled:
-            print("Text Filter: Bypassed. Checking for most relevant cached text...")
+            print("📝 AIOFC Text Filter: Bypassed. Checking for most relevant cached text...")
             if os.path.exists(node_memory_filepath):
                 with open(node_memory_filepath, 'r') as f: cached_data = json.load(f)
-                print(f"Bypassed Mode: Using node's last saved text from {node_memory_filepath}")
+                print(f"✅ Bypassed Mode: Using node's last saved text from {node_memory_filepath}")
                 return (image, cached_data.get('edited_text', text), *cached_data.get('extras', [extra1, extra2, extra3]))
             if os.path.exists(image_specific_filepath):
                 with open(image_specific_filepath, 'r') as f: cached_data = json.load(f)
-                print(f"Bypassed Mode: Using image-specific cached text from {image_specific_filepath}")
+                print(f"✅ Bypassed Mode: Using image-specific cached text from {image_specific_filepath}")
                 return (image, cached_data.get('edited_text', text), *cached_data.get('extras', [extra1, extra2, extra3]))
-            print("Bypassed Mode: No cache found. Passing input text.")
+            print("📝 Bypassed Mode: No cache found. Passing input text.")
             return (image, text, extra1, extra2, extra3)
 
         # STEP 3: HANDLE ACTIVE (ENABLED) STATE
@@ -210,7 +210,7 @@ class AIOFC_TextImageFilter(PreviewImage):
         # Special case: "Bypass & Repeat Last Text" intentionally ignores input text validation.
         if cache_behavior == "Bypass & Repeat Last Text":
             if os.path.exists(node_memory_filepath):
-                print(f"Active Mode ('Repeat'): Using node memory cache from {node_memory_filepath}")
+                print(f"✅ Active Mode ('Repeat'): Using node memory cache from {node_memory_filepath}")
                 with open(node_memory_filepath, 'r') as f: cached_data = json.load(f)
                 return (image, cached_data.get('edited_text', text), *cached_data.get('extras', [extra1, extra2, extra3]))
             else:
@@ -227,7 +227,7 @@ class AIOFC_TextImageFilter(PreviewImage):
                 if data.get('source_text') == text:
                     most_relevant_cached_text = data.get('edited_text')
                     most_relevant_extras = data.get('extras', most_relevant_extras)
-                    print("Found valid, most recent text in the node's memory cache.")
+                    print("✅ Found valid, most recent text in the node's memory cache.")
             except Exception: pass
         
         # Priority 2: If node memory was stale/missing, check image-specific cache.
@@ -237,22 +237,22 @@ class AIOFC_TextImageFilter(PreviewImage):
                 if data.get('source_text') == text:
                     most_relevant_cached_text = data.get('edited_text')
                     most_relevant_extras = data.get('extras', most_relevant_extras)
-                    print("Found valid text in the image-specific cache.")
+                    print("✅ Found valid text in the image-specific cache.")
             except Exception: pass
 
         # Now, act based on the mode and whether we found a relevant cache.
         if cache_behavior == "Bypass if Image is Cached" and most_relevant_cached_text is not None:
-            print(f"Active Mode ('Bypass'): Valid cache found. Bypassing popup.")
+            print(f"✅ Active Mode ('Bypass'): Valid cache found. Bypassing popup.")
             return (image, most_relevant_cached_text, *most_relevant_extras)
 
         # Prepare for the editor
         text_for_editor = text # Default to fresh input
         if most_relevant_cached_text is not None:
             text_for_editor = most_relevant_cached_text
-            print(f"Active Mode ('Edit'): Pre-filling editor with most relevant cached text.")
+            print(f"📝 Active Mode ('Edit'): Pre-filling editor with most relevant cached text.")
 
         # Show popup
-        print("Text Filter: Launching editor...")
+        print("💨 AIOFC Text Filter: Launching editor...")
         urls:list[str] = self.save_images(images=image, **kwargs)['ui']['images']
         payload = {"uid": uid, "urls":urls, "text":text_for_editor, "extras":most_relevant_extras, "tip":tip}
         if textareaheight is not None: payload['textareaheight'] = textareaheight
@@ -273,11 +273,11 @@ class AIOFC_TextImageFilter(PreviewImage):
             'extras': [e1, e2, e3]
         }
         
-        print(f"Saving to image-specific cache: {image_specific_filepath}")
+        print(f"💾 Saving to image-specific cache: {image_specific_filepath}")
         with open(image_specific_filepath, 'w') as f:
             json.dump(new_cache_data, f)
         
-        print(f"Updating node's persistent memory (most recent action): {node_memory_filepath}")
+        print(f"💾 Updating node's persistent memory (most recent action): {node_memory_filepath}")
         with open(node_memory_filepath, 'w') as f:
             json.dump(new_cache_data, f)
             
@@ -291,7 +291,7 @@ class AIOFC_MaskImageFilter(PreviewImage, LoadImage):
     RETURN_NAMES = ("image", "mask", "mask_inverted", "extra1", "extra2", "extra3")
     
     FUNCTION = "func"
-    CATEGORY = "Interactive"
+    CATEGORY = "AIOFC/Interactive"
     OUTPUT_NODE = False
 
     @classmethod
@@ -325,7 +325,7 @@ class AIOFC_MaskImageFilter(PreviewImage, LoadImage):
     
     def func(self, image, enabled, timeout, uid, if_no_mask, cache_behavior, node_identifier, mask=None, extra1="", extra2="", extra3="", tip="", **kwargs):
         if not enabled:
-            print("Mask Filter: Bypassed")
+            print("🎭 AIOFC Mask Filter: Bypassed")
             if mask is None:
                 mask = torch.zeros_like(image[:, :, :, 0])
             return (image, mask, 1.0 - mask, extra1, extra2, extra3)
@@ -339,7 +339,7 @@ class AIOFC_MaskImageFilter(PreviewImage, LoadImage):
         cache_filepath = os.path.join(cache_dir, f"{cache_key}_mask.png")
 
         if cache_behavior == "Resend previous mask" and os.path.exists(cache_filepath):
-            print(f"Mask Cache Hit! Resending previous mask from {cache_filepath}")
+            print(f"✅ AIOFC Mask Cache Hit! Resending previous mask from {cache_filepath}")
             pil_mask = Image.open(cache_filepath)
             natural_mask = pil_to_natural_mask_tensor(pil_mask)
             return (image, natural_mask, 1.0 - natural_mask, extra1, extra2, extra3)
@@ -351,7 +351,7 @@ class AIOFC_MaskImageFilter(PreviewImage, LoadImage):
             initial_mask_for_editor = mask.to(target_device)
         
         if cache_behavior == "Edit previous mask" and os.path.exists(cache_filepath):
-            print(f"Mask Cache: Loading previous mask for editing from {cache_filepath}")
+            print(f"💨 AIOFC Mask Cache: Loading previous mask for editing from {cache_filepath}")
             pil_mask = Image.open(cache_filepath)
             initial_mask_for_editor = pil_to_natural_mask_tensor(pil_mask).to(target_device)
 
@@ -365,17 +365,17 @@ class AIOFC_MaskImageFilter(PreviewImage, LoadImage):
         urls:list[dict[str,str]] = self.save_images(images=saveable, **kwargs)['ui']['images']
         payload = {"uid": uid, "urls":urls, "maskedit":True, "extras":[extra1, extra2, extra3], "tip":tip}
         
-        print("Mask Filter: Waiting for user interaction...")
+        print("💨 AIOFC Mask Filter: Waiting for user interaction...")
         response = send_and_wait(payload, timeout, uid, node_identifier)
         
         if (response.masked_image):
-            print(f"DEBUG: Using masked_image path: {response.masked_image}")
+            print(f"🎭 DEBUG: Using masked_image path: {response.masked_image}")
             try:
                 loaded_image, mask_from_editor = self.load_image(os.path.join('clipspace', response.masked_image)+" [input]")
 
                 final_natural_mask = 1.0 - mask_from_editor
 
-                print(f"Saving corrected natural_mask to cache: {cache_filepath}")
+                print(f"💾 Saving corrected natural_mask to cache: {cache_filepath}")
                 save_natural_mask_as_alpha(final_natural_mask, cache_filepath)
 
                 return (loaded_image, final_natural_mask, 1.0 - final_natural_mask, *response.get_extras([extra1, extra2, extra3]))
@@ -400,12 +400,12 @@ class AIOFC_MaskImageFilter(PreviewImage, LoadImage):
                 # Use alpha directly: painted = white (1), unpainted = black (0)
                 final_natural_mask = torch.from_numpy(mask_np).unsqueeze(0)
 
-                print(f"Saving mask from data URL to cache: {cache_filepath}")
+                print(f"💾 Saving mask from data URL to cache: {cache_filepath}")
                 save_natural_mask_as_alpha(final_natural_mask, cache_filepath)
 
                 return (image, final_natural_mask, 1.0 - final_natural_mask, *response.get_extras([extra1, extra2, extra3]))
             except Exception as e:
-                print(f"Error processing masked_data: {e}")
+                print(f"⚠️ Error processing masked_data: {e}")
 
         if if_no_mask == 'cancel':
             raise InterruptProcessingException()

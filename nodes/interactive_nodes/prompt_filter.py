@@ -38,7 +38,7 @@ class AIOFC_PromptFilter(PreviewImage):
     OUTPUT_IS_LIST = (True, True, True, True, False, False)
     INPUT_IS_LIST = True
     FUNCTION = "func"
-    CATEGORY = "Interactive"
+    CATEGORY = "AIOFC/Interactive"
     OUTPUT_NODE = False
     DESCRIPTION = "Filter images and their associated prompts/seeds together"
 

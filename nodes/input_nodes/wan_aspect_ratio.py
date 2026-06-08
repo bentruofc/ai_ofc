@@ -32,7 +32,7 @@ class AIOFC_WANAspectRatio:
     RETURN_TYPES = ("INT", "INT", "STRING")
     RETURN_NAMES = ("width", "height", "aspect_label")
     FUNCTION = "get_resolution"
-    CATEGORY = "Input"
+    CATEGORY = "AIOFC/Input"
     DESCRIPTION = "WAN aspect ratio presets. Outputs resolution optimized for WAN 2x upscaling workflow."
 
     def get_resolution(self, aspect_ratio):
@@ -57,5 +57,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_WANAspectRatio": "WAN Aspect Ratio"
+    "AIOFC_WANAspectRatio": "📐 WAN Aspect Ratio"
 }

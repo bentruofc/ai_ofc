@@ -43,7 +43,7 @@ class AIOFC_NeuralGrain:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "apply_grain"
-    CATEGORY = "Post-Processing"
+    CATEGORY = "AIOFC/Post-Processing"
 
     def load_model(self):
         """Loads the GrainNet model into a global variable for reuse."""
@@ -52,13 +52,13 @@ class AIOFC_NeuralGrain:
             if not os.path.exists(MODEL_PATH):
                 raise FileNotFoundError(f"Neural Grain model not found! Expected at: {MODEL_PATH}")
             
-            print("Neural Grain: Loading GrainNet model...")
+            print("🧠 AIOFC Neural Grain: Loading GrainNet model...")
             # The pretrained model uses block_nb=2 and activation='tanh'
             state_dict = torch.load(MODEL_PATH, map_location="cpu")
             GRAIN_NET_MODEL = GrainNet(block_nb=2, activation='tanh')
             GRAIN_NET_MODEL.load_state_dict(state_dict)
             GRAIN_NET_MODEL.eval()
-            print("Neural Grain: Model loaded.")
+            print("✅ AIOFC Neural Grain: Model loaded.")
         return GRAIN_NET_MODEL
 
     def apply_grain(self, image: torch.Tensor, seed: int, grain_size: float, strength: float):
@@ -102,7 +102,7 @@ class AIOFC_NeuralGrain:
 
         final_image = blended_image_bchw.permute(0, 2, 3, 1).to(original_device)
 
-        print("Neural Grain: Processing complete.")
+        print("✅ AIOFC Neural Grain: Processing complete.")
         return (final_image,)
 
 # --- Node Registration ---
@@ -111,5 +111,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_NeuralGrain": "Neural Grain",
+    "AIOFC_NeuralGrain": "✨ AIOFC Neural Grain",
 }

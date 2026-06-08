@@ -28,8 +28,8 @@ from .nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 try:
     from .nodes.api_nodes import creative_api
 except Exception as e:
-    print(f"Warning: Could not load creative_api: {e}")
-    print("Creative/Character generation features will not be available.")
+    print(f"[AIOFC] Warning: Could not load creative_api: {e}")
+    print("[AIOFC] Creative/Character generation features will not be available.")
 
 # Required exports for ComfyUI
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]
@@ -37,4 +37,4 @@ __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]
 # Package metadata
 __version__ = "1.2.0" # Version bumped to reflect the major addition
 __author__ = "Aiofc"
-__description__ = "General purpose custom nodes for ComfyUI"
+__description__ = "AIOFC - General purpose custom nodes for ComfyUI"

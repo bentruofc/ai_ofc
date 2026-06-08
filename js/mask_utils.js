@@ -70,10 +70,10 @@ export function open_maskeditor(node) {
                 app.canvas.selected_nodes = [node]
                 me_command.function()
             } else {
-                console.error('[] Could not find MaskEditor command')
+                console.error('[AIOFC] Could not find MaskEditor command')
             }
         } else {
-            console.error('[] Could not find MaskEditor extension')
+            console.error('[AIOFC] Could not find MaskEditor extension')
         }
     }
 }

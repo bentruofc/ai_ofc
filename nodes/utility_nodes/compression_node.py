@@ -34,7 +34,7 @@ class AIOFC_Multi_Compression:
             },
         }
 
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "AIOFC/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor.ndim == 4: tensor = tensor[0]
@@ -69,4 +69,4 @@ class AIOFC_Multi_Compression:
 
 # --- Node Registration ---
 NODE_CLASS_MAPPINGS = {"AIOFC_Multi_Compression": AIOFC_Multi_Compression}
-NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_Multi_Compression": "Multi-Compression"}
+NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_Multi_Compression": "🛡️ AIOFC Multi-Compression"}

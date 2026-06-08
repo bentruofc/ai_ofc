@@ -309,7 +309,7 @@ class AIOFC_GenerativeAPIBase:
 
             # Check if the compressed size is within the limit
             if buffer.tell() <= max_bytes:
-                print(f"Image compressed to JPEG (quality={quality}) to fit API limits. Size: {buffer.tell() / 1024:.2f} KB")
+                print(f"✅ Image compressed to JPEG (quality={quality}) to fit API limits. Size: {buffer.tell() / 1024:.2f} KB")
                 base64_str = base64.b64encode(buffer.getvalue()).decode()
                 mime_type = "image/jpeg"
                 return f"data:{mime_type};base64,{base64_str}" if include_prefix else base64_str
@@ -324,7 +324,7 @@ class AIOFC_GenerativeAPIBase:
             "Authorization": f"Key {self.api_key}",
             "Content-Type": "application/json",
         }
-        print(f"Submitting SYNC request to fal.ai: {url}")
+        print(f"🚀 Submitting SYNC request to fal.ai: {url}")
         response = requests.post(url, json=payload, headers=headers, timeout=180)
         if not response.ok:
             if response.status_code == 422:
@@ -350,7 +350,7 @@ class AIOFC_GenerativeAPIBase:
                     f"API request failed: {response.status_code} - {response.text}"
                 )
         result = response.json()
-        print("fal.ai sync response received.")
+        print("📦 fal.ai sync response received.")
         if "images" in result and len(result["images"]) > 0:
             return result["images"][0]["url"]
         raise Exception(
@@ -371,7 +371,7 @@ class AIOFC_GenerativeAPIBase:
             "Content-Type": "application/json",
         }
         num_images = p.get("num_images", 1)
-        print(f"Submitting ASYNC task to wavespeed.ai: {base}/{e} (num_images={num_images})")
+        print(f"🚀 Submitting ASYNC task to wavespeed.ai: {base}/{e} (num_images={num_images})")
         r = requests.post(f"{base}/{e}", json=p, headers=headers, timeout=30)
         if not r.ok:
             # Extract error details for better UX
@@ -380,7 +380,7 @@ class AIOFC_GenerativeAPIBase:
                 raise Exception(f"Content policy violation: {error_text}")
             raise Exception(f"API task submission failed: {r.status_code} - {error_text}")
         req_id = r.json()["data"]["id"]
-        print(f"Task submitted (ID: {req_id[:8]}...). Polling for result...")
+        print(f"✅ Task submitted (ID: {req_id[:8]}...). Polling for result...")
         poll_url, start_time, timeout = (
             f"{base}/predictions/{req_id}/result",
             time.time(),
@@ -396,7 +396,7 @@ class AIOFC_GenerativeAPIBase:
             if status == "completed":
                 elapsed = time.time() - start_time
                 outputs = d.get("outputs", [])
-                print(f"Task completed in {elapsed:.1f}s ({len(outputs)} image(s))")
+                print(f"✅ Task completed in {elapsed:.1f}s ({len(outputs)} image(s))")
                 if return_all_outputs:
                     return outputs  # Return all image URLs for multi-image mode
                 return outputs[0] if outputs else None
@@ -447,7 +447,7 @@ class AIOFC_GenerativeAPIBase:
         image_response = requests.get(image_url)
         image_response.raise_for_status()
         image_pil = Image.open(io.BytesIO(image_response.content)).convert("RGB")
-        print(f"Saving generated image to cache: {cache_filename}")
+        print(f"💾 Saving generated image to cache: {cache_filename}")
         image_pil.save(cache_filename, "PNG")
         image_np = np.array(image_pil).astype(np.float32) / 255.0
         return (torch.from_numpy(image_np).unsqueeze(0),)
@@ -511,7 +511,7 @@ class AIOFC_APITextToImage(AIOFC_GenerativeAPIBase):
             },
         }
 
-    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "generate", "/API"
+    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "generate", "AIOFC/API"
 
     def generate(self, **kwargs):
         # Handle aspect_ratio_override - if provided, use it instead of dropdown
@@ -525,13 +525,13 @@ class AIOFC_APITextToImage(AIOFC_GenerativeAPIBase):
             self._log_and_update_hash(hasher, key, kwargs[key])
         cache_filepath = os.path.join(cache_dir, f"{hasher.hexdigest()}_api_t2i.png")
         if os.path.exists(cache_filepath):
-            print(f"API T2I Cache Hit! Loading image from {cache_filepath}")
+            print(f"✅ API T2I Cache Hit! Loading image from {cache_filepath}")
             return (
                 torch.from_numpy(
                     np.array(Image.open(cache_filepath)).astype(np.float32) / 255.0
                 ).unsqueeze(0),
             )
-        print("API T2I Cache Miss. Proceeding with API call...")
+        print("💨 API T2I Cache Miss. Proceeding with API call...")
         return self.execute_generation(
             is_i2i=False, cache_filename=cache_filepath, **kwargs
         )
@@ -579,7 +579,7 @@ class AIOFC_APIImageToImage(AIOFC_GenerativeAPIBase):
             },
         }
 
-    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "generate", "/API"
+    RETURN_TYPES, FUNCTION, CATEGORY = ("IMAGE",), "generate", "AIOFC/API"
 
     def generate(
         self,
@@ -600,7 +600,7 @@ class AIOFC_APIImageToImage(AIOFC_GenerativeAPIBase):
     ):
         # --- ADDED: Validate that at least one image is provided ---
         if all(img is None for img in [image_1, image_2, image_3, image_4]):
-            raise ValueError("API I2I node requires at least one image input to be provided.")
+            raise ValueError("AIOFC API I2I node requires at least one image input to be provided.")
 
         all_args = {
             "api_key": api_key,
@@ -630,13 +630,13 @@ class AIOFC_APIImageToImage(AIOFC_GenerativeAPIBase):
             self._log_and_update_hash(hasher, key, all_args[key])
         cache_filepath = os.path.join(cache_dir, f"{hasher.hexdigest()}_api_i2i.png")
         if os.path.exists(cache_filepath):
-            print(f"API I2I Cache Hit! Loading image from {cache_filepath}")
+            print(f"✅ API I2I Cache Hit! Loading image from {cache_filepath}")
             return (
                 torch.from_numpy(
                     np.array(Image.open(cache_filepath)).astype(np.float32) / 255.0
                 ).unsqueeze(0),
             )
-        print("API I2I Cache Miss. Proceeding with API call...")
+        print("💨 API I2I Cache Miss. Proceeding with API call...")
         return self.execute_generation(
             is_i2i=True, cache_filename=cache_filepath, **all_args
         )
@@ -651,6 +651,6 @@ NODE_CLASS_MAPPINGS = {
     "AIOFC_APIImageToImage": AIOFC_APIImageToImage,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_APITextToImage": "API T2I",
-    "AIOFC_APIImageToImage": "API I2I",
+    "AIOFC_APITextToImage": "🎨 AIOFC API T2I",
+    "AIOFC_APIImageToImage": "🎨 AIOFC API I2I",
 }

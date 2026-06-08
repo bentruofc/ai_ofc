@@ -13,7 +13,7 @@ app.registerExtension({
 
 				// Set default properties ONLY if they don't already exist.
 				if (!this.properties.logo_url) {
-					this.properties.logo_url = 'https://.s3.us-east-1.amazonaws.com/_logomark_only.svg';
+					this.properties.logo_url = 'https://aiofc.s3.us-east-1.amazonaws.com/AIOFC_logomark_only.svg';
 				}
 				if (this.properties.width == null) {
 					this.properties.width = 120;

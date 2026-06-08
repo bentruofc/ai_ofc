@@ -8,10 +8,10 @@ import { api } from "../../scripts/api.js";
 // Auto-migrate images from old per-node folders to central pool (runs once on load)
 (async function migrateOldImages() {
 	try {
-		const response = await fetch("//migrate_images", { method: "POST" });
+		const response = await fetch("/aiofc/migrate_images", { method: "POST" });
 		const result = await response.json();
 		if (result.success && result.migrated > 0) {
-			console.log(`Migrated ${result.migrated} images to central pool`);
+			console.log(`[AIOFC] ✅ Migrated ${result.migrated} images to central pool`);
 		}
 	} catch (e) {
 		// Silent fail - migration is optional
@@ -30,7 +30,7 @@ app.registerExtension({
 				if (data.properties) {
 					this.properties = this.properties || {};
 					Object.assign(this.properties, data.properties);
-					console.log(`[ AIL ${this.id}] Restored properties from saved data:`, {
+					console.log(`[AIOFC AIL ${this.id}] Restored properties from saved data:`, {
 						hasBatchData: !!this.properties.batch_data,
 						batchDataLength: this.properties.batch_data?.length
 					});
@@ -42,7 +42,7 @@ app.registerExtension({
 						const widgetIdx = this.widgets.indexOf(batchDataWidget);
 						if (data.widgets_values[widgetIdx]) {
 							this.properties.batch_data = data.widgets_values[widgetIdx];
-							console.log(`[ AIL ${this.id}] Restored batch_data from widget value`);
+							console.log(`[AIOFC AIL ${this.id}] Restored batch_data from widget value`);
 						}
 					}
 				}
@@ -155,7 +155,7 @@ app.registerExtension({
 					// Read the dropdown selection from the aspect ratio node
 					const selection = aspectRatioNode.widgets?.[0]?.value;
 					if (!selection) {
-						console.warn(`AIL ${node.id}] Aspect ratio node has no selection`);
+						console.warn(`[AIOFC AIL ${node.id}] Aspect ratio node has no selection`);
 						return null;
 					}
 
@@ -182,7 +182,7 @@ app.registerExtension({
 
 						const config = NANO_RATIOS[selection];
 						if (!config) {
-							console.warn(`AIL ${node.id}] Unknown Nano Banana aspect ratio: ${selection}`);
+							console.warn(`[AIOFC AIL ${node.id}] Unknown Nano Banana aspect ratio: ${selection}`);
 							return null;
 						}
 
@@ -231,7 +231,7 @@ app.registerExtension({
 
 					const config = ratios[selection];
 					if (!config) {
-						console.warn(`AIL ${node.id}] Unknown aspect ratio selection: ${selection}`);
+						console.warn(`[AIOFC AIL ${node.id}] Unknown aspect ratio selection: ${selection}`);
 						return null;
 					}
 
@@ -292,9 +292,9 @@ app.registerExtension({
 				 */
 				const isTxt2ImgMode = () => {
 					const enableImg2Img = getFinalInputValue("enable_img2img", true);
-					// console.log(`[ AIL ${node.id}] enable_img2img value:`, enableImg2Img, `(type: ${typeof enableImg2Img})`);
+					// console.log(`[AIOFC AIL ${node.id}] enable_img2img value:`, enableImg2Img, `(type: ${typeof enableImg2Img})`);
 					const result = enableImg2Img === false || enableImg2Img === "false";
-					// console.log(`[ AIL ${node.id}] isTxt2ImgMode result:`, result);
+					// console.log(`[AIOFC AIL ${node.id}] isTxt2ImgMode result:`, result);
 					return result;
 				};
 
@@ -303,43 +303,43 @@ app.registerExtension({
 				 * Works with both connected boolean nodes and local widgets.
 				 */
 				const switchToImg2ImgMode = () => {
-					console.log(`[ AIL ${node.id}] === Switching to img2img mode ===`);
+					console.log(`[AIOFC AIL ${node.id}] === Switching to img2img mode ===`);
 
 					// First, try to find and update a connected boolean node
 					const input = node.inputs?.find(i => i.name === "enable_img2img");
-					console.log(`[ AIL ${node.id}] enable_img2img input:`, input);
+					console.log(`[AIOFC AIL ${node.id}] enable_img2img input:`, input);
 
 					if (input && input.link != null) {
-						console.log(`[ AIL ${node.id}] Input is linked, link ID:`, input.link);
+						console.log(`[AIOFC AIL ${node.id}] Input is linked, link ID:`, input.link);
 						const link = app.graph.links[input.link];
-						console.log(`[ AIL ${node.id}] Link object:`, link);
+						console.log(`[AIOFC AIL ${node.id}] Link object:`, link);
 
 						if (link) {
 							const booleanNode = app.graph.getNodeById(link.origin_id);
-							console.log(`[ AIL ${node.id}] Boolean node:`, booleanNode);
-							console.log(`[ AIL ${node.id}] Boolean node type:`, booleanNode?.type);
-							console.log(`[ AIL ${node.id}] Boolean node widgets:`, booleanNode?.widgets);
+							console.log(`[AIOFC AIL ${node.id}] Boolean node:`, booleanNode);
+							console.log(`[AIOFC AIL ${node.id}] Boolean node type:`, booleanNode?.type);
+							console.log(`[AIOFC AIL ${node.id}] Boolean node widgets:`, booleanNode?.widgets);
 
 							if (booleanNode && booleanNode.widgets && booleanNode.widgets.length > 0) {
 								const widget = booleanNode.widgets[0];
-								console.log(`[ AIL ${node.id}] Widget name:`, widget.name);
-								console.log(`[ AIL ${node.id}] Widget type:`, widget.type);
+								console.log(`[AIOFC AIL ${node.id}] Widget name:`, widget.name);
+								console.log(`[AIOFC AIL ${node.id}] Widget type:`, widget.type);
 								const oldValue = widget.value;
-								console.log(`[ AIL ${node.id}] Old value:`, oldValue);
+								console.log(`[AIOFC AIL ${node.id}] Old value:`, oldValue);
 
 								// Update the boolean node's widget value
 								widget.value = true;
-								console.log(`[ AIL ${node.id}] New value set:`, widget.value);
+								console.log(`[AIOFC AIL ${node.id}] New value set:`, widget.value);
 
 								// Trigger the widget's callback if it exists
 								if (widget.callback) {
-									console.log(`[ AIL ${node.id}] Calling widget callback...`);
+									console.log(`[AIOFC AIL ${node.id}] Calling widget callback...`);
 									widget.callback.call(booleanNode, true, null, booleanNode, null, oldValue);
 								} else {
-									console.log(`[ AIL ${node.id}] Widget has no callback!`);
+									console.log(`[AIOFC AIL ${node.id}] ⚠️ Widget has no callback!`);
 								}
 
-								console.log(`[ AIL ${node.id}] Updated connected boolean node #${booleanNode.id} to true`);
+								console.log(`[AIOFC AIL ${node.id}] ✅ Updated connected boolean node #${booleanNode.id} to true`);
 								app.graph.setDirtyCanvas(true, true);
 								return true;
 							}
@@ -357,12 +357,12 @@ app.registerExtension({
 							widget.callback.call(node, true, null, node, null, oldValue);
 						}
 
-						console.log(`[ AIL ${node.id}] Updated local enable_img2img widget to true`);
+						console.log(`[AIOFC AIL ${node.id}] Updated local enable_img2img widget to true`);
 						app.graph.setDirtyCanvas(true, true);
 						return true;
 					}
 
-					console.warn(`[ AIL ${node.id}] Could not find enable_img2img input or widget`);
+					console.warn(`[AIOFC AIL ${node.id}] Could not find enable_img2img input or widget`);
 					return false;
 				};
 
@@ -370,20 +370,20 @@ app.registerExtension({
 				 * Gets width, height, and aspect_label from connected nodes for txt2img mode.
 				 */
 				const getTxt2ImgDimensions = () => {
-					// console.log(`[ AIL ${node.id}] === Reading dimensions from connected nodes ===`);
+					// console.log(`[AIOFC AIL ${node.id}] === Reading dimensions from connected nodes ===`);
 
 					const widthRaw = getFinalInputValue("width", 960);
 					const heightRaw = getFinalInputValue("height", 960);
 					const aspect_label_raw = getFinalInputValue("aspect_label", null);
 
-					// console.log(`[ AIL ${node.id}] Raw values:`, { widthRaw, heightRaw, aspect_label_raw });
+					// console.log(`[AIOFC AIL ${node.id}] Raw values:`, { widthRaw, heightRaw, aspect_label_raw });
 
 					const width = parseInt(widthRaw) || 960;
 					const height = parseInt(heightRaw) || 960;
 					const aspect_label = aspect_label_raw || getAspectLabel(width, height);
 
-					// console.log(`[ AIL ${node.id}] Final dimensions:`, { width, height, aspect_label });
-					// console.log(`[ AIL ${node.id}] Expected tensor size: ${width}×${height} (${(width * height / 1000000).toFixed(2)}MP)`);
+					// console.log(`[AIOFC AIL ${node.id}] Final dimensions:`, { width, height, aspect_label });
+					// console.log(`[AIOFC AIL ${node.id}] Expected tensor size: ${width}×${height} (${(width * height / 1000000).toFixed(2)}MP)`);
 
 					return { width, height, aspect_label };
 				};
@@ -422,11 +422,11 @@ app.registerExtension({
 
 				const renderGallery = () => {
 					const detectedMode = isTxt2ImgMode();
-					console.log(`[ AIL ${node.id}] renderGallery - currentDetectedMode:`, currentDetectedMode, `detectedMode:`, detectedMode);
+					console.log(`[AIOFC AIL ${node.id}] renderGallery - currentDetectedMode:`, currentDetectedMode, `detectedMode:`, detectedMode);
 
 					// Handle mode switching
 					if (currentDetectedMode !== null && currentDetectedMode !== detectedMode) {
-						console.log(`[ AIL ${node.id}] MODE SWITCH DETECTED! Switching to ${detectedMode ? 'txt2img' : 'img2img'}`);
+						console.log(`[AIOFC AIL ${node.id}] MODE SWITCH DETECTED! Switching to ${detectedMode ? 'txt2img' : 'img2img'}`);
 						if (detectedMode) {
 							// Switching to txt2img mode
 							node.properties.img2img_data_backup = node.properties.batch_data;
@@ -478,7 +478,7 @@ app.registerExtension({
 					}
 					currentDetectedMode = detectedMode;
 
-					// console.log(`[ AIL ${node.id}] Rendering ${detectedMode ? 'txt2img' : 'img2img'} gallery`);
+					// console.log(`[AIOFC AIL ${node.id}] Rendering ${detectedMode ? 'txt2img' : 'img2img'} gallery`);
 					if (detectedMode) {
 						renderTxt2ImgGallery();
 					} else {
@@ -494,7 +494,7 @@ app.registerExtension({
 					// Validate and clean up stale data (order items that don't exist in images)
 					const validOrder = order.filter(id => images.some(img => img.id === id));
 					if (validOrder.length !== order.length) {
-						console.log(`[ AIL ${node.id}] Cleaning up stale img2img data: ${order.length} -> ${validOrder.length} items`);
+						console.log(`[AIOFC AIL ${node.id}] Cleaning up stale img2img data: ${order.length} -> ${validOrder.length} items`);
 						batchData.order = validOrder;
 						batchData.total_count = validOrder.reduce((sum, id) => {
 							const image = images.find(img => img.id === id);
@@ -510,19 +510,45 @@ app.registerExtension({
 					const batchIndexWidget = node.widgets?.find((w) => w.name === "batch_index");
 					const currentIndex = node._processingIndex !== undefined ? node._processingIndex : batchIndexWidget?.value || 0;
 
-					container.innerHTML = `<div class="-adv-loader-brand-row"> <img src="/extensions/ComfyUI_/.svg" alt="" class="-adv-loader-logo" /> <span class="-adv-loader-version">AIL V2.0</span> </div> <div class="-adv-loader-topbar"> <div class="-adv-loader-topbar-left"> <span class="adv-loader-mode-badge -adv-loader-mode-img2img"> IMG2IMG</span> <div class="-adv-loader-mode-select"> <select class="-adv-loader-mode-dropdown"> <option value="Batch Tensor" ${currentMode === "Batch Tensor" ? "selected" : ""}> Batch Tensor</option> <option value="Sequential" ${currentMode === "Sequential" ? "selected" : ""}> Sequential</option> </select> </div> ${currentMode === "Sequential" ?`<span class="aiofc-adv-loader-progress-badge">${currentIndex}/${batchData.total_count || 0}</span>`""} </div> <div class="-adv-loader-topbar-right"> <span class="-adv-loader-count">${images.length} image${images.length !== 1 ? "s" : ""}</span> <span class="-adv-loader-separator">·</span> <span class="-adv-loader-total">${batchData.total_count || 0} total</span> </div> </div> <div class="-adv-loader-actions"> ${selectionMode ?`
+					container.innerHTML = `
+                        <div class="aiofc-adv-loader-brand-row">
+                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-adv-loader-logo" />
+                            <span class="aiofc-adv-loader-version">AIL V2.0</span>
+                        </div>
+                        <div class="aiofc-adv-loader-topbar">
+                            <div class="aiofc-adv-loader-topbar-left">
+                                <span class="aiofc-adv-loader-mode-badge aiofc-adv-loader-mode-img2img">🖼️ IMG2IMG</span>
+                                <div class="aiofc-adv-loader-mode-select">
+                                    <select class="aiofc-adv-loader-mode-dropdown">
+                                        <option value="Batch Tensor" ${currentMode === "Batch Tensor" ? "selected" : ""}>🎯 Batch Tensor</option>
+                                        <option value="Sequential" ${currentMode === "Sequential" ? "selected" : ""}>📑 Sequential</option>
+                                    </select>
+                                </div>
+                                ${currentMode === "Sequential" ? `<span class="aiofc-adv-loader-progress-badge">${currentIndex}/${batchData.total_count || 0}</span>` : ""}
+                            </div>
+                            <div class="aiofc-adv-loader-topbar-right">
+                                <span class="aiofc-adv-loader-count">${images.length} image${images.length !== 1 ? "s" : ""}</span>
+                                <span class="aiofc-adv-loader-separator">·</span>
+                                <span class="aiofc-adv-loader-total">${batchData.total_count || 0} total</span>
+                            </div>
+                        </div>
+                        <div class="aiofc-adv-loader-actions">
+                            ${selectionMode ? `
                                 <button class="aiofc-adv-loader-select-all-btn" title="Select all images">☑ Select All</button>
                                 <button class="aiofc-adv-loader-deselect-all-btn" title="Deselect all">☐ Deselect</button>
                                 <button class="aiofc-adv-loader-delete-selected-btn" title="Delete selected images" ${selectedImages.size === 0 ? 'disabled' : ''}>🗑️ Delete (${selectedImages.size})</button>
                                 <button class="aiofc-adv-loader-cancel-selection-btn" title="Exit selection mode">✖ Cancel</button>
                             ` : `
                                 <button class="aiofc-adv-loader-upload-btn" title="Upload images">📁 Upload Images</button>
-                                ${currentMode === "Sequential" ? `<button class="-adv-loader-queue-all-btn" title="Queue all images"> Queue All</button>` : ""}
-                                ${images.length > 0 ? `<button class="-adv-loader-duplicate-btn" title="Duplicate last image">⧉ Duplicate</button>` : ""}
-                                ${images.length > 0 ? `<button class="-adv-loader-sync-btn" title="Smart sync: Match counts across AILs"> Sync</button>` : ""}
-                                ${images.length > 0 ? `<button class="-adv-loader-enter-selection-btn" title="Select multiple images"> Select</button>` : ""}
-                                ${images.length > 0 ? `<button class="-adv-loader-delete-all-btn" title="Delete all images"> Clear</button>` : ""}
-                            `} </div> <div class="-adv-loader-gallery"> ${order.length === 0 ?`<div class="aiofc-adv-loader-empty"><p>No images loaded</p><p class="aiofc-adv-loader-hint">Click "Upload Images" to get started</p></div>` : (() => {
+                                ${currentMode === "Sequential" ? `<button class="aiofc-adv-loader-queue-all-btn" title="Queue all images">🎬 Queue All</button>` : ""}
+                                ${images.length > 0 ? `<button class="aiofc-adv-loader-duplicate-btn" title="Duplicate last image">⧉ Duplicate</button>` : ""}
+                                ${images.length > 0 ? `<button class="aiofc-adv-loader-sync-btn" title="Smart sync: Match counts across AILs">🔄 Sync</button>` : ""}
+                                ${images.length > 0 ? `<button class="aiofc-adv-loader-enter-selection-btn" title="Select multiple images">☑ Select</button>` : ""}
+                                ${images.length > 0 ? `<button class="aiofc-adv-loader-delete-all-btn" title="Delete all images">🗑️ Clear</button>` : ""}
+                            `}
+                        </div>
+                        <div class="aiofc-adv-loader-gallery">
+                            ${order.length === 0 ? `<div class="aiofc-adv-loader-empty"><p>No images loaded</p><p class="aiofc-adv-loader-hint">Click "Upload Images" to get started</p></div>` : (() => {
 								let currentIdx = 0;
 								return order.map((imgId) => {
 									const img = images.find((i) => i.id === imgId);
@@ -535,13 +561,17 @@ app.registerExtension({
 									const isActive = currentMode === "Sequential" && currentIndex >= startIdx && currentIndex <= endIdx;
 									const isPast = currentMode === "Sequential" && currentIndex > endIdx;
 									const isProcessing = node._isProcessing && isActive;
-									return `<div class="adv-loader-item ${isActive ?"aiofc-adv-loader-item-active" : ""} ${isPast ? "aiofc-adv-loader-item-done" : ""} ${isProcessing ? "aiofc-adv-loader-item-processing" : ""} ${selectionMode ? "aiofc-adv-loader-item-selection" : ""} ${selectedImages.has(String(img.id)) ? "aiofc-adv-loader-item-selected" : ""}" data-id="${img.id}" draggable="${!selectionMode}">
-                                        ${selectionMode ? `<label class="-adv-loader-selection-checkbox"> <input type="checkbox" class="-adv-loader-image-checkbox" data-id="${img.id}" ${selectedImages.has(String(img.id)) ? 'checked' : ''} /> </label>` : ''}
-                                        ${currentMode === "Sequential" && !selectionMode ? `<div class="-adv-loader-index-badge">${repeatCount === 1 ?`#${startIdx}` : `#${startIdx}-${endIdx}`}</div>` : ""}
+									return `<div class="aiofc-adv-loader-item ${isActive ? "aiofc-adv-loader-item-active" : ""} ${isPast ? "aiofc-adv-loader-item-done" : ""} ${isProcessing ? "aiofc-adv-loader-item-processing" : ""} ${selectionMode ? "aiofc-adv-loader-item-selection" : ""} ${selectedImages.has(String(img.id)) ? "aiofc-adv-loader-item-selected" : ""}" data-id="${img.id}" draggable="${!selectionMode}">
+                                        ${selectionMode ? `
+                                            <label class="aiofc-adv-loader-selection-checkbox">
+                                                <input type="checkbox" class="aiofc-adv-loader-image-checkbox" data-id="${img.id}" ${selectedImages.has(String(img.id)) ? 'checked' : ''} />
+                                            </label>
+                                        ` : ''}
+                                        ${currentMode === "Sequential" && !selectionMode ? `<div class="aiofc-adv-loader-index-badge">${repeatCount === 1 ? `#${startIdx}` : `#${startIdx}-${endIdx}`}</div>` : ""}
                                         <div class="aiofc-adv-loader-thumb">
                                             <img src="${thumbUrl}" alt="${img.original_name}" style="background: rgba(0,0,0,0.3);" onerror="this.style.opacity='0.3'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%239ca3af%22 d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E';" />
-                                            ${isProcessing ? '<div class="-adv-loader-processing-indicator"> PROCESSING...</div>' : isActive && !selectionMode ? '<div class="-adv-loader-active-indicator">▶ NEXT</div>' : ""}
-                                            ${isPast && !selectionMode ? '<div class="-adv-loader-done-indicator"></div>' : ""}
+                                            ${isProcessing ? '<div class="aiofc-adv-loader-processing-indicator">⚡ PROCESSING...</div>' : isActive && !selectionMode ? '<div class="aiofc-adv-loader-active-indicator">▶ NEXT</div>' : ""}
+                                            ${isPast && !selectionMode ? '<div class="aiofc-adv-loader-done-indicator">✓</div>' : ""}
                                         </div>
                                         <div class="aiofc-adv-loader-controls">
                                             <label>×</label>
@@ -570,7 +600,7 @@ app.registerExtension({
 							images: order.map(imgId => {
 								const img = images.find(i => i.id === imgId);
 								if (!img) return null;
-								const thumbUrl = `//view/${img.thumbnail}`;
+								const thumbUrl = `/aiofc/view/${img.thumbnail}`;
 								const width = img.width || 1024;
 								const height = img.height || 1024;
 								return {
@@ -601,7 +631,7 @@ app.registerExtension({
 					// Validate and clean up stale data (order items that don't exist in latents)
 					const validOrder = order.filter(id => latents.some(l => l.id === id));
 					if (validOrder.length !== order.length) {
-						console.log(`[ AIL ${node.id}] Cleaning up stale txt2img data: ${order.length} -> ${validOrder.length} items`);
+						console.log(`[AIOFC AIL ${node.id}] Cleaning up stale txt2img data: ${order.length} -> ${validOrder.length} items`);
 						batchData.order = validOrder;
 						batchData.total_count = validOrder.reduce((sum, id) => {
 							const latent = latents.find(l => l.id === id);
@@ -620,12 +650,43 @@ app.registerExtension({
 					const dimensions = getTxt2ImgDimensions();
 
 					// Debug: Log dimensions for debugging
-					console.log(`[ AIL ${node.id}] renderTxt2ImgGallery - dimensions:`, dimensions);
+					console.log(`[AIOFC AIL ${node.id}] renderTxt2ImgGallery - dimensions:`, dimensions);
 
-					container.innerHTML = `<div class="-adv-loader-brand-row"> <img src="/extensions/ComfyUI_/.svg" alt="" class="-adv-loader-logo" /> <span class="-adv-loader-version">AIL V2.0</span> </div> <div class="-adv-loader-topbar"> <div class="-adv-loader-topbar-left"> <span class="adv-loader-mode-badge -adv-loader-mode-txt2img"> TXT2IMG</span> <div class="-adv-loader-mode-select"> <select class="-adv-loader-mode-dropdown"> <option value="Batch Tensor" ${currentMode === "Batch Tensor" ? "selected" : ""}> Batch Tensor</option> <option value="Sequential" ${currentMode === "Sequential" ? "selected" : ""}> Sequential</option> </select> </div> ${currentMode === "Sequential" ?`<span class="aiofc-adv-loader-progress-badge">${currentIndex}/${batchData.total_count || 0}</span>`""} </div> <div class="-adv-loader-topbar-right"> <span class="-adv-loader-count">${latents.length} latent${latents.length !== 1 ? "s" : ""}</span> <span class="-adv-loader-separator">·</span> <span class="-adv-loader-total">${batchData.total_count || 0} total</span> </div> </div> <div class="-adv-loader-actions"> <button class="-adv-loader-add-latent-btn" title="Add empty latent"> Add Latent</button> <div class="-adv-loader-batch-add-controls"> <input type="number" class="-adv-loader-batch-count-input" value="${preservedBatchCount}" min="1" max="100" /> <button class="-adv-loader-batch-add-btn" title="Batch add empty latents"> Add N</button> </div> ${currentMode === "Sequential" ?`<button class="aiofc-adv-loader-queue-all-btn" title="Queue all latents">🎬 Queue All</button>` : ""}
+					container.innerHTML = `
+                        <div class="aiofc-adv-loader-brand-row">
+                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-adv-loader-logo" />
+                            <span class="aiofc-adv-loader-version">AIL V2.0</span>
+                        </div>
+                        <div class="aiofc-adv-loader-topbar">
+                            <div class="aiofc-adv-loader-topbar-left">
+                                <span class="aiofc-adv-loader-mode-badge aiofc-adv-loader-mode-txt2img">🎨 TXT2IMG</span>
+                                <div class="aiofc-adv-loader-mode-select">
+                                    <select class="aiofc-adv-loader-mode-dropdown">
+                                        <option value="Batch Tensor" ${currentMode === "Batch Tensor" ? "selected" : ""}>🎯 Batch Tensor</option>
+                                        <option value="Sequential" ${currentMode === "Sequential" ? "selected" : ""}>📑 Sequential</option>
+                                    </select>
+                                </div>
+                                ${currentMode === "Sequential" ? `<span class="aiofc-adv-loader-progress-badge">${currentIndex}/${batchData.total_count || 0}</span>` : ""}
+                            </div>
+                            <div class="aiofc-adv-loader-topbar-right">
+                                <span class="aiofc-adv-loader-count">${latents.length} latent${latents.length !== 1 ? "s" : ""}</span>
+                                <span class="aiofc-adv-loader-separator">·</span>
+                                <span class="aiofc-adv-loader-total">${batchData.total_count || 0} total</span>
+                            </div>
+                        </div>
+                        <div class="aiofc-adv-loader-actions">
+                            <button class="aiofc-adv-loader-add-latent-btn" title="Add empty latent">➕ Add Latent</button>
+                            <div class="aiofc-adv-loader-batch-add-controls">
+                                <input type="number" class="aiofc-adv-loader-batch-count-input" value="${preservedBatchCount}" min="1" max="100" />
+                                <button class="aiofc-adv-loader-batch-add-btn" title="Batch add empty latents">📦 Add N</button>
+                            </div>
+                            ${currentMode === "Sequential" ? `<button class="aiofc-adv-loader-queue-all-btn" title="Queue all latents">🎬 Queue All</button>` : ""}
                             ${latents.length > 0 ? `<button class="aiofc-adv-loader-duplicate-btn" title="Duplicate last latent">⧉ Duplicate</button>` : ""}
                             ${latents.length > 0 ? `<button class="aiofc-adv-loader-sync-btn" title="Smart sync: Match counts across AILs">🔄 Sync</button>` : ""}
-                            ${latents.length > 0 ? `<button class="aiofc-adv-loader-delete-all-btn" title="Delete all latents">🗑️ Clear</button>`""} </div> <div class="-adv-loader-gallery"> ${order.length === 0 ?`<div class="aiofc-adv-loader-empty"><p>No latents added</p><p class="aiofc-adv-loader-hint">Click "Add Empty Latent" to get started (txt2img mode)</p></div>` : (() => {
+                            ${latents.length > 0 ? `<button class="aiofc-adv-loader-delete-all-btn" title="Delete all latents">🗑️ Clear</button>` : ""}
+                        </div>
+                        <div class="aiofc-adv-loader-gallery">
+                            ${order.length === 0 ? `<div class="aiofc-adv-loader-empty"><p>No latents added</p><p class="aiofc-adv-loader-hint">Click "Add Empty Latent" to get started (txt2img mode)</p></div>` : (() => {
 								let currentIdx = 0;
 								return order.map((latentId) => {
 									const latent = latents.find((l) => l.id === latentId);
@@ -649,8 +710,8 @@ app.registerExtension({
 									const aspectRatio = width / height;
 									const aspectLabel = dimensions.aspect_label;
 
-									return `<div class="adv-loader-item ${isActive ?"aiofc-adv-loader-item-active" : ""} ${isPast ? "aiofc-adv-loader-item-done" : ""} ${isProcessing ? "aiofc-adv-loader-item-processing" : ""}" data-id="${latent.id}" draggable="true">
-                                        ${currentMode === "Sequential" ? `<div class="-adv-loader-index-badge">${repeatCount === 1 ?`#${startIdx}` : `#${startIdx}-${endIdx}`}</div>` : ""}
+									return `<div class="aiofc-adv-loader-item ${isActive ? "aiofc-adv-loader-item-active" : ""} ${isPast ? "aiofc-adv-loader-item-done" : ""} ${isProcessing ? "aiofc-adv-loader-item-processing" : ""}" data-id="${latent.id}" draggable="true">
+                                        ${currentMode === "Sequential" ? `<div class="aiofc-adv-loader-index-badge">${repeatCount === 1 ? `#${startIdx}` : `#${startIdx}-${endIdx}`}</div>` : ""}
                                         <div class="aiofc-adv-loader-latent-thumb">
                                             <div class="aiofc-adv-loader-aspect-preview" style="aspect-ratio: ${aspectRatio};">
                                                 <div class="aiofc-adv-loader-aspect-content">
@@ -658,8 +719,8 @@ app.registerExtension({
                                                     <div style="font-size: 11px; font-weight: 600;">${aspectLabel}</div>
                                                 </div>
                                             </div>
-                                            ${isProcessing ? '<div class="-adv-loader-processing-indicator"> PROCESSING...</div>' : isActive ? '<div class="-adv-loader-active-indicator">▶ NEXT</div>' : ""}
-                                            ${isPast ? '<div class="-adv-loader-done-indicator"></div>' : ""}
+                                            ${isProcessing ? '<div class="aiofc-adv-loader-processing-indicator">⚡ PROCESSING...</div>' : isActive ? '<div class="aiofc-adv-loader-active-indicator">▶ NEXT</div>' : ""}
+                                            ${isPast ? '<div class="aiofc-adv-loader-done-indicator">✓</div>' : ""}
                                         </div>
                                         <div class="aiofc-adv-loader-controls">
                                             <label>×</label>
@@ -734,7 +795,7 @@ app.registerExtension({
 						aspect_label: dimensions.aspect_label  // Use aspect_label from connected node
 					};
 
-					console.log(`[ AIL ${node.id}] Adding latent:`, newLatent);
+					console.log(`[AIOFC AIL ${node.id}] Adding latent:`, newLatent);
 
 					batchData.latents.push(newLatent);
 					batchData.order.push(newLatent.id);
@@ -769,7 +830,7 @@ app.registerExtension({
 						}
 					}
 
-					console.log(`[ AIL ${node.id}] Batch adding ${count} latents with dimensions:`, dimensions);
+					console.log(`[AIOFC AIL ${node.id}] Batch adding ${count} latents with dimensions:`, dimensions);
 
 					for (let i = 0; i < count; i++) {
 						const newLatent = {
@@ -999,29 +1060,29 @@ app.registerExtension({
 						const formData = new FormData();
 						formData.append("node_id", node.id);
 						files.forEach((file) => formData.append("files", file));
-						const response = await fetch("//batch_upload", { method: "POST", body: formData });
+						const response = await fetch("/aiofc/batch_upload", { method: "POST", body: formData });
 						const result = await response.json();
-						console.log(`[ AIL ${node.id}] Upload result:`, result.success);
+						console.log(`[AIOFC AIL ${node.id}] 📤 Upload result:`, result.success);
 						if (result.success) {
 							// Auto-switch to img2img mode FIRST if currently in txt2img mode
 							const wasInTxt2ImgMode = isTxt2ImgMode();
-							console.log(`[ AIL ${node.id}] Current mode - isTxt2ImgMode:`, wasInTxt2ImgMode);
+							console.log(`[AIOFC AIL ${node.id}] 📊 Current mode - isTxt2ImgMode:`, wasInTxt2ImgMode);
 							if (wasInTxt2ImgMode) {
-								console.log(`[ AIL ${node.id}] Auto-switching to img2img mode BEFORE adding images`);
+								console.log(`[AIOFC AIL ${node.id}] 🔄 Auto-switching to img2img mode BEFORE adding images`);
 
 								// Properly swap data (backup txt2img, restore img2img)
 								node.properties.txt2img_data_backup = node.properties.batch_data;
 								node.properties.batch_data = node.properties.img2img_data_backup || JSON.stringify({ images: [], order: [], total_count: 0 });
-								console.log(`[ AIL ${node.id}] Backed up txt2img data, restored img2img data`);
+								console.log(`[AIOFC AIL ${node.id}] 💾 Backed up txt2img data, restored img2img data`);
 
 								// Update the boolean
 								switchToImg2ImgMode();
 
 								// Manually update currentDetectedMode to prevent mode switch detection in renderGallery
 								currentDetectedMode = false; // false = img2img mode
-								console.log(`[ AIL ${node.id}] Updated currentDetectedMode to img2img`);
+								console.log(`[AIOFC AIL ${node.id}] ✅ Updated currentDetectedMode to img2img`);
 							} else {
-								console.log(`[ AIL ${node.id}] Already in img2img mode, no switch needed`);
+								console.log(`[AIOFC AIL ${node.id}] ✅ Already in img2img mode, no switch needed`);
 							}
 
 							// NOW add images to batch_data (after mode switch completes)
@@ -1060,7 +1121,7 @@ app.registerExtension({
 						// Only call server delete for original images (not duplicates)
 						if (!isDuplicate) {
 							try {
-								await fetch(`//batch_delete/${node.id}/${imageId}`, { method: "DELETE" });
+								await fetch(`/aiofc/batch_delete/${node.id}/${imageId}`, { method: "DELETE" });
 							} catch (serverError) {
 								// Server delete failed, but continue with local removal
 								console.warn(`[AIL] Server delete failed for ${imageId}, removing locally`);
@@ -1124,7 +1185,7 @@ app.registerExtension({
 					const imageCount = batchData.images?.length || 0;
 					if (imageCount === 0 || !confirm(`Delete all ${imageCount} image${imageCount !== 1 ? "s" : ""}?`)) return;
 					try {
-						await Promise.all(batchData.images.map((img) => fetch(`//batch_delete/${node.id}/${img.id}`, { method: "DELETE" })));
+						await Promise.all(batchData.images.map((img) => fetch(`/aiofc/batch_delete/${node.id}/${img.id}`, { method: "DELETE" })));
 						node.properties.batch_data = JSON.stringify({ images: [], order: [], total_count: 0 });
 						// Clear backup to prevent old data from reappearing on mode switch
 						node.properties.img2img_data_backup = JSON.stringify({ images: [], order: [], total_count: 0 });
@@ -1217,7 +1278,7 @@ app.registerExtension({
 
 					if (promptCount > 0) {
 						// Prompts exist - prompts are king, sync this AIL to match
-						console.log(`[AIL ${node.id}] Prompts are king: Syncing to ${promptCount} prompts`);
+						console.log(`[AIL ${node.id}] 🔄 Prompts are king: Syncing to ${promptCount} prompts`);
 
 						if (myCount === promptCount) {
 							// Same count, just sync repeats
@@ -1228,7 +1289,7 @@ app.registerExtension({
 									repeats: promptRepeats
 								}
 							}));
-							alert(`Synced repeat counts to match ${promptCount} prompts`);
+							alert(`✅ Synced repeat counts to match ${promptCount} prompts`);
 						} else if (myCount < promptCount) {
 							// Need to add items
 							const toAdd = promptCount - myCount;
@@ -1245,14 +1306,14 @@ app.registerExtension({
 									}
 								}));
 							}, 100);
-							alert(`Added ${toAdd} items and synced to match ${promptCount} prompts`);
+							alert(`✅ Added ${toAdd} items and synced to match ${promptCount} prompts`);
 						} else {
 							// Need to remove items - just update repeats for first N
-							alert(`You have ${myCount} items but only ${promptCount} prompts. Remove ${myCount - promptCount} items manually, or prompts will only use the first ${promptCount}.`);
+							alert(`⚠️ You have ${myCount} items but only ${promptCount} prompts. Remove ${myCount - promptCount} items manually, or prompts will only use the first ${promptCount}.`);
 						}
 					} else {
 						// No prompts - find connected AILs and sync to the one with most images
-						console.log(`[AIL ${node.id}] No prompts: Looking for other AILs to sync with`);
+						console.log(`[AIL ${node.id}] 🔍 No prompts: Looking for other AILs to sync with`);
 
 						// Find all AILs connected to the same RPG or BIG
 						const findSiblingAILs = () => {
@@ -1307,7 +1368,7 @@ app.registerExtension({
 						const masterAIL = siblingAILs.reduce((max, ail) => ail.count > max.count ? ail : max, siblingAILs[0]);
 
 						if (myCount === masterAIL.count) {
-							alert(`Already synced! Both have ${myCount} items.`);
+							alert(`✅ Already synced! Both have ${myCount} items.`);
 							return;
 						}
 
@@ -1323,13 +1384,13 @@ app.registerExtension({
 							window.dispatchEvent(new CustomEvent("AIOFC_DUPLICATE_LAST_N", {
 								detail: { targetNodeId: node.id, count: diff }
 							}));
-							alert(`Duplicated ${diff} images to match ${masterAIL.count} items`);
+							alert(`✅ Duplicated ${diff} images to match ${masterAIL.count} items`);
 						} else {
 							// Trim to match
 							window.dispatchEvent(new CustomEvent("AIOFC_TRIM_AIL_IMAGES", {
 								detail: { targetNodeId: node.id, targetCount: masterAIL.count }
 							}));
-							alert(`Trimmed to ${masterAIL.count} items`);
+							alert(`✅ Trimmed to ${masterAIL.count} items`);
 						}
 					}
 				};
@@ -1486,7 +1547,7 @@ app.registerExtension({
 							selectionMode = true;
 							selectedImages.clear();
 							renderGallery();
-							console.log(`[ AIL ${node.id}] Entered selection mode`);
+							console.log(`[AIOFC AIL ${node.id}] Entered selection mode`);
 						};
 					}
 
@@ -1496,7 +1557,7 @@ app.registerExtension({
 							selectionMode = false;
 							selectedImages.clear();
 							renderGallery();
-							console.log(`[ AIL ${node.id}] Exited selection mode`);
+							console.log(`[AIOFC AIL ${node.id}] Exited selection mode`);
 						};
 					}
 
@@ -1507,7 +1568,7 @@ app.registerExtension({
 							const order = batchData.order || [];
 							order.forEach(id => selectedImages.add(String(id)));
 							renderGallery();
-							console.log(`[ AIL ${node.id}] Selected all: ${selectedImages.size} images`);
+							console.log(`[AIOFC AIL ${node.id}] Selected all: ${selectedImages.size} images`);
 						};
 					}
 
@@ -1516,7 +1577,7 @@ app.registerExtension({
 						deselectAllBtn.onclick = () => {
 							selectedImages.clear();
 							renderGallery();
-							console.log(`[ AIL ${node.id}] Deselected all`);
+							console.log(`[AIOFC AIL ${node.id}] Deselected all`);
 						};
 					}
 
@@ -1549,7 +1610,7 @@ app.registerExtension({
 								node.properties.batch_data = JSON.stringify(batchData);
 								syncBatchDataWidget();
 
-								console.log(`[ AIL ${node.id}] Deleted ${selectedIds.length} images`);
+								console.log(`[AIOFC AIL ${node.id}] Deleted ${selectedIds.length} images`);
 
 								// Exit selection mode
 								selectionMode = false;
@@ -1558,7 +1619,7 @@ app.registerExtension({
 
 								alert(`Successfully deleted ${selectedIds.length} image${selectedIds.length === 1 ? '' : 's'}`);
 							} catch (error) {
-								console.error(`[ AIL ${node.id}] Error deleting selected images:`, error);
+								console.error(`[AIOFC AIL ${node.id}] Error deleting selected images:`, error);
 								alert(`Error deleting images: ${error.message}`);
 							}
 						};
@@ -1577,7 +1638,7 @@ app.registerExtension({
 							}
 
 							renderGallery();
-							console.log(`[ AIL ${node.id}] ${checkbox.checked ? 'Selected' : 'Deselected'} image ${imageId}. Total: ${selectedImages.size}`);
+							console.log(`[AIOFC AIL ${node.id}] ${checkbox.checked ? 'Selected' : 'Deselected'} image ${imageId}. Total: ${selectedImages.size}`);
 						};
 						checkbox.onclick = (e) => e.stopPropagation();
 					});
@@ -1661,7 +1722,7 @@ app.registerExtension({
 					};
 
 					const handleFileDrop = async (files) => {
-						console.log(`[ AIL ${node.id}] Files dropped:`, files.length);
+						console.log(`[AIOFC AIL ${node.id}] 📂 Files dropped:`, files.length);
 						if (files.length === 0) return;
 
 						const uploadBtn = container.querySelector(".aiofc-adv-loader-upload-btn");
@@ -1673,42 +1734,42 @@ app.registerExtension({
 							uploadBtn.textContent = "⏳ Uploading...";
 							uploadBtn.disabled = true;
 						} else {
-							console.log(`[ AIL ${node.id}] ℹ No upload button (probably in txt2img mode), proceeding anyway...`);
+							console.log(`[AIOFC AIL ${node.id}] ℹ️ No upload button (probably in txt2img mode), proceeding anyway...`);
 						}
 
 						try {
 							const formData = new FormData();
 							formData.append("node_id", node.id);
 							files.forEach((file) => formData.append("files", file));
-							const response = await fetch("//batch_upload", { method: "POST", body: formData });
+							const response = await fetch("/aiofc/batch_upload", { method: "POST", body: formData });
 							const result = await response.json();
-							console.log(`[ AIL ${node.id}] Upload result:`, result.success);
-							console.log(`[ AIL ${node.id}] Images returned:`, result.images?.length || 0);
+							console.log(`[AIOFC AIL ${node.id}] 📤 Upload result:`, result.success);
+							console.log(`[AIOFC AIL ${node.id}] 📤 Images returned:`, result.images?.length || 0);
 							if (result.success) {
 								// Auto-switch to img2img mode FIRST if currently in txt2img mode
 								const wasInTxt2ImgMode = isTxt2ImgMode();
-								console.log(`[ AIL ${node.id}] Current mode - isTxt2ImgMode:`, wasInTxt2ImgMode);
+								console.log(`[AIOFC AIL ${node.id}] 📊 Current mode - isTxt2ImgMode:`, wasInTxt2ImgMode);
 								if (wasInTxt2ImgMode) {
-									console.log(`[ AIL ${node.id}] Auto-switching to img2img mode BEFORE adding images`);
+									console.log(`[AIOFC AIL ${node.id}] 🔄 Auto-switching to img2img mode BEFORE adding images`);
 
 									// Properly swap data (backup txt2img, restore img2img)
 									node.properties.txt2img_data_backup = node.properties.batch_data;
 									node.properties.batch_data = node.properties.img2img_data_backup || JSON.stringify({ images: [], order: [], total_count: 0 });
-									console.log(`[ AIL ${node.id}] Backed up txt2img data, restored img2img data`);
+									console.log(`[AIOFC AIL ${node.id}] 💾 Backed up txt2img data, restored img2img data`);
 
 									// Update the boolean
 									switchToImg2ImgMode();
 
 									// Manually update currentDetectedMode to prevent mode switch detection in renderGallery
 									currentDetectedMode = false; // false = img2img mode
-									console.log(`[ AIL ${node.id}] Updated currentDetectedMode to img2img`);
+									console.log(`[AIOFC AIL ${node.id}] ✅ Updated currentDetectedMode to img2img`);
 								} else {
-									console.log(`[ AIL ${node.id}] Already in img2img mode, no switch needed`);
+									console.log(`[AIOFC AIL ${node.id}] ✅ Already in img2img mode, no switch needed`);
 								}
 
 								// NOW add images to batch_data (after mode switch completes)
 								const batchData = JSON.parse(node.properties.batch_data || "{}");
-								console.log(`[ AIL ${node.id}] Batch data before:`, batchData);
+								console.log(`[AIOFC AIL ${node.id}] 📦 Batch data before:`, batchData);
 								batchData.images = batchData.images || [];
 								batchData.order = batchData.order || [];
 								result.images.forEach((img) => {
@@ -1717,7 +1778,7 @@ app.registerExtension({
 								});
 								batchData.total_count = batchData.images.reduce((sum, img) => sum + (img.repeat_count || 1), 0);
 								node.properties.batch_data = JSON.stringify(batchData);
-								console.log(`[ AIL ${node.id}] Batch data after:`, JSON.parse(node.properties.batch_data));
+								console.log(`[AIOFC AIL ${node.id}] 📦 Batch data after:`, JSON.parse(node.properties.batch_data));
 
 								syncBatchDataWidget();
 								renderGallery();
@@ -1814,7 +1875,7 @@ app.registerExtension({
 						    firstLatent.height !== currentDims.height ||
 						    firstLatent.aspect_label !== currentDims.aspect_label) {
 
-							console.log(`[ AIL ${node.id}] Updating ${batchData.latents.length} latents: ${firstLatent.width}×${firstLatent.height} (${firstLatent.aspect_label}) → ${currentDims.width}×${currentDims.height} (${currentDims.aspect_label})`);
+							console.log(`[AIOFC AIL ${node.id}] 🔄 Updating ${batchData.latents.length} latents: ${firstLatent.width}×${firstLatent.height} (${firstLatent.aspect_label}) → ${currentDims.width}×${currentDims.height} (${currentDims.aspect_label})`);
 
 							batchData.latents.forEach(latent => {
 								latent.width = currentDims.width;
@@ -1908,7 +1969,7 @@ app.registerExtension({
 							const currentDims = getTxt2ImgDimensions();
 							const dimsKey = `${currentDims.width}x${currentDims.height}:${currentDims.aspect_label}`;
 							if (lastDimensions !== null && lastDimensions !== dimsKey) {
-								console.log(`[ AIL ${node.id}] Dimensions changed: ${lastDimensions} -> ${dimsKey}`);
+								console.log(`[AIOFC AIL ${node.id}] Dimensions changed: ${lastDimensions} -> ${dimsKey}`);
 								updateLatentsWithNewDimensions();
 								renderGallery();
 							}
@@ -1937,7 +1998,7 @@ app.registerExtension({
 					const { targetNodeId, latentSpecs, dimensions } = event.detail;
 					if (node.id !== targetNodeId) return; // Not for this node
 
-					console.log(`[ AIL ${node.id}] Received sync request: Create ${latentSpecs.length} empty latents with repeat counts`);
+					console.log(`[AIOFC AIL ${node.id}] Received sync request: Create ${latentSpecs.length} empty latents with repeat counts`);
 
 					// Get current dimensions or use provided
 					const currentDimensions = getTxt2ImgDimensions();
@@ -1950,7 +2011,7 @@ app.registerExtension({
 					const oldBatchData = JSON.parse(node.properties.batch_data || "{}");
 					if (oldBatchData.images && oldBatchData.images.length > 0) {
 						// Still has img2img data - backup and swap
-						console.log(`[ AIL ${node.id}] Sync: Swapping from img2img to txt2img data`);
+						console.log(`[AIOFC AIL ${node.id}] Sync: Swapping from img2img to txt2img data`);
 						node.properties.img2img_data_backup = node.properties.batch_data;
 					}
 
@@ -1986,7 +2047,7 @@ app.registerExtension({
 					syncBatchDataWidget();
 					renderGallery();
 
-					console.log(`[ AIL ${node.id}] Created ${latentSpecs.length} latents (${totalCount} total generations) (${width}×${height})`);
+					console.log(`[AIOFC AIL ${node.id}] Created ${latentSpecs.length} latents (${totalCount} total generations) (${width}×${height})`);
 				});
 
 				// Listen for Repeat Sync requests from RPG
@@ -1994,14 +2055,14 @@ app.registerExtension({
 					const { targetNodeId, mode, repeats } = event.detail;
 					if (node.id !== targetNodeId) return; // Not for this node
 
-					console.log(`[ AIL ${node.id}] Received repeat sync request: Update ${repeats.length} items`);
+					console.log(`[AIOFC AIL ${node.id}] Received repeat sync request: Update ${repeats.length} items`);
 
 					const batchData = JSON.parse(node.properties.batch_data || "{}");
 					const items = mode === "img2img" ? batchData.images : batchData.latents;
 					const order = batchData.order || [];
 
 					if (!items || items.length === 0) {
-						console.warn(`[ AIL ${node.id}] No ${mode === "img2img" ? "images" : "latents"} in AIL to sync (mode: ${mode})`);
+						console.warn(`[AIOFC AIL ${node.id}] No ${mode === "img2img" ? "images" : "latents"} in AIL to sync (mode: ${mode})`);
 						return;
 					}
 
@@ -2025,7 +2086,7 @@ app.registerExtension({
 					syncBatchDataWidget();
 					renderGallery();
 
-					console.log(`[ AIL ${node.id}] Synced repeat counts: ${repeats.length} items, ${totalCount} total`);
+					console.log(`[AIOFC AIL ${node.id}] Synced repeat counts: ${repeats.length} items, ${totalCount} total`);
 				});
 
 				// Listen for Duplicate Last N requests from RPG
@@ -2033,7 +2094,7 @@ app.registerExtension({
 					const { targetNodeId, count } = event.detail;
 					if (node.id !== targetNodeId) return; // Not for this node
 
-					console.log(`[ AIL ${node.id}] Received duplicate last N request: Duplicate last item ${count} times`);
+					console.log(`[AIOFC AIL ${node.id}] Received duplicate last N request: Duplicate last item ${count} times`);
 
 					const batchData = JSON.parse(node.properties.batch_data || "{}");
 					const isTxt2Img = isTxt2ImgMode();
@@ -2041,7 +2102,7 @@ app.registerExtension({
 					const order = batchData.order || [];
 
 					if (items.length === 0 || order.length === 0) {
-						console.warn(`[ AIL ${node.id}] No items to duplicate!`);
+						console.warn(`[AIOFC AIL ${node.id}] No items to duplicate!`);
 						return;
 					}
 
@@ -2050,7 +2111,7 @@ app.registerExtension({
 					const lastItem = items.find(item => item.id === lastItemId);
 
 					if (!lastItem) {
-						console.warn(`[ AIL ${node.id}] Last item not found!`);
+						console.warn(`[AIOFC AIL ${node.id}] Last item not found!`);
 						return;
 					}
 
@@ -2078,7 +2139,7 @@ app.registerExtension({
 					syncBatchDataWidget();
 					renderGallery();  // Already dispatches AIOFC_AIL_UPDATED with proper format
 
-					console.log(`[ AIL ${node.id}] Duplicated last item ${count} times, total items: ${items.length}, total count: ${batchData.total_count}`);
+					console.log(`[AIOFC AIL ${node.id}] Duplicated last item ${count} times, total items: ${items.length}, total count: ${batchData.total_count}`);
 				});
 
 				// Listen for Trim Images requests from RPG
@@ -2086,19 +2147,19 @@ app.registerExtension({
 					const { targetNodeId, targetCount } = event.detail;
 					if (node.id !== targetNodeId) return; // Not for this node
 
-					console.log(`[ AIL ${node.id}] Received trim request: Trim to ${targetCount} images`);
+					console.log(`[AIOFC AIL ${node.id}] Received trim request: Trim to ${targetCount} images`);
 
 					const batchData = JSON.parse(node.properties.batch_data || "{}");
 					const images = batchData.images || [];
 					const order = batchData.order || [];
 
 					if (images.length === 0 || order.length === 0) {
-						console.warn(`[ AIL ${node.id}] No images to trim!`);
+						console.warn(`[AIOFC AIL ${node.id}] No images to trim!`);
 						return;
 					}
 
 					if (targetCount >= order.length) {
-						console.warn(`[ AIL ${node.id}] Target count ${targetCount} >= current count ${order.length}, no trimming needed`);
+						console.warn(`[AIOFC AIL ${node.id}] Target count ${targetCount} >= current count ${order.length}, no trimming needed`);
 						return;
 					}
 
@@ -2117,7 +2178,7 @@ app.registerExtension({
 					syncBatchDataWidget();
 					renderGallery();  // Already dispatches AIOFC_AIL_UPDATED with proper format
 
-					console.log(`[ AIL ${node.id}] Trimmed ${excessCount} image${excessCount > 1 ? 's' : ''}, total images: ${batchData.images.length}, total count: ${batchData.total_count}`);
+					console.log(`[AIOFC AIL ${node.id}] Trimmed ${excessCount} image${excessCount > 1 ? 's' : ''}, total images: ${batchData.images.length}, total count: ${batchData.total_count}`);
 				});
 
 				// Listen for Sync from Master AIL broadcast (when no prompts, another AIL is master)
@@ -2125,7 +2186,7 @@ app.registerExtension({
 					const { masterNodeId, count, repeats, mode } = event.detail;
 					if (node.id === masterNodeId) return; // Don't sync to ourselves
 
-					console.log(`[ AIL ${node.id}] Received sync from master AIL ${masterNodeId}: ${count} items`);
+					console.log(`[AIOFC AIL ${node.id}] Received sync from master AIL ${masterNodeId}: ${count} items`);
 
 					const batchData = JSON.parse(node.properties.batch_data || "{}");
 					const isTxt2Img = isTxt2ImgMode();
@@ -2134,7 +2195,7 @@ app.registerExtension({
 					const myCount = order.length;
 
 					if (myCount === 0) {
-						console.log(`[ AIL ${node.id}] No items to sync, skipping`);
+						console.log(`[AIOFC AIL ${node.id}] No items to sync, skipping`);
 						return;
 					}
 
@@ -2148,7 +2209,7 @@ app.registerExtension({
 								repeats: repeats
 							}
 						}));
-						console.log(`[ AIL ${node.id}] Synced repeat counts to match master AIL`);
+						console.log(`[AIOFC AIL ${node.id}] Synced repeat counts to match master AIL`);
 					} else if (myCount < count) {
 						// Need to add items
 						const toAdd = count - myCount;
@@ -2165,7 +2226,7 @@ app.registerExtension({
 								}
 							}));
 						}, 100);
-						console.log(`[ AIL ${node.id}] Added ${toAdd} items to match master AIL`);
+						console.log(`[AIOFC AIL ${node.id}] Added ${toAdd} items to match master AIL`);
 					} else {
 						// Need to trim items
 						const targetCount = count;
@@ -2182,7 +2243,7 @@ app.registerExtension({
 								}
 							}));
 						}, 100);
-						console.log(`[ AIL ${node.id}] Trimmed to ${targetCount} items to match master AIL`);
+						console.log(`[AIOFC AIL ${node.id}] Trimmed to ${targetCount} items to match master AIL`);
 					}
 				});
 
@@ -2219,7 +2280,7 @@ app.registerExtension({
 						if (batchData.latents && Array.isArray(batchData.latents)) {
 							batchData.latents.forEach(latent => {
 								if (latent.width < 64 || latent.height < 64) {
-									console.warn(`[ AIL ${this.id}] Corrupted latent dimensions detected: ${latent.width}x${latent.height}`);
+									console.warn(`[AIOFC AIL ${this.id}] ⚠️ Corrupted latent dimensions detected: ${latent.width}x${latent.height}`);
 									latent.width = 512;
 									latent.height = 512;
 									latent.aspect_label = "1:1";
@@ -2229,11 +2290,11 @@ app.registerExtension({
 						}
 
 						if (needsFixing) {
-							console.log(`[ AIL ${this.id}] Fixed corrupted dimensions in batch_data`);
+							console.log(`[AIOFC AIL ${this.id}] ✅ Fixed corrupted dimensions in batch_data`);
 							this.properties.batch_data = JSON.stringify(batchData);
 						}
 					} catch (e) {
-						console.error(`[ AIL ${this.id}] Error validating batch_data:`, e);
+						console.error(`[AIOFC AIL ${this.id}] Error validating batch_data:`, e);
 					}
 
 					const batchDataWidget = this.widgets?.find((w) => w.name === "batch_data");

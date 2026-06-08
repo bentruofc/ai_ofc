@@ -12,7 +12,7 @@ class AIOFC_BatchFromImageList:
     INPUT_IS_LIST = True
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def func(self, images):
         if not images:
@@ -30,7 +30,7 @@ class AIOFC_ImageListFromBatch:
     OUTPUT_IS_LIST = [True,]
     RETURN_TYPES = ("IMAGE", )
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def func(self, images):
         image_list = list( i.unsqueeze(0) for i in images )
@@ -53,7 +53,7 @@ class AIOFC_StringListFromStrings:
     OUTPUT_IS_LIST = [True,]
     RETURN_TYPES = ("STRING", )
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def func(self, s0,s1,s2=None,s3=None):
         lst = [s0,s1]
@@ -72,7 +72,7 @@ class AIOFC_PickFromList:
     RETURN_TYPES = ("*",) # Use "*" for output too for consistency
     RETURN_NAMES = ("picks",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     INPUT_IS_LIST = True
     OUTPUT_IS_LIST = [True,]
 
@@ -89,7 +89,7 @@ class AIOFC_PickFromList:
             indexes_str = indexes if isinstance(indexes, str) else str(indexes)
             parsed_indexes = [int(x.strip()) for x in indexes_str.split(',') if x.strip()]
         except Exception as e:
-            print(f"PickFromList: Error parsing indexes '{indexes}'. Defaulting to first item. Error: {e}")
+            print(f"AIOFC PickFromList: Error parsing indexes '{indexes}'. Defaulting to first item. Error: {e}")
             parsed_indexes = [0]
         
         valid_picks = []
@@ -97,6 +97,6 @@ class AIOFC_PickFromList:
             if 0 <= i < len(anything):
                 valid_picks.append(anything[i])
             else:
-                print(f"PickFromList Warning: index {i} is out of bounds for list of size {len(anything)}. Skipping.")
+                print(f"AIOFC PickFromList Warning: index {i} is out of bounds for list of size {len(anything)}. Skipping.")
         
         return (valid_picks, )

@@ -72,7 +72,7 @@ class AIOFCGrowMask:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     RETURN_TYPES = ("MASK", "MASK", "STRING",)
     RETURN_NAMES = ("mask", "mask_inverted", "info_text",)
     FUNCTION = "expand_mask"
@@ -104,7 +104,7 @@ class AIOFCGrowMask:
             import kornia.morphology as morph
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         except ImportError:
-            print("Kornia not available for morphology, expansion/shrinking will be skipped.")
+            print("⚠️ Kornia not available for morphology, expansion/shrinking will be skipped.")
             device = torch.device("cpu")
             morph = None
 
@@ -131,7 +131,7 @@ class AIOFCGrowMask:
                     import scipy.ndimage
                     output = torch.from_numpy(scipy.ndimage.binary_fill_holes(output.cpu().numpy() > 0).astype(np.float32)).to(device)
                 except ImportError:
-                    print("scipy not available, skipping fill_holes")
+                    print("⚠️ scipy not available, skipping fill_holes")
 
             if (lerp_alpha < 1.0 or decay_factor < 1.0) and previous_output is not None:
                 if lerp_alpha < 1.0:
@@ -197,5 +197,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFCGrowMask": "Grow Mask",
+    "AIOFCGrowMask": "🎭 AIOFC Grow Mask",
 }

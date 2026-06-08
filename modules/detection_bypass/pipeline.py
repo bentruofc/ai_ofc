@@ -38,7 +38,7 @@ class BypassPipeline:
         self.config = config
         self.profile_dir = os.path.join(os.path.dirname(__file__), "profiles")
         self.fingerprint = self._load_profile(config.profile_name)
-        print(f"BypassPipeline initialized for '{config.mode}' mode with '{config.profile_name}' profile.")
+        print(f"✅ BypassPipeline initialized for '{config.mode}' mode with '{config.profile_name}' profile.")
 
     def _load_profile(self, name: str) -> dict:
         """Loads the statistical fingerprint from a JSON file."""
@@ -70,7 +70,7 @@ class BypassPipeline:
         r_g_ratio = r_mean / (g_mean + 1e-6)
         b_g_ratio = b_mean / (g_mean + 1e-6)
 
-        print(f"\n [{label}] Color Analysis:")
+        print(f"\n  🔍 [{label}] Color Analysis:")
         print(f"     R: mean={r_mean:.1f}, std={r_std:.1f}")
         print(f"     G: mean={g_mean:.1f}, std={g_std:.1f}")
         print(f"     B: mean={b_mean:.1f}, std={b_std:.1f}")
@@ -78,9 +78,9 @@ class BypassPipeline:
         print(f"     B/G ratio: {b_g_ratio:.3f} (balanced ≈ 1.0)")
 
         if b_g_ratio > 1.15:
-            print(f"BLUE SHIFT DETECTED! B/G ratio too high: {b_g_ratio:.3f}")
+            print(f"     ⚠️ BLUE SHIFT DETECTED! B/G ratio too high: {b_g_ratio:.3f}")
         elif b_g_ratio < 0.85:
-            print(f"YELLOW SHIFT DETECTED! B/G ratio too low: {b_g_ratio:.3f}")
+            print(f"     ⚠️ YELLOW SHIFT DETECTED! B/G ratio too low: {b_g_ratio:.3f}")
 
     def _run_unmarker(self, input_tensor: torch.Tensor) -> torch.Tensor:
         """
@@ -128,7 +128,7 @@ class BypassPipeline:
                 verbose=True
             )
         else:
-            print(f"Unknown unmarker version: {version}, skipping")
+            print(f"  ⚠️ Unknown unmarker version: {version}, skipping")
             return input_tensor
 
         # Convert back to tensor
@@ -147,24 +147,24 @@ class BypassPipeline:
         # DEBUG: Analyze input image
         self._analyze_colors(current_tensor, "INPUT IMAGE")
 
-        print(f"Pipeline Mode: {self.config.mode}")
-        print(f"UnMarker Version: {self.config.unmarker_version}")
+        print(f"📋 Pipeline Mode: {self.config.mode}")
+        print(f"🎯 UnMarker Version: {self.config.unmarker_version}")
 
         if self.config.mode == "Ultra-Minimal":
             # Just run UnMarker if enabled, no other processing
-            print("Ultra-Minimal: UnMarker only")
+            print("  ⚡ Ultra-Minimal: UnMarker only")
             current_tensor = self._run_unmarker(current_tensor)
 
         elif self.config.mode == "Balanced":
             # TODO: Add ISP simulation stages here (LUT, noise, etc.)
             # For now, just run UnMarker
-            print("Balanced: Running UnMarker")
+            print("  ⚖️ Balanced: Running UnMarker")
             current_tensor = self._run_unmarker(current_tensor)
 
         elif self.config.mode == "Aggressive":
             # TODO: Add full pipeline with ISP + quality analysis
             # For now, just run UnMarker
-            print("Aggressive: Running UnMarker")
+            print("  🔥 Aggressive: Running UnMarker")
             current_tensor = self._run_unmarker(current_tensor)
 
         # DEBUG: Analyze final output

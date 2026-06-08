@@ -30,7 +30,7 @@ class AIOFC_API_ModelSelector:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("model",)
     FUNCTION = "select_model"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def select_model(self, model):
         # --- THE FIX: Return a tuple with ONE item ---
@@ -45,5 +45,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_API_ModelSelector": "API Model Selector",
+    "AIOFC_API_ModelSelector": "🤖 AIOFC API Model Selector",
 }

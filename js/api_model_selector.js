@@ -16,7 +16,7 @@ app.registerExtension({
 				warningWidget.inputEl.style.backgroundColor = '#442222';
 				warningWidget.inputEl.style.color = '#FFCCCC';
 				warningWidget.inputEl.style.opacity = '0.8';
-				warningWidget.value = 'For this model, the fal.ai provider is unreliable for Image-to-Image (Edit) tasks. wavespeed.ai recommended.';
+				warningWidget.value = '⚠️ For this model, the fal.ai provider is unreliable for Image-to-Image (Edit) tasks. wavespeed.ai recommended.';
 				warningWidget.hidden = true; // Initially hidden
 
 				const modelWidget = this.widgets.find((w) => w.name === 'model');

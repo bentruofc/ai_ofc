@@ -3,7 +3,7 @@ from comfy.comfy_types.node_typing import IO
 class AIOFC_SplitByCommas:
     RETURN_TYPES = ("STRING","STRING","STRING","STRING","STRING","STRING")
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     OUTPUT_NODE = False
     OUTPUT_IS_LIST = [False, False, False, False, False, True]
     DESCRIPTION = "Split the input string into up to five pieces. Splits on commas (or | or ^) and then strips whitespace."
@@ -21,7 +21,7 @@ class AIOFC_SplitByCommas:
 class AIOFC_AnyListToString:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     INPUT_IS_LIST  = True
     OUTPUT_IS_LIST = (False,) 
 
@@ -35,7 +35,7 @@ class AIOFC_AnyListToString:
 class AIOFC_StringToInt:
     RETURN_TYPES = ("INT",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     @classmethod
     def INPUT_TYPES(s):
@@ -48,7 +48,7 @@ class AIOFC_StringToInt:
 class AIOFC_StringToFloat:
     RETURN_TYPES = ("FLOAT",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -65,7 +65,7 @@ class AIOFC_ConcatenateStringsNullSafe:
     """
     RETURN_TYPES = ("STRING",)
     FUNCTION = "concatenate"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     
     @classmethod
     def INPUT_TYPES(cls):
@@ -123,7 +123,7 @@ class AIOFC_StringCombine:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "combine"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def combine(self, separator, string_1=None, string_2=None, string_3=None, string_4=None, print_to_console=False):
         # Collect all provided strings into a list
@@ -136,6 +136,6 @@ class AIOFC_StringCombine:
         combined_string = separator.join(valid_strings)
         
         if print_to_console:
-            print(f"String Combine Output: '{combined_string}'")
+            print(f"AIOFC String Combine Output: '{combined_string}'")
             
         return (combined_string,)

@@ -37,7 +37,7 @@ class AIOFC_LineSplitter:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("list_out",)
     FUNCTION = "split"
-    CATEGORY = "Utility"
+    CATEGORY = "AIOFC/Utility"
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):

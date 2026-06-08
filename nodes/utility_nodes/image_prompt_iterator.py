@@ -19,7 +19,7 @@ class AIOFC_ImagePromptIterator:
     RETURN_TYPES = ("IMAGE", "STRING",)
     RETURN_NAMES = ("images", "prompts",)
     FUNCTION = "map"
-    CATEGORY = "Workflow Logic"
+    CATEGORY = "AIOFC/Workflow Logic"
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):

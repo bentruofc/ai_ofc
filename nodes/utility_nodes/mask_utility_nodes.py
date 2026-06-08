@@ -13,7 +13,7 @@ class AIOFC_MaskedSection:
     
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "func"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     
     def func(self, mask:torch.Tensor, image, minimum=512):
         mbb = mask.squeeze()
@@ -61,7 +61,7 @@ class AIOFC_MaskCombine:
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "combine_masks"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def combine_masks(self, operation, mask1=None, mask2=None):
         # --- THIS IS THE FIX: Added passthrough logic for single masks ---
@@ -69,10 +69,10 @@ class AIOFC_MaskCombine:
             # If both are missing, we can't create a mask of unknown size. Return None.
             return (None,)
         if mask1 is None:
-            print("Mask Combine: mask1 is missing, passing through mask2.")
+            print("AIOFC Mask Combine: mask1 is missing, passing through mask2.")
             return (mask2,)
         if mask2 is None:
-            print("Mask Combine: mask2 is missing, passing through mask1.")
+            print("AIOFC Mask Combine: mask2 is missing, passing through mask1.")
             return (mask1,)
         # --- END FIX ---
 

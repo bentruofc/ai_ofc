@@ -31,7 +31,7 @@ class AIOFC_API_ProviderSelector:
     RETURN_TYPES = ("STRING", "STRING",)
     RETURN_NAMES = ("provider", "api_key",)
     FUNCTION = "select_provider"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def select_provider(self, provider, fal_api_key, wavespeed_api_key):
         if provider == "fal.ai":
@@ -39,7 +39,7 @@ class AIOFC_API_ProviderSelector:
         elif provider == "wavespeed.ai":
             api_key = wavespeed_api_key
         else:
-            print(f"Warning: Unknown provider '{provider}' selected. Returning empty API key.")
+            print(f"⚠️ Warning: Unknown provider '{provider}' selected. Returning empty API key.")
             api_key = ""
         return (provider, api_key,)
 
@@ -64,7 +64,7 @@ class AIOFC_IdeogramProviderSelector:
     RETURN_TYPES = ("STRING", "STRING",)
     RETURN_NAMES = ("provider", "api_key",)
     FUNCTION = "select_provider"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def select_provider(self, provider, official_ideogram_api_key, fal_api_key):
         if provider == "Official Ideogram":
@@ -72,7 +72,7 @@ class AIOFC_IdeogramProviderSelector:
         elif provider == "fal.ai":
             api_key = fal_api_key
         else:
-            print(f"Warning: Unknown Ideogram provider '{provider}' selected. Returning empty API key.")
+            print(f"⚠️ Warning: Unknown Ideogram provider '{provider}' selected. Returning empty API key.")
             api_key = ""
         return (provider, api_key,)
 
@@ -87,6 +87,6 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_API_ProviderSelector": "API Provider Selector",
-    "AIOFC_IdeogramProviderSelector": "Ideogram Provider Selector", # New node
+    "AIOFC_API_ProviderSelector": "🔑 AIOFC API Provider Selector",
+    "AIOFC_IdeogramProviderSelector": "🔑 AIOFC Ideogram Provider Selector", # New node
 }

@@ -17,7 +17,7 @@ class AIOFC_JSON_Extract_Values:
     RETURN_TYPES = ("INT", "INT", "INT", "INT",)
     RETURN_NAMES = ("x", "y", "width", "height",)
     FUNCTION = "extract"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def extract(self, json_string):
         try:
@@ -39,5 +39,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_JSON_Extract_Values": "... JSON Extract Values",
+    "AIOFC_JSON_Extract_Values": "... AIOFC JSON Extract Values",
 }

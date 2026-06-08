@@ -43,7 +43,7 @@ class AIOFC_Camera_Simulator:
             },
         }
 
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "AIOFC/Authenticity"
 
     def _tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor.ndim == 4: tensor = tensor[0]

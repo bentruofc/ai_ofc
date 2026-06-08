@@ -63,7 +63,7 @@ class AIOFC_NanoBananaProMulti:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("images",)
     FUNCTION = "generate"
-    CATEGORY = "API"
+    CATEGORY = "AIOFC/API"
     DESCRIPTION = (
         "Nano Banana Pro Multi - Generates 2 images per call at $0.07/image. "
         "WaveSpeed.ai exclusive. Limited aspect ratios."
@@ -78,7 +78,7 @@ class AIOFC_NanoBananaProMulti:
             "Content-Type": "application/json",
         }
 
-        print(f"Nano Banana Pro Multi: Submitting request to WaveSpeed.ai...")
+        print(f"🚀 Nano Banana Pro Multi: Submitting request to WaveSpeed.ai...")
         print(f"   Endpoint: {base_url}/{endpoint}")
 
         # Submit task
@@ -96,7 +96,7 @@ class AIOFC_NanoBananaProMulti:
 
         result = response.json()
         request_id = result["data"]["id"]
-        print(f"Task submitted. Request ID: {request_id}. Polling for result...")
+        print(f"✅ Task submitted. Request ID: {request_id}. Polling for result...")
 
         # Poll for result
         poll_url = f"{base_url}/predictions/{request_id}/result"
@@ -115,7 +115,7 @@ class AIOFC_NanoBananaProMulti:
             status = data.get("status")
 
             if status == "completed":
-                print("Task completed!")
+                print("✅ Task completed!")
                 return data["outputs"]  # Returns list of image URLs
 
             if status == "failed":
@@ -146,7 +146,7 @@ class AIOFC_NanoBananaProMulti:
         ]
 
         if all(os.path.exists(f) for f in cache_files):
-            print(f"Nano Banana Pro Multi: Cache hit! Loading from cache...")
+            print(f"✅ Nano Banana Pro Multi: Cache hit! Loading from cache...")
             tensors = []
             for cache_file in cache_files:
                 img = Image.open(cache_file).convert("RGB")
@@ -154,7 +154,7 @@ class AIOFC_NanoBananaProMulti:
                 tensors.append(torch.from_numpy(img_np))
             return (torch.stack(tensors),)
 
-        print("Nano Banana Pro Multi: Cache miss. Proceeding with API call...")
+        print("💨 Nano Banana Pro Multi: Cache miss. Proceeding with API call...")
 
         # Build payload
         payload = {
@@ -184,7 +184,7 @@ class AIOFC_NanoBananaProMulti:
 
             # Save to cache
             cache_file = cache_files[i]
-            print(f"Saving image {i + 1} to cache: {cache_file}")
+            print(f"💾 Saving image {i + 1} to cache: {cache_file}")
             image_pil.save(cache_file, "PNG")
 
             # Convert to tensor
@@ -195,7 +195,7 @@ class AIOFC_NanoBananaProMulti:
         result_tensor = torch.stack(tensors)
 
         print(
-            f"Nano Banana Pro Multi: Complete! Generated {len(tensors)} images, shape: {result_tensor.shape}"
+            f"✅ Nano Banana Pro Multi: Complete! Generated {len(tensors)} images, shape: {result_tensor.shape}"
         )
 
         return (result_tensor,)
@@ -210,5 +210,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_NanoBananaProMulti": "Nano Banana Pro Multi (2x)",
+    "AIOFC_NanoBananaProMulti": "🍌 AIOFC Nano Banana Pro Multi (2x)",
 }

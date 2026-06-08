@@ -11,7 +11,7 @@ app.registerExtension({
     settings: [
         {
             id: "AIOFC.Interactive.Header",
-            name: "Interactive Nodes",
+            name: "AIOFC Interactive Nodes",
             type: () => {
                 const x = document.createElement('span');
                 const a = document.createElement('a');
@@ -33,11 +33,11 @@ app.registerExtension({
         { id: "AIOFC.Interactive.FPS", name: "Video Frames per Second", type: "int", defaultValue: 5 }
     ],
     setup() {
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/filter.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/floating_window.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/zoomed.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/advanced_image_loader.css' });
-		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_/reality_prompt_generator.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_AIOFC/filter.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_AIOFC/floating_window.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_AIOFC/zoomed.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_AIOFC/advanced_image_loader.css' });
+		create('link', null, document.getElementsByTagName('HEAD')[0], { 'rel': 'stylesheet', 'type': 'text/css', 'href': 'extensions/ComfyUI_AIOFC/reality_prompt_generator.css' });
 
 		api.addEventListener("execution_interrupted", popup.send_cancel.bind(popup));
         api.addEventListener("aiofc-interactive-images", popup.handle_message.bind(popup));
@@ -80,7 +80,7 @@ app.registerExtension({
                         this.disabled = true;
 
                         try {
-                            const resp = await api.fetchApi('//clear_text_filter_cache', {
+                            const resp = await api.fetchApi('/aiofc/clear_text_filter_cache', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ uid: this._ni_widget.value }),
@@ -92,7 +92,7 @@ app.registerExtension({
                                 throw new Error(await resp.text());
                             }
                         } catch (e) {
-                            console.error("Failed to clear cache:", e);
+                            console.error("AIOFC: Failed to clear cache:", e);
                             buttonWidget.error();
                         }
                     });

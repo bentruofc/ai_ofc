@@ -43,7 +43,7 @@ class AIOFC_Metadata_Inspector:
     RETURN_TYPES = ("STRING", "INT",)
     RETURN_NAMES = ("metadata_json", "tag_count",)
     FUNCTION = "inspect_metadata"
-    CATEGORY = "Authenticity"
+    CATEGORY = "AIOFC/Authenticity"
 
     def inspect_metadata(self, filepath):
         if not PYEXIFTOOL_AVAILABLE:
@@ -51,7 +51,7 @@ class AIOFC_Metadata_Inspector:
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"Inspector could not find file: {filepath}")
 
-        print(f"Metadata Inspector: Analyzing file '{os.path.basename(filepath)}'...")
+        print(f"📊 AIOFC Metadata Inspector: Analyzing file '{os.path.basename(filepath)}'...")
         
         clean_metadata = {}
         try:
@@ -80,7 +80,7 @@ class AIOFC_Metadata_Inspector:
 
         formatted_json = json.dumps(clean_metadata, indent=2, ensure_ascii=False)
 
-        print("\n" + "="*25 + "Inspector Log" + "="*24)
+        print("\n" + "="*25 + " AIOFC Inspector Log " + "="*24)
         print(f"--- METADATA FOUND IN {os.path.basename(filepath)} {log_summary} ---")
         print(formatted_json)
         print("="*70 + "\n")
@@ -88,4 +88,4 @@ class AIOFC_Metadata_Inspector:
         return (formatted_json, total_count)
 
 NODE_CLASS_MAPPINGS = { "AIOFC_Metadata_Inspector": AIOFC_Metadata_Inspector }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_Metadata_Inspector": "Metadata Inspector" }
+NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_Metadata_Inspector": "📊 AIOFC Metadata Inspector" }

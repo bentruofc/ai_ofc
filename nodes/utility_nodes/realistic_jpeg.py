@@ -57,7 +57,7 @@ class AIOFC_JPEG_Degradation:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "degrade"
     DESCRIPTION = """
@@ -130,7 +130,7 @@ Simulates image quality loss.
             )
             final_batch = blurred_batch.permute(0, 2, 3, 1)
         elif soften_artifacts and not KORNIA_AVAILABLE:
-            print("JPEG Degradation: Soften artifacts is enabled, but Kornia is not installed. Skipping blur.")
+            print("⚠️ AIOFC JPEG Degradation: Soften artifacts is enabled, but Kornia is not installed. Skipping blur.")
 
         return (final_batch.to(original_device),)
 
@@ -139,5 +139,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_JPEG_Degradation": "JPEG Degradation",
+    "AIOFC_JPEG_Degradation": "🗜️ AIOFC JPEG Degradation",
 }

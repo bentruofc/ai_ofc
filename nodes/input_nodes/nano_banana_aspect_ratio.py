@@ -77,7 +77,7 @@ class AIOFC_NanoBananaAspectRatio:
     RETURN_TYPES = ("STRING", "STRING", "INT", "INT", "STRING")
     RETURN_NAMES = ("aspect_ratio", "resolution", "width", "height", "aspect_label")
     FUNCTION = "get_settings"
-    CATEGORY = "Input"
+    CATEGORY = "AIOFC/Input"
     DESCRIPTION = "Nano Banana Pro aspect ratio and resolution selector with visual preview."
 
     def get_settings(self, aspect_ratio, resolution):
@@ -125,5 +125,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_NanoBananaAspectRatio": "Nano Banana Pro Aspect Ratio",
+    "AIOFC_NanoBananaAspectRatio": "📐 Nano Banana Pro Aspect Ratio",
 }

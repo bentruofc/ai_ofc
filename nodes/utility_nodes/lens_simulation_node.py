@@ -34,7 +34,7 @@ class AIOFC_LensEffects:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "apply_effects"
-    CATEGORY = "Post-Processing"
+    CATEGORY = "AIOFC/Post-Processing"
 
     def tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
         if tensor.ndim == 4 and tensor.shape[0] == 1:
@@ -48,7 +48,7 @@ class AIOFC_LensEffects:
         if vignette_strength == 0 and chromatic_aberration == 0:
             return (image,)
 
-        print(f"Lens Effects: Applying effects.")
+        print(f"👁️ AIOFC Lens Effects: Applying effects.")
 
         processed_images = []
         for i in range(image.shape[0]):
@@ -82,7 +82,7 @@ class AIOFC_LensEffects:
             
         final_batch = torch.cat(processed_images, dim=0)
         
-        print("Lens Effects: Processing complete.")
+        print("✅ AIOFC Lens Effects: Processing complete.")
         return (final_batch,)
 
 # --- Node Registration ---
@@ -91,5 +91,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_LensEffects": "Lens Effects",
+    "AIOFC_LensEffects": "👁️ AIOFC Lens Effects",
 }

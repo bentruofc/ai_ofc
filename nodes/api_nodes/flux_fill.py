@@ -49,7 +49,7 @@ class AIOFC_FluxFill:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("filled_image",)
     FUNCTION = "fill"
-    CATEGORY = "API"
+    CATEGORY = "AIOFC/API"
 
     def image_to_base64(self, image_tensor, max_size_mb=7):
         """Convert image tensor to base64 data URI with compression."""
@@ -122,7 +122,7 @@ class AIOFC_FluxFill:
             "Content-Type": "application/json",
         }
 
-        print(f"FLUX Fill: Submitting request to fal.ai...")
+        print(f"🚀 FLUX Fill: Submitting request to fal.ai...")
         response = requests.post(url, json=payload, headers=headers, timeout=300)
 
         if not response.ok:
@@ -136,7 +136,7 @@ class AIOFC_FluxFill:
             raise Exception(f"fal.ai API error ({response.status_code}): {error_text}")
 
         result = response.json()
-        print("FLUX Fill: Response received from fal.ai")
+        print("📦 FLUX Fill: Response received from fal.ai")
 
         if "images" in result and len(result["images"]) > 0:
             return result["images"][0]["url"]
@@ -176,12 +176,12 @@ class AIOFC_FluxFill:
 
         # Check cache
         if os.path.exists(cache_filepath):
-            print(f"FLUX Fill: Cache hit! Loading from {cache_filepath}")
+            print(f"✅ FLUX Fill: Cache hit! Loading from {cache_filepath}")
             cached_image = Image.open(cache_filepath).convert("RGB")
             cached_np = np.array(cached_image).astype(np.float32) / 255.0
             return (torch.from_numpy(cached_np).unsqueeze(0),)
 
-        print("FLUX Fill: Cache miss. Proceeding with API call...")
+        print("💨 FLUX Fill: Cache miss. Proceeding with API call...")
 
         # Convert image and mask to base64
         image_b64 = self.image_to_base64(image)
@@ -216,14 +216,14 @@ class AIOFC_FluxFill:
         result_pil = Image.open(io.BytesIO(image_response.content)).convert("RGB")
 
         # Save to cache
-        print(f"FLUX Fill: Saving to cache: {cache_filepath}")
+        print(f"💾 FLUX Fill: Saving to cache: {cache_filepath}")
         result_pil.save(cache_filepath, "PNG")
 
         # Convert to tensor
         result_np = np.array(result_pil).astype(np.float32) / 255.0
         result_tensor = torch.from_numpy(result_np).unsqueeze(0)
 
-        print(f"FLUX Fill: Complete! Output size: {result_pil.size}")
+        print(f"✅ FLUX Fill: Complete! Output size: {result_pil.size}")
 
         return (result_tensor,)
 
@@ -237,5 +237,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_FluxFill": "FLUX Fill (Inpaint)",
+    "AIOFC_FluxFill": "🎨 AIOFC FLUX Fill (Inpaint)",
 }

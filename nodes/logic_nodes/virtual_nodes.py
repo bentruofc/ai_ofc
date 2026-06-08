@@ -37,7 +37,7 @@ class AIOFC_BooleanBypass:
         "output_4",
     )
     FUNCTION = "passthrough"
-    CATEGORY = "Logic"
+    CATEGORY = "AIOFC/Logic"
 
     def passthrough(
         self,
@@ -74,7 +74,7 @@ class AIOFC_GroupBypassToBoolean:
     RETURN_TYPES = ("BOOLEAN",)
     RETURN_NAMES = ("boolean",)
     FUNCTION = "get_status"
-    CATEGORY = "Logic"
+    CATEGORY = "AIOFC/Logic"
 
     def get_status(self, is_active):
         # This function simply returns the value of the widget,
@@ -94,7 +94,7 @@ class AIOFC_PreviewAnyAndPassthrough:
     RETURN_TYPES = (IO.ANY,)
     RETURN_NAMES = ("source_out",)
     FUNCTION = "preview_and_pass"
-    CATEGORY = "Logic"
+    CATEGORY = "AIOFC/Logic"
     OUTPUT_NODE = True  # CRITICAL for passthrough functionality
 
     def preview_and_pass(self, source=None):
@@ -123,7 +123,7 @@ NODE_CLASS_MAPPINGS = {
     "AIOFC_GroupBypassToBoolean": AIOFC_GroupBypassToBoolean, # Add new node here
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_BooleanBypass": "Boolean Bypass",
-    "AIOFC_PreviewAnyAndPassthrough": "Preview Any & Passthrough",
-    "AIOFC_GroupBypassToBoolean": "Group Bypass Detector", # And here
+    "AIOFC_BooleanBypass": "🔀 AIOFC Boolean Bypass",
+    "AIOFC_PreviewAnyAndPassthrough": "👁️ AIOFC Preview Any & Passthrough",
+    "AIOFC_GroupBypassToBoolean": "🔀 AIOFC Group Bypass Detector", # And here
 }

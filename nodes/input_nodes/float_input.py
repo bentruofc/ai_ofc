@@ -28,7 +28,7 @@ class AIOFC_FloatInput:
     RETURN_TYPES = ("FLOAT",)
     RETURN_NAMES = ("float",)
     FUNCTION = "output_float"
-    CATEGORY = "Input"
+    CATEGORY = "AIOFC/Input"
     DESCRIPTION = "Outputs a float value with up to three decimal places precision"
 
     def output_float(self, value):
@@ -49,5 +49,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_FloatInput": "Float Input (3 decimals)",
+    "AIOFC_FloatInput": "🔢 AIOFC Float Input (3 decimals)",
 }

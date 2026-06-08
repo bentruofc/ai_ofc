@@ -56,7 +56,7 @@ class AIOFC_GLCM_Normalize(AIOFC_Texture_Base):
             },
             "optional": {"ref_image": ("IMAGE",), "profile_path": ("STRING", {"forceInput": True}),}
         }
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "AIOFC/Authenticity"
 
     def execute(self, image, strength, distances, seed, ref_image=None, profile_path=None):
         try:
@@ -78,7 +78,7 @@ class AIOFC_LBP_Normalize(AIOFC_Texture_Base):
             },
             "optional": {"ref_image": ("IMAGE",), "profile_path": ("STRING", {"forceInput": True}),}
         }
-    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "Authenticity"
+    RETURN_TYPES = ("IMAGE",); FUNCTION = "execute"; CATEGORY = "AIOFC/Authenticity"
 
     def execute(self, image, strength, radius, n_points, seed, ref_image=None, profile_path=None):
         return self._process_batch(image, strength, seed, ref_image, profile_path, lbp_normalize, radius=radius, n_points=n_points)

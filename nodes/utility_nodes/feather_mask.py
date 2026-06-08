@@ -21,7 +21,7 @@ try:
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 except ImportError:
     KORNIA_AVAILABLE = False
-    print("Kornia not available. Feather Mask node requires Kornia.")
+    print("⚠️ Kornia not available. Feather Mask node requires Kornia.")
 
 class AIOFCFeatherMask:
     """
@@ -39,7 +39,7 @@ class AIOFCFeatherMask:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     RETURN_TYPES = ("MASK", "MASK", "STRING",)
     RETURN_NAMES = ("mask", "mask_inverted", "info_text",)
     FUNCTION = "feather_mask"
@@ -121,5 +121,5 @@ NODE_CLASS_MAPPINGS = {
     "AIOFCFeatherMask": AIOFCFeatherMask,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFCFeatherMask": "Feather Mask",
+    "AIOFCFeatherMask": "🎭 AIOFC Feather Mask",
 }

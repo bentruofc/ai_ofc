@@ -62,7 +62,7 @@ class AIOFC_GrokNative:
 
 	RETURN_TYPES = ("STRING",)
 	FUNCTION = "generate_content"
-	CATEGORY = "API"
+	CATEGORY = "AIOFC/API"
 
 	def generate_content(
 		self,
@@ -246,5 +246,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-	"AIOFC_GrokNative": "Grok (Native)",
+	"AIOFC_GrokNative": "🧠 AIOFC Grok (Native)",
 }

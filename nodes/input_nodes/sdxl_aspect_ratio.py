@@ -31,7 +31,7 @@ class AIOFC_SDXLAspectRatio:
     RETURN_TYPES = ("INT", "INT", "STRING")
     RETURN_NAMES = ("width", "height", "aspect_label")
     FUNCTION = "get_resolution"
-    CATEGORY = "Input"
+    CATEGORY = "AIOFC/Input"
     DESCRIPTION = "SDXL aspect ratio presets. Outputs resolution optimized for Stable Diffusion XL."
 
     def get_resolution(self, aspect_ratio):
@@ -56,5 +56,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_SDXLAspectRatio": "SDXL Aspect Ratio"
+    "AIOFC_SDXLAspectRatio": "📐 SDXL Aspect Ratio"
 }

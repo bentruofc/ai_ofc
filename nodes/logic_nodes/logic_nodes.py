@@ -41,7 +41,7 @@ class AIOFC_BooleanLogic:
     RETURN_TYPES = ("BOOLEAN",)
     RETURN_NAMES = ("result",)
     FUNCTION = "operate"
-    CATEGORY = "Logic"
+    CATEGORY = "AIOFC/Logic"
 
     def operate(self, boolean_a, operation, boolean_b=True):
         result = False
@@ -76,7 +76,7 @@ class AIOFC_ImageToBoolean:
     RETURN_TYPES = ("BOOLEAN",)
     RETURN_NAMES = ("boolean",)
     FUNCTION = "check_image"
-    CATEGORY = "Logic"
+    CATEGORY = "AIOFC/Logic"
 
     def check_image(self, image=None):
         is_present = image is not None
@@ -86,7 +86,7 @@ class AIOFC_ImageToBoolean:
 # A simple base class to avoid repeating the switch logic.
 class AIOFC_SwitchBase:
     FUNCTION = "switch"
-    CATEGORY = "Logic"
+    CATEGORY = "AIOFC/Logic"
 
     def switch(self, boolean=False, input_true=None, input_false=None):
         """
@@ -208,7 +208,7 @@ class AIOFC_InvertBoolean:
     @classmethod
     def INPUT_TYPES(cls):
         return {"required": {"boolean": ("BOOLEAN", {"forceInput": True})}}
-    RETURN_TYPES = ("BOOLEAN",); FUNCTION = "invert"; CATEGORY = "Logic"
+    RETURN_TYPES = ("BOOLEAN",); FUNCTION = "invert"; CATEGORY = "AIOFC/Logic"
     def invert(self, boolean): return (not boolean,)
 
 
@@ -231,15 +231,15 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_BooleanLogic": "Boolean Logic",
-    "AIOFC_ImageToBoolean": "Image to Boolean",
-    "AIOFC_ImageSwitch": "Switch (Image)",
-    "AIOFC_MaskSwitch": "Switch (Mask)",
-    "AIOFC_LatentSwitch": "Switch (Latent)",
-    "AIOFC_ConditioningSwitch": "Switch (Conditioning)",
-    "AIOFC_IntSwitch": "Switch (Int)",
-    "AIOFC_FloatSwitch": "Switch (Float)",
-    "AIOFC_StringSwitch": "Switch (String)",
-    "AIOFC_AnySwitch": "Switch (Any)",
-    "AIOFC_InvertBoolean": "Invert Boolean",
+    "AIOFC_BooleanLogic": "🔀 AIOFC Boolean Logic",
+    "AIOFC_ImageToBoolean": "🔀 AIOFC Image to Boolean",
+    "AIOFC_ImageSwitch": "🔀 AIOFC Switch (Image)",
+    "AIOFC_MaskSwitch": "🔀 AIOFC Switch (Mask)",
+    "AIOFC_LatentSwitch": "🔀 AIOFC Switch (Latent)",
+    "AIOFC_ConditioningSwitch": "🔀 AIOFC Switch (Conditioning)",
+    "AIOFC_IntSwitch": "🔀 AIOFC Switch (Int)",
+    "AIOFC_FloatSwitch": "🔀 AIOFC Switch (Float)",
+    "AIOFC_StringSwitch": "🔀 AIOFC Switch (String)",
+    "AIOFC_AnySwitch": "🔀 AIOFC Switch (Any)",
+    "AIOFC_InvertBoolean": "🔁 AIOFC Invert Boolean",
 }

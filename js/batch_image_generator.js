@@ -22,11 +22,11 @@ const JobState = {
 // State styling
 const STATE_CONFIG = {
     [JobState.PENDING]: { class: "pending", text: "Pending", icon: "⏳" },
-    [JobState.GENERATING]: { class: "in-progress", text: "Generating...", icon: "" },
-    [JobState.SUCCESS]: { class: "success", text: "Complete", icon: "" },
-    [JobState.FAILED]: { class: "error", text: "Failed", icon: "" },
-    [JobState.CACHED]: { class: "cached", text: "Cached", icon: "" },
-    [JobState.RETRYING]: { class: "retrying", text: "Retrying...", icon: "" },
+    [JobState.GENERATING]: { class: "in-progress", text: "Generating...", icon: "🔄" },
+    [JobState.SUCCESS]: { class: "success", text: "Complete", icon: "✓" },
+    [JobState.FAILED]: { class: "error", text: "Failed", icon: "✖" },
+    [JobState.CACHED]: { class: "cached", text: "Cached", icon: "📦" },
+    [JobState.RETRYING]: { class: "retrying", text: "Retrying...", icon: "🔁" },
     [JobState.CANCELLED]: { class: "cancelled", text: "Cancelled", icon: "⊘" },
 };
 
@@ -127,7 +127,7 @@ app.registerExtension({
                 // Node IDs are unique within a ComfyUI session
                 const getSessionKey = () => {
                     // Use a simple key based on node ID - it's unique per node in the session
-                    return `_big_${node.id}`;
+                    return `aiofc_big_${node.id}`;
                 };
 
                 // Save to session storage (survives tab switches!)
@@ -135,7 +135,7 @@ app.registerExtension({
                     try {
                         const key = getSessionKey();
                         sessionStorage.setItem(key, data);
-                        console.log(`[BIG] Saved to sessionStorage[${key}]: ${data.length} chars`);
+                        console.log(`[BIG] 💾 Saved to sessionStorage[${key}]: ${data.length} chars`);
                     } catch (e) {
                         console.warn("[BIG] Failed to save to session storage:", e);
                     }
@@ -171,7 +171,7 @@ app.registerExtension({
                         if (dataSource) {
                             const batchData = JSON.parse(dataSource);
                             if (batchData && batchData.length > 0) {
-                                console.log(`[BIG] Restoring ${batchData.length} jobs from ${sourceName}`);
+                                console.log(`[BIG] 🔄 Restoring ${batchData.length} jobs from ${sourceName}`);
 
                                 // Reconstruct image URLs from filenames (we don't store base64 anymore)
                                 // Images are saved to: {ComfyUI}/output/{subdir}/{filename}
@@ -186,7 +186,7 @@ app.registerExtension({
                                         (!job.image_url ||
                                          job.image_url.startsWith("data:") ||
                                          job.image_url.startsWith("/extensions/") ||
-                                         job.image_url.startsWith("//batch_gen_image/"));
+                                         job.image_url.startsWith("/aiofc/batch_gen_image/"));
 
                                     if (needsReconstruction) {
                                         // Support both new 'subfolder' and legacy 'output_subdir' keys
@@ -201,15 +201,15 @@ app.registerExtension({
                                         }
                                         // Use ComfyUI's standard /view endpoint
                                         job.image_url = `/view?filename=${encodeURIComponent(job.filename)}&subfolder=${encodeURIComponent(subdir)}&type=output`;
-                                        console.log(`[BIG] Reconstructed URL for job ${job.id}: filename="${job.filename}", subdir="${subdir}" → ${job.image_url}`);
+                                        console.log(`[BIG] 🔗 Reconstructed URL for job ${job.id}: filename="${job.filename}", subdir="${subdir}" → ${job.image_url}`);
                                         reconstructedCount++;
                                     } else if (!job.filename && (job.state === "success" || job.state === "cached")) {
-                                        console.warn(`[BIG] Job ${job.id} is ${job.state} but has NO filename! Cannot reconstruct URL.`);
+                                        console.warn(`[BIG] ⚠️ Job ${job.id} is ${job.state} but has NO filename! Cannot reconstruct URL.`);
                                     }
                                 });
 
                                 if (reconstructedCount > 0) {
-                                    console.log(`[BIG] Reconstructed ${reconstructedCount} image URLs from filenames`);
+                                    console.log(`[BIG] 🔗 Reconstructed ${reconstructedCount} image URLs from filenames`);
                                 } else {
                                     console.log(`[BIG] ℹ️ No URLs needed reconstruction. Job details:`);
                                     batchData.forEach(j => {
@@ -232,7 +232,7 @@ app.registerExtension({
                                 });
 
                                 if (invalidUrlCount > 0) {
-                                    console.log(`[BIG] ${invalidUrlCount} jobs have temp URLs that may need validation`);
+                                    console.log(`[BIG] ⚠️ ${invalidUrlCount} jobs have temp URLs that may need validation`);
                                 }
 
                                 // For jobs in "generating"/"retrying" state, we'll check backend status
@@ -241,7 +241,7 @@ app.registerExtension({
                                 const pendingJobs = batchData.filter(j => j.state === "pending");
 
                                 if (generatingJobs.length > 0) {
-                                    console.log(`[BIG] ${generatingJobs.length} jobs were generating - checking backend...`);
+                                    console.log(`[BIG] 🔍 ${generatingJobs.length} jobs were generating - checking backend...`);
                                     // Schedule async backend check (don't block restore)
                                     setTimeout(() => checkBackendProgress(batchData), 100);
                                 }
@@ -286,13 +286,13 @@ app.registerExtension({
                 const checkBackendProgress = async (localJobs) => {
                     try {
                         const nodeId = node._ni_widget?.value || String(node.id);
-                        console.log(`[BIG] Checking backend progress for node ${nodeId}...`);
+                        console.log(`[BIG] 🔍 Checking backend progress for node ${nodeId}...`);
 
-                        const response = await fetch(`//batch_gen_progress/${nodeId}`);
+                        const response = await fetch(`/aiofc/batch_gen_progress/${nodeId}`);
                         const backendData = await response.json();
 
                         if (backendData && backendData.jobs && backendData.jobs.length > 0) {
-                            console.log(`[BIG] Backend has ${backendData.jobs.length} jobs!`);
+                            console.log(`[BIG] ✅ Backend has ${backendData.jobs.length} jobs!`);
 
                             // Merge backend data with local jobs
                             let updatedCount = 0;
@@ -305,21 +305,21 @@ app.registerExtension({
                                         localJob.image_url = backendJob.image_url || localJob.image_url;
                                         localJob.error = null;
                                         updatedCount++;
-                                        console.log(`[BIG] Job ${localJob.id}: ${backendJob.state}`);
+                                        console.log(`[BIG] ✅ Job ${localJob.id}: ${backendJob.state}`);
                                     } else if (backendJob.state === "failed") {
                                         localJob.state = "failed";
                                         localJob.error = backendJob.error || "Failed on backend";
                                         updatedCount++;
                                     } else if (backendJob.state === "generating") {
                                         // Still generating on backend! Resume polling
-                                        console.log(`[BIG] Job ${localJob.id} still generating on backend`);
+                                        console.log(`[BIG] 🔄 Job ${localJob.id} still generating on backend`);
                                         node._bigIsGenerating = true;
                                     }
                                 }
                             });
 
                             if (updatedCount > 0) {
-                                console.log(`[BIG] Updated ${updatedCount} jobs from backend`);
+                                console.log(`[BIG] ✅ Updated ${updatedCount} jobs from backend`);
                                 node._bigJobs = localJobs;
                                 updateGeneratedBatchData();
                                 if (node._renderUI) node._renderUI();
@@ -327,12 +327,12 @@ app.registerExtension({
 
                             // If still generating, start polling
                             if (backendData.is_generating) {
-                                console.log(`[BIG] Backend still generating - starting polling`);
+                                console.log(`[BIG] 🔄 Backend still generating - starting polling`);
                                 if (node._startPolling) node._startPolling();
                             }
                         } else {
                             // Backend has no data - mark generating jobs as interrupted
-                            console.log(`[BIG] No backend data - marking jobs as interrupted`);
+                            console.log(`[BIG] ⚠️ No backend data - marking jobs as interrupted`);
                             localJobs.forEach(job => {
                                 if (job.state === "generating" || job.state === "retrying") {
                                     job.state = "failed";
@@ -638,11 +638,11 @@ app.registerExtension({
                                     ? order.map(imgId => {
                                         const img = ailImages.find(i => i.id === imgId);
                                         return img?.thumbnail
-                                            ? `//view/${img.thumbnail}`
+                                            ? `/aiofc/view/${img.thumbnail}`
                                             : null;
                                     }).filter(Boolean)
                                     : ailImages.map(img => img?.thumbnail
-                                        ? `//view/${img.thumbnail}`
+                                        ? `/aiofc/view/${img.thumbnail}`
                                         : null).filter(Boolean);
                             }
                         } catch (e) {
@@ -722,11 +722,11 @@ app.registerExtension({
                                     ? order.map(imgId => {
                                         const img = ailImages.find(i => i.id === imgId);
                                         return img?.thumbnail
-                                            ? `//view/${img.thumbnail}`
+                                            ? `/aiofc/view/${img.thumbnail}`
                                             : null;
                                     }).filter(Boolean)
                                     : ailImages.map(img => img?.thumbnail
-                                        ? `//view/${img.thumbnail}`
+                                        ? `/aiofc/view/${img.thumbnail}`
                                         : null).filter(Boolean);
 
                                 imageCount = imageUrls.length;
@@ -1017,7 +1017,7 @@ app.registerExtension({
                             const nodeId = node._ni_widget?.value || String(node.id);
                             if (nodeId) {
                                 // Use raw fetch to bypass any ComfyUI blocking
-                                const response = await fetch(`//batch_gen_progress/${nodeId}`, {
+                                const response = await fetch(`/aiofc/batch_gen_progress/${nodeId}`, {
                                     method: 'GET',
                                     headers: { 'Accept': 'application/json' },
                                 });
@@ -1265,7 +1265,7 @@ app.registerExtension({
                     if (timerInterval) return;
                     timerInterval = setInterval(() => {
                         if (node._bigIsGenerating && node._bigStartTime) {
-                            const header = container.querySelector(".-big-progress-header h4");
+                            const header = container.querySelector(".aiofc-big-progress-header h4");
                             if (header) {
                                 const elapsed = formatTime(Date.now() - node._bigStartTime);
                                 header.textContent = `Generating... (${elapsed})`;
@@ -1282,16 +1282,16 @@ app.registerExtension({
                 };
 
                 const updateProgressHeader = () => {
-                    const header = container.querySelector(".-big-progress-header h4");
+                    const header = container.querySelector(".aiofc-big-progress-header h4");
                     const kpiRow = container.querySelector(".aiofc-big-kpi-row");
 
                     if (header) {
                         const elapsed = node._bigStartTime ? formatTime(Date.now() - node._bigStartTime) : "0s";
                         if (node._bigIsGenerating) {
-                            header.textContent = `Generating Images... (${elapsed})`;
+                            header.textContent = `🔄 Generating Images... (${elapsed})`;
                             startTimer();
                         } else {
-                            header.textContent = `Generation Complete (${elapsed})`;
+                            header.textContent = `✅ Generation Complete (${elapsed})`;
                             stopTimer();
                         }
                     }
@@ -1323,7 +1323,7 @@ app.registerExtension({
                 };
 
                 const updateProgressItem = (job) => {
-                    const itemEl = container.querySelector(`.-big-progress-item[data-job-id="${job.id}"]`);
+                    const itemEl = container.querySelector(`.aiofc-big-progress-item[data-job-id="${job.id}"]`);
                     if (!itemEl) return;
 
                     // Debug: Log if job has image URL
@@ -1334,25 +1334,25 @@ app.registerExtension({
                     const stateInfo = STATE_CONFIG[job.state] || STATE_CONFIG[JobState.PENDING];
 
                     // Update class for border/background color
-                    itemEl.className = `big-progress-item ${stateInfo.class}`;
+                    itemEl.className = `aiofc-big-progress-item ${stateInfo.class}`;
 
                     // Update status badge
                     const statusBadge = itemEl.querySelector(".aiofc-big-progress-item-status");
                     if (statusBadge) {
-                        statusBadge.className = `big-progress-item-status ${stateInfo.class}`;
+                        statusBadge.className = `aiofc-big-progress-item-status ${stateInfo.class}`;
                         let statusText = `${stateInfo.icon} ${stateInfo.text}`;
 
                         if (job.state === JobState.RETRYING && job.attempts > 1) {
-                            statusText = `Retry #${job.attempts}`;
+                            statusText = `🔁 Retry #${job.attempts}`;
                         } else if (job.state === JobState.SUCCESS && job.generation_time) {
                             // Show retry count if there were retries
                             if (job.attempts > 1) {
-                                statusText = `${job.generation_time.toFixed(1)}s (${job.attempts} tries)`;
+                                statusText = `✓ ${job.generation_time.toFixed(1)}s (${job.attempts} tries)`;
                             } else {
-                                statusText = `${job.generation_time.toFixed(1)}s`;
+                                statusText = `✓ ${job.generation_time.toFixed(1)}s`;
                             }
                         } else if (job.state === JobState.FAILED && job.attempts > 1) {
-                            statusText = `Failed (${job.attempts} tries)`;
+                            statusText = `✖ Failed (${job.attempts} tries)`;
                         }
 
                         statusBadge.textContent = statusText;
@@ -1387,7 +1387,7 @@ app.registerExtension({
                             messageDiv.classList.remove("retry-message");
                             messageDiv.classList.add("error-message");
                         } else if (job.state === JobState.RETRYING && job.error) {
-                            messageDiv.textContent = `${job.error.slice(0, 80)}`;
+                            messageDiv.textContent = `⚠️ ${job.error.slice(0, 80)}`;
                             messageDiv.style.display = "block";
                             messageDiv.classList.remove("error-message");
                             messageDiv.classList.add("retry-message");
@@ -1414,7 +1414,7 @@ app.registerExtension({
                         thumbDiv.className = "aiofc-big-progress-item-thumbnail" + (hasImage ? "" : " placeholder");
 
                         if (hasImage) {
-                            thumbDiv.innerHTML = `<img src="${job.image_url}" alt="Generated image" class="-big-thumbnail-img" data-job-id="${job.id}" loading="lazy" style="background: rgba(0,0,0,0.3);" onerror="this.style.opacity='0.3'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%239ca3af%22 d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E';" />`;
+                            thumbDiv.innerHTML = `<img src="${job.image_url}" alt="Generated image" class="aiofc-big-thumbnail-img" data-job-id="${job.id}" loading="lazy" style="background: rgba(0,0,0,0.3);" onerror="this.style.opacity='0.3'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%239ca3af%22 d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E';" />`;
                         } else if (isGenerating) {
                             console.log("[BIG] Creating video element for job", job.id);
                             const video = document.createElement("video");
@@ -1423,7 +1423,7 @@ app.registerExtension({
                             video.loop = true;
                             video.muted = true;
                             video.playsInline = true;
-                            video.src = "extensions/ComfyUI_/_loader.mp4";
+                            video.src = "extensions/ComfyUI_AIOFC/Aiofc_loader.mp4";
 
                             // Debug events
                             video.addEventListener('loadeddata', () => console.log("[BIG] Video loaded:", video.src));
@@ -1439,7 +1439,7 @@ app.registerExtension({
                                 console.error("[BIG] Video autoplay failed:", e);
                             });
                         } else {
-                            thumbDiv.innerHTML = `<div class="-big-thumbnail-empty"></div>`;
+                            thumbDiv.innerHTML = `<div class="aiofc-big-thumbnail-empty"></div>`;
                         }
 
                         // Append to the main item container
@@ -1497,7 +1497,7 @@ app.registerExtension({
                                 // No image yet, replace entire content
                                 // console.log("[BIG] No existing img, replacing content");
                                 thumbnailContainer.className = "aiofc-big-progress-item-thumbnail";
-                                thumbnailContainer.innerHTML = `<img src="${job.image_url}" alt="Generated image" class="-big-thumbnail-img" data-job-id="${job.id}" loading="lazy" />`;
+                                thumbnailContainer.innerHTML = `<img src="${job.image_url}" alt="Generated image" class="aiofc-big-thumbnail-img" data-job-id="${job.id}" loading="lazy" />`;
 
                                 const img = thumbnailContainer.querySelector(".aiofc-big-thumbnail-img");
                                 if (img) {
@@ -1515,7 +1515,7 @@ app.registerExtension({
                             // Show video if not already showing
                             if (!thumbnailContainer.querySelector(".aiofc-big-thumbnail-video")) {
                                 console.log("[BIG] Updating to show video for job", job.id);
-                                thumbnailContainer.className = "big-progress-item-thumbnail placeholder";
+                                thumbnailContainer.className = "aiofc-big-progress-item-thumbnail placeholder";
                                 thumbnailContainer.innerHTML = ''; // Clear existing content
                                 const video = document.createElement("video");
                                 video.className = "aiofc-big-thumbnail-video";
@@ -1523,7 +1523,7 @@ app.registerExtension({
                                 video.loop = true;
                                 video.muted = true;
                                 video.playsInline = true;
-                                video.src = "extensions/ComfyUI_/_loader.mp4";
+                                video.src = "extensions/ComfyUI_AIOFC/Aiofc_loader.mp4";
 
                                 // Debug events
                                 video.addEventListener('loadeddata', () => console.log("[BIG] Video loaded (update):", video.src));
@@ -1542,8 +1542,8 @@ app.registerExtension({
                         } else {
                             // Show empty placeholder (no icon)
                             if (!thumbnailContainer.querySelector(".aiofc-big-thumbnail-empty")) {
-                                thumbnailContainer.className = "big-progress-item-thumbnail placeholder";
-                                thumbnailContainer.innerHTML = `<div class="-big-thumbnail-empty"></div>`;
+                                thumbnailContainer.className = "aiofc-big-progress-item-thumbnail placeholder";
+                                thumbnailContainer.innerHTML = `<div class="aiofc-big-thumbnail-empty"></div>`;
                             }
                         }
                     }
@@ -1558,7 +1558,7 @@ app.registerExtension({
                         newBtn.className = "aiofc-big-view-image-btn";
                         newBtn.dataset.jobId = job.id;
                         newBtn.title = "View image";
-                        newBtn.textContent = "";
+                        newBtn.textContent = "👁️";
                         newBtn.onclick = (e) => {
                             e.stopPropagation();
                             openPhotoSwipe(job.id);
@@ -1905,7 +1905,7 @@ app.registerExtension({
                         if (!params.model) missing.push("Model");
 
                         if (missing.length > 0) {
-                            const msg = `Missing required parameters: ${missing.join(", ")}\n\n` +
+                            const msg = `❌ Missing required parameters: ${missing.join(", ")}\n\n` +
                                        `Make sure these are connected to the BIG node:\n` +
                                        `- API Key Loader → api_key input\n` +
                                        `- Provider → provider input\n` +
@@ -1996,7 +1996,7 @@ app.registerExtension({
                         }
 
                         // Pass signal to fetch for cancellation support
-                        const response = await api.fetchApi("//batch_gen_generate_single", {
+                        const response = await api.fetchApi("/aiofc/batch_gen_generate_single", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(requestBody),
@@ -2082,7 +2082,7 @@ app.registerExtension({
 
                     const pairStartTime = Date.now();
                     const promptPreview = (job1.prompt_positive || "").slice(0, 30);
-                    console.log(`[BIG] [${new Date().toISOString().slice(11,19)}] Starting pair ${jobIndex1}+${jobIndex2}: "${promptPreview}..."`);
+                    console.log(`[BIG] 🎯 [${new Date().toISOString().slice(11,19)}] Starting pair ${jobIndex1}+${jobIndex2}: "${promptPreview}..."`);
 
                     // Mark both as generating
                     job1.state = "generating";
@@ -2119,7 +2119,7 @@ app.registerExtension({
                             requestBody.input_image4 = job1.input_image4_b64;
                         }
 
-                        const response = await api.fetchApi("//batch_gen_generate_single", {
+                        const response = await api.fetchApi("/aiofc/batch_gen_generate_single", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(requestBody),
@@ -2128,7 +2128,7 @@ app.registerExtension({
 
                         const result = await response.json();
                         const pairDuration = ((Date.now() - pairStartTime) / 1000).toFixed(1);
-                        console.log(`[BIG] [${new Date().toISOString().slice(11,19)}] Pair ${jobIndex1}+${jobIndex2} completed in ${pairDuration}s`);
+                        console.log(`[BIG] 🎯 [${new Date().toISOString().slice(11,19)}] Pair ${jobIndex1}+${jobIndex2} completed in ${pairDuration}s`);
 
                         if (result.status === "success" && result.multi_image && result.results) {
                             // Process both results
@@ -2285,12 +2285,15 @@ app.registerExtension({
                     // Sync status badge HTML (informational only - sync in RPG/AIL)
                     const renderSyncBadge = () => {
                         if (totalGenerations === 0) {
-                            return `<span class="big-sync-badge -big-sync-no-prompts">No prompts</span>`;
+                            return `<span class="aiofc-big-sync-badge aiofc-big-sync-no-prompts">No prompts</span>`;
                         }
                         if (isSynced) {
-                            return `<span class="big-sync-badge -big-sync-match"> ${totalGenerations} gens ↔ ${ailTotalCount} AIL</span>`;
+                            return `<span class="aiofc-big-sync-badge aiofc-big-sync-match">✓ ${totalGenerations} gens ↔ ${ailTotalCount} AIL</span>`;
                         }
-                        return `<span class="big-sync-badge -big-sync-mismatch" title="Sync in RPG or AIL"> ${totalGenerations} gens ↔ ${ailTotalCount} AIL</span> <span class="-big-sync-hint">Sync in RPG</span>`;
+                        return `
+                            <span class="aiofc-big-sync-badge aiofc-big-sync-mismatch" title="Sync in RPG or AIL">⚠ ${totalGenerations} gens ↔ ${ailTotalCount} AIL</span>
+                            <span class="aiofc-big-sync-hint">Sync in RPG</span>
+                        `;
                     };
 
                     // Multi-image mode: Show combination cards
@@ -2300,7 +2303,23 @@ app.registerExtension({
                             getImageUrl: (url) => url
                         });
 
-                        return `<div class="-big-image-preview"> <div class="-big-image-preview-header"> <div class="-multi-image-indicator"> <span class="-multi-image-indicator-dot"></span> <span class="-multi-image-count">${connectedInputs} AIL inputs</span> <span>connected</span> </div> <div class="-big-image-preview-header-right"> ${renderSyncBadge()} </div> </div> <div class="-combo-grid"> ${comboCardsHtml} </div> </div>`;
+                        return `
+                            <div class="aiofc-big-image-preview">
+                                <div class="aiofc-big-image-preview-header">
+                                    <div class="aiofc-multi-image-indicator">
+                                        <span class="aiofc-multi-image-indicator-dot"></span>
+                                        <span class="aiofc-multi-image-count">${connectedInputs} AIL inputs</span>
+                                        <span>connected</span>
+                                    </div>
+                                    <div class="aiofc-big-image-preview-header-right">
+                                        ${renderSyncBadge()}
+                                    </div>
+                                </div>
+                                <div class="aiofc-combo-grid">
+                                    ${comboCardsHtml}
+                                </div>
+                            </div>
+                        `;
                     }
 
                     // Single input mode: Clean square thumbnail grid
@@ -2340,10 +2359,21 @@ app.registerExtension({
                     };
                     const expandedImages = getExpandedImages();
 
-                    return `<div class="-big-image-preview"> <div class="-big-image-preview-header"> <span> Reference Images</span> <div class="-big-image-preview-header-right"> ${renderSyncBadge()} </div> </div> <div class="-big-ref-grid"> ${expandedImages.map((img, idx) => { const label = img.repeatTotal > 1 ?`${img.index}.${img.repeatIndex}`
+                    return `
+                        <div class="aiofc-big-image-preview">
+                            <div class="aiofc-big-image-preview-header">
+                                <span>📸 Reference Images</span>
+                                <div class="aiofc-big-image-preview-header-right">
+                                    ${renderSyncBadge()}
+                                </div>
+                            </div>
+                            <div class="aiofc-big-ref-grid">
+                                ${expandedImages.map((img, idx) => {
+                                    const label = img.repeatTotal > 1
+                                        ? `${img.index}.${img.repeatIndex}`
                                         : `${img.index}`;
                                     return `
-                                        <div class="big-ref-thumb${img.isRepeat ? ' -big-ref-repeat-item' : ''}" title="Image ${img.index}${img.repeatTotal > 1 ? ` (${img.repeatIndex}/${img.repeatTotal})` : ''}">
+                                        <div class="aiofc-big-ref-thumb${img.isRepeat ? ' aiofc-big-ref-repeat-item' : ''}" title="Image ${img.index}${img.repeatTotal > 1 ? ` (${img.repeatIndex}/${img.repeatTotal})` : ''}">
                                             <img src="${img.url}" alt="Image ${img.index}" draggable="false" />
                                             <span class="aiofc-big-ref-index">${label}</span>
                                         </div>
@@ -2365,16 +2395,31 @@ app.registerExtension({
                     // Check if RPG is connected (even if no prompts yet)
                     const rpgConnected = isRPGConnected();
                     const idleMessage = rpgConnected
-                        ? "RPG connected — Generate prompts in RPG to continue"
+                        ? "✅ RPG connected — Generate prompts in RPG to continue"
                         : "Connect to Reality Prompt Generator to generate images";
 
-                    container.innerHTML = `<div class="-big-idle"> <img src="/extensions/ComfyUI_/.svg" alt="" class="-big-idle-logo" style="width: 180px; height: auto; margin-bottom: 22px;" /> <div class="-big-idle-text">Batch Image Generator</div> ${multiImageInfo.multiImage ?`
+                    container.innerHTML = `
+                        <div class="aiofc-big-idle">
+                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-idle-logo" style="width: 180px; height: auto; margin-bottom: 22px;" />
+                            <div class="aiofc-big-idle-text">Batch Image Generator</div>
+                            ${multiImageInfo.multiImage ? `
                             <div class="aiofc-big-idle-mode-badges">
-                                ${multiImageInfo.isActive ? `<span class="big-mode-badge -big-multi-image-badge" title="50% cost savings: $0.07/img instead of $0.14/img"> 2X MODE</span>` : ''}
-                                ${multiImageInfo.isWarning ? `<span class="big-mode-badge -big-multi-image-warning" title="Multi-image only works with Wavespeed.ai"> 2X needs Wavespeed</span>` : ''}
-                                ${multiImageInfo.isNoProvider ? `<span class="big-mode-badge -big-multi-image-warning" title="Connect a provider to use multi-image mode"> 2X no provider</span>` : ''}
+                                ${multiImageInfo.isActive ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-badge" title="50% cost savings: $0.07/img instead of $0.14/img">⚡ 2X MODE</span>` : ''}
+                                ${multiImageInfo.isWarning ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-warning" title="Multi-image only works with Wavespeed.ai">⚠️ 2X needs Wavespeed</span>` : ''}
+                                ${multiImageInfo.isNoProvider ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-warning" title="Connect a provider to use multi-image mode">⚠️ 2X no provider</span>` : ''}
                             </div>
-                            `''} <div class="-big-model-info">${escapeHtml(modelDisplay)}</div> <!-- 2X Mode Toggle --> <label class="-big-2x-toggle" title="Generate 2 variations per prompt at 50% cost savings ($0.07/img instead of $0.14/img). Only works with Wavespeed.ai provider."> <input type="checkbox" class="-big-2x-checkbox" ${multiImageInfo.multiImage ? 'checked' : ''}> <span> 2X Mode</span> </label> <div class="-big-idle-instructions"> ${idleMessage} </div> </div>`;
+                            ` : ''}
+                            <div class="aiofc-big-model-info">${escapeHtml(modelDisplay)}</div>
+                            <!-- 2X Mode Toggle -->
+                            <label class="aiofc-big-2x-toggle" title="Generate 2 variations per prompt at 50% cost savings ($0.07/img instead of $0.14/img). Only works with Wavespeed.ai provider.">
+                                <input type="checkbox" class="aiofc-big-2x-checkbox" ${multiImageInfo.multiImage ? 'checked' : ''}>
+                                <span>⚡ 2X Mode</span>
+                            </label>
+                            <div class="aiofc-big-idle-instructions">
+                                ${idleMessage}
+                            </div>
+                        </div>
+                    `;
                     updateCachedHeight();
                 };
 
@@ -2410,26 +2455,84 @@ app.registerExtension({
                     // Calculate total output images (2x if multi-image mode is active)
                     const totalOutputImages = multiImageInfo.isActive ? totalGenerations * 2 : totalGenerations;
 
-                    container.innerHTML = `<div class="-big-preview"> <!-- Model Warning (if not Nano Banana Pro) --> ${modelInfo.model && !modelInfo.isSupported ?`
+                    container.innerHTML = `
+                        <div class="aiofc-big-preview">
+                            <!-- Model Warning (if not Nano Banana Pro) -->
+                            ${modelInfo.model && !modelInfo.isSupported ? `
                             <div class="aiofc-big-model-warning">
                                 ⚠️ <strong>Unsupported Model:</strong> "${escapeHtml(modelInfo.model)}"<br>
                                 <small>This node is experimental and currently only supports <strong>Nano Banana Pro</strong>. Support for other models will be added soon.</small>
                             </div>
-                            `''} <!-- Mode Card (RPG Style) --> <div class="-big-topbar"> <div class="-big-mode-card"> <div class="-big-mode-card-inner"> <div class="-big-mode-card-left"> <div class="-big-mode-indicator"> <span class="big-mode-badge ${modeClass}">${modeLabel}</span> ${multiImageInfo.isActive ?`<span class="big-mode-badge -big-multi-image-badge" title="2 variations per prompt at $0.07/img">⚡ 2X MODE</span>` : ''}
-                                                ${multiImageInfo.isWarning ? `<span class="big-mode-badge -big-multi-image-warning" title="Multi-image only works with Wavespeed.ai">⚠️ 2X needs Wavespeed</span>` : ''}
-                                                ${multiImageInfo.isNoProvider ? `<span class="big-mode-badge -big-multi-image-warning" title="Connect a provider to use multi-image mode">⚠️ 2X no provider</span>` : ''}
+                            ` : ''}
+
+                            <!-- Mode Card (RPG Style) -->
+                            <div class="aiofc-big-topbar">
+                                <div class="aiofc-big-mode-card">
+                                    <div class="aiofc-big-mode-card-inner">
+                                        <div class="aiofc-big-mode-card-left">
+                                            <div class="aiofc-big-mode-indicator">
+                                                <span class="aiofc-big-mode-badge ${modeClass}">${modeLabel}</span>
+                                                ${multiImageInfo.isActive ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-badge" title="2 variations per prompt at $0.07/img">⚡ 2X MODE</span>` : ''}
+                                                ${multiImageInfo.isWarning ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-warning" title="Multi-image only works with Wavespeed.ai">⚠️ 2X needs Wavespeed</span>` : ''}
+                                                ${multiImageInfo.isNoProvider ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-warning" title="Connect a provider to use multi-image mode">⚠️ 2X no provider</span>` : ''}
                                             </div>
-                                            ${mode === "img2img" ? `<div class="aiofc-big-mode-source">${formatImageCount()}</div>`''} <div class="-big-model-info">${escapeHtml(modelDisplay)}</div> <!-- 2X Mode Toggle --> <label class="-big-2x-toggle" title="Generate 2 variations per prompt at 50% cost savings ($0.07/img instead of $0.14/img). Only works with Wavespeed.ai provider."> <input type="checkbox" class="-big-2x-checkbox" ${multiImageInfo.multiImage ? 'checked' : ''}> <span> 2X Mode</span> </label> </div> <div class="-big-mode-card-brand"> <img src="/extensions/ComfyUI_/.svg" alt="" class="-big-topbar-logo" /> <span class="-big-topbar-version">BIG V2.0</span> </div> </div> </div> <div class="-big-kpi-row"> <div class="-big-kpi"> <span>PROMPTS</span> <strong>${promptCount}</strong> </div> <div class="-big-kpi"> <span>OUTPUT</span> <strong>${totalOutputImages}${multiImageInfo.isActive ? ' (2×)' : ''}</strong> </div> </div> </div> ${multiImageInfo.isActive ?`
+                                            ${mode === "img2img" ? `<div class="aiofc-big-mode-source">${formatImageCount()}</div>` : ''}
+                                            <div class="aiofc-big-model-info">${escapeHtml(modelDisplay)}</div>
+                                            <!-- 2X Mode Toggle -->
+                                            <label class="aiofc-big-2x-toggle" title="Generate 2 variations per prompt at 50% cost savings ($0.07/img instead of $0.14/img). Only works with Wavespeed.ai provider.">
+                                                <input type="checkbox" class="aiofc-big-2x-checkbox" ${multiImageInfo.multiImage ? 'checked' : ''}>
+                                                <span>⚡ 2X Mode</span>
+                                            </label>
+                                        </div>
+                                        <div class="aiofc-big-mode-card-brand">
+                                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-topbar-logo" />
+                                            <span class="aiofc-big-topbar-version">BIG V2.0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="aiofc-big-kpi-row">
+                                    <div class="aiofc-big-kpi">
+                                        <span>PROMPTS</span>
+                                        <strong>${promptCount}</strong>
+                                    </div>
+                                    <div class="aiofc-big-kpi">
+                                        <span>OUTPUT</span>
+                                        <strong>${totalOutputImages}${multiImageInfo.isActive ? ' (2×)' : ''}</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${multiImageInfo.isActive ? `
                             <div class="aiofc-big-multi-image-banner">
                                 <span>⚡ <strong>2X Multi-Image Mode</strong> - ${promptCount} prompt${promptCount !== 1 ? 's' : ''} × 2 variations = ${totalOutputImages} images</span>
                                 <span class="aiofc-big-cost-savings">50% cost savings: $0.07/img</span>
                             </div>
-                            ${multiImageInfo.aspectRatioWarning ? `<div class="-big-aspect-warning"> Aspect ratio "${multiImageInfo.aspectRatio}" will be mapped to closest supported (3:2, 2:3, 3:4, 4:3) </div>` : ''}
-                            `''} <!-- Reference Images Preview (for img2img) --> ${renderImagePreview(imageUrls, mode, multiImageInfo.aspectRatio || "1:1", totalGenerations)} <!-- Generate All at TOP --> <div class="-big-preview-actions"> <button class="big-btn-primary -big-generate-all-btn" ${!modelInfo.isSupported ? 'disabled title="Unsupported model - only Nano Banana Pro is supported"' : ''}> Generate All (${totalOutputImages} image${totalOutputImages !== 1 ? 's' : ''}${multiImageInfo.isActive ? '' : ''}) </button> </div> <div class="-big-preview-header"> <span> ${promptCount} prompt${promptCount !== 1 ? 's' : ''} ready</span> </div> <div class="-big-preview-list"> ${promptsToShow.map((p, i) =>`
+                            ${multiImageInfo.aspectRatioWarning ? `
+                            <div class="aiofc-big-aspect-warning">
+                                ⚠️ Aspect ratio "${multiImageInfo.aspectRatio}" will be mapped to closest supported (3:2, 2:3, 3:4, 4:3)
+                            </div>
+                            ` : ''}
+                            ` : ''}
+
+                            <!-- Reference Images Preview (for img2img) -->
+                            ${renderImagePreview(imageUrls, mode, multiImageInfo.aspectRatio || "1:1", totalGenerations)}
+
+                            <!-- Generate All at TOP -->
+                            <div class="aiofc-big-preview-actions">
+                                <button class="aiofc-big-btn-primary aiofc-big-generate-all-btn" ${!modelInfo.isSupported ? 'disabled title="Unsupported model - only Nano Banana Pro is supported"' : ''}>
+                                    ✨ Generate All (${totalOutputImages} image${totalOutputImages !== 1 ? 's' : ''}${multiImageInfo.isActive ? ' ⚡' : ''})
+                                </button>
+                            </div>
+
+                            <div class="aiofc-big-preview-header">
+                                <span>📋 ${promptCount} prompt${promptCount !== 1 ? 's' : ''} ready</span>
+                            </div>
+                            <div class="aiofc-big-preview-list">
+                                ${promptsToShow.map((p, i) => `
                                     <div class="aiofc-big-preview-item">
                                         <span class="aiofc-big-preview-prompt">#${i + 1}: ${escapeHtml(p.positive.slice(0, 50))}${p.positive.length > 50 ? '...' : ''}</span>
                                         <button class="aiofc-big-generate-single-btn" data-index="${i}" ${!modelInfo.isSupported ? 'disabled' : ''}>
-                                            🎨 ${multiImageInfo.isActive ? 'Generate 2×' : 'Generate'}
+                                            🎨 ${multiImageInfo.isActive ? 'Generate ⚡2×' : 'Generate'}
                                         </button>
                                     </div>
                                 `).join('')}
@@ -2469,38 +2572,90 @@ app.registerExtension({
                     const detectedPrompts = getConnectedRPGData() || [];
                     const totalGenerations = detectedPrompts.reduce((sum, p) => sum + (p.repeat_count || 1), 0);
 
-                    container.innerHTML = `<div class="-big-generation-progress"> <!-- Top Bar (RPG Style) --> <div class="-big-topbar"> <div class="-big-mode-card"> <div class="-big-mode-card-inner"> <div class="-big-mode-card-left"> <div class="-big-mode-indicator"> <span class="big-mode-badge ${modeClass}">${modeLabel}</span> ${multiImageInfo.isActive ?`<span class="big-mode-badge -big-multi-image-badge" title="50% cost savings: $0.07/img instead of $0.14/img">⚡ 2X MODE</span>` : ''}
-                                                ${multiImageInfo.isWarning ? `<span class="big-mode-badge -big-multi-image-warning" title="Multi-image only works with Wavespeed.ai">⚠️ 2X needs Wavespeed</span>` : ''}
-                                                ${multiImageInfo.isNoProvider ? `<span class="big-mode-badge -big-multi-image-warning" title="Connect a provider to use multi-image mode">⚠️ 2X no provider</span>` : ''}
+                    container.innerHTML = `
+                        <div class="aiofc-big-generation-progress">
+                            <!-- Top Bar (RPG Style) -->
+                            <div class="aiofc-big-topbar">
+                                <div class="aiofc-big-mode-card">
+                                    <div class="aiofc-big-mode-card-inner">
+                                        <div class="aiofc-big-mode-card-left">
+                                            <div class="aiofc-big-mode-indicator">
+                                                <span class="aiofc-big-mode-badge ${modeClass}">${modeLabel}</span>
+                                                ${multiImageInfo.isActive ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-badge" title="50% cost savings: $0.07/img instead of $0.14/img">⚡ 2X MODE</span>` : ''}
+                                                ${multiImageInfo.isWarning ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-warning" title="Multi-image only works with Wavespeed.ai">⚠️ 2X needs Wavespeed</span>` : ''}
+                                                ${multiImageInfo.isNoProvider ? `<span class="aiofc-big-mode-badge aiofc-big-multi-image-warning" title="Connect a provider to use multi-image mode">⚠️ 2X no provider</span>` : ''}
                                             </div>
-                                            ${mode === "img2img" ? `<div class="aiofc-big-mode-source">${formatImageCount()}</div>`''} <div class="-big-model-info">${escapeHtml(modelDisplay)}</div> <!-- 2X Mode Toggle (when not generating) --> ${!node._bigIsGenerating ?`
+                                            ${mode === "img2img" ? `<div class="aiofc-big-mode-source">${formatImageCount()}</div>` : ''}
+                                            <div class="aiofc-big-model-info">${escapeHtml(modelDisplay)}</div>
+                                            <!-- 2X Mode Toggle (when not generating) -->
+                                            ${!node._bigIsGenerating ? `
                                             <label class="aiofc-big-2x-toggle" title="Generate 2 variations per prompt at 50% cost savings ($0.07/img instead of $0.14/img). Only works with Wavespeed.ai provider.">
                                                 <input type="checkbox" class="aiofc-big-2x-checkbox" ${multiImageInfo.multiImage ? 'checked' : ''}>
                                                 <span>⚡ 2X Mode</span>
                                             </label>
-                                            `''} </div> <div class="-big-mode-card-brand"> <img src="/extensions/ComfyUI_/.svg" alt="" class="-big-topbar-logo" /> <span class="-big-topbar-version">BIG V2.0</span> </div> </div> </div> <div class="-big-kpi-row"> <div class="-big-kpi"> <span>JOBS</span> <strong>${s.completed}/${s.total}</strong> </div> <div class="big-kpi success"> <span>SUCCESS</span> <strong>${s.success}</strong> </div> <div class="big-kpi cached"> <span>CACHED</span> <strong>${s.cached}</strong> </div> <div class="big-kpi failed"> <span>FAILED</span> <strong>${s.failed}</strong> </div> </div> </div> <!-- Reference Images Preview (for img2img) --> ${renderImagePreview(imageUrls, mode, multiImageInfo.aspectRatio || "1:1", totalGenerations)} <!-- Header with inline stop button --> <div class="-big-progress-header"> <h4>${node._bigIsGenerating ?`Generating... (${elapsed})` : `Complete (${elapsed})`}</h4>
+                                            ` : ''}
+                                        </div>
+                                        <div class="aiofc-big-mode-card-brand">
+                                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-topbar-logo" />
+                                            <span class="aiofc-big-topbar-version">BIG V2.0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="aiofc-big-kpi-row">
+                                    <div class="aiofc-big-kpi">
+                                        <span>JOBS</span>
+                                        <strong>${s.completed}/${s.total}</strong>
+                                    </div>
+                                    <div class="aiofc-big-kpi success">
+                                        <span>SUCCESS</span>
+                                        <strong>${s.success}</strong>
+                                    </div>
+                                    <div class="aiofc-big-kpi cached">
+                                        <span>CACHED</span>
+                                        <strong>${s.cached}</strong>
+                                    </div>
+                                    <div class="aiofc-big-kpi failed">
+                                        <span>FAILED</span>
+                                        <strong>${s.failed}</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Reference Images Preview (for img2img) -->
+                            ${renderImagePreview(imageUrls, mode, multiImageInfo.aspectRatio || "1:1", totalGenerations)}
+
+                            <!-- Header with inline stop button -->
+                            <div class="aiofc-big-progress-header">
+                                <h4>${node._bigIsGenerating ? `Generating... (${elapsed})` : `Complete (${elapsed})`}</h4>
                                 ${node._bigIsGenerating ? `<button class="aiofc-big-stop-btn">⏹ Stop</button>` : ''}
                             </div>
 
                             <!-- Actions at TOP (only when not generating) -->
                             ${!node._bigIsGenerating ? `
                             <div class="aiofc-big-actions">
-                                <button class="big-btn-primary -big-generate-all-btn" ${!modelInfo.isSupported ? 'disabled title="Unsupported model - only Nano Banana Pro is supported"' : ''}>
+                                <button class="aiofc-big-btn-primary aiofc-big-generate-all-btn" ${!modelInfo.isSupported ? 'disabled title="Unsupported model - only Nano Banana Pro is supported"' : ''}>
                                     ✨ Generate All
                                 </button>
                                 <div class="aiofc-big-actions-row">
-                                    <button class="big-btn-secondary -big-download-all-btn" ${s.success === 0 ? 'disabled' : ''}>
+                                    <button class="aiofc-big-btn-secondary aiofc-big-download-all-btn" ${s.success === 0 ? 'disabled' : ''}>
                                         ⬇ Download All (${s.success})
                                     </button>
-                                    <button class="big-btn-secondary -big-retry-failed-btn" ${s.failed === 0 ? 'disabled' : ''}>
+                                    <button class="aiofc-big-btn-secondary aiofc-big-retry-failed-btn" ${s.failed === 0 ? 'disabled' : ''}>
                                         🔁 Retry (${s.failed})
                                     </button>
-                                    <button class="big-btn-secondary -big-clear-btn">
+                                    <button class="aiofc-big-btn-secondary aiofc-big-clear-btn">
                                         🗑️ Clear
                                     </button>
                                 </div>
                             </div>
-                            `''} <!-- Progress Items --> <div class="-big-progress-items"> ${renderProgressItems(jobs)} </div> </div>`;
+                            ` : ''}
+
+                            <!-- Progress Items -->
+                            <div class="aiofc-big-progress-items">
+                                ${renderProgressItems(jobs)}
+                            </div>
+                        </div>
+                    `;
 
                     setupEventHandlers();
                     attachImageOnloadHandlers();
@@ -2516,7 +2671,14 @@ app.registerExtension({
                     // Show loading state while waiting for initialization
                     // This prevents flash of idle state before data is restored
                     if (node._pendingInitRender && !node._bigInitialized) {
-                        container.innerHTML = `<div class="-big-container"> <div class="-big-idle"> <img src="/extensions/ComfyUI_/.svg" alt="" class="-big-idle-logo" style="width: 180px; height: auto; margin-bottom: 22px; opacity: 0.6;" /> <div class="-big-idle-text">Loading...</div> </div> </div>`;
+                        container.innerHTML = `
+                            <div class="aiofc-big-container">
+                                <div class="aiofc-big-idle">
+                                    <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-idle-logo" style="width: 180px; height: auto; margin-bottom: 22px; opacity: 0.6;" />
+                                    <div class="aiofc-big-idle-text">Loading...</div>
+                                </div>
+                            </div>
+                        `;
                         updateCachedHeight();
                         return;
                     }
@@ -2562,7 +2724,18 @@ app.registerExtension({
                             const secondIdx = Math.max(i, pairIdx);
                             const promptIdx = jobs[firstIdx].prompt_index ?? Math.floor(firstIdx / 2);
                             const promptPreview = (jobs[firstIdx].prompt_positive || "").slice(0, 40);
-                            html += `<div class="-big-pair-group"> <div class="-big-pair-header"> <span class="-big-pair-label"> Prompt #${promptIdx + 1}: ${escapeHtml(promptPreview)}${promptPreview.length >= 40 ? '...' : ''}</span> <span class="-big-pair-savings">2 variations</span> </div> <div class="-big-pair-items"> ${renderProgressItem(jobs[firstIdx], firstIdx)} ${renderProgressItem(jobs[secondIdx], secondIdx)} </div> </div>`;
+                            html += `
+                                <div class="aiofc-big-pair-group">
+                                    <div class="aiofc-big-pair-header">
+                                        <span class="aiofc-big-pair-label">⚡ Prompt #${promptIdx + 1}: ${escapeHtml(promptPreview)}${promptPreview.length >= 40 ? '...' : ''}</span>
+                                        <span class="aiofc-big-pair-savings">2 variations</span>
+                                    </div>
+                                    <div class="aiofc-big-pair-items">
+                                        ${renderProgressItem(jobs[firstIdx], firstIdx)}
+                                        ${renderProgressItem(jobs[secondIdx], secondIdx)}
+                                    </div>
+                                </div>
+                            `;
                         } else {
                             // Single job (last odd one or non-paired)
                             rendered.add(i);
@@ -2590,11 +2763,11 @@ app.registerExtension({
 
                     let statusText = `${stateInfo.icon} ${stateInfo.text}`;
                     if (job.state === JobState.RETRYING && job.attempts > 1) {
-                        statusText = `Retry #${job.attempts}`;
+                        statusText = `🔁 Retry #${job.attempts}`;
                     } else if (job.state === JobState.SUCCESS && job.generation_time) {
-                        statusText = `${job.generation_time.toFixed(1)}s`;
+                        statusText = `✓ ${job.generation_time.toFixed(1)}s`;
                     } else if (job.state === JobState.CACHED && job.generation_time) {
-                        statusText = `Cached (${job.generation_time.toFixed(1)}s)`;
+                        statusText = `📦 Cached (${job.generation_time.toFixed(1)}s)`;
                     }
 
                     // Show error for failed jobs, show "retrying" message for retrying jobs
@@ -2623,18 +2796,30 @@ app.registerExtension({
                     // Note: No inline onerror - attachImageOnloadHandlers adds smart retry with subfolder fallback
                     let thumbnailHtml = '';
                     if (hasImage) {
-                        thumbnailHtml = `<div class="-big-progress-item-thumbnail"> <img src="${job.image_url}" alt="Generated image #${idx + 1}" class="-big-thumbnail-img" data-job-id="${job.id}" loading="lazy" style="background: rgba(0,0,0,0.3);" /> </div>`;
+                        thumbnailHtml = `
+                            <div class="aiofc-big-progress-item-thumbnail">
+                                <img src="${job.image_url}" alt="Generated image #${idx + 1}" class="aiofc-big-thumbnail-img" data-job-id="${job.id}" loading="lazy" style="background: rgba(0,0,0,0.3);" />
+                            </div>
+                        `;
                     } else if (isGenerating) {
                         // Show loader video while generating
-                        thumbnailHtml = `<div class="big-progress-item-thumbnail placeholder"> <video class="-big-thumbnail-video" autoplay loop muted playsinline src="extensions/ComfyUI_/_loader.mp4"></video> </div>`;
+                        thumbnailHtml = `
+                            <div class="aiofc-big-progress-item-thumbnail placeholder">
+                                <video class="aiofc-big-thumbnail-video" autoplay loop muted playsinline src="extensions/ComfyUI_AIOFC/Aiofc_loader.mp4"></video>
+                            </div>
+                        `;
                     } else {
                         // No image yet - show empty placeholder (no icon)
-                        thumbnailHtml = `<div class="big-progress-item-thumbnail placeholder"> <div class="-big-thumbnail-empty"></div> </div>`;
+                        thumbnailHtml = `
+                            <div class="aiofc-big-progress-item-thumbnail placeholder">
+                                <div class="aiofc-big-thumbnail-empty"></div>
+                            </div>
+                        `;
                     }
 
                     // Message to display (error or retry info)
                     const messageText = showError ? escapeHtml(job.error?.slice(0, 100)) :
-                                       showRetryMsg ? `${escapeHtml(job.error?.slice(0, 80))}` : "";
+                                       showRetryMsg ? `⚠️ ${escapeHtml(job.error?.slice(0, 80))}` : "";
                     const showMessage = showError || showRetryMsg;
                     const messageClass = showError ? "error-message" : "retry-message";
 
@@ -2644,8 +2829,36 @@ app.registerExtension({
                     const seed = job.seed || "N/A";
                     const hasLongPrompt = (job.prompt_positive || "").length > 60;
 
-                    return `<div class="big-progress-item ${stateInfo.class}" data-job-id="${job.id}"> <div class="-big-progress-item-content"> <div class="-big-progress-item-header"> <span class="-big-progress-item-label">${labelText}</span> <span class="big-progress-item-status ${stateInfo.class}">${statusText}</span> ${hasLongPrompt ?`<button class="aiofc-big-expand-prompt-btn" data-job-id="${job.id}" title="Expand prompt">📝</button>` : ''}
-                                    ${hasImage ? `<button class="aiofc-big-view-image-btn" data-job-id="${job.id}" title="View image">👁️</button>`''} <button class="-big-job-retry-btn" data-job-id="${job.id}" style="display: ${showRetry ? 'inline-block' : 'none'};"></button> </div> <div class="-big-progress-item-bar"> <div class="big-progress-item-fill ${barClass}" style="width: ${barWidth}; ${barStyle}"></div> </div> <div class="big-progress-item-message ${messageClass}" style="display: ${showMessage ? 'block' : 'none'};">${messageText}</div> <!-- Expandable prompt section --> <div class="-big-prompt-expanded" data-job-id="${job.id}" style="display: none;"> <div class="-big-prompt-header"> <span class="-big-prompt-meta">Seed: ${seed}</span> <div class="-big-prompt-actions"> <button class="-big-copy-seed-btn" data-seed="${seed}" title="Copy seed"> Seed</button> <button class="-big-copy-prompt-btn" data-prompt="${escapeHtml(rawPrompt)}" title="Copy prompt"> Prompt</button> <button class="-big-favorite-prompt-btn" data-prompt="${escapeHtml(rawPrompt)}" data-seed="${seed}" title="Add to favorites in RPG"> Favorite</button> </div> </div> <div class="-big-prompt-text">${fullPrompt}</div> </div> </div> ${thumbnailHtml} </div>`;
+                    return `
+                        <div class="aiofc-big-progress-item ${stateInfo.class}" data-job-id="${job.id}">
+                            <div class="aiofc-big-progress-item-content">
+                                <div class="aiofc-big-progress-item-header">
+                                    <span class="aiofc-big-progress-item-label">${labelText}</span>
+                                    <span class="aiofc-big-progress-item-status ${stateInfo.class}">${statusText}</span>
+                                    ${hasLongPrompt ? `<button class="aiofc-big-expand-prompt-btn" data-job-id="${job.id}" title="Expand prompt">📝</button>` : ''}
+                                    ${hasImage ? `<button class="aiofc-big-view-image-btn" data-job-id="${job.id}" title="View image">👁️</button>` : ''}
+                                    <button class="aiofc-big-job-retry-btn" data-job-id="${job.id}" style="display: ${showRetry ? 'inline-block' : 'none'};">🔁</button>
+                                </div>
+                                <div class="aiofc-big-progress-item-bar">
+                                    <div class="aiofc-big-progress-item-fill ${barClass}" style="width: ${barWidth}; ${barStyle}"></div>
+                                </div>
+                                <div class="aiofc-big-progress-item-message ${messageClass}" style="display: ${showMessage ? 'block' : 'none'};">${messageText}</div>
+                                <!-- Expandable prompt section -->
+                                <div class="aiofc-big-prompt-expanded" data-job-id="${job.id}" style="display: none;">
+                                    <div class="aiofc-big-prompt-header">
+                                        <span class="aiofc-big-prompt-meta">Seed: ${seed}</span>
+                                        <div class="aiofc-big-prompt-actions">
+                                            <button class="aiofc-big-copy-seed-btn" data-seed="${seed}" title="Copy seed">🎲 Seed</button>
+                                            <button class="aiofc-big-copy-prompt-btn" data-prompt="${escapeHtml(rawPrompt)}" title="Copy prompt">📋 Prompt</button>
+                                            <button class="aiofc-big-favorite-prompt-btn" data-prompt="${escapeHtml(rawPrompt)}" data-seed="${seed}" title="Add to favorites in RPG">⭐ Favorite</button>
+                                        </div>
+                                    </div>
+                                    <div class="aiofc-big-prompt-text">${fullPrompt}</div>
+                                </div>
+                            </div>
+                            ${thumbnailHtml}
+                        </div>
+                    `;
                 };
 
                 // Track active PhotoSwipe instance to prevent duplicates
@@ -2966,7 +3179,7 @@ app.registerExtension({
 
                             if (isMultiImage) {
                                 // Multi-image mode: create 2 jobs for this prompt
-                                console.log(`[BIG] Multi-image single: generating 2 variations for prompt #${promptIndex}`);
+                                console.log(`[BIG] 🎯 Multi-image single: generating 2 variations for prompt #${promptIndex}`);
 
                                 node._bigJobs = [
                                     {
@@ -3030,7 +3243,7 @@ app.registerExtension({
                                 updateGeneratedBatchData();
                                 renderUI();
 
-                                console.log("[BIG] Multi-image single generation complete (2 variations)!");
+                                console.log("[BIG] ✅ Multi-image single generation complete (2 variations)!");
                             } else {
                                 // Standard mode: 1 job
                                 node._bigJobs = [{
@@ -3070,13 +3283,13 @@ app.registerExtension({
                                 updateGeneratedBatchData();
                                 renderUI();
 
-                                console.log("[BIG] Single generation complete!");
+                                console.log("[BIG] ✅ Single generation complete!");
                             }
                         };
                     });
 
                     // View image buttons and thumbnails
-                    const clickableElements = container.querySelectorAll(".-big-view-image-btn, .-big-thumbnail-img");
+                    const clickableElements = container.querySelectorAll(".aiofc-big-view-image-btn, .aiofc-big-thumbnail-img");
                     clickableElements.forEach(btn => {
                         btn.onclick = (e) => {
                             e.stopPropagation();
@@ -3090,11 +3303,11 @@ app.registerExtension({
                         btn.onclick = (e) => {
                             e.stopPropagation();
                             const jobId = btn.dataset.jobId;
-                            const expandedEl = container.querySelector(`.-big-prompt-expanded[data-job-id="${jobId}"]`);
+                            const expandedEl = container.querySelector(`.aiofc-big-prompt-expanded[data-job-id="${jobId}"]`);
                             if (expandedEl) {
                                 const isExpanded = expandedEl.style.display !== "none";
                                 expandedEl.style.display = isExpanded ? "none" : "block";
-                                btn.textContent = isExpanded ? "" : "";
+                                btn.textContent = isExpanded ? "📝" : "📝✕";
                                 btn.title = isExpanded ? "Expand prompt" : "Collapse prompt";
                             }
                         };
@@ -3110,7 +3323,7 @@ app.registerExtension({
                             try {
                                 await navigator.clipboard.writeText(seed);
                                 const originalText = btn.textContent;
-                                btn.textContent = "Copied!";
+                                btn.textContent = "✅ Copied!";
                                 setTimeout(() => {
                                     btn.textContent = originalText;
                                 }, 1000);
@@ -3132,7 +3345,7 @@ app.registerExtension({
                                 await navigator.clipboard.writeText(prompt);
                                 // Show success feedback
                                 const originalText = btn.textContent;
-                                btn.textContent = "Copied!";
+                                btn.textContent = "✅ Copied!";
                                 setTimeout(() => {
                                     btn.textContent = originalText;
                                 }, 1000);
@@ -3205,7 +3418,7 @@ app.registerExtension({
                     const stopBtn = container.querySelector(".aiofc-big-stop-btn");
                     if (stopBtn) {
                         stopBtn.onclick = () => {
-                            console.log("[BIG] Stop button clicked - aborting generation");
+                            console.log("[BIG] 🛑 Stop button clicked - aborting generation");
 
                             // 1. Abort any in-flight requests immediately
                             if (node._bigAbortController) {
@@ -3235,7 +3448,7 @@ app.registerExtension({
                             stopPolling();
                             renderUI();
 
-                            console.log("[BIG] Generation stopped cleanly");
+                            console.log("[BIG] ✅ Generation stopped cleanly");
                         };
                     }
 
@@ -3373,7 +3586,7 @@ app.registerExtension({
                             updateGeneratedBatchData();
                             renderUI();
 
-                            console.log("[BIG] Retry complete!");
+                            console.log("[BIG] ✅ Retry complete!");
                         };
                     }
 
@@ -3497,8 +3710,8 @@ app.registerExtension({
 
                             // Confirm generation with cost info
                             const confirmMsg = willUseMultiImage
-                                ? `Generate ${totalImages} images (${numPrompts} prompts × 2 variations)?\n\n Multi-image mode: ${costPerImage}/image\n Estimated cost: $${totalCost}`
-                                : `Generate ${totalImages} images?\n\n Estimated cost: $${totalCost} (${costPerImage}/image)`;
+                                ? `Generate ${totalImages} images (${numPrompts} prompts × 2 variations)?\n\n⚡ Multi-image mode: ${costPerImage}/image\n💰 Estimated cost: $${totalCost}`
+                                : `Generate ${totalImages} images?\n\n💰 Estimated cost: $${totalCost} (${costPerImage}/image)`;
 
                             if (!confirm(confirmMsg)) {
                                 return;
@@ -3528,7 +3741,7 @@ app.registerExtension({
                                     if (b64) {
                                         result.push(b64);
                                     } else {
-                                        console.error(`[BIG] Failed to fetch ${label}[${i}]`);
+                                        console.error(`[BIG] ✗ Failed to fetch ${label}[${i}]`);
                                     }
                                 }
                                 return result;
@@ -3564,7 +3777,7 @@ app.registerExtension({
 
                             // Initialize jobs - in multi-image mode, create 2 jobs per prompt
                             if (isMultiImage) {
-                                console.log(`[BIG] MULTI-IMAGE MODE: Creating 2 jobs per prompt (${prompts_positive.length} prompts → ${prompts_positive.length * 2} images)`);
+                                console.log(`[BIG] 🎯 MULTI-IMAGE MODE: Creating 2 jobs per prompt (${prompts_positive.length} prompts → ${prompts_positive.length * 2} images)`);
                                 node._bigJobs = [];
                                 let jobId = 0;
 
@@ -3693,7 +3906,7 @@ app.registerExtension({
                                         const jobIndex2 = nextJobIndex++;
                                         activeCount += 2;
 
-                                        console.log(`[BIG] Starting paired jobs ${jobIndex1 + 1} & ${jobIndex2 + 1}/${totalJobs} (${activeCount} active)`);
+                                        console.log(`[BIG] 🎯 Starting paired jobs ${jobIndex1 + 1} & ${jobIndex2 + 1}/${totalJobs} (${activeCount} active)`);
 
                                         try {
                                             await generateJobPair(jobIndex1, jobIndex2, genParams, signal);
@@ -3732,7 +3945,7 @@ app.registerExtension({
                             const numPairs = isMultiImage ? Math.ceil(totalJobs / 2) : totalJobs;
                             const numWorkers = Math.min(effectiveParallel, numPairs);
 
-                            console.log(`[BIG] Parallel config: ${numWorkers} workers for ${numPairs} ${isMultiImage ? 'pairs' : 'jobs'} (max_parallel=${maxParallel})`);
+                            console.log(`[BIG] 🚀 Parallel config: ${numWorkers} workers for ${numPairs} ${isMultiImage ? 'pairs' : 'jobs'} (max_parallel=${maxParallel})`);
 
                             const workers = [];
                             for (let i = 0; i < numWorkers; i++) {
@@ -3741,7 +3954,7 @@ app.registerExtension({
                                     await new Promise(resolve => setTimeout(resolve, 222));
                                 }
                                 if (!node._bigIsGenerating || signal.aborted) break;
-                                console.log(`[BIG] Starting worker ${i + 1}/${numWorkers}`);
+                                console.log(`[BIG] 🚀 Starting worker ${i + 1}/${numWorkers}`);
                                 workers.push(processNextJob());
                             }
 
@@ -3754,7 +3967,7 @@ app.registerExtension({
                             updateGeneratedBatchData();
                             renderUI();
 
-                            console.log(`[BIG] Generation complete! ${results.length}/${totalJobs} jobs processed`);
+                            console.log(`[BIG] ✅ Generation complete! ${results.length}/${totalJobs} jobs processed`);
                         };
                     }
 
@@ -3960,7 +4173,7 @@ app.registerExtension({
                 const widgetValue = this.widgets?.find(w => w.name === "generated_batch_data")?.value;
                 const propValue = this.properties?.big_jobs_data;
                 // Try to get session key (need to access getSessionKey via closure)
-                const sessionKey = this._getSessionKey ? this._getSessionKey() : `_big_session_default_${this.id}`;
+                const sessionKey = this._getSessionKey ? this._getSessionKey() : `aiofc_big_session_default_${this.id}`;
                 const sessionValue = sessionStorage.getItem(sessionKey);
                 console.log("[BIG] onConfigure called:", {
                     hasData: !!data,
@@ -4007,7 +4220,1193 @@ app.registerExtension({
         console.log("[BIG] Extension setup() called - loading CSS");
         // Add CSS (following RPG's progress-item styling exactly)
         const style = document.createElement("style");
-        style.textContent = `/* === Container (RPG Style) === */ .-big-container { background: #0d0f12; padding: 16px; border-radius: 4px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #f9fafb; } /* === Idle State === */ .-big-idle { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; } .-big-idle-icon { font-size: 48px; margin-bottom: 12px; } .-big-idle-text { font-size: 16px; font-weight: 600; color: #f9fafb; margin-bottom: 8px; } .-big-idle-hint { font-size: 12px; color: rgba(249, 250, 251, 0.5); max-width: 280px; } .-big-idle-mode-badges { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; justify-content: center; } .-big-idle-instructions { font-size: 12px; color: rgba(249, 250, 251, 0.5); max-width: 280px; margin-top: 8px; } .-big-preview-box { margin-top: 20px; padding: 12px 20px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 6px; display: flex; align-items: center; gap: 10px; max-width: 400px; } .-big-preview-icon { font-size: 24px; line-height: 1; } .-big-preview-text { font-size: 14px; color: #f9fafb; line-height: 1.4; } .-big-preview-text strong { font-weight: 700; color: #818cf8; } /* === Preview State (prompts detected) === */ .-big-preview { /* No extra background/border - container already styled */ } .-big-preview-header { margin-top: 12px; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: #e5e7eb; } .-big-preview-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 400px; overflow-y: auto; } .-big-preview-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; } .-big-preview-item-more { padding: 8px 12px; text-align: center; font-size: 11px; color: #9ca3af; font-style: italic; } .-big-preview-prompt { flex: 1; font-size: 11px; color: #d1d5db; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .-big-generate-single-btn { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; border: 1px solid rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.2); color: #818cf8; white-space: nowrap; } .-big-generate-single-btn:hover { background: rgba(99, 102, 241, 0.3); border-color: #818cf8; } .-big-preview-actions { margin-top: 12px; } /* === Buttons - Clean, Minimal, Instant === */ .-big-btn-primary { width: 100%; background: #6366f1; color: #ffffff; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 13px; } .-big-btn-primary:hover { background: #4f46e5; } .-big-btn-primary:disabled { background: #374151; cursor: not-allowed; color: rgba(255, 255, 255, 0.4); } .-big-btn-secondary { flex: 1; background: rgba(255, 255, 255, 0.05); color: #9ca3af; border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 12px; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 11px; } .-big-btn-secondary:hover { background: rgba(255, 255, 255, 0.08); color: #e5e7eb; } .-big-btn-secondary:disabled { background: rgba(255, 255, 255, 0.02); cursor: not-allowed; color: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.04); } /* === Actions === */ .-big-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; } .-big-actions-row { display: flex; gap: 6px; } /* === Generation Progress Section (RPG pattern) === */ .-big-generation-progress { /* No extra padding - container already styled */ } /* === Top Bar (RPG Style) === */ .-big-topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; } .-big-mode-card-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; } .-big-mode-card-left { display: flex; flex-direction: column; gap: 6px; } .-big-mode-card-brand { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; } .-big-topbar-logo { width: 120px; height: auto; opacity: 0.85; } .-big-topbar-version { font-family: monospace; font-size: 10px; color: rgba(255, 255, 255, 0.5); white-space: nowrap; margin-top: 2px; } .-big-mode-card { flex: 1 1 200px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.03); border-radius: 4px; padding: 12px; display: flex; flex-direction: column; gap: 8px; } .-big-mode-indicator { display: flex; align-items: center; gap: 10px; } .-big-mode-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 12px; font-weight: 700; border-radius: 4px; } .-big-mode-txt2img { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border: 2px solid #a78bfa; color: #ffffff; } .-big-mode-img2img { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: 2px solid #60a5fa; color: #ffffff; } /* Multi-image mode badge (50% cost savings) */ .-big-multi-image-badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 2px solid #34d399; color: #ffffff; font-size: 10px; padding: 4px 8px; } /* Warning badge when multi-image is enabled but provider is not Wavespeed */ .-big-multi-image-warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 2px solid #fbbf24; color: #ffffff; font-size: 9px; padding: 4px 8px; } /* Multi-image info banner */ .-big-multi-image-banner { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%); border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 6px; margin-bottom: 12px; font-size: 12px; color: #34d399; } .-big-multi-image-banner strong { color: #10b981; } .-big-cost-savings { font-weight: 600; color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 4px 8px; border-radius: 4px; font-size: 11px; } .-big-aspect-warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 11px; color: #fbbf24; } /* Model Warning (unsupported model) */ .-big-model-warning { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 6px; padding: 12px 14px; margin-bottom: 12px; font-size: 12px; color: #fca5a5; line-height: 1.5; } .-big-model-warning strong { color: #f87171; } .-big-model-warning small { color: rgba(252, 165, 165, 0.8); } /* 2X Mode Toggle */ .-big-2x-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; font-weight: 600; color: #34d399; padding-top: 6px; user-select: none; } .-big-2x-toggle:hover { color: #4ade80; } .-big-2x-checkbox { width: 16px; height: 16px; accent-color: #10b981; cursor: pointer; } .-big-mode-source { font-size: 11px; color: rgba(249, 250, 251, 0.6); margin-top: 9px; } /* === Reference Images Preview (RPG Style) === */ .-big-image-preview { background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 6px; padding: 12px; margin-bottom: 12px; } .-big-image-preview-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; font-size: 12px; font-weight: 500; color: #e5e7eb; } .-big-image-preview-header-right { display: flex; align-items: center; gap: 8px; } .-big-sync-ails-btn { background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); color: #818cf8; padding: 3px 8px; border-radius: 4px; font-size: 10px; cursor: pointer; } .-big-sync-ails-btn:hover { background: rgba(99, 102, 241, 0.3); border-color: #818cf8; } .-big-sync-ails-btn:disabled { opacity: 0.6; cursor: not-allowed; } .-big-image-preview-count { font-size: 11px; color: #818cf8; font-weight: 500; } /* Sync Badge & Button Styles */ .-big-sync-badge { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 4px; white-space: nowrap; } .-big-sync-match { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); } .-big-sync-mismatch { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); } .-big-sync-no-prompts { background: rgba(107, 114, 128, 0.15); color: #9ca3af; border: 1px solid rgba(107, 114, 128, 0.3); } .-big-sync-hint { font-size: 9px; color: #9ca3af; margin-left: 6px; font-style: italic; } /* Clean Reference Image Grid (Single AIL Input) */ .-big-ref-grid { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; } .-big-ref-thumb { position: relative; width: 48px; height: 48px; border-radius: 4px; overflow: hidden; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); } .-big-ref-thumb img { width: 100%; height: 100%; object-fit: cover; } .-big-ref-index { position: absolute; bottom: 2px; right: 2px; font-size: 9px; font-weight: 600; color: white; background: rgba(0, 0, 0, 0.6); padding: 1px 4px; border-radius: 4px; line-height: 1; } .-big-ref-repeat-item { opacity: 0.7; border-style: dashed; } .-big-image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 8px; max-height: 180px; overflow-y: auto; } .-big-image-preview-item { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; border: 2px solid #4b5563; } .-big-image-preview-item:hover { border-color: #6366f1; } .-big-image-preview-item img { width: 100%; height: 100%; object-fit: cover; } .-big-image-preview-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 0, 0, 0.75); padding: 2px 4px; font-size: 10px; color: white; text-align: center; font-weight: 500; } .-big-image-preview-more { display: flex; align-items: center; justify-content: center; aspect-ratio: 1; border-radius: 4px; background: rgba(99, 102, 241, 0.2); border: 2px dashed #6366f1; color: #818cf8; font-size: 12px; font-weight: 600; } /* Optimal aspect ratio grid for all images */ .-big-aspect-grid-container { background: #1a1a2e; border-radius: 8px; padding: 8px; border: 1px solid #374151; } .-big-aspect-grid { border-radius: 4px; overflow: hidden; } .-big-aspect-grid-item { aspect-ratio: 1; overflow: hidden; background: #0d0d1a; } .-big-aspect-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; } .-big-aspect-grid-item:hover { opacity: 0.85; } .-big-aspect-label { background: #4f46e5; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-left: 6px; } .-big-image-input-section { margin-bottom: 10px; } .-big-image-input-section:last-child { margin-bottom: 0; } .-big-image-input-label { font-size: 11px; color: #9ca3af; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; } .-big-image-input-count { color: #6b7280; font-size: 10px; } .-big-model-info { font-size: 11px; color: #9ca3af; font-weight: 500; } /* === KPI Row (RPG Style) === */ .-big-kpi-row { display: flex; flex: 1 1 240px; gap: 8px; justify-content: flex-end; flex-wrap: wrap; } .-big-kpi { flex: 1 1 60px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); border-radius: 4px; padding: 8px 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; min-width: 60px; } .-big-kpi span { font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(249, 250, 251, 0.5); font-weight: 500; } .-big-kpi strong { font-size: 18px; font-weight: 700; color: #a78bfa; font-variant-numeric: tabular-nums; } .-big-kpi.success strong { color: #4ade80; } .-big-kpi.cached strong { color: #c084fc; } .-big-kpi.failed strong { color: #f87171; } .-big-progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; } .-big-progress-header h4 { margin: 0; font-size: 13px; font-weight: 600; color: #9ca3af; } /* === Stop Button (Minimal, Inline) === */ .-big-stop-btn { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 11px; } .-big-stop-btn:hover { background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); } .-big-stat { font-size: 12px; font-weight: 600; color: #9ca3af; } .-big-stat.success { color: #4ade80; } .-big-stat.cached { color: #c084fc; } .-big-stat.failed { color: #f87171; } /* === Progress Items (no scroll - grows with content) === */ .-big-progress-items { display: flex; flex-direction: column; gap: 10px; } .-big-progress-item { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; padding: 10px 12px; display: flex; gap: 12px; align-items: flex-start; } .-big-progress-item-content { flex: 1; min-width: 0; } .-big-progress-item.success { border-color: rgba(34, 197, 94, 0.4); background: rgba(34, 197, 94, 0.08); } .-big-progress-item.error { border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08); } .-big-progress-item.in-progress { border-color: rgba(99, 102, 241, 0.5); background: rgba(99, 102, 241, 0.1); } .-big-progress-item.retrying { border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); } .-big-progress-item.cached { border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08); } .-big-progress-item.cancelled { border-color: rgba(156, 163, 175, 0.3); background: rgba(156, 163, 175, 0.05); opacity: 0.6; } .-big-progress-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 8px; } .-big-progress-item-label { font-size: 11px; font-weight: 500; color: #d1d5db; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: flex; align-items: center; gap: 6px; } /* Pair badge for multi-image mode */ .-big-pair-badge { display: inline-flex; align-items: center; justify-content: center; padding: 1px 5px; font-size: 9px; font-weight: 700; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 1px solid #34d399; border-radius: 3px; color: #fff; flex-shrink: 0; } /* Pair group container for multi-image mode */ .-big-pair-group { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 8px; padding: 8px; margin-bottom: 8px; } .-big-pair-header { display: flex; justify-content: space-between; align-items: center; padding: 4px 8px 8px 8px; border-bottom: 1px solid rgba(52, 211, 153, 0.15); margin-bottom: 8px; } .-big-pair-label { font-size: 11px; font-weight: 600; color: #34d399; } .-big-pair-savings { font-size: 9px; color: #4ade80; background: rgba(74, 222, 128, 0.1); padding: 2px 6px; border-radius: 3px; } .-big-pair-items { display: flex; flex-direction: column; gap: 6px; } .-big-pair-items .-big-progress-item { margin-bottom: 0; } .-big-progress-item-status { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; white-space: nowrap; } .-big-progress-item-status.pending { background: rgba(156, 163, 175, 0.15); color: #6b7280; } .-big-progress-item-status.in-progress { background: rgba(99, 102, 241, 0.2); color: #818cf8; } .-big-progress-item-status.success { background: rgba(34, 197, 94, 0.3); color: #22c55e; } .-big-progress-item-status.error { background: rgba(239, 68, 68, 0.3); color: #ef4444; } .-big-progress-item-status.retrying { background: rgba(251, 191, 36, 0.2); color: #fbbf24; } .-big-progress-item-status.cached { background: rgba(168, 85, 247, 0.2); color: #a78bfa; } .-big-progress-item-status.cancelled { background: rgba(156, 163, 175, 0.15); color: #9ca3af; } .-big-progress-item-bar { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.08); border-radius: 4px; overflow: hidden; margin-top: 10px; position: relative; } .-big-progress-item-fill { height: 100%; background: #6366f1; position: relative; overflow: hidden; border-radius: 4px; } .-big-progress-item-fill.animating { background: linear-gradient(90deg, #6366f1, #818cf8, #6366f1); background-size: 200% 100%; animation: -big-progress-shimmer 1.5s linear infinite; } @keyframes -big-progress-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } } .-big-progress-item-message { font-size: 10px; color: #f87171; margin-top: 4px; padding: 4px 6px; background: rgba(239, 68, 68, 0.1); border-radius: 3px; } .-big-progress-item-message.retry-message { color: #fbbf24; background: rgba(251, 191, 36, 0.15); border-left: 2px solid #fbbf24; } .-big-progress-item-message.error-message { color: #f87171; background: rgba(239, 68, 68, 0.15); border-left: 2px solid #ef4444; } .-big-progress-item-thumbnail { flex-shrink: 0; border-radius: 4px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.3); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; } .-big-progress-item-thumbnail:not(.placeholder) { cursor: pointer; } .-big-progress-item-thumbnail:not(.placeholder):hover { border-color: #6366f1; } .-big-progress-item-thumbnail.placeholder { cursor: default; background: rgba(0, 0, 0, 0.5); } .-big-thumbnail-img { width: 100%; height: 100%; object-fit: cover; display: block; } .-big-thumbnail-video { width: 100%; height: 100%; object-fit: cover; display: block; } .-big-thumbnail-empty { width: 100%; height: 100%; background: rgba(0, 0, 0, 0.2); } .-big-view-image-btn { display: none; /* Hidden - click thumbnail instead */ } .-big-job-retry-btn { background: rgba(251, 191, 36, 0.2); border: 1px solid rgba(251, 191, 36, 0.4); color: #fbbf24; padding: 2px 6px; border-radius: 3px; cursor: pointer; font-size: 10px; } .-big-job-retry-btn:hover { background: rgba(251, 191, 36, 0.3); } .-big-job-retry-btn:disabled { opacity: 0.5; cursor: not-allowed; } /* Expand prompt button */ .-big-expand-prompt-btn { background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.4); color: #a78bfa; padding: 2px 6px; border-radius: 3px; cursor: pointer; font-size: 10px; margin-right: 4px; } .-big-expand-prompt-btn:hover { background: rgba(139, 92, 246, 0.3); } /* Expanded prompt section */ .-big-prompt-expanded { margin-top: 8px; padding: 10px; background: rgba(0, 0, 0, 0.3); border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1); } .-big-prompt-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; } .-big-prompt-meta { font-size: 11px; color: #a0a0a0; } .-big-prompt-actions { display: flex; gap: 6px; } .-big-copy-seed-btn, .-big-copy-prompt-btn, .-big-favorite-prompt-btn { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #e0e0e0; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; transition: all 0.15s ease; } .-big-copy-seed-btn:hover { background: rgba(168, 85, 247, 0.3); border-color: rgba(168, 85, 247, 0.5); color: #c4b5fd; } .-big-copy-prompt-btn:hover { background: rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.5); color: #93c5fd; } .-big-favorite-prompt-btn:hover { background: rgba(251, 191, 36, 0.3); border-color: rgba(251, 191, 36, 0.5); color: #fcd34d; } .-big-copy-seed-btn:disabled, .-big-copy-prompt-btn:disabled, .-big-favorite-prompt-btn:disabled { opacity: 0.6; cursor: not-allowed; } .-big-prompt-text { font-size: 12px; color: #e0e0e0; line-height: 1.5; white-space: pre-wrap; word-break: break-word; } /* Old button styles removed - using new btn-primary, btn-secondary, btn-danger classes */ .-big-retry-failed-btn:hover:not(:disabled) { background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.4); } /* PhotoSwipe instant animations override */ .pswp--open, .pswp--closing, .pswp__bg, .pswp__container, .pswp__img, .pswp__zoom-wrap { transition: none !important; animation: none !important; } /* PhotoSwipe caption styles */ .pswp-caption-content { text-align: left; padding: 10px; background: rgba(0, 0, 0, 0.6); border-radius: 8px; max-width: 400px; } .pswp-caption-header { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #a0a0a0; } .pswp-caption-prompt { font-size: 13px; line-height: 1.5; color: #e0e0e0; white-space: pre-wrap; word-break: break-word; max-height: 150px; overflow-y: auto; } .pswp-caption-actions { display: flex; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); } .pswp-copy-btn, .pswp-favorite-btn { padding: 6px 12px; font-size: 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.1); color: #e0e0e0; cursor: pointer; transition: all 0.15s ease; } .pswp-copy-btn:hover { background: rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.5); color: #93c5fd; } .pswp-favorite-btn:hover { background: rgba(251, 191, 36, 0.3); border-color: rgba(251, 191, 36, 0.5); color: #fcd34d; } /* Dynamic caption plugin overrides */ .pswp__dynamic-caption { color: #e0e0e0; } .pswp__dynamic-caption--aside { max-width: 400px; }`;
+        style.textContent = `
+            /* === Container (RPG Style) === */
+            .aiofc-big-container {
+                background: #0d0f12;
+                padding: 16px;
+                border-radius: 4px;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+                color: #f9fafb;
+            }
+
+            /* === Idle State === */
+            .aiofc-big-idle {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+                text-align: center;
+            }
+
+            .aiofc-big-idle-icon {
+                font-size: 48px;
+                margin-bottom: 12px;
+            }
+
+            .aiofc-big-idle-text {
+                font-size: 16px;
+                font-weight: 600;
+                color: #f9fafb;
+                margin-bottom: 8px;
+            }
+
+            .aiofc-big-idle-hint {
+                font-size: 12px;
+                color: rgba(249, 250, 251, 0.5);
+                max-width: 280px;
+            }
+
+            .aiofc-big-idle-mode-badges {
+                display: flex;
+                gap: 8px;
+                margin: 8px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .aiofc-big-idle-instructions {
+                font-size: 12px;
+                color: rgba(249, 250, 251, 0.5);
+                max-width: 280px;
+                margin-top: 8px;
+            }
+
+            .aiofc-big-preview-box {
+                margin-top: 20px;
+                padding: 12px 20px;
+                background: rgba(99, 102, 241, 0.1);
+                border: 1px solid rgba(99, 102, 241, 0.3);
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: 400px;
+            }
+
+            .aiofc-big-preview-icon {
+                font-size: 24px;
+                line-height: 1;
+            }
+
+            .aiofc-big-preview-text {
+                font-size: 14px;
+                color: #f9fafb;
+                line-height: 1.4;
+            }
+
+            .aiofc-big-preview-text strong {
+                font-weight: 700;
+                color: #818cf8;
+            }
+
+            /* === Preview State (prompts detected) === */
+            .aiofc-big-preview {
+                /* No extra background/border - container already styled */
+            }
+
+            .aiofc-big-preview-header {
+                margin-top: 12px;
+                margin-bottom: 12px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #e5e7eb;
+            }
+
+            .aiofc-big-preview-list {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 12px;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            .aiofc-big-preview-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 10px 12px;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+            }
+
+            .aiofc-big-preview-item-more {
+                padding: 8px 12px;
+                text-align: center;
+                font-size: 11px;
+                color: #9ca3af;
+                font-style: italic;
+            }
+
+            .aiofc-big-preview-prompt {
+                flex: 1;
+                font-size: 11px;
+                color: #d1d5db;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .aiofc-big-generate-single-btn {
+                padding: 4px 10px;
+                border-radius: 4px;
+                font-size: 10px;
+                font-weight: 600;
+                cursor: pointer;
+                border: 1px solid rgba(99, 102, 241, 0.4);
+                background: rgba(99, 102, 241, 0.2);
+                color: #818cf8;
+                white-space: nowrap;
+            }
+
+            .aiofc-big-generate-single-btn:hover {
+                background: rgba(99, 102, 241, 0.3);
+                border-color: #818cf8;
+            }
+
+            .aiofc-big-preview-actions {
+                margin-top: 12px;
+            }
+
+            /* === Buttons - Clean, Minimal, Instant === */
+            .aiofc-big-btn-primary {
+                width: 100%;
+                background: #6366f1;
+                color: #ffffff;
+                border: none;
+                padding: 12px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 13px;
+            }
+
+            .aiofc-big-btn-primary:hover {
+                background: #4f46e5;
+            }
+
+            .aiofc-big-btn-primary:disabled {
+                background: #374151;
+                cursor: not-allowed;
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            .aiofc-big-btn-secondary {
+                flex: 1;
+                background: rgba(255, 255, 255, 0.05);
+                color: #9ca3af;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 8px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 500;
+                font-size: 11px;
+            }
+
+            .aiofc-big-btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.08);
+                color: #e5e7eb;
+            }
+
+            .aiofc-big-btn-secondary:disabled {
+                background: rgba(255, 255, 255, 0.02);
+                cursor: not-allowed;
+                color: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.04);
+            }
+
+            /* === Actions === */
+            .aiofc-big-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .aiofc-big-actions-row {
+                display: flex;
+                gap: 6px;
+            }
+
+            /* === Generation Progress Section (RPG pattern) === */
+            .aiofc-big-generation-progress {
+                /* No extra padding - container already styled */
+            }
+
+            /* === Top Bar (RPG Style) === */
+            .aiofc-big-topbar {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .aiofc-big-mode-card-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .aiofc-big-mode-card-left {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .aiofc-big-mode-card-brand {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                flex-shrink: 0;
+            }
+
+            .aiofc-big-topbar-logo {
+                width: 120px;
+                height: auto;
+                opacity: 0.85;
+            }
+
+            .aiofc-big-topbar-version {
+                font-family: monospace;
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.5);
+                white-space: nowrap;
+                margin-top: 2px;
+            }
+
+            .aiofc-big-mode-card {
+                flex: 1 1 200px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                background: rgba(255, 255, 255, 0.03);
+                border-radius: 4px;
+                padding: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .aiofc-big-mode-indicator {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .aiofc-big-mode-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 14px;
+                font-size: 12px;
+                font-weight: 700;
+                border-radius: 4px;
+            }
+
+            .aiofc-big-mode-txt2img {
+                background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+                border: 2px solid #a78bfa;
+                color: #ffffff;
+            }
+
+            .aiofc-big-mode-img2img {
+                background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                border: 2px solid #60a5fa;
+                color: #ffffff;
+            }
+
+            /* Multi-image mode badge (50% cost savings) */
+            .aiofc-big-multi-image-badge {
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                border: 2px solid #34d399;
+                color: #ffffff;
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+
+            /* Warning badge when multi-image is enabled but provider is not Wavespeed */
+            .aiofc-big-multi-image-warning {
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                border: 2px solid #fbbf24;
+                color: #ffffff;
+                font-size: 9px;
+                padding: 4px 8px;
+            }
+
+            /* Multi-image info banner */
+            .aiofc-big-multi-image-banner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 14px;
+                background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+                border: 1px solid rgba(52, 211, 153, 0.4);
+                border-radius: 6px;
+                margin-bottom: 12px;
+                font-size: 12px;
+                color: #34d399;
+            }
+
+            .aiofc-big-multi-image-banner strong {
+                color: #10b981;
+            }
+
+            .aiofc-big-cost-savings {
+                font-weight: 600;
+                color: #4ade80;
+                background: rgba(74, 222, 128, 0.1);
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 11px;
+            }
+
+            .aiofc-big-aspect-warning {
+                background: rgba(245, 158, 11, 0.1);
+                border: 1px solid rgba(245, 158, 11, 0.3);
+                border-radius: 6px;
+                padding: 8px 12px;
+                margin-bottom: 12px;
+                font-size: 11px;
+                color: #fbbf24;
+            }
+
+            /* Model Warning (unsupported model) */
+            .aiofc-big-model-warning {
+                background: rgba(239, 68, 68, 0.15);
+                border: 1px solid rgba(239, 68, 68, 0.4);
+                border-radius: 6px;
+                padding: 12px 14px;
+                margin-bottom: 12px;
+                font-size: 12px;
+                color: #fca5a5;
+                line-height: 1.5;
+            }
+
+            .aiofc-big-model-warning strong {
+                color: #f87171;
+            }
+
+            .aiofc-big-model-warning small {
+                color: rgba(252, 165, 165, 0.8);
+            }
+
+            /* 2X Mode Toggle */
+            .aiofc-big-2x-toggle {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                font-size: 12px;
+                font-weight: 600;
+                color: #34d399;
+                padding-top: 6px;
+                user-select: none;
+            }
+
+            .aiofc-big-2x-toggle:hover {
+                color: #4ade80;
+            }
+
+            .aiofc-big-2x-checkbox {
+                width: 16px;
+                height: 16px;
+                accent-color: #10b981;
+                cursor: pointer;
+            }
+
+            .aiofc-big-mode-source {
+                font-size: 11px;
+                color: rgba(249, 250, 251, 0.6);
+                margin-top: 9px;
+            }
+
+            /* === Reference Images Preview (RPG Style) === */
+            .aiofc-big-image-preview {
+                background: rgba(99, 102, 241, 0.08);
+                border: 1px solid rgba(99, 102, 241, 0.2);
+                border-radius: 6px;
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .aiofc-big-image-preview-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                font-size: 12px;
+                font-weight: 500;
+                color: #e5e7eb;
+            }
+
+            .aiofc-big-image-preview-header-right {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .aiofc-big-sync-ails-btn {
+                background: rgba(99, 102, 241, 0.2);
+                border: 1px solid rgba(99, 102, 241, 0.4);
+                color: #818cf8;
+                padding: 3px 8px;
+                border-radius: 4px;
+                font-size: 10px;
+                cursor: pointer;
+            }
+
+            .aiofc-big-sync-ails-btn:hover {
+                background: rgba(99, 102, 241, 0.3);
+                border-color: #818cf8;
+            }
+
+            .aiofc-big-sync-ails-btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+
+            .aiofc-big-image-preview-count {
+                font-size: 11px;
+                color: #818cf8;
+                font-weight: 500;
+            }
+
+            /* Sync Badge & Button Styles */
+            .aiofc-big-sync-badge {
+                font-size: 10px;
+                font-weight: 500;
+                padding: 2px 6px;
+                border-radius: 4px;
+                white-space: nowrap;
+            }
+
+            .aiofc-big-sync-match {
+                background: rgba(34, 197, 94, 0.15);
+                color: #22c55e;
+                border: 1px solid rgba(34, 197, 94, 0.3);
+            }
+
+            .aiofc-big-sync-mismatch {
+                background: rgba(245, 158, 11, 0.15);
+                color: #f59e0b;
+                border: 1px solid rgba(245, 158, 11, 0.3);
+            }
+
+            .aiofc-big-sync-no-prompts {
+                background: rgba(107, 114, 128, 0.15);
+                color: #9ca3af;
+                border: 1px solid rgba(107, 114, 128, 0.3);
+            }
+
+            .aiofc-big-sync-hint {
+                font-size: 9px;
+                color: #9ca3af;
+                margin-left: 6px;
+                font-style: italic;
+            }
+
+            /* Clean Reference Image Grid (Single AIL Input) */
+            .aiofc-big-ref-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                padding: 8px 0;
+            }
+
+            .aiofc-big-ref-thumb {
+                position: relative;
+                width: 48px;
+                height: 48px;
+                border-radius: 4px;
+                overflow: hidden;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .aiofc-big-ref-thumb img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .aiofc-big-ref-index {
+                position: absolute;
+                bottom: 2px;
+                right: 2px;
+                font-size: 9px;
+                font-weight: 600;
+                color: white;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 1px 4px;
+                border-radius: 4px;
+                line-height: 1;
+            }
+
+            .aiofc-big-ref-repeat-item {
+                opacity: 0.7;
+                border-style: dashed;
+            }
+
+            .aiofc-big-image-preview-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+                gap: 8px;
+                max-height: 180px;
+                overflow-y: auto;
+            }
+
+            .aiofc-big-image-preview-item {
+                position: relative;
+                aspect-ratio: 1;
+                border-radius: 4px;
+                overflow: hidden;
+                border: 2px solid #4b5563;
+            }
+
+            .aiofc-big-image-preview-item:hover {
+                border-color: #6366f1;
+            }
+
+            .aiofc-big-image-preview-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .aiofc-big-image-preview-label {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.75);
+                padding: 2px 4px;
+                font-size: 10px;
+                color: white;
+                text-align: center;
+                font-weight: 500;
+            }
+
+            .aiofc-big-image-preview-more {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                aspect-ratio: 1;
+                border-radius: 4px;
+                background: rgba(99, 102, 241, 0.2);
+                border: 2px dashed #6366f1;
+                color: #818cf8;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            /* Optimal aspect ratio grid for all images */
+            .aiofc-big-aspect-grid-container {
+                background: #1a1a2e;
+                border-radius: 8px;
+                padding: 8px;
+                border: 1px solid #374151;
+            }
+
+            .aiofc-big-aspect-grid {
+                border-radius: 4px;
+                overflow: hidden;
+            }
+
+            .aiofc-big-aspect-grid-item {
+                aspect-ratio: 1;
+                overflow: hidden;
+                background: #0d0d1a;
+            }
+
+            .aiofc-big-aspect-grid-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .aiofc-big-aspect-grid-item:hover {
+                opacity: 0.85;
+            }
+
+            .aiofc-big-aspect-label {
+                background: #4f46e5;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 10px;
+                font-weight: 600;
+                margin-left: 6px;
+            }
+
+            .aiofc-big-image-input-section {
+                margin-bottom: 10px;
+            }
+
+            .aiofc-big-image-input-section:last-child {
+                margin-bottom: 0;
+            }
+
+            .aiofc-big-image-input-label {
+                font-size: 11px;
+                color: #9ca3af;
+                margin-bottom: 6px;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .aiofc-big-image-input-count {
+                color: #6b7280;
+                font-size: 10px;
+            }
+
+            .aiofc-big-model-info {
+                font-size: 11px;
+                color: #9ca3af;
+                font-weight: 500;
+            }
+
+            /* === KPI Row (RPG Style) === */
+            .aiofc-big-kpi-row {
+                display: flex;
+                flex: 1 1 240px;
+                gap: 8px;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+            }
+
+            .aiofc-big-kpi {
+                flex: 1 1 60px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                background: rgba(255, 255, 255, 0.02);
+                border-radius: 4px;
+                padding: 8px 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2px;
+                min-width: 60px;
+            }
+
+            .aiofc-big-kpi span {
+                font-size: 9px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: rgba(249, 250, 251, 0.5);
+                font-weight: 500;
+            }
+
+            .aiofc-big-kpi strong {
+                font-size: 18px;
+                font-weight: 700;
+                color: #a78bfa;
+                font-variant-numeric: tabular-nums;
+            }
+
+            .aiofc-big-kpi.success strong { color: #4ade80; }
+            .aiofc-big-kpi.cached strong { color: #c084fc; }
+            .aiofc-big-kpi.failed strong { color: #f87171; }
+
+            .aiofc-big-progress-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+
+            .aiofc-big-progress-header h4 {
+                margin: 0;
+                font-size: 13px;
+                font-weight: 600;
+                color: #9ca3af;
+            }
+
+            /* === Stop Button (Minimal, Inline) === */
+            .aiofc-big-stop-btn {
+                background: rgba(239, 68, 68, 0.1);
+                color: #f87171;
+                border: 1px solid rgba(239, 68, 68, 0.2);
+                padding: 4px 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 500;
+                font-size: 11px;
+            }
+
+            .aiofc-big-stop-btn:hover {
+                background: rgba(239, 68, 68, 0.2);
+                border-color: rgba(239, 68, 68, 0.4);
+            }
+
+            .aiofc-big-stat {
+                font-size: 12px;
+                font-weight: 600;
+                color: #9ca3af;
+            }
+
+            .aiofc-big-stat.success { color: #4ade80; }
+            .aiofc-big-stat.cached { color: #c084fc; }
+            .aiofc-big-stat.failed { color: #f87171; }
+
+            /* === Progress Items (no scroll - grows with content) === */
+            .aiofc-big-progress-items {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .aiofc-big-progress-item {
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+                padding: 10px 12px;
+                display: flex;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .aiofc-big-progress-item-content {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .aiofc-big-progress-item.success {
+                border-color: rgba(34, 197, 94, 0.4);
+                background: rgba(34, 197, 94, 0.08);
+            }
+
+            .aiofc-big-progress-item.error {
+                border-color: rgba(239, 68, 68, 0.4);
+                background: rgba(239, 68, 68, 0.08);
+            }
+
+            .aiofc-big-progress-item.in-progress {
+                border-color: rgba(99, 102, 241, 0.5);
+                background: rgba(99, 102, 241, 0.1);
+            }
+
+            .aiofc-big-progress-item.retrying {
+                border-color: rgba(251, 191, 36, 0.5);
+                background: rgba(251, 191, 36, 0.1);
+            }
+
+            .aiofc-big-progress-item.cached {
+                border-color: rgba(168, 85, 247, 0.4);
+                background: rgba(168, 85, 247, 0.08);
+            }
+
+            .aiofc-big-progress-item.cancelled {
+                border-color: rgba(156, 163, 175, 0.3);
+                background: rgba(156, 163, 175, 0.05);
+                opacity: 0.6;
+            }
+
+            .aiofc-big-progress-item-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 6px;
+                gap: 8px;
+            }
+
+            .aiofc-big-progress-item-label {
+                font-size: 11px;
+                font-weight: 500;
+                color: #d1d5db;
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            /* Pair badge for multi-image mode */
+            .aiofc-big-pair-badge {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1px 5px;
+                font-size: 9px;
+                font-weight: 700;
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                border: 1px solid #34d399;
+                border-radius: 3px;
+                color: #fff;
+                flex-shrink: 0;
+            }
+
+            /* Pair group container for multi-image mode */
+            .aiofc-big-pair-group {
+                background: rgba(16, 185, 129, 0.05);
+                border: 1px solid rgba(52, 211, 153, 0.2);
+                border-radius: 8px;
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+
+            .aiofc-big-pair-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 4px 8px 8px 8px;
+                border-bottom: 1px solid rgba(52, 211, 153, 0.15);
+                margin-bottom: 8px;
+            }
+
+            .aiofc-big-pair-label {
+                font-size: 11px;
+                font-weight: 600;
+                color: #34d399;
+            }
+
+            .aiofc-big-pair-savings {
+                font-size: 9px;
+                color: #4ade80;
+                background: rgba(74, 222, 128, 0.1);
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+
+            .aiofc-big-pair-items {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .aiofc-big-pair-items .aiofc-big-progress-item {
+                margin-bottom: 0;
+            }
+
+            .aiofc-big-progress-item-status {
+                font-size: 10px;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+
+            .aiofc-big-progress-item-status.pending {
+                background: rgba(156, 163, 175, 0.15);
+                color: #6b7280;
+            }
+
+            .aiofc-big-progress-item-status.in-progress {
+                background: rgba(99, 102, 241, 0.2);
+                color: #818cf8;
+            }
+
+            .aiofc-big-progress-item-status.success {
+                background: rgba(34, 197, 94, 0.3);
+                color: #22c55e;
+            }
+
+            .aiofc-big-progress-item-status.error {
+                background: rgba(239, 68, 68, 0.3);
+                color: #ef4444;
+            }
+
+            .aiofc-big-progress-item-status.retrying {
+                background: rgba(251, 191, 36, 0.2);
+                color: #fbbf24;
+            }
+
+            .aiofc-big-progress-item-status.cached {
+                background: rgba(168, 85, 247, 0.2);
+                color: #a78bfa;
+            }
+
+            .aiofc-big-progress-item-status.cancelled {
+                background: rgba(156, 163, 175, 0.15);
+                color: #9ca3af;
+            }
+
+            .aiofc-big-progress-item-bar {
+                width: 100%;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 4px;
+                overflow: hidden;
+                margin-top: 10px;
+                position: relative;
+            }
+
+            .aiofc-big-progress-item-fill {
+                height: 100%;
+                background: #6366f1;
+                position: relative;
+                overflow: hidden;
+                border-radius: 4px;
+            }
+
+            .aiofc-big-progress-item-fill.animating {
+                background: linear-gradient(90deg, #6366f1, #818cf8, #6366f1);
+                background-size: 200% 100%;
+                animation: aiofc-big-progress-shimmer 1.5s linear infinite;
+            }
+
+            @keyframes aiofc-big-progress-shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+
+            .aiofc-big-progress-item-message {
+                font-size: 10px;
+                color: #f87171;
+                margin-top: 4px;
+                padding: 4px 6px;
+                background: rgba(239, 68, 68, 0.1);
+                border-radius: 3px;
+            }
+
+            .aiofc-big-progress-item-message.retry-message {
+                color: #fbbf24;
+                background: rgba(251, 191, 36, 0.15);
+                border-left: 2px solid #fbbf24;
+            }
+
+            .aiofc-big-progress-item-message.error-message {
+                color: #f87171;
+                background: rgba(239, 68, 68, 0.15);
+                border-left: 2px solid #ef4444;
+            }
+
+            .aiofc-big-progress-item-thumbnail {
+                flex-shrink: 0;
+                border-radius: 4px;
+                overflow: hidden;
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                background: rgba(0, 0, 0, 0.3);
+                width: 64px;
+                height: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+
+            .aiofc-big-progress-item-thumbnail:not(.placeholder) {
+                cursor: pointer;
+            }
+
+            .aiofc-big-progress-item-thumbnail:not(.placeholder):hover {
+                border-color: #6366f1;
+            }
+
+            .aiofc-big-progress-item-thumbnail.placeholder {
+                cursor: default;
+                background: rgba(0, 0, 0, 0.5);
+            }
+
+            .aiofc-big-thumbnail-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .aiofc-big-thumbnail-video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .aiofc-big-thumbnail-empty {
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .aiofc-big-view-image-btn {
+                display: none; /* Hidden - click thumbnail instead */
+            }
+
+            .aiofc-big-job-retry-btn {
+                background: rgba(251, 191, 36, 0.2);
+                border: 1px solid rgba(251, 191, 36, 0.4);
+                color: #fbbf24;
+                padding: 2px 6px;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 10px;
+            }
+
+            .aiofc-big-job-retry-btn:hover {
+                background: rgba(251, 191, 36, 0.3);
+            }
+
+            .aiofc-big-job-retry-btn:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            /* Expand prompt button */
+            .aiofc-big-expand-prompt-btn {
+                background: rgba(139, 92, 246, 0.2);
+                border: 1px solid rgba(139, 92, 246, 0.4);
+                color: #a78bfa;
+                padding: 2px 6px;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 10px;
+                margin-right: 4px;
+            }
+            .aiofc-big-expand-prompt-btn:hover {
+                background: rgba(139, 92, 246, 0.3);
+            }
+
+            /* Expanded prompt section */
+            .aiofc-big-prompt-expanded {
+                margin-top: 8px;
+                padding: 10px;
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 6px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .aiofc-big-prompt-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .aiofc-big-prompt-meta {
+                font-size: 11px;
+                color: #a0a0a0;
+            }
+            .aiofc-big-prompt-actions {
+                display: flex;
+                gap: 6px;
+            }
+            .aiofc-big-copy-seed-btn,
+            .aiofc-big-copy-prompt-btn,
+            .aiofc-big-favorite-prompt-btn {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #e0e0e0;
+                padding: 3px 8px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 11px;
+                transition: all 0.15s ease;
+            }
+            .aiofc-big-copy-seed-btn:hover {
+                background: rgba(168, 85, 247, 0.3);
+                border-color: rgba(168, 85, 247, 0.5);
+                color: #c4b5fd;
+            }
+            .aiofc-big-copy-prompt-btn:hover {
+                background: rgba(59, 130, 246, 0.3);
+                border-color: rgba(59, 130, 246, 0.5);
+                color: #93c5fd;
+            }
+            .aiofc-big-favorite-prompt-btn:hover {
+                background: rgba(251, 191, 36, 0.3);
+                border-color: rgba(251, 191, 36, 0.5);
+                color: #fcd34d;
+            }
+            .aiofc-big-copy-seed-btn:disabled,
+            .aiofc-big-copy-prompt-btn:disabled,
+            .aiofc-big-favorite-prompt-btn:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+            .aiofc-big-prompt-text {
+                font-size: 12px;
+                color: #e0e0e0;
+                line-height: 1.5;
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+
+            /* Old button styles removed - using new btn-primary, btn-secondary, btn-danger classes */
+
+            .aiofc-big-retry-failed-btn:hover:not(:disabled) {
+                background: rgba(251, 191, 36, 0.15);
+                border-color: rgba(251, 191, 36, 0.4);
+            }
+
+            /* PhotoSwipe instant animations override */
+            .pswp--open,
+            .pswp--closing,
+            .pswp__bg,
+            .pswp__container,
+            .pswp__img,
+            .pswp__zoom-wrap {
+                transition: none !important;
+                animation: none !important;
+            }
+
+            /* PhotoSwipe caption styles */
+            .pswp-caption-content {
+                text-align: left;
+                padding: 10px;
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 8px;
+                max-width: 400px;
+            }
+            .pswp-caption-header {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #a0a0a0;
+            }
+            .pswp-caption-prompt {
+                font-size: 13px;
+                line-height: 1.5;
+                color: #e0e0e0;
+                white-space: pre-wrap;
+                word-break: break-word;
+                max-height: 150px;
+                overflow-y: auto;
+            }
+            .pswp-caption-actions {
+                display: flex;
+                gap: 8px;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .pswp-copy-btn,
+            .pswp-favorite-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                border-radius: 6px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: rgba(255, 255, 255, 0.1);
+                color: #e0e0e0;
+                cursor: pointer;
+                transition: all 0.15s ease;
+            }
+            .pswp-copy-btn:hover {
+                background: rgba(59, 130, 246, 0.3);
+                border-color: rgba(59, 130, 246, 0.5);
+                color: #93c5fd;
+            }
+            .pswp-favorite-btn:hover {
+                background: rgba(251, 191, 36, 0.3);
+                border-color: rgba(251, 191, 36, 0.5);
+                color: #fcd34d;
+            }
+            /* Dynamic caption plugin overrides */
+            .pswp__dynamic-caption {
+                color: #e0e0e0;
+            }
+            .pswp__dynamic-caption--aside {
+                max-width: 400px;
+            }
+        `;
         document.head.appendChild(style);
     },
 });

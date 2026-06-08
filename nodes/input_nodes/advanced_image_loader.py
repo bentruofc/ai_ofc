@@ -51,18 +51,18 @@ class AIOFC_AdvancedImageLoader:
     RETURN_TYPES = ("IMAGE", "INT", "INT", "STRING")
     RETURN_NAMES = ("images", "index", "total", "info")
     FUNCTION = "load_batch"
-    CATEGORY = "Input"
+    CATEGORY = "AIOFC/Input"
 
     def load_batch(self, mode="Batch Tensor", resize_mode="Center Crop", batch_index=0, width=512, height=512, aspect_label="1:1", enable_img2img=True, node_id=None, batch_data="{}"):
         print(f"\n{'='*60}")
-        print(f"[ Adv Loader] Mode: {mode} | Resize: {resize_mode} | Index: {batch_index}")
-        print(f"[ Adv Loader] Enable img2img: {enable_img2img} | Resolution: {width}x{height} | Aspect: {aspect_label}")
-        print(f"[ Adv Loader] Loading batch for node: {node_id}")
+        print(f"[AIOFC Adv Loader] Mode: {mode} | Resize: {resize_mode} | Index: {batch_index}")
+        print(f"[AIOFC Adv Loader] Enable img2img: {enable_img2img} | Resolution: {width}x{height} | Aspect: {aspect_label}")
+        print(f"[AIOFC Adv Loader] Loading batch for node: {node_id}")
 
         try:
             data = json.loads(batch_data) if batch_data else {}
         except json.JSONDecodeError:
-            print("[ Adv Loader] Invalid batch_data JSON, using empty.")
+            print("[AIOFC Adv Loader] Invalid batch_data JSON, using empty.")
             data = {}
 
         # txt2img mode: Generate empty latents
@@ -74,13 +74,13 @@ class AIOFC_AdvancedImageLoader:
         order = data.get('order', [])
 
         if not images_meta or not order:
-            print("[ Adv Loader] No images in batch, returning empty.")
+            print("[AIOFC Adv Loader] No images in batch, returning empty.")
             empty = torch.zeros((1, 64, 64, 3), dtype=torch.float32)
             return (empty, 0, 0, "No images loaded")
 
         upload_dir = self._get_upload_dir(node_id)
         if not os.path.exists(upload_dir):
-            print(f"[ Adv Loader] Upload directory not found: {upload_dir}")
+            print(f"[AIOFC Adv Loader] Upload directory not found: {upload_dir}")
             empty = torch.zeros((1, 64, 64, 3), dtype=torch.float32)
             return (empty, 0, 0, f"Directory not found: {upload_dir}")
 
@@ -102,7 +102,7 @@ class AIOFC_AdvancedImageLoader:
             try:
                 PromptServer.instance.send_sync("aiofc_adv_loader_update", {"node_id": str(node_id), "current_index": current_index, "next_index": next_index, "total_count": total_count})
             except Exception as e:
-                print(f"[ Adv Loader] Error sending WebSocket update: {e}")
+                print(f"[AIOFC Adv Loader] Error sending WebSocket update: {e}")
             
             return (img_tensor, current_index, total, info)
         else:
@@ -145,7 +145,7 @@ class AIOFC_AdvancedImageLoader:
         This ensures consistent tensor dimensions controlled by the WAN/SDXL aspect ratio node.
         """
         loaded_images, info_lines = [], []
-        print(f"[ Adv Loader] Batch Tensor Mode - Target dimensions: {target_width}x{target_height} (from aspect ratio selector)")
+        print(f"[AIOFC Adv Loader] Batch Tensor Mode - Target dimensions: {target_width}x{target_height} (from aspect ratio selector)")
 
         for img_id in order:
             img_meta = next((img for img in images_meta if img['id'] == img_id), None)
@@ -156,7 +156,7 @@ class AIOFC_AdvancedImageLoader:
             # Use smart path finder that checks multiple locations
             img_path = self._find_image_path(filename, node_id)
             if not img_path:
-                print(f"[ Adv Loader] Image not found: {filename}")
+                print(f"[AIOFC Adv Loader] Image not found: {filename}")
                 continue
 
             try:
@@ -166,12 +166,12 @@ class AIOFC_AdvancedImageLoader:
                 # Always resize to target dimensions (from aspect ratio selector)
                 if img_tensor.shape[0] != target_height or img_tensor.shape[1] != target_width:
                     img_tensor = self._resize_image(img_tensor, target_width, target_height, resize_mode)
-                    print(f"[ Adv Loader] Resized {original_name} from {img.size[0]}x{img.size[1]} → {target_width}x{target_height} ({resize_mode})")
+                    print(f"[AIOFC Adv Loader] Resized {original_name} from {img.size[0]}x{img.size[1]} → {target_width}x{target_height} ({resize_mode})")
                 for i in range(repeat_count):
                     loaded_images.append(img_tensor)
                     info_lines.append(f"{original_name} (copy {i+1}/{repeat_count})")
             except Exception as e:
-                print(f"[ Adv Loader] Error loading {filename}: {e}")
+                print(f"[AIOFC Adv Loader] Error loading {filename}: {e}")
                 continue
 
         if not loaded_images:
@@ -204,7 +204,7 @@ class AIOFC_AdvancedImageLoader:
         order = data.get('order', [])
 
         if not latents_meta or not order:
-            print(f"[ Adv Loader] No latents in batch, returning empty {aspect_label} latent.")
+            print(f"[AIOFC Adv Loader] No latents in batch, returning empty {aspect_label} latent.")
             empty = torch.zeros((1, height, width, 3), dtype=torch.float32)
             return (empty, 0, 0, f"No latents defined ({aspect_label})")
 
@@ -246,8 +246,8 @@ class AIOFC_AdvancedImageLoader:
         # VALIDATION: Ensure dimensions are reasonable (not corrupted)
         # Use ground truth from node inputs if corrupted
         if w < 64 or h < 64:
-            print(f"[ Adv Loader] WARNING: Corrupted dimensions in latent_meta: {w}x{h}")
-            print(f"[ Adv Loader] Using ground truth from node inputs: {fallback_width}x{fallback_height}")
+            print(f"[AIOFC Adv Loader] ⚠️ WARNING: Corrupted dimensions in latent_meta: {w}x{h}")
+            print(f"[AIOFC Adv Loader] Using ground truth from node inputs: {fallback_width}x{fallback_height}")
             w, h = fallback_width, fallback_height
 
         # Generate empty tensor
@@ -267,7 +267,7 @@ class AIOFC_AdvancedImageLoader:
                 "total_count": total_count
             })
         except Exception as e:
-            print(f"[ Adv Loader] Error sending WebSocket update: {e}")
+            print(f"[AIOFC Adv Loader] Error sending WebSocket update: {e}")
 
         return (empty_tensor, current_index, total_count, info)
 
@@ -286,8 +286,8 @@ class AIOFC_AdvancedImageLoader:
             # VALIDATION: Ensure dimensions are reasonable (not corrupted)
             # Use ground truth from node inputs if corrupted
             if w < 64 or h < 64:
-                print(f"[ Adv Loader] WARNING: Corrupted dimensions in latent_meta: {w}x{h}")
-                print(f"[ Adv Loader] Using ground truth from node inputs: {fallback_width}x{fallback_height}")
+                print(f"[AIOFC Adv Loader] ⚠️ WARNING: Corrupted dimensions in latent_meta: {w}x{h}")
+                print(f"[AIOFC Adv Loader] Using ground truth from node inputs: {fallback_width}x{fallback_height}")
                 w, h = fallback_width, fallback_height
             repeat_count = latent_meta.get('repeat_count', 1)
             latent_display_id = latent_meta.get('id', 'unknown')[:8]
@@ -343,9 +343,9 @@ class AIOFC_AdvancedImageLoader:
                 # Auto-migrate to pool
                 try:
                     shutil.copy2(old_path, pool_path)
-                    print(f"[] Auto-migrated {filename} from node {node_id} folder to pool")
+                    print(f"[AIOFC] Auto-migrated {filename} from node {node_id} folder to pool")
                 except Exception as e:
-                    print(f"[] Failed to migrate {filename}: {e}")
+                    print(f"[AIOFC] Failed to migrate {filename}: {e}")
                 return old_path if not os.path.exists(pool_path) else pool_path
 
         # 3. Search ALL old per-node folders
@@ -358,9 +358,9 @@ class AIOFC_AdvancedImageLoader:
                         # Auto-migrate to pool
                         try:
                             shutil.copy2(old_path, pool_path)
-                            print(f"[] Auto-migrated {filename} from folder {folder} to pool")
+                            print(f"[AIOFC] Auto-migrated {filename} from folder {folder} to pool")
                         except Exception as e:
-                            print(f"[] Failed to migrate {filename}: {e}")
+                            print(f"[AIOFC] Failed to migrate {filename}: {e}")
                         return old_path if not os.path.exists(pool_path) else pool_path
 
         # Not found anywhere
@@ -375,7 +375,7 @@ class AIOFC_AdvancedImageLoader:
             return hashlib.md5(batch_data.encode()).hexdigest()
 
 # --- API Endpoints (Branded) ---
-@PromptServer.instance.routes.post("//batch_upload")
+@PromptServer.instance.routes.post("/aiofc/batch_upload")
 async def batch_upload_endpoint(request):
     """Upload images to central pool (not per-node) so they survive node ID changes"""
     try:
@@ -408,13 +408,13 @@ async def batch_upload_endpoint(request):
                     img.save(os.path.join(upload_dir, thumb_filename))
                     uploaded_files.append({"id": file_id, "filename": safe_filename, "original_name": filename, "width": width, "height": height, "thumbnail": thumb_filename, "repeat_count": 1})
                 except Exception as e:
-                    print(f"[ Adv Loader] Error processing image: {e}")
+                    print(f"[AIOFC Adv Loader] Error processing image: {e}")
                     if os.path.exists(full_path): os.remove(full_path)
         return web.json_response({"success": True, "images": uploaded_files})
     except Exception as e:
         return web.json_response({"success": False, "error": str(e)}, status=500)
 
-@PromptServer.instance.routes.delete("//batch_delete/{node_id}/{image_id}")
+@PromptServer.instance.routes.delete("/aiofc/batch_delete/{node_id}/{image_id}")
 async def batch_delete_endpoint(request):
     """Delete image from central pool (node_id kept in URL for backwards compat but ignored)"""
     image_id = request.match_info['image_id']
@@ -431,7 +431,7 @@ async def batch_delete_endpoint(request):
     except Exception as e:
         return web.json_response({"success": False, "error": str(e)}, status=500)
 
-@PromptServer.instance.routes.get("//view/{filename}")
+@PromptServer.instance.routes.get("/aiofc/view/{filename}")
 async def smart_view_endpoint(request):
     """
     Smart image view endpoint that checks multiple locations:
@@ -451,7 +451,7 @@ async def smart_view_endpoint(request):
     pool_path = os.path.join(pool_dir, filename)
     if os.path.exists(pool_path):
         # Redirect to standard ComfyUI view endpoint
-        return web.HTTPFound(f"/view?filename={filename}&type=input&subfolder=_ImagePool")
+        return web.HTTPFound(f"/view?filename={filename}&type=input&subfolder=AIOFC_ImagePool")
 
     # 2. Search ALL old per-node folders
     old_base_dir = os.path.join(input_dir, "AIOFC_BatchUploads")
@@ -464,16 +464,16 @@ async def smart_view_endpoint(request):
                     # Auto-migrate to pool
                     try:
                         shutil.copy2(old_path, pool_path)
-                        print(f"[] Auto-migrated {filename} from folder {folder} to pool (via view)")
-                        return web.HTTPFound(f"/view?filename={filename}&type=input&subfolder=_ImagePool")
+                        print(f"[AIOFC] Auto-migrated {filename} from folder {folder} to pool (via view)")
+                        return web.HTTPFound(f"/view?filename={filename}&type=input&subfolder=AIOFC_ImagePool")
                     except Exception as e:
-                        print(f"[] Failed to migrate {filename}: {e}")
+                        print(f"[AIOFC] Failed to migrate {filename}: {e}")
                         # Serve from old location
-                        return web.HTTPFound(f"/view?filename={filename}&type=input&subfolder=_BatchUploads/{folder}")
+                        return web.HTTPFound(f"/view?filename={filename}&type=input&subfolder=AIOFC_BatchUploads/{folder}")
 
     return web.Response(status=404, text=f"Image not found: {filename}")
 
-@PromptServer.instance.routes.post("//migrate_images")
+@PromptServer.instance.routes.post("/aiofc/migrate_images")
 async def migrate_images_endpoint(request):
     """Migrate images from old per-node folders to central pool"""
     try:
@@ -506,4 +506,4 @@ async def migrate_images_endpoint(request):
         return web.json_response({"success": False, "error": str(e)}, status=500)
 
 NODE_CLASS_MAPPINGS = {"AIOFC_AdvancedImageLoader": AIOFC_AdvancedImageLoader}
-NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_AdvancedImageLoader": "Advanced Image Loader"}
+NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_AdvancedImageLoader": "🖼️ AIOFC Advanced Image Loader"}

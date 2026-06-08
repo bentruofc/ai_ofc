@@ -38,7 +38,7 @@ def _optimization_worker(
         delta = torch.zeros_like(img_tensor_main, requires_grad=True)
         optimizer = optim.Adam([delta], lr=learning_rate)
         
-        print(f"Texture Engine: Starting stable optimization for {iterations} steps...")
+        print(f"🧠 AIOFC Texture Engine: Starting stable optimization for {iterations} steps...")
         with torch.no_grad():
             initial_loss = texture_matcher(img_tensor_main, log_stats=True)
             print(f"    - Initial Texture Loss: {initial_loss.item():.4f}")
@@ -82,7 +82,7 @@ def _optimization_worker(
             final_image = torch.clamp(img_tensor_main + (final_delta * strength), 0.0, 1.0)
         
         result_container.append(final_image)
-        print("Texture Engine: Optimization complete.")
+        print("✅ AIOFC Texture Engine: Optimization complete.")
 
     except Exception as e:
         exception_container.append(e)
@@ -106,7 +106,7 @@ class AIOFC_Texture_Engine:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Authenticity"
+    CATEGORY = "AIOFC/Authenticity"
 
     def execute(self, image, profile_base_path, strength, smoothness, iterations, learning_rate):
         if strength == 0: return (image,)
@@ -134,4 +134,4 @@ class AIOFC_Texture_Engine:
         return (torch.cat(processed_batches, dim=0),)
 
 NODE_CLASS_MAPPINGS = { "AIOFC_Texture_Engine": AIOFC_Texture_Engine, }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_Texture_Engine": "Texture Engine", }
+NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_Texture_Engine": "🧠 AIOFC Texture Engine", }

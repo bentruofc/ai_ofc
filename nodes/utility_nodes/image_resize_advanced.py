@@ -19,7 +19,7 @@ class AIOFC_ImageResizeFill:
     'pad_with_background' fit method to fill empty space with another image.
     """
 
-    TITLE = "Image Resize & Fill"
+    TITLE = "📐 AIOFC Image Resize & Fill"
 
     FIT_METHODS = ["crop", "pad", "contain", "pad_with_background"]
 
@@ -41,7 +41,7 @@ class AIOFC_ImageResizeFill:
     RETURN_TYPES = ("IMAGE", "INT", "INT",)
     RETURN_NAMES = ("IMAGE", "WIDTH", "HEIGHT",)
     FUNCTION = "main"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def main(self, image, width, height, method, fit, background_image=None):
         if not image.numel(): return (image, 0, 0)
@@ -61,7 +61,7 @@ class AIOFC_ImageResizeFill:
             if background_image is None:
                 raise ValueError("A 'background_image' is required for the 'pad_with_background' fit method.")
 
-            print("Performing 'Pad with Background' resize.")
+            print("✨ Performing 'Pad with Background' resize.")
             fg, bg = image, background_image
             
             # 1. Create the canvas: Resize the background to the final target size.
@@ -124,4 +124,4 @@ class AIOFC_ImageResizeFill:
 # =================================================================================
 
 NODE_CLASS_MAPPINGS = {"AIOFC_ImageResizeFill": AIOFC_ImageResizeFill}
-NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_ImageResizeFill": "Image Resize & Fill"}
+NODE_DISPLAY_NAME_MAPPINGS = {"AIOFC_ImageResizeFill": "📐 AIOFC Image Resize & Fill"}

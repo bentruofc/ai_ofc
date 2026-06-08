@@ -44,7 +44,7 @@ class AIOFC_EnsureImageResolution:
             }
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     RETURN_TYPES = ("IMAGE", "BOOLEAN", "STRING",)
     RETURN_NAMES = ("image", "was_changed", "info_text",)
     FUNCTION = "ensure_resolution"
@@ -117,5 +117,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_EnsureImageResolution": "Ensure Image Resolution",
+    "AIOFC_EnsureImageResolution": "📏 AIOFC Ensure Image Resolution",
 }

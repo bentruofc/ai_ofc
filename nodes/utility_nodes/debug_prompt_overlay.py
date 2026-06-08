@@ -35,7 +35,7 @@ class AIOFC_DebugPromptOverlay:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image",)
     FUNCTION = "overlay"
-    CATEGORY = "Debug"
+    CATEGORY = "AIOFC/Debug"
 
     @classmethod
     def IS_CHANGED(cls, **kwargs):
@@ -90,5 +90,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_DebugPromptOverlay": "Debug Prompt Overlay",
+    "AIOFC_DebugPromptOverlay": "🐛 AIOFC Debug Prompt Overlay",
 }

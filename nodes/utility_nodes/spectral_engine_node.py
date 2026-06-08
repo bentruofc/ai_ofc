@@ -22,7 +22,7 @@ class AIOFC_SpectralEngine:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "execute"
-    CATEGORY = "Post-Processing"
+    CATEGORY = "AIOFC/Post-Processing"
 
     def load_stats(self):
         global IPHONE_STATS
@@ -32,9 +32,9 @@ class AIOFC_SpectralEngine:
             stats_path = os.path.join(aiofc_root_path, "pretrained", "iphone_stats.npz")
             if not os.path.exists(stats_path):
                 raise FileNotFoundError(f"iPhone stats file not found! Expected at: {stats_path}")
-            print("Spectral Engine: Loading iPhone stats profile...")
+            print("🧠 AIOFC Spectral Engine: Loading iPhone stats profile...")
             IPHONE_STATS = np.load(stats_path)
-            print("Spectral Engine: Stats loaded.")
+            print("✅ AIOFC Spectral Engine: Stats loaded.")
         return IPHONE_STATS
 
     def tensor_to_numpy(self, tensor: torch.Tensor) -> np.ndarray:
@@ -44,7 +44,7 @@ class AIOFC_SpectralEngine:
         return torch.from_numpy(np_array.astype(np.float32) / 255.0).unsqueeze(0)
 
     def execute(self, image: torch.Tensor, strength: float, seed: int):
-        print(f"Spectral Engine (Direct Match v2): Starting.")
+        print(f"🚀 AIOFC Spectral Engine (Direct Match v2): Starting.")
         stats = self.load_stats()
         
         # Create the dictionary of target spectra for each channel
@@ -66,8 +66,8 @@ class AIOFC_SpectralEngine:
             processed_images.append(processed_tensor)
 
         final_batch = torch.cat(processed_images, dim=0)
-        print("Spectral Engine: Processing complete.")
+        print("✅ AIOFC Spectral Engine: Processing complete.")
         return (final_batch,)
 
 NODE_CLASS_MAPPINGS = { "AIOFC_SpectralEngine": AIOFC_SpectralEngine }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_SpectralEngine": "Spectral Engine" }
+NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_SpectralEngine": "🛡️ AIOFC Spectral Engine" }

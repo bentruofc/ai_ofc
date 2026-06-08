@@ -25,7 +25,7 @@ try:
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 except ImportError:
     KORNIA_AVAILABLE = False
-    print("Kornia not available. Realistic Noise node requires Kornia for blurring effects.")
+    print("⚠️ Kornia not available. Realistic Noise node requires Kornia for blurring effects.")
 
 class AIOFC_RealisticNoise:
     """
@@ -58,7 +58,7 @@ class AIOFC_RealisticNoise:
             },
         }
 
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "add_noise"
     DESCRIPTION = """
@@ -127,5 +127,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_RealisticNoise": "Realistic Noise",
+    "AIOFC_RealisticNoise": "✨ AIOFC Realistic Noise",
 }

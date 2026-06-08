@@ -42,7 +42,7 @@ class AIOFC_LUT_Selector:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("lut_path",)
     FUNCTION = "get_path"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def get_path(self, lut_name):
         full_path = os.path.join(self.LUTS_DIR, lut_name)
@@ -50,5 +50,5 @@ class AIOFC_LUT_Selector:
         if not os.path.exists(full_path):
             raise FileNotFoundError(f"Selected LUT file could not be found: {full_path}")
             
-        print(f"LUT Selector: Providing path '{full_path}'")
+        print(f"✅ AIOFC LUT Selector: Providing path '{full_path}'")
         return (full_path,)

@@ -45,7 +45,7 @@ class AIOFC_GeminiNative:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "generate_content"
-    CATEGORY = "API"
+    CATEGORY = "AIOFC/API"
 
     def generate_content(self, api_key, prompt, model, seed, temperature, enable_thinking, safety_level, 
                          image_1=None, image_2=None, image_3=None, image_4=None):
@@ -106,11 +106,11 @@ class AIOFC_GeminiNative:
             return (result_text,)
 
         except core_exceptions.ResourceExhausted as e:
-            raise Exception("Gemini Error: Rate limit exceeded (429). Enable billing on your Google AI Studio account or wait and try again.") from e
+            raise Exception("AIOFC Gemini Error: Rate limit exceeded (429). Enable billing on your Google AI Studio account or wait and try again.") from e
         except errors.ServerError as e:
-            raise Exception("Gemini Error: Model overloaded or unavailable (503). Enable billing for a higher quota or try again later.") from e
+            raise Exception("AIOFC Gemini Error: Model overloaded or unavailable (503). Enable billing for a higher quota or try again later.") from e
         except Exception as e:
             raise e
 
 NODE_CLASS_MAPPINGS = { "AIOFC_GeminiNative": AIOFC_GeminiNative }
-NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_GeminiNative": "Gemini (Native)" }
+NODE_DISPLAY_NAME_MAPPINGS = { "AIOFC_GeminiNative": "🧠 AIOFC Gemini (Native)" }

@@ -138,7 +138,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
     RETURN_NAMES = ("images", "count")
     OUTPUT_IS_LIST = (False, False)  # Returns single batch tensor and count
     FUNCTION = "generate_batch"
-    CATEGORY = "API"
+    CATEGORY = "AIOFC/API"
     DESCRIPTION = (
         "Parallel batch image generator. Accepts prompt lists from RPG and runs "
         "multiple API requests concurrently. Supports all models and Multi endpoint."
@@ -281,11 +281,11 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
         for attempt in range(max_retries + 1):
             try:
                 if attempt > 0:
-                    print(f"Retry {attempt}/{max_retries}...", flush=True)
+                    print(f"   🔄 Retry {attempt}/{max_retries}...", flush=True)
 
-                print(f"Submitting to fal.ai: {endpoint} (timeout={timeout}s)", flush=True)
+                print(f"   📡 Submitting to fal.ai: {endpoint} (timeout={timeout}s)", flush=True)
                 response = requests.post(url, json=payload, headers=headers, timeout=timeout)
-                print(f"Response received: {response.status_code}", flush=True)
+                print(f"   📦 Response received: {response.status_code}", flush=True)
 
                 if not response.ok:
                     if response.status_code == 422:
@@ -305,12 +305,12 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
                     continue
             except requests.exceptions.RequestException as e:
                 last_error = str(e)
-                print(f"Request error: {last_error[:100]}", flush=True)
+                print(f"   ❌ Request error: {last_error[:100]}", flush=True)
                 if attempt < max_retries:
                     time.sleep(2)  # Brief pause before retry
                     continue
             except Exception as e:
-                print(f"Non-retryable error: {str(e)[:100]}", flush=True)
+                print(f"   ❌ Non-retryable error: {str(e)[:100]}", flush=True)
                 # Non-retryable errors
                 raise
 
@@ -320,7 +320,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
                          resolution, width, height, enable_safety_checker, input_image=None):
         """Generate a single image. Returns (idx, [tensor], error)."""
         try:
-            print(f"Starting request #{idx + 1}: {prompt[:50]}...", flush=True)
+            print(f"   🎯 Starting request #{idx + 1}: {prompt[:50]}...", flush=True)
 
             # Build kwargs for payload
             kwargs = {
@@ -338,7 +338,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
                 kwargs["resolution"] = resolution
             if input_image is not None:
                 kwargs["image_1"] = input_image
-                print(f"Request #{idx + 1} includes reference image, shape: {input_image.shape}", flush=True)
+                print(f"   🖼️ Request #{idx + 1} includes reference image, shape: {input_image.shape}", flush=True)
 
             # Check cache first
             cache_key = self._compute_cache_key(prompt, seed, model, provider, aspect_ratio, resolution)
@@ -436,7 +436,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
         """Report progress to console."""
         mode = "Multi (2x)" if is_multi else "Standard"
         pct = 100 * completed // total if total > 0 else 0
-        print(f"[{mode}] Progress: {completed}/{total} requests ({pct}%)", flush=True)
+        print(f"🚀 [{mode}] Progress: {completed}/{total} requests ({pct}%)", flush=True)
 
     def generate_batch(
         self,
@@ -512,7 +512,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
         has_reference_images = False
 
         if images is not None:
-            print(f"Received images input: type={type(images)}, len={len(images) if isinstance(images, list) else 'N/A'}", flush=True)
+            print(f"   🖼️ Received images input: type={type(images)}, len={len(images) if isinstance(images, list) else 'N/A'}", flush=True)
 
             if isinstance(images, list) and len(images) > 0:
                 # Check if it's a list of individual tensors or a list with one batch tensor
@@ -522,7 +522,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
                         # Check dimensions to determine format
                         if first_item.dim() == 3:
                             # List of individual [H, W, C] tensors - stack them
-                            print(f"Detected list of {len(images)} individual image tensors", flush=True)
+                            print(f"   🖼️ Detected list of {len(images)} individual image tensors", flush=True)
                             valid_tensors = [img for img in images if img is not None and isinstance(img, torch.Tensor)]
                             if valid_tensors:
                                 # Add batch dimension to each and stack
@@ -533,38 +533,38 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
                                     else:
                                         stacked.append(img)
                                 input_images = torch.cat(stacked, dim=0)
-                                print(f"Stacked into batch: shape={input_images.shape}", flush=True)
+                                print(f"   🖼️ Stacked into batch: shape={input_images.shape}", flush=True)
                         elif first_item.dim() == 4:
                             # First item is already a batch tensor [B, H, W, C]
                             if len(images) == 1:
                                 input_images = first_item
-                                print(f"Single batch tensor: shape={input_images.shape}", flush=True)
+                                print(f"   🖼️ Single batch tensor: shape={input_images.shape}", flush=True)
                             else:
                                 # Multiple batch tensors - concatenate them
                                 valid_tensors = [img for img in images if img is not None and isinstance(img, torch.Tensor)]
                                 input_images = torch.cat(valid_tensors, dim=0)
-                                print(f"Concatenated batches: shape={input_images.shape}", flush=True)
+                                print(f"   🖼️ Concatenated batches: shape={input_images.shape}", flush=True)
             elif isinstance(images, torch.Tensor):
                 input_images = images
-                print(f"Direct tensor: shape={input_images.shape}", flush=True)
+                print(f"   🖼️ Direct tensor: shape={input_images.shape}", flush=True)
 
             # Validate we have usable images
             if input_images is not None and isinstance(input_images, torch.Tensor) and len(input_images) > 0:
                 has_reference_images = True
                 num_images = len(input_images)
-                print(f"I2I MODE: Using {num_images} reference images (edit endpoint)", flush=True)
+                print(f"   🖼️ I2I MODE: Using {num_images} reference images (edit endpoint)", flush=True)
 
                 if num_images < len(prompt_list):
-                    print(f"Only {num_images} images for {len(prompt_list)} prompts - will cycle through available images", flush=True)
+                    print(f"   ⚠️ Only {num_images} images for {len(prompt_list)} prompts - will cycle through available images", flush=True)
                 elif num_images > len(prompt_list):
-                    print(f"{num_images} images but only {len(prompt_list)} prompts - extra images will be ignored", flush=True)
+                    print(f"   ⚠️ {num_images} images but only {len(prompt_list)} prompts - extra images will be ignored", flush=True)
 
         if not has_reference_images:
             input_images = None
-            print(f"T2I MODE: No reference images provided", flush=True)
+            print(f"   📝 T2I MODE: No reference images provided", flush=True)
 
         total_prompts = len(prompt_list)
-        print(f"Parallel Batch Generator: {total_prompts} prompts, max {max_parallel_val} parallel", flush=True)
+        print(f"🎨 Parallel Batch Generator: {total_prompts} prompts, max {max_parallel_val} parallel", flush=True)
         print(f"   Model: {model_val} | Provider: {provider_val} | Aspect: {aspect_ratio_val}", flush=True)
 
         # Check if we should use Multi endpoint
@@ -572,18 +572,18 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
         is_multi_mode = False
         if use_multi_val:
             if has_reference_images:
-                print(f"Multi endpoint requested but reference images provided - using standard I2I endpoint instead", flush=True)
+                print(f"   ⚠️ Multi endpoint requested but reference images provided - using standard I2I endpoint instead", flush=True)
             elif model_val != "Nano Banana Pro":
-                print(f"Multi endpoint only available for Nano Banana Pro", flush=True)
+                print(f"   ⚠️ Multi endpoint only available for Nano Banana Pro", flush=True)
             elif provider_val != "wavespeed.ai":
-                print(f"Multi endpoint only available on wavespeed.ai", flush=True)
+                print(f"   ⚠️ Multi endpoint only available on wavespeed.ai", flush=True)
             elif aspect_ratio_val not in self.MULTI_ASPECT_RATIOS:
-                print(f"Multi endpoint doesn't support aspect ratio {aspect_ratio_val} (only: {self.MULTI_ASPECT_RATIOS})", flush=True)
+                print(f"   ⚠️ Multi endpoint doesn't support aspect ratio {aspect_ratio_val} (only: {self.MULTI_ASPECT_RATIOS})", flush=True)
             else:
                 is_multi_mode = True
 
         if is_multi_mode:
-            print(f"Using Multi endpoint (2 images per request)", flush=True)
+            print(f"   🍌 Using Multi endpoint (2 images per request)", flush=True)
             return self._generate_batch_multi(
                 api_key_val, prompt_list, max_parallel_val, aspect_ratio_val
             )
@@ -623,7 +623,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
                 futures[future] = i
 
             mode_str = f"I2I with {num_ref_images} ref images" if num_ref_images > 0 else "T2I"
-            print(f"Submitted {total} requests ({mode_str}), waiting for completion...", flush=True)
+            print(f"   📋 Submitted {total} requests ({mode_str}), waiting for completion...", flush=True)
 
             for future in as_completed(futures):
                 idx, tensors, error = future.result()
@@ -631,14 +631,14 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
 
                 if error:
                     errors.append((idx, prompts[idx], error))
-                    print(f"Request {idx + 1}/{total} failed: {error}", flush=True)
+                    print(f"❌ Request {idx + 1}/{total} failed: {error}", flush=True)
                 else:
                     results[idx] = tensors[0]  # Single image
                     self._report_progress(completed, total, is_multi=False)
 
         # Report failures
         if errors:
-            print(f"{len(errors)} of {total} generations failed:", flush=True)
+            print(f"⚠️ {len(errors)} of {total} generations failed:", flush=True)
             for idx, prompt, err in errors[:5]:  # Show first 5
                 print(f"   - #{idx + 1}: {err[:100]}...", flush=True)
 
@@ -654,7 +654,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
             resized = []
             for i, tensor in enumerate(successful):
                 if tensor.shape != ref_shape:
-                    print(f"Image {i + 1} has different size {tensor.shape}, resizing to {ref_shape}", flush=True)
+                    print(f"   ⚠️ Image {i + 1} has different size {tensor.shape}, resizing to {ref_shape}", flush=True)
                     # Resize using PIL for quality
                     img_np = tensor.cpu().numpy()
                     if img_np.max() <= 1.0:
@@ -668,7 +668,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
             successful = resized
 
         batch_tensor = torch.stack(successful)
-        print(f"Parallel Batch Generator complete! Generated {len(successful)} images, shape: {batch_tensor.shape}", flush=True)
+        print(f"✅ Parallel Batch Generator complete! Generated {len(successful)} images, shape: {batch_tensor.shape}", flush=True)
 
         return (batch_tensor, len(successful))
 
@@ -694,7 +694,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
 
                 if error:
                     errors.append((idx, prompts[idx], error))
-                    print(f"Multi request {idx + 1}/{total} failed: {error}")
+                    print(f"❌ Multi request {idx + 1}/{total} failed: {error}")
                 else:
                     # Multi returns 2 images per request
                     results.append((idx, tensors))
@@ -702,7 +702,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
 
         # Report failures
         if errors:
-            print(f"{len(errors)} of {total} multi-generations failed:")
+            print(f"⚠️ {len(errors)} of {total} multi-generations failed:")
             for idx, prompt, err in errors[:5]:
                 print(f"   - #{idx + 1}: {err[:100]}...")
 
@@ -721,7 +721,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
             resized = []
             for i, tensor in enumerate(all_tensors):
                 if tensor.shape != ref_shape:
-                    print(f"Image {i + 1} has different size {tensor.shape}, resizing to {ref_shape}", flush=True)
+                    print(f"   ⚠️ Image {i + 1} has different size {tensor.shape}, resizing to {ref_shape}", flush=True)
                     img_np = tensor.cpu().numpy()
                     if img_np.max() <= 1.0:
                         img_np = (img_np * 255).astype(np.uint8)
@@ -736,7 +736,7 @@ class AIOFC_ParallelBatchGenerator(AIOFC_GenerativeAPIBase):
         batch_tensor = torch.stack(all_tensors)
         expected_count = total * 2
         actual_count = len(all_tensors)
-        print(f"Multi Batch Generator complete! Generated {actual_count} images (expected {expected_count}), shape: {batch_tensor.shape}", flush=True)
+        print(f"✅ Multi Batch Generator complete! Generated {actual_count} images (expected {expected_count}), shape: {batch_tensor.shape}", flush=True)
 
         return (batch_tensor, actual_count)
 
@@ -750,5 +750,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_ParallelBatchGenerator": "Parallel Batch Generator",
+    "AIOFC_ParallelBatchGenerator": "🚀 AIOFC Parallel Batch Generator",
 }

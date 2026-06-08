@@ -35,7 +35,7 @@ class AIOFCSeedGenerator:
     RETURN_TYPES = ("INT",)
     RETURN_NAMES = ("seed",)
     FUNCTION = "get_seed"
-    CATEGORY = "Utils"
+    CATEGORY = "AIOFC/Utils"
 
     def get_seed(self, seed):
         """Simply return the seed value provided by ComfyUI."""
@@ -51,5 +51,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFCSeedGenerator": "Seed",
+    "AIOFCSeedGenerator": "🎲 AIOFC Seed",
 }

@@ -22,12 +22,12 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_ImageFilter": "Image Filter",
-    "AIOFC_TextImageFilter": "Text/Image Filter",
-    "AIOFC_MaskImageFilter": "Mask Filter",
-    "AIOFC_Interactive_Crop": "Interactive Crop",
-    "AIOFC_PromptFilter": "Prompt Filter",
-    "AIOFC_BatchImageGenerator": "Batch Image Generator",
+    "AIOFC_ImageFilter": "🎭 AIOFC Image Filter",
+    "AIOFC_TextImageFilter": "📝 AIOFC Text/Image Filter",
+    "AIOFC_MaskImageFilter": "✂️ AIOFC Mask Filter",
+    "AIOFC_Interactive_Crop": "🖼️ AIOFC Interactive Crop",
+    "AIOFC_PromptFilter": "🎯 AIOFC Prompt Filter",
+    "AIOFC_BatchImageGenerator": "🎨 AIOFC Batch Image Generator",
 }
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

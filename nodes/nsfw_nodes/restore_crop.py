@@ -28,7 +28,7 @@ class AIOFC_RestoreCropToOriginal:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("restored_image",)
     FUNCTION = "restore_crop"
-    CATEGORY = "NSFW"
+    CATEGORY = "AIOFC/NSFW"
 
     def restore_crop(self, original_image, cropped_image, crop_data_json):
         # Parse crop data
@@ -44,7 +44,7 @@ class AIOFC_RestoreCropToOriginal:
 
         # Validate crop data
         if width <= 0 or height <= 0:
-            print("Restore Crop: Invalid crop dimensions. Returning original image.")
+            print("⚠️ AIOFC Restore Crop: Invalid crop dimensions. Returning original image.")
             return (original_image,)
 
         # Get dimensions
@@ -53,7 +53,7 @@ class AIOFC_RestoreCropToOriginal:
 
         # Check if cropped image matches expected dimensions
         if crop_w != width or crop_h != height:
-            print(f"Restore Crop: Cropped image size ({crop_w}x{crop_h}) doesn't match crop data ({width}x{height}). Resizing...")
+            print(f"⚠️ AIOFC Restore Crop: Cropped image size ({crop_w}x{crop_h}) doesn't match crop data ({width}x{height}). Resizing...")
             # Resize cropped image to match expected dimensions
             # Permute to BCHW for interpolate, then back to BHWC
             cropped_permuted = cropped_image.permute(0, 3, 1, 2)
@@ -77,7 +77,7 @@ class AIOFC_RestoreCropToOriginal:
         # Paste the cropped image back into the original
         restored[:, y:end_y, x:end_x, :] = cropped_image[:, :actual_height, :actual_width, :]
 
-        print(f"Restore Crop: Restored crop region ({x}, {y}, {width}x{height}) to original image.")
+        print(f"✅ AIOFC Restore Crop: Restored crop region ({x}, {y}, {width}x{height}) to original image.")
 
         return (restored,)
 
@@ -91,5 +91,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "AIOFC_RestoreCropToOriginal": "Restore Crop to Original",
+    "AIOFC_RestoreCropToOriginal": "📥 AIOFC Restore Crop to Original",
 }
