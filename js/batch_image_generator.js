@@ -2400,7 +2400,7 @@ app.registerExtension({
 
                     container.innerHTML = `
                         <div class="aiofc-big-idle">
-                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-idle-logo" style="width: 180px; height: auto; margin-bottom: 22px;" />
+                            <span class="aiofc-big-idle-logo" style="font-family: monospace; font-size: 36px; font-weight: 900; color: #fff; width: 180px; display: inline-block; text-align: center; margin-bottom: 22px; letter-spacing: 2px;">AI_OFC</span>
                             <div class="aiofc-big-idle-text">Batch Image Generator</div>
                             ${multiImageInfo.multiImage ? `
                             <div class="aiofc-big-idle-mode-badges">
@@ -2485,7 +2485,7 @@ app.registerExtension({
                                             </label>
                                         </div>
                                         <div class="aiofc-big-mode-card-brand">
-                                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-topbar-logo" />
+                                            <span class="aiofc-big-topbar-logo" style="font-family: monospace; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 2px;">AI_OFC</span>
                                             <span class="aiofc-big-topbar-version">BIG V2.0</span>
                                         </div>
                                     </div>
@@ -2596,7 +2596,7 @@ app.registerExtension({
                                             ` : ''}
                                         </div>
                                         <div class="aiofc-big-mode-card-brand">
-                                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-topbar-logo" />
+                                            <span class="aiofc-big-topbar-logo" style="font-family: monospace; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 2px;">AI_OFC</span>
                                             <span class="aiofc-big-topbar-version">BIG V2.0</span>
                                         </div>
                                     </div>
@@ -2674,7 +2674,7 @@ app.registerExtension({
                         container.innerHTML = `
                             <div class="aiofc-big-container">
                                 <div class="aiofc-big-idle">
-                                    <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-big-idle-logo" style="width: 180px; height: auto; margin-bottom: 22px; opacity: 0.6;" />
+                                    <span class="aiofc-big-idle-logo" style="font-family: monospace; font-size: 36px; font-weight: 900; color: #fff; width: 180px; display: inline-block; text-align: center; margin-bottom: 22px; opacity: 0.6; letter-spacing: 2px;">AI_OFC</span>
                                     <div class="aiofc-big-idle-text">Loading...</div>
                                 </div>
                             </div>

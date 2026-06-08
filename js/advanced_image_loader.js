@@ -512,7 +512,7 @@ app.registerExtension({
 
 					container.innerHTML = `
                         <div class="aiofc-adv-loader-brand-row">
-                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-adv-loader-logo" />
+                            <span class="aiofc-adv-loader-logo" style="font-family: monospace; font-size: 28px; font-weight: 900; color: #fff; line-height: 1; display: flex; align-items: center; letter-spacing: 2px;">AI_OFC</span>
                             <span class="aiofc-adv-loader-version">AIL V2.0</span>
                         </div>
                         <div class="aiofc-adv-loader-topbar">
@@ -654,7 +654,7 @@ app.registerExtension({
 
 					container.innerHTML = `
                         <div class="aiofc-adv-loader-brand-row">
-                            <img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" class="aiofc-adv-loader-logo" />
+                            <span class="aiofc-adv-loader-logo" style="font-family: monospace; font-size: 28px; font-weight: 900; color: #fff; line-height: 1; display: flex; align-items: center; letter-spacing: 2px;">AI_OFC</span>
                             <span class="aiofc-adv-loader-version">AIL V2.0</span>
                         </div>
                         <div class="aiofc-adv-loader-topbar">

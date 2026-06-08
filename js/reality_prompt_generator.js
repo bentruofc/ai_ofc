@@ -2102,7 +2102,7 @@ app.registerExtension({
 												${isDetectedFromAIL ? `<span class="aiofc-rpg-mode-source">From AIL #${node._linkedAILNodeId}</span>` : ''}
 											</div>
 											<div style="display: flex; align-items: center; gap: 10px;">
-												<img src="/extensions/ComfyUI_AIOFC/aiofc.svg" alt="AIOFC" style="width: 177px; height: auto;" />
+												<span style="font-family: monospace; font-size: 28px; font-weight: 900; color: #fff; width: 177px; display: inline-block; letter-spacing: 2px;">AI_OFC</span>
 												<span style="font-family: monospace; font-size: 14px; color: rgba(255, 255, 255, 0.5); white-space: nowrap;">RPG V2.0</span>
 											</div>
 											<button class="aiofc-rpg-btn-secondary aiofc-rpg-sdxl-toggle-btn" style="font-size: 12px; padding: 6px 12px;">
