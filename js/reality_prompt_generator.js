@@ -1444,23 +1444,35 @@ app.registerExtension({
 				};
 
 				// === Database Loading with IndexedDB ===
-				const loadPromptsDatabase = async () => {
+				const loadPromptsDatabase = async (forceFetch = false) => {
 					if (isDatabaseLoading) return;
 					isDatabaseLoading = true;
 
 					try {
-						// Try IndexedDB first
-						const cachedDB = await getFromIndexedDB("prompts_db_cache");
-						if (cachedDB && cachedDB.version === "1.0") {
-							promptsDatabase = cachedDB.data;
-							// Load user data from IndexedDB
-							await loadUserPrompts();
-							await loadGeneratedPrompts();
-							await loadBookmarks();
-							mergeUserPromptsWithLibrary();
-							isDatabaseLoading = false;
-							renderUI();
-							return;
+						// Try IndexedDB first, unless forced to fetch
+						if (!forceFetch) {
+							const cachedDB = await getFromIndexedDB("prompts_db_cache");
+							if (cachedDB && cachedDB.version === "1.0") {
+								promptsDatabase = cachedDB.data;
+								// Load user data from IndexedDB
+								await loadUserPrompts();
+								await loadGeneratedPrompts();
+								await loadBookmarks();
+								mergeUserPromptsWithLibrary();
+								isDatabaseLoading = false;
+								renderUI();
+								return;
+							} else {
+								// By default, do NOT fetch from server. Initialize empty library.
+								promptsDatabase = [];
+								await loadUserPrompts();
+								await loadGeneratedPrompts();
+								await loadBookmarks();
+								mergeUserPromptsWithLibrary();
+								isDatabaseLoading = false;
+								renderUI();
+								return;
+							}
 						}
 
 						// Fetch from server
@@ -2311,6 +2323,9 @@ app.registerExtension({
 											</button>
 											<button class="aiofc-rpg-btn-secondary aiofc-rpg-export-prompts-btn" style="font-size: 12px; padding: 6px 12px;" title="Export user prompts, bookmarks, and batch queue to JSON file" ${userPrompts.length === 0 && bookmarks.length === 0 && promptQueue.length === 0 ? 'disabled' : ''}>
 												💾 Export (${userPrompts.length + bookmarks.length + promptQueue.length})
+											</button>
+											<button class="aiofc-rpg-btn-secondary aiofc-rpg-load-samples-btn" style="font-size: 12px; padding: 6px 12px;" title="Load sample prompts from remote server">
+												🌐 Load sample prompts
 											</button>
 											${(filters.prompt_source === 'user' || filters.prompt_source === 'generated') ? `
 												<button class="aiofc-rpg-btn-secondary aiofc-rpg-enter-selection-btn" style="font-size: 12px; padding: 6px 12px;" title="Select multiple prompts to delete">
@@ -6611,6 +6626,30 @@ DO NOT use tags like "1girl, solo" or similar categorization prefixes.`;
 							}
 
 							exportUserPrompts();
+						};
+					}
+
+					// Load sample prompts button
+					const loadSamplesBtn = container.querySelector(".aiofc-rpg-load-samples-btn");
+					if (loadSamplesBtn) {
+						loadSamplesBtn.onclick = async () => {
+							loadSamplesBtn.disabled = true;
+							loadSamplesBtn.textContent = "🌐 Loading...";
+							
+							try {
+								// 1. Fetch locally for UI
+								await loadPromptsDatabase(true);
+								
+								// 2. Trigger backend cache for API features
+								await api.fetchApi("/aiofc/load_sample_prompts_backend", {
+									method: "POST"
+								});
+							} catch (e) {
+								console.error("Failed to load sample prompts", e);
+							}
+
+							loadSamplesBtn.disabled = false;
+							loadSamplesBtn.innerHTML = "🌐 Load sample prompts";
 						};
 					}
 

@@ -924,12 +924,15 @@ async def _generate_character_description(request):
 PROMPTS_DB_CACHE = None
 PROMPTS_DB_URL = "https://instara.s3.us-east-1.amazonaws.com/prompts.db.json"
 
-async def load_prompts_database():
+async def load_prompts_database(force_fetch=False):
     """Load and cache the prompts database from remote URL."""
     global PROMPTS_DB_CACHE
 
-    if PROMPTS_DB_CACHE is not None:
+    if PROMPTS_DB_CACHE is not None and not force_fetch:
         return PROMPTS_DB_CACHE
+
+    if not force_fetch:
+        return []
 
     print("[RPG Prompts API] Loading prompts database from remote URL...")
 
@@ -1040,6 +1043,15 @@ async def _get_random_prompts(request):
 
 
 # === Register New Endpoints ===
+@PromptServer.instance.routes.post("/aiofc/load_sample_prompts_backend")
+async def load_sample_prompts_backend_endpoint(request):
+    try:
+        data = await load_prompts_database(force_fetch=True)
+        return web.json_response({"success": True, "count": len(data)}, headers=CORS_HEADERS)
+    except Exception as e:
+        return web.json_response({"success": False, "error": str(e)}, status=500, headers=CORS_HEADERS)
+
+
 @PromptServer.instance.routes.post("/aiofc/generate_character_description")
 async def generate_character_description_endpoint(request):
     return await _generate_character_description(request)
@@ -1068,6 +1080,7 @@ async def get_random_prompts_endpoint_slash(request):
 
 @PromptServer.instance.routes.options("/aiofc/get_random_prompts")
 @PromptServer.instance.routes.options("/aiofc/get_random_prompts/")
+@PromptServer.instance.routes.options("/aiofc/load_sample_prompts_backend")
 async def get_random_prompts_options(request):
     return web.Response(headers=CORS_HEADERS)
 
@@ -1075,6 +1088,7 @@ async def get_random_prompts_options(request):
 print("[RPG Creative API] Endpoint registered: POST /aiofc/generate_creative_prompts")
 print("[RPG Character API] Endpoint registered: POST /aiofc/generate_character_description")
 print("[RPG Prompts API] Endpoint registered: POST /aiofc/get_random_prompts")
+print("[RPG Prompts API] Endpoint registered: POST /aiofc/load_sample_prompts_backend")
 
 # Add these lines to the end of the file
 NODE_CLASS_MAPPINGS = {}
