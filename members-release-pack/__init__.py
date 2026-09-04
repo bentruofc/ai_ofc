@@ -16,6 +16,7 @@ from .image_processing import MetadataRemoveNode, SaveAsPhonePhotoNode
 
 from .lora_caption import LoraCaptionGeneratorNode
 
+
 from .nodes.nano_banana_aio import NanoBananaAIO
 
 from .nodes.imageUtils import PreviewImageWithoutMetadata
@@ -23,8 +24,6 @@ from .nodes.imageUtils import PreviewImageWithoutMetadata
 from .nodes.aiorbust_video_loader import AiorBustVideoLoader
 
 from .nodes.instagram_faceswap import InstagramFaceSwapNode
-
-from .nodes.dataset_creator          import DatasetCreatorNode
 
 from .nodes.aiorbust_image_batch_loader import AiorbustImageBatchLoader
 
@@ -156,8 +155,6 @@ NODE_CLASS_MAPPINGS["AiorBustVideoLoader"] = AiorBustVideoLoader
 
 NODE_CLASS_MAPPINGS["InstagramFaceSwapNode"] = InstagramFaceSwapNode
 
-NODE_CLASS_MAPPINGS["DatasetCreatorNode"]        = DatasetCreatorNode
-
 NODE_CLASS_MAPPINGS["AiorbustImageBatchLoader"] = AiorbustImageBatchLoader
 
 NODE_CLASS_MAPPINGS["ReposeCarouselNode"] = ReposeCarouselNode
@@ -219,8 +216,6 @@ NODE_DISPLAY_NAME_MAPPINGS["PreviewImageWithoutMetadata"] = "Aiorbust Preview No
 NODE_DISPLAY_NAME_MAPPINGS["AiorBustVideoLoader"]      = "Aiorbust Video Loader"
 
 NODE_DISPLAY_NAME_MAPPINGS["InstagramFaceSwapNode"]   = "Aiorbust Content Remaker"
-
-NODE_DISPLAY_NAME_MAPPINGS["DatasetCreatorNode"]        = "Aiorbust Dataset Creator"
 
 NODE_DISPLAY_NAME_MAPPINGS["AiorbustImageBatchLoader"] = "Aiorbust Image and Video Batch Loader"
 

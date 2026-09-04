@@ -16,7 +16,6 @@ const ALL_NODES = [
     "Aiorbust_Camera_Look",
     "Aiorbust_Apply_LUT",
     "InstagramFaceSwapNode",
-    "DatasetCreatorNode",
     "AiorbustImageBatchLoader",
     "ReposeCarouselNode",
     "MetadataBypassNode",
