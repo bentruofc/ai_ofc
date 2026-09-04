@@ -1,0 +1,3 @@
+google-genai
+google
+mediapipe>=0.10.14
