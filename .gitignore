@@ -1,0 +1,68 @@
+# ==========================================
+# ComfyUI_AIOFC .gitignore
+# ==========================================
+# ------------------------------------------
+# Byte-compiled / optimized / DLL files
+# ------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+# ------------------------------------------
+# Virtual Environments & Packaging
+# ------------------------------------------
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+# ------------------------------------------
+# Testing & Code Analysis
+# ------------------------------------------
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.ipynb_checkpoints/
+# ------------------------------------------
+# Secrets, API Keys & Licenses
+# ------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+license.key
+.aiorbust-private
+*api_keys.json
+credentials.json
+secrets.json
+
+.DS_Store
