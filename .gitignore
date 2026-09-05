@@ -60,7 +60,7 @@ coverage.xml
 !.env.example
 !.env.template
 license.key
-.aiorbust-private
+.Aiofc-private
 *api_keys.json
 credentials.json
 secrets.json

@@ -100,14 +100,10 @@ class Aiofc_Apply_LUT:
         return (out,)
 
 
-Aiorbust_Apply_LUT = Aiofc_Apply_LUT
-
 NODE_CLASS_MAPPINGS = {
     "Aiofc_Apply_LUT": Aiofc_Apply_LUT,
-    "Aiorbust_Apply_LUT": Aiorbust_Apply_LUT,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "Aiofc_Apply_LUT": "🎨 AIOFC Apply LUT",
-    "Aiorbust_Apply_LUT": "🎨 AIOFC Apply LUT (Legacy)",
 }

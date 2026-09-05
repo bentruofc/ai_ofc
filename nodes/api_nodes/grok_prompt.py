@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-ComfyUI node - Aiorbust Grok Prompt Generator.
+ComfyUI node - Aiofc Grok Prompt Generator.
 Calls the xAI Grok API directly (api.x.ai) - no OpenRouter middleman.
 Get your API key at: https://console.x.ai
 Same image+text message format as GeminiPromptNode._call_grok() in gemini_prompt.py,
@@ -15,9 +15,6 @@ import numpy as np
 import requests
 from PIL import Image
 
-
-# Vision-capable models (support image input) first, text-only models after.
-# Same list as _GROK_MODELS in gemini_prompt.py for consistency across the pack.
 _GROK_MODELS = [
     "grok-4.20-0309-reasoning",
     "grok-4.20-0309-non-reasoning",
@@ -32,16 +29,11 @@ _GROK_MODELS = [
 
 _XAI_URL = "https://api.x.ai/v1/chat/completions"
 
-# Taille exacte du tenseur que l'Aiorbust Image Batch Loader renvoie quand sa
-# liste est vide : torch.zeros((1, 64, 64, 3)). Ce n'est pas une image, c'est un
-# bouchon — mais rien dans le type IMAGE de ComfyUI ne permet de le distinguer
-# d'une vraie image en aval.
 _PLACEHOLDER_SIDE = 64
 
 
 def _is_placeholder_frame(frame) -> bool:
     """True si la frame est le carre noir 64x64 d'un Batch Loader vide.
-
     Envoyer ce bouchon a un modele vision coute des tokens image pour faire
     analyser du vide, et brouille la reponse : le modele decrit consciencieusement
     un rectangle noir. Le test porte sur la taille ET le contenu — une vraie image
@@ -52,8 +44,6 @@ def _is_placeholder_frame(frame) -> bool:
         h, w = int(frame.shape[0]), int(frame.shape[1])
         if h != _PLACEHOLDER_SIDE or w != _PLACEHOLDER_SIDE:
             return False
-        # Tolerance sous 1/255 : le tenseur est en float, une valeur strictement
-        # nulle n'est pas garantie apres un passage par un autre node.
         return float(frame.max()) < (1.0 / 255.0)
     except Exception:
         return False
@@ -62,20 +52,6 @@ def _is_placeholder_frame(frame) -> bool:
 class GrokPromptNode:
 
     _cached_api_key = ""
-
-    # Nombre d'appels API depuis le demarrage de ComfyUI.
-    #
-    # Ajoute pour une raison precise : cette fonction ne fait qu'UN POST par
-    # execution, donc si la facture xAI montre N requetes pour ce qui semble
-    # etre un seul run, c'est que ComfyUI a appele generate() N fois. Le
-    # compteur rend ca visible dans la console au lieu de le laisser deviner
-    # depuis les logs de facturation, des heures plus tard.
-    #
-    # Volontairement PAS de IS_CHANGED ici, contrairement a GeminiPromptNode qui
-    # renvoie float("nan") : NaN != NaN, donc ce node-la se re-execute a CHAQUE
-    # queue meme a entrees identiques. Sur une API facturee au token, c'est un
-    # gouffre. Sans IS_CHANGED, ComfyUI hache les entrees et reutilise le cache
-    # tant que rien ne change — ce qui est le comportement voulu ici.
     _api_call_count = 0
 
     @classmethod
@@ -94,7 +70,7 @@ class GrokPromptNode:
             },
             "optional": {
                 "image": ("IMAGE", {
-                    "tooltip": "Optional image (e.g. from the Aiorbust Image Batch Loader for batch runs). Sent alongside the prompt to vision-capable models.",
+                    "tooltip": "Optional image (e.g. from the Aiofc Image Batch Loader for batch runs). Sent alongside the prompt to vision-capable models.",
                 }),
                 "api_key": ("STRING", {
                     "default": "",
@@ -146,11 +122,11 @@ class GrokPromptNode:
 
         if not key:
             raise RuntimeError(
-                "[Aiorbust Grok] API key is required. Get yours at https://console.x.ai"
+                "[Aiofc Grok] API key is required. Get yours at https://console.x.ai"
             )
 
         if not prompt.strip():
-            raise RuntimeError("[Aiorbust Grok] Prompt cannot be empty.")
+            raise RuntimeError("[Aiofc Grok] Prompt cannot be empty.")
 
         # Build the user message content — a list of image_url parts (one per
         # image in the batch) followed by the text part, same shape as
@@ -176,12 +152,12 @@ class GrokPromptNode:
 
         if _skipped:
             print(
-                f"⚠️  [Aiorbust Grok] {_skipped} image(s) placeholder ignoree(s) "
+                f"⚠️  [Aiofc Grok] {_skipped} image(s) placeholder ignoree(s) "
                 f"(64x64 noire — Batch Loader vide). Vision non facturee pour rien."
             )
         if _skipped and _sent == 0:
             print(
-                "ℹ️  [Aiorbust Grok] Aucune image reelle → requete texte seule. "
+                "ℹ️  [Aiofc Grok] Aucune image reelle → requete texte seule. "
                 "Un modele vision n'est pas necessaire ici."
             )
 
@@ -206,12 +182,12 @@ class GrokPromptNode:
         # placeholder vient d'etre ecarte — exactement le genre de log qui fait
         # chercher une facture vision inexistante.
         print(
-            f"🛰️  [Aiorbust Grok] API CALL #{GrokPromptNode._api_call_count} "
+            f"🛰️  [Aiofc Grok] API CALL #{GrokPromptNode._api_call_count} "
             f"(depuis le demarrage de ComfyUI) — model={model} | images envoyees={_sent} | "
             f"temp={temperature:.2f} | max_tokens={max_tokens}"
         )
         logging.info(
-            "[Aiorbust Grok] Calling %s (model=%s, images=%d, temp=%.2f, max_tokens=%d)",
+            "[Aiofc Grok] Calling %s (model=%s, images=%d, temp=%.2f, max_tokens=%d)",
             _XAI_URL, model, _sent, temperature, max_tokens,
         )
 
@@ -226,7 +202,7 @@ class GrokPromptNode:
             if resp.history:
                 _hops = " → ".join(f"{r.status_code} {r.url}" for r in resp.history)
                 print(
-                    f"⚠️  [Aiorbust Grok] {len(resp.history)} redirection(s) suivie(s) : {_hops}\n"
+                    f"⚠️  [Aiofc Grok] {len(resp.history)} redirection(s) suivie(s) : {_hops}\n"
                     f"   Le corps de la requete a ete renvoye a chaque saut."
                 )
             resp.raise_for_status()

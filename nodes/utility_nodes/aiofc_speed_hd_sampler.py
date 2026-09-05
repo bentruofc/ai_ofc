@@ -150,15 +150,10 @@ class AiofcSpeedHDSampler:
         return (sampler,)
 
 
-# Backward compatibility alias
-AiorbustSpeedHDSampler = AiofcSpeedHDSampler
-
 NODE_CLASS_MAPPINGS = {
     "AiofcSpeedHDSampler": AiofcSpeedHDSampler,
-    "AiorbustSpeedHDSampler": AiorbustSpeedHDSampler,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcSpeedHDSampler": "AIOFC Speed HD Sampler",
-    "AiorbustSpeedHDSampler": "AIOFC Speed HD Sampler (Legacy)",
 }

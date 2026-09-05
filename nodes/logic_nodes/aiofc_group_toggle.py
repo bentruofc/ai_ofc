@@ -70,14 +70,9 @@ class AiofcGroupToggle:
         return ()
 
 
-# Backward compatibility alias
-AiorbustGroupToggle = AiofcGroupToggle
-
 NODE_CLASS_MAPPINGS = {
     "AiofcGroupToggle": AiofcGroupToggle,
-    "AiorbustGroupToggle": AiorbustGroupToggle,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcGroupToggle": "AIOFC Group Toggle",
-    "AiorbustGroupToggle": "AIOFC Group Toggle (Legacy)",
 }

@@ -69,14 +69,9 @@ class AiofcAudioSwitch:
         return (audio,)
 
 
-# Backward compatibility alias
-AiorbustAudioSwitch = AiofcAudioSwitch
-
 NODE_CLASS_MAPPINGS = {
     "AiofcAudioSwitch": AiofcAudioSwitch,
-    "AiorbustAudioSwitch": AiorbustAudioSwitch,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcAudioSwitch": "AIOFC Audio Switch",
-    "AiorbustAudioSwitch": "AIOFC Audio Switch (Legacy)",
 }

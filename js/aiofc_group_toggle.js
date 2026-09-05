@@ -71,8 +71,6 @@ function applyToggle(node) {
         count++;
     }
 
-    node.color   = on ? undefined : "#3a0a0a";
-    node.bgcolor = on ? undefined : "#1a0505";
     app.graph.setDirtyCanvas(true, true);
     console.log(`[Aiofc Group Toggle] "${title}": ${count} node(s) -> ${on ? "active" : w("off_mode")?.value}`);
 }
@@ -81,7 +79,7 @@ app.registerExtension({
     name: "aiofc.GroupToggle",
 
     nodeCreated(node) {
-        if (node.comfyClass !== "AiofcGroupToggle" && node.comfyClass !== "AiorbustGroupToggle") return;
+        if (node.comfyClass !== "AiofcGroupToggle") return;
 
         const groupW = node.widgets?.find(w => w.name === "group");
         if (groupW) {

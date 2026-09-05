@@ -162,14 +162,9 @@ class AiofcH3FrameSnap:
         return (snapped, snapped / _FPS)
 
 
-# Backward compatibility alias
-AiorbustH3FrameSnap = AiofcH3FrameSnap
-
 NODE_CLASS_MAPPINGS = {
     "AiofcH3FrameSnap": AiofcH3FrameSnap,
-    "AiorbustH3FrameSnap": AiorbustH3FrameSnap,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcH3FrameSnap": "AIOFC H3 Frame Snap",
-    "AiorbustH3FrameSnap": "AIOFC H3 Frame Snap (Legacy)",
 }

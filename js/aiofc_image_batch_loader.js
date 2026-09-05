@@ -45,12 +45,11 @@ function btn(label, bgCol, textCol, title = "") {
         fontWeight:   "700",
         cursor:       "pointer",
         whiteSpace:   "nowrap",
-        transition:   "background 0.15s, transform 0.1s",
         fontFamily:   "inherit",
         letterSpacing:"0.3px",
     });
-    b.addEventListener("mouseenter", () => css(b, { background: T.btnHover, transform: "scale(1.03)" }));
-    b.addEventListener("mouseleave", () => css(b, { background: bgCol,     transform: "scale(1)" }));
+    b.addEventListener("mouseenter", () => css(b, { background: T.btnHover }));
+    b.addEventListener("mouseleave", () => css(b, { background: bgCol }));
     return b;
 }
 
@@ -139,7 +138,6 @@ function setupBatchLoader(node) {
         border:          `2px dashed ${T.border}`,
         borderRadius:    "8px",
         cursor:          "pointer",
-        transition:      "border-color 0.2s, background 0.2s",
         padding:         "24px",
         gap:             "10px",
     });
@@ -315,8 +313,6 @@ function setupBatchLoader(node) {
                 display:      "flex",
                 flexDirection:"column",
                 aspectRatio:  "1",
-                transition:   "border-color 0.2s, box-shadow 0.2s",
-                boxShadow:    isActive ? `0 0 10px ${T.accentDim}` : "none",
             });
 
             const thumb = document.createElement("img");
@@ -368,7 +364,6 @@ function setupBatchLoader(node) {
                     alignItems:   "center",
                     justifyContent: "center",
                     fontWeight:   "bold",
-                    boxShadow:    "0 0 6px rgba(0,0,0,0.6)",
                 });
                 card.appendChild(badge);
             }
@@ -443,7 +438,6 @@ function setupBatchLoader(node) {
         if (active) active.scrollIntoView({ block: "nearest", behavior: "smooth" });
     };
     api.addEventListener("aiofc_batch_loader_update", wsHandler);
-    api.addEventListener("aiorbust_batch_loader_update", wsHandler);
 
     // ── DOM widget (display only — does not serialize) ─────────────────────
     node.addDOMWidget("images_display", "AIOFC_BATCH_DISPLAY", root, {
@@ -485,7 +479,6 @@ function setupBatchLoader(node) {
     const origOnRemoved = node.onRemoved?.bind(node);
     node.onRemoved = function() {
         api.removeEventListener("aiofc_batch_loader_update", wsHandler);
-        api.removeEventListener("aiorbust_batch_loader_update", wsHandler);
         origOnRemoved?.();
     };
 
@@ -498,7 +491,7 @@ app.registerExtension({
     name: "Aiofc.ImageBatchLoader",
 
     async beforeRegisterNodeDef(nodeType, nodeData) {
-        if (nodeData.name !== "AiofcImageBatchLoader" && nodeData.name !== "AiorbustImageBatchLoader") return;
+        if (nodeData.name !== "AiofcImageBatchLoader") return;
 
         const origCreated = nodeType.prototype.onNodeCreated;
         nodeType.prototype.onNodeCreated = function () {

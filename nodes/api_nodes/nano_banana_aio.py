@@ -1144,7 +1144,7 @@ class NanoBananaAIO:
                 "image_4": ("IMAGE", {"tooltip": "Image source 4"}),
                 "image_5": ("IMAGE", {"tooltip": "Image source 5"}),
                 "video_reference": ("AB_VIDEO", {
-                    "tooltip": "[Kling 3.0 Motion Control] Connect an 'Aiorbust Video Loader' node.\n"
+                    "tooltip": "[Kling 3.0 Motion Control] Connect an 'Aiofc Video Loader' node.\n"
                                "The duration of the generated video will match the reference.\n"
                                "[Seedance 2.0 / Reference mode] Also accepted as a motion reference "
                                "(max 15s). Rejected in First & Last Frame mode.\n"
@@ -1230,24 +1230,24 @@ class NanoBananaAIO:
                 # widgets go after it, never beside where they belong visually.
                 "license_key": ("STRING", {
                     "default": "", "multiline": False,
-                    "tooltip": "Checked LAST, after AIORBUST_LICENSE_KEY and the "
+                    "tooltip": "Checked LAST, after AIOFC_LICENSE_KEY and the "
                                "key files. Prefer either of those: a key typed "
                                "here is saved into the workflow JSON and travels "
                                "with every copy of the graph you share.\n\n"
-                               "Leave it empty and an Aiorbust License node "
+                               "Leave it empty and an Aiofc License node "
                                "anywhere in the graph supplies the key, wired "
                                "in here or not.",
                 }),
             },
             # The whole queued graph, injected by ComfyUI. Read only to find
-            # an Aiorbust License node's key, which is what lets that node sit
+            # an Aiofc License node's key, which is what lets that node sit
             # unconnected: unconnected means never executed, so nothing it
             # could hand over at run time would ever arrive.
             #
-            # Named aiorbust_graph, not prompt: hidden inputs land in the same
+            # Named aiofc_graph, not prompt: hidden inputs land in the same
             # kwargs as the widgets, and this node already has a prompt widget
             # that would be overwritten with the graph dict.
-            "hidden": {"aiorbust_graph": "PROMPT"},
+            "hidden": {"aiofc_graph": "PROMPT"},
         }
 
     RETURN_TYPES  = ("IMAGE", "STRING", "STRING")
@@ -1298,8 +1298,9 @@ class NanoBananaAIO:
         # Gate first, before a retry loop that can bill a provider several
         # times. Cached after the first call, so a graph with several licensed
         # nodes still makes one round trip per queue.
+        prompt_graph = kwargs.pop("aiofc_graph", None) or kwargs.pop("aiorbust_graph", None)
         check("nano_banana_aio", kwargs.pop("license_key", ""), label="NB AIO",
-              prompt=kwargs.pop("aiorbust_graph", None))
+              prompt=prompt_graph)
 
         attempts = max(0, int(kwargs.pop("max_black_retries", 0) or 0)) + 1
 
@@ -1316,14 +1317,14 @@ class NanoBananaAIO:
             black = self._black_indices(images)
             if not black:
                 if attempt > 1:
-                    print(f"✅ [Aiorbust] Recovered on attempt {attempt}/{attempts}.")
+                    print(f"✅ [Aiofc] Recovered on attempt {attempt}/{attempts}.")
                 return result
 
             total = int(images.shape[0])
             info = (result[1] or "").strip() if len(result) > 1 else ""
             if attempt < attempts:
                 print(
-                    f"⚫ [Aiorbust] {len(black)}/{total} black image(s) — "
+                    f"⚫ [Aiofc] {len(black)}/{total} black image(s) — "
                     f"attempt {attempt}/{attempts}, retrying."
                     + (f"\n   Provider said: {info.splitlines()[0][:160]}" if info else "")
                 )
@@ -1332,7 +1333,7 @@ class NanoBananaAIO:
                 # que de lever. Le node Image Black Check en aval decide alors
                 # d'arreter ou non, ce qui reste son role.
                 print(
-                    f"⚫ [Aiorbust] Still {len(black)}/{total} black image(s) after "
+                    f"⚫ [Aiofc] Still {len(black)}/{total} black image(s) after "
                     f"{attempts} attempt(s). Returning as-is."
                     + (f"\n   Provider said: {info.splitlines()[0][:160]}" if info else "")
                 )
@@ -1401,7 +1402,7 @@ class NanoBananaAIO:
             if video_input_mode not in _VIDEO_INPUT_MODES:
                 if video_mode_enabled:
                     print(
-                        f"⚠️  [Aiorbust] video_input_mode={video_input_mode!r} is not one of "
+                        f"⚠️  [Aiofc] video_input_mode={video_input_mode!r} is not one of "
                         f"{_VIDEO_INPUT_MODES} — falling back to '{VIDEO_MODE_FIRST_LAST}'.\n"
                         f"   A saved workflow whose widget positions shifted can land a wrong "
                         f"value here. Re-pick the mode on the node to store it cleanly."
@@ -6456,7 +6457,7 @@ class NanoBananaAIO:
             if not has_vid:
                 return (
                     f"❌ [Omni Flash] '{VIDEO_MODE_EDIT}' needs a video to edit.\n"
-                    f"→ Connect an 'Aiorbust Video Loader' to video_reference, or switch "
+                    f"→ Connect an 'Aiofc Video Loader' to video_reference, or switch "
                     f"to '{VIDEO_MODE_FIRST_LAST}' / '{VIDEO_MODE_REFERENCE}'."
                 )
             if tensors:
@@ -6656,7 +6657,7 @@ class NanoBananaAIO:
             print(f"⚠️  [Audio] WAV encoding failed: {e}")
             return None
 
-        filename = f"aiorbust_audio_{int(time.time())}.wav"
+        filename = f"aiofc_audio_{int(time.time())}.wav"
         print(f"🎵 [Audio] Encoded {len(audio_bytes) / 1024:.0f} KB WAV — uploading…")
 
         # --- Priority 0 : Kie file-stream-upload ---

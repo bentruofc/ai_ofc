@@ -56,7 +56,7 @@ def _read_key_file(path):
     return ""
 
 
-LICENSE_NODE_CLASS_TYPES = ("AiofcLicense", "AiorbustLicense")
+LICENSE_NODE_CLASS_TYPES = ("AiofcLicense",)
 
 
 def key_from_prompt(prompt):
@@ -263,13 +263,9 @@ class AiofcLicense:
         return (key,)
 
 
-AiorbustLicense = AiofcLicense
-
 NODE_CLASS_MAPPINGS = {
     "AiofcLicense": AiofcLicense,
-    "AiorbustLicense": AiorbustLicense,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcLicense": "AIOFC License",
-    "AiorbustLicense": "AIOFC License (Legacy)",
 }

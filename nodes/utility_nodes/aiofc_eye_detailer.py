@@ -765,20 +765,12 @@ class AiofcDetailer:
         return result_img, result_cropped_enhanced, result_cropped_enhanced_alpha, result_mask, pipe, result_cnet_images
 
 
-# Backward compatibility aliases
-AiorbustEyeBBoxDetectorProvider = AiofcEyeBBoxDetectorProvider
-AiorbustDetailer = AiofcDetailer
-
 NODE_CLASS_MAPPINGS = {
     "AiofcEyeBBoxDetectorProvider": AiofcEyeBBoxDetectorProvider,
-    "AiorbustEyeBBoxDetectorProvider": AiorbustEyeBBoxDetectorProvider,
     "AiofcDetailer": AiofcDetailer,
-    "AiorbustDetailer": AiorbustDetailer,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcEyeBBoxDetectorProvider": "AIOFC HD Ultralytic BBox Loader",
-    "AiorbustEyeBBoxDetectorProvider": "AIOFC HD Ultralytic BBox Loader (Legacy)",
     "AiofcDetailer": "AIOFC Detailer",
-    "AiorbustDetailer": "AIOFC Detailer (Legacy)",
 }

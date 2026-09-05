@@ -1,5 +1,5 @@
 """
-ComfyUI node — Aiorbust Lora Caption Generator.
+ComfyUI node — Aiofc Lora Caption Generator.
 Captions every image in a folder through Gemini (API key), Vertex (service
 account) or Grok, one request per image.
 By default the images are left untouched and each caption is written to

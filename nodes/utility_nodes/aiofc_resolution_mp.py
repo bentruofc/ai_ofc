@@ -140,14 +140,9 @@ class AiofcResolutionMP:
         return (width, height, ratio_out)
 
 
-# Backward compatibility alias
-AiorbustResolutionMP = AiofcResolutionMP
-
 NODE_CLASS_MAPPINGS = {
     "AiofcResolutionMP": AiofcResolutionMP,
-    "AiorbustResolutionMP": AiorbustResolutionMP,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcResolutionMP": "AIOFC Resolution (MP)",
-    "AiorbustResolutionMP": "AIOFC Resolution (MP) (Legacy)",
 }

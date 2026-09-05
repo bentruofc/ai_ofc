@@ -23,11 +23,7 @@ import numpy as np
 import requests
 from PIL import Image
 
-# The licence gate lives in aiorbust_license so both gated nodes share one
-# implementation. Imported defensively: this file is the customer-facing stub
-# and must still load if that module is ever absent, in which case the local
-# resolver below is used and the service stays the only gate -- which it is
-# in every case anyway, since it re-checks the key on every request.
+
 try:
     from ..utility_nodes.aiofc_license import check as _license_check
 except Exception:
@@ -37,7 +33,7 @@ except Exception:
 # request to it is licence-checked. Overridable so you can point a pod at a
 # staging deployment without shipping a different client.
 DEFAULT_API_URL = "https://aiorbust-h3-ir.fly.dev"
-API_URL = os.environ.get("AIORBUST_API_URL", "").strip() or DEFAULT_API_URL
+API_URL = os.environ.get("AIOFC_API_URL", "").strip() or os.environ.get("AIORBUST_API_URL", "").strip() or DEFAULT_API_URL
 TIMEOUT = 600
 CLIENT_VERSION = "0.2.0"
 NODE_ID = "H3ContextIR"
@@ -57,16 +53,7 @@ PROVIDERS = ["Gemini", "Vertex", "Grok"]
 TARGET_H3 = "MiniMax H3"
 TARGET_SEEDANCE = "Seedance"
 TARGETS = [TARGET_H3, TARGET_SEEDANCE]
-# Mirrors _MODELS + _GROK_MODELS in the private pack's H3 node
-# (aiorbust-ofm-pack/nodes/h3_context_ir.py), which is the source of truth for
-# this node's model ids. The two lists are kept identical so a workflow saved
-# against one pack validates against the other -- ComfyUI rejects a combo value
-# that is not in the list, so a divergent list breaks saved graphs outright.
-#
-# One flat combo shared by every provider: `provider` is chosen separately, so
-# pick a model that belongs to the provider you selected. The service forwards
-# `model` verbatim and does not validate it, so an id the upstream API no
-# longer serves fails at that API rather than here.
+
 MODELS = [
     # Gemini / Vertex
     "gemini-3.6-flash",
@@ -273,18 +260,17 @@ def _license_file_candidates():
     """
     paths = []
 
-    explicit = os.environ.get("AIORBUST_LICENSE_FILE", "").strip()
+    explicit = os.environ.get("AIOFC_LICENSE_FILE", "").strip() or os.environ.get("AIORBUST_LICENSE_FILE", "").strip()
     if explicit:
         paths.append(explicit)
 
-    # Pod: the network volume, which start.sh seeds and which survives restarts.
+    paths.append("/workspace/aiofc/license.key")
     paths.append("/workspace/aiorbust/license.key")
 
-    # ComfyUI's own user directory. The idiomatic place for per-install config,
-    # and it survives updating or reinstalling this node pack.
     try:
         import folder_paths
         user_dir = folder_paths.get_user_directory()
+        paths.append(os.path.join(user_dir, "aiofc", "license.key"))
         paths.append(os.path.join(user_dir, "aiorbust", "license.key"))
     except Exception:
         pass
@@ -294,6 +280,7 @@ def _license_file_candidates():
     paths.append(os.path.join(pack_dir, "license.key"))
 
     # Home directory, for a key shared across several ComfyUI installs.
+    paths.append(os.path.join(os.path.expanduser("~"), ".aiofc", "license.key"))
     paths.append(os.path.join(os.path.expanduser("~"), ".aiorbust", "license.key"))
 
     return paths
@@ -306,7 +293,7 @@ def _read_key_file(path: str) -> str:
                 line = line.strip()
                 if not line or line.startswith("#"):
                     continue
-                # Tolerate "AIORBUST_LICENSE_KEY=..." from someone pasting an
+                # Tolerate "AIOFC_LICENSE_KEY=..." from someone pasting an
                 # env-var line into the file.
                 return line.split("=")[-1].strip()
     except OSError:
@@ -315,11 +302,11 @@ def _read_key_file(path: str) -> str:
 
 
 # Node ids whose license_key widget counts as the graph-wide key.
-LICENSE_NODE_CLASS_TYPES = ("AiorbustLicense",)
+LICENSE_NODE_CLASS_TYPES = ("AiofcLicense",)
 
 
 def _key_from_prompt(prompt) -> str:
-    """The key typed into an Aiorbust License node of the queued graph.
+    """The key typed into an Aiofc License node of the queued graph.
 
     `prompt` is ComfyUI's hidden PROMPT input -- every node in the graph,
     executed or not. Reading it here is what lets a licence node supply the key
@@ -345,7 +332,7 @@ def _key_from_prompt(prompt) -> str:
 
 def _license_key(widget_value: str, prompt=None) -> str:
     """First hit wins: environment, then a key file, then the widget, then an
-    Aiorbust License node anywhere in the graph.
+    Aiofc License node anywhere in the graph.
 
     Order is about leak risk, not convenience. A widget value is saved INTO the
     workflow JSON, so a customer who types their key there and then shares the
@@ -359,7 +346,7 @@ def _license_key(widget_value: str, prompt=None) -> str:
     wired directly here still wins -- which is how one graph can run two
     different licences.
     """
-    key = os.environ.get("AIORBUST_LICENSE_KEY", "").strip()
+    key = os.environ.get("AIOFC_LICENSE_KEY", "").strip() or os.environ.get("AIORBUST_LICENSE_KEY", "").strip()
     if key:
         return key
 
@@ -382,13 +369,8 @@ def _pod_fingerprint() -> str:
             return v
     return "unknown"
 
-
-# ---------------------------------------------------------------------------
-# Node
-# ---------------------------------------------------------------------------
-
 class H3ContextIR:
-    """Two-pass H3 prompt compiler. Runs on the Aiorbust service."""
+    """Two-pass H3 prompt compiler. Runs on the Aiofc service."""
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -404,7 +386,7 @@ class H3ContextIR:
                 "aspect_ratio": ("STRING", {
                     "default": "adaptive", "multiline": False,
                     "tooltip": "adaptive, 16:9, 9:16, 1:1, 4:3, 3:4, 21:9, 3:2, "
-                               "2:3, 5:4, 4:5. Connect Aiorbust Resolution (MP)'s "
+                               "2:3, 5:4, 4:5. Connect Aiofc Resolution (MP)'s "
                                "aspect_ratio output to keep it in sync."}),
                 # Index 3, matching the private pack. Inserted BEFORE provider,
                 # so every widget after it shifts by one — a workflow saved with
@@ -427,7 +409,7 @@ class H3ContextIR:
                 # Do not delete it; a replacement must go on the END.
                 "guide_folder": ("STRING", {
                     "default": "", "multiline": False,
-                    "tooltip": "No longer used — the guides live on the Aiorbust "
+                    "tooltip": "No longer used — the guides live on the Aiofc "
                                "service. Kept so existing workflows keep loading."}),
                 "max_tokens": ("INT", {
                     "default": 8192, "min": 512, "max": 65536, "step": 512}),
@@ -465,9 +447,9 @@ class H3ContextIR:
                     "default": "", "multiline": False,
                     "tooltip": "LAST RESORT. A key typed here is saved into the "
                                "workflow JSON and travels with every copy you share. "
-                               "Prefer AIORBUST_LICENSE_KEY in the pod environment, or "
-                               "put the key in /workspace/aiorbust/license.key.\n\n"
-                               "Leave it empty and an Aiorbust License node anywhere "
+                               "Prefer AIOFC_LICENSE_KEY in the pod environment, or "
+                               "put the key in /workspace/aiofc/license.key.\n\n"
+                               "Leave it empty and an Aiofc License node anywhere "
                                "in the graph supplies the key, wired in here or not."}),
                 # Appended after license_key, not slotted in beside `intent`
                 # where it belongs visually. ComfyUI stores widget values by
@@ -475,17 +457,17 @@ class H3ContextIR:
                 # in every saved workflow onto the wrong input. Ugly beats wrong.
                 "intent_preset": (INTENT_PRESETS, {
                     "default": INTENT_CUSTOM,
-                    "tooltip": "A named intent held by the Aiorbust service. "
+                    "tooltip": "A named intent held by the Aiofc service. "
                                "Anything but Custom REPLACES the intent box, so "
                                "the prompt itself never has to live in the "
                                "workflow file. Custom uses what you typed."}),
             },
             # The whole queued graph, injected by ComfyUI. Read only to find an
-            # Aiorbust License node's key, which is what lets that node supply
-            # one while sitting unconnected. Named aiorbust_graph rather than
+            # Aiofc License node's key, which is what lets that node supply
+            # one while sitting unconnected. Named aiofc_graph rather than
             # prompt because hidden inputs arrive in the same kwargs as the
             # widgets, and a collision there silently replaces a widget value.
-            "hidden": {"aiorbust_graph": "PROMPT"},
+            "hidden": {"aiofc_graph": "PROMPT"},
         }
 
     RETURN_TYPES = ("STRING", "STRING")
@@ -518,24 +500,14 @@ class H3ContextIR:
             ref_audio_1=None, ref_audio_2=None,
             gemini_api_key="", grok_api_key="", vertex_json_folder="",
             license_key="", grounding_override="", guide_folder="",
-            intent_preset=INTENT_CUSTOM, aiorbust_graph=None):
+            intent_preset=INTENT_CUSTOM, aiofc_graph=None, **kwargs):
 
-        # Gate BEFORE the payload is built. Without this an unlicensed run
-        # encodes and uploads several MB of base64 media only to be turned
-        # away by the service, and the user reads whatever the server put in
-        # `detail` rather than a message naming the places a key can live.
-        #
-        # The entitlement matches the service exactly: app/nodes/h3_context_ir.py
-        # registers this node with entitlement="h3_context_ir", and
-        # /v1/nodes/H3ContextIR validates against that same string. Checking it
-        # here only moves the same refusal earlier -- a key without the
-        # entitlement was always going to be turned away, now it happens before
-        # the upload and says which plan grants what.
+        graph_prompt = aiofc_graph or kwargs.get("aiorbust_graph")
         if _license_check is not None:
             key = _license_check("h3_context_ir", license_key,
-                                 label="H3 Context-IR", prompt=aiorbust_graph)
+                                 label="H3 Context-IR", prompt=graph_prompt)
         else:
-            key = _license_key(license_key, aiorbust_graph)
+            key = _license_key(license_key, graph_prompt)
 
         if provider == "Vertex":
             credential = _vertex_credential(vertex_json_folder)
@@ -637,7 +609,7 @@ class H3ContextIR:
             )
         except requests.exceptions.RequestException as e:
             raise RuntimeError(
-                "[H3 Context-IR] Could not reach the Aiorbust service at %s (%s).\n"
+                "[H3 Context-IR] Could not reach the Aiofc service at %s (%s).\n"
                 "-> Check the pod has outbound internet, then check status." % (API_URL, e))
 
         if resp.status_code >= 400:

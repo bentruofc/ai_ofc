@@ -1,5 +1,5 @@
 """
-Aiorbust Image and Video Batch Loader
+Aiofc Image and Video Batch Loader
 Sequential batch loader with drag-and-drop UI.
 Loads images and videos one at a time in order, cycling through the uploaded list.
 """
@@ -17,7 +17,6 @@ from server import PromptServer
 
 # ─────────────────────────────────────────────────────────────────────────────
 _POOL_SUBDIR = "Aiofc_ImagePool"
-_LEGACY_POOL_SUBDIR = "Aiorbust_ImagePool"
 _THUMB_PREFIX = "thumb_"
 
 _VIDEO_EXTS = {".mp4", ".mov", ".webm", ".mkv", ".avi", ".m4v", ".mpg", ".mpeg", ".wmv", ".flv"}
@@ -134,7 +133,7 @@ def _decode_video(path: str, max_side: int = 1024):
                 errors.append(f"{name}: decoded 0 frames")
                 continue
             arr = np.stack([np.asarray(f, dtype=np.float32) / 255.0 for f in frames])
-            print(f"[Aiorbust Batch] 🎞️  decoded with {name}: {len(frames)} frames "
+            print(f"[Aiofc Batch] 🎞️  decoded with {name}: {len(frames)} frames "
                   f"@ {fps:.2f} fps, {frames[0].size[0]}x{frames[0].size[1]}")
             return torch.from_numpy(arr), (fps or 24.0)
         except ImportError:
@@ -142,7 +141,7 @@ def _decode_video(path: str, max_side: int = 1024):
         except Exception as e:
             errors.append(f"{name}: {e}")
     raise RuntimeError(
-        "[Aiorbust Batch] Could not decode the video. Tried:\n  "
+        "[Aiofc Batch] Could not decode the video. Tried:\n  "
         + "\n  ".join(errors)
         + "\n-> Install one of: av (recommended, same decoder as ComfyUI), "
           "opencv-python, imageio[ffmpeg]."
@@ -234,7 +233,7 @@ def _resize_frames(frames, method: str, target_w: int, target_h: int):
         out = F.interpolate(chw, size=(rh, rw), mode="bilinear", align_corners=False)
 
     out = out.permute(0, 2, 3, 1).contiguous().clamp(0.0, 1.0)
-    print(f"[Aiorbust Batch] 📐 resized {w}x{h} -> {out.shape[2]}x{out.shape[1]} ({method})")
+    print(f"[Aiofc Batch] 📐 resized {w}x{h} -> {out.shape[2]}x{out.shape[1]} ({method})")
     return out
 
 
@@ -400,7 +399,7 @@ class AiofcImageBatchLoader:
 
         if (start, end) != (0, total):
             frames = frames[start:end]
-            print(f"[Aiorbust Batch] ✂️  trimmed to frames {start}-{end} "
+            print(f"[Aiofc Batch] ✂️  trimmed to frames {start}-{end} "
                   f"({(end - start) / fps:.3f}s of {total / fps:.3f}s)")
 
         if force_fps > 0 and abs(force_fps - fps) > 1e-6:
@@ -408,7 +407,7 @@ class AiofcImageBatchLoader:
             n_out = max(1, int(round(n_in * force_fps / fps)))
             idx = torch.linspace(0, n_in - 1, n_out).round().long().clamp(0, n_in - 1)
             frames = frames[idx]
-            print(f"[Aiorbust Batch] ⏱️  resampled {fps:.2f} -> {force_fps:.2f} fps "
+            print(f"[Aiofc Batch] ⏱️  resampled {fps:.2f} -> {force_fps:.2f} fps "
                   f"({n_in} -> {n_out} frames)")
             fps = float(force_fps)
 
@@ -468,7 +467,7 @@ class AiofcImageBatchLoader:
         name = meta.get("original_name", meta["filename"])
 
         if not os.path.exists(path):
-            print(f"[Aiorbust Batch] File not found: {path}")
+            print(f"[Aiofc Batch] File not found: {path}")
             self._notify(unique_id, idx, total)
             return blank
 
@@ -490,7 +489,7 @@ class AiofcImageBatchLoader:
                 audio = _extract_audio(path)
                 n = int(frames.shape[0])
                 duration = n / fps if fps else 0.0
-                print(f"[Aiorbust Batch] ✅ [{idx + 1}/{total}] 🎬 {name} — "
+                print(f"[Aiofc Batch] ✅ [{idx + 1}/{total}] 🎬 {name} — "
                       f"{n} frames, {duration:.3f}s @ {fps:.2f} fps")
                 self._notify(unique_id, idx, total)
                 # `image` reste le placeholder : cet item est une video, et
@@ -498,7 +497,7 @@ class AiofcImageBatchLoader:
                 # une video pour une photo dans un graphe branche sur les deux.
                 return (empty, frames, float(fps), float(duration), n, audio, path)
             except Exception as e:
-                print(f"[Aiorbust Batch] ❌ {name}: {e}")
+                print(f"[Aiofc Batch] ❌ {name}: {e}")
                 self._notify(unique_id, idx, total)
                 return blank
 
@@ -506,9 +505,9 @@ class AiofcImageBatchLoader:
             pil_img = Image.open(path).convert("RGB")
             arr     = np.array(pil_img).astype(np.float32) / 255.0
             tensor  = torch.from_numpy(arr).unsqueeze(0)
-            print(f"[Aiorbust Batch] ✅ [{idx + 1}/{total}] 🖼️  {name}")
+            print(f"[Aiofc Batch] ✅ [{idx + 1}/{total}] 🖼️  {name}")
         except Exception as e:
-            print(f"[Aiorbust Batch] ❌ Error loading {meta['filename']}: {e}")
+            print(f"[Aiofc Batch] ❌ Error loading {meta['filename']}: {e}")
             self._notify(unique_id, idx, total)
             return blank
 
@@ -519,7 +518,7 @@ class AiofcImageBatchLoader:
     def _notify(node_id, current_index: int, total: int):
         try:
             PromptServer.instance.send_sync(
-                "aiorbust_batch_loader_update",
+                "aiofc_batch_loader_update",
                 {"node_id": str(node_id), "current_index": current_index, "total": total},
             )
         except Exception:
@@ -540,8 +539,8 @@ class AiofcImageBatchLoader:
 # ne peut pas demarrer. Pattern identique a celui utilise dans nano_banana_aio.
 # ─────────────────────────────────────────────────────────────────────────────
 
-if not getattr(PromptServer.instance, "_aiorbust_batch_routes_registered", False):
-    PromptServer.instance._aiorbust_batch_routes_registered = True
+if not getattr(PromptServer.instance, "_aiofc_batch_routes_registered", False):
+    PromptServer.instance._aiofc_batch_routes_registered = True
 
     @PromptServer.instance.routes.post("/aiorbust/batch_upload")
     async def _aiofc_batch_upload(request):
@@ -630,15 +629,10 @@ if not getattr(PromptServer.instance, "_aiorbust_batch_routes_registered", False
         return web.Response(status=404, text=f"Image not found: {filename}")
 
 
-# Alias for backwards compatibility
-AiorbustImageBatchLoader = AiofcImageBatchLoader
-
 NODE_CLASS_MAPPINGS = {
     "AiofcImageBatchLoader": AiofcImageBatchLoader,
-    "AiorbustImageBatchLoader": AiofcImageBatchLoader,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcImageBatchLoader": "Aiofc Image and Video Batch Loader",
-    "AiorbustImageBatchLoader": "Aiofc Image and Video Batch Loader",
 }
 

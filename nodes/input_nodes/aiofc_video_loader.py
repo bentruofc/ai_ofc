@@ -69,16 +69,11 @@ class AiofcVideoLoader:
         return (video_path,)
 
 
-# Alias for backwards compatibility
-AiorBustVideoLoader = AiofcVideoLoader
-
 NODE_CLASS_MAPPINGS = {
     "AiofcVideoLoader": AiofcVideoLoader,
-    "AiorBustVideoLoader": AiofcVideoLoader,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AiofcVideoLoader": "Aiofc Video Loader",
-    "AiorBustVideoLoader": "Aiofc Video Loader",
 }
 

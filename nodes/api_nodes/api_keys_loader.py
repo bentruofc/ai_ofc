@@ -1,5 +1,5 @@
 """
-ComfyUI node — API Keys Loader (Aiorbust pack).
+ComfyUI node — API Keys Loader (Aiofc pack).
 Entrez vos clés API une seule fois ici et câblez les sorties vers les autres nodes.
 """
 
@@ -54,18 +54,15 @@ class ApiKeysLoaderNode:
 # Alias pour compatibilité avec l'ancien __init__.py
 LoadAPIKeysNode = ApiKeysLoaderNode
 Aiofc_Api_Loader = ApiKeysLoaderNode
-Aiorbust_Api_Loader = ApiKeysLoaderNode
 
 NODE_CLASS_MAPPINGS = {
     "LoadAPIKeysNode": LoadAPIKeysNode,
     "ApiKeysLoaderNode": ApiKeysLoaderNode,
     "Aiofc_Api_Loader": Aiofc_Api_Loader,
-    "Aiorbust_Api_Loader": Aiorbust_Api_Loader,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LoadAPIKeysNode": "Aiofc Load API Keys",
     "ApiKeysLoaderNode": "Aiofc Load API Keys",
     "Aiofc_Api_Loader": "Aiofc Load API Keys",
-    "Aiorbust_Api_Loader": "Aiofc Load API Keys (Legacy)",
 }

@@ -136,14 +136,10 @@ class Aiofc_Renoise:
         return (out.permute(0, 2, 3, 1).to(image.device),)
 
 
-Aiorbust_Renoise = Aiofc_Renoise
-
 NODE_CLASS_MAPPINGS = {
     "Aiofc_Renoise": Aiofc_Renoise,
-    "Aiorbust_Renoise": Aiorbust_Renoise,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "Aiofc_Renoise": "🎞️ AIOFC Renoise",
-    "Aiorbust_Renoise": "🎞️ AIOFC Renoise (Legacy)",
 }

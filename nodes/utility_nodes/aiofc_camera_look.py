@@ -227,14 +227,10 @@ class Aiofc_Camera_Look:
         return (torch.cat(out_frames, dim=0),)
 
 
-Aiorbust_Camera_Look = Aiofc_Camera_Look
-
 NODE_CLASS_MAPPINGS = {
     "Aiofc_Camera_Look": Aiofc_Camera_Look,
-    "Aiorbust_Camera_Look": Aiorbust_Camera_Look,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "Aiofc_Camera_Look": "📷 AIOFC Camera Look",
-    "Aiorbust_Camera_Look": "📷 AIOFC Camera Look (Legacy)",
 }
