@@ -544,7 +544,7 @@ if not getattr(PromptServer.instance, "_aiorbust_batch_routes_registered", False
     PromptServer.instance._aiorbust_batch_routes_registered = True
 
     @PromptServer.instance.routes.post("/aiorbust/batch_upload")
-    async def _aiorbust_batch_upload(request):
+    async def _aiofc_batch_upload(request):
         """Upload one or more images to the shared pool."""
         try:
             reader  = await request.multipart()
@@ -593,7 +593,7 @@ if not getattr(PromptServer.instance, "_aiorbust_batch_routes_registered", False
                         "is_video":      is_video,
                     })
                 except Exception as e:
-                    print(f"[Aiorbust Batch] Error processing {raw_name}: {e}")
+                    print(f"[AIOFC Batch] Error processing {raw_name}: {e}")
                     if os.path.exists(path):
                         os.remove(path)
 
@@ -602,38 +602,6 @@ if not getattr(PromptServer.instance, "_aiorbust_batch_routes_registered", False
             return web.json_response({"success": False, "error": str(e)}, status=500)
 
 
-    @PromptServer.instance.routes.post("/aiofc/batch_upload")
-    @PromptServer.instance.routes.post("/aiorbust/batch_upload")
-    async def _aiofc_batch_upload(request):
-        try:
-            reader = await request.multipart()
-            pool   = _pool_dir()
-            uploaded = []
-            while True:
-                field = await reader.next()
-                if field is None:
-                    break
-                if field.name == "images":
-                    orig_name = field.filename or "image.png"
-                    ext = os.path.splitext(orig_name)[1].lower()
-                    data = await field.read()
-                    img_id = str(uuid.uuid4())
-                    save_name = f"{img_id}{ext}"
-                    save_path = os.path.join(pool, save_name)
-                    with open(save_path, "wb") as f:
-                        f.write(data)
-                    meta = _save_thumbnail(data, orig_name, save_path, pool, img_id)
-                    meta["id"]        = img_id
-                    meta["filename"]  = save_name
-                    meta["orig_name"] = orig_name
-                    meta["is_video"]  = _is_video(orig_name)
-                    uploaded.append(meta)
-            return web.json_response({"success": True, "files": uploaded})
-        except Exception as e:
-            return web.json_response({"success": False, "error": str(e)}, status=500)
-
-
-    @PromptServer.instance.routes.delete("/aiofc/batch_delete/{image_id}")
     @PromptServer.instance.routes.delete("/aiorbust/batch_delete/{image_id}")
     async def _aiofc_batch_delete(request):
         """Delete an image (and its thumbnail) from the pool."""
@@ -650,7 +618,6 @@ if not getattr(PromptServer.instance, "_aiorbust_batch_routes_registered", False
             return web.json_response({"success": False, "error": str(e)}, status=500)
 
 
-    @PromptServer.instance.routes.get("/aiofc/view/{filename}")
     @PromptServer.instance.routes.get("/aiorbust/view/{filename}")
     async def _aiofc_view(request):
         """Serve an image from the pool via ComfyUI's standard /view endpoint."""

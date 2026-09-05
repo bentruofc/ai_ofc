@@ -220,9 +220,7 @@ function setupBatchLoader(node) {
         if (!imageData.order.length) return;
         if (!confirm(`Remove all ${imageData.order.length} image(s) from the batch?`)) return;
         for (const id of [...imageData.order]) {
-            fetch(`/aiofc/batch_delete/${id}`, { method: "DELETE" }).catch(() => {
-                fetch(`/aiorbust/batch_delete/${id}`, { method: "DELETE" }).catch(() => {});
-            });
+            fetch(`/aiorbust/batch_delete/${id}`, { method: "DELETE" }).catch(() => {});
         }
         imageData    = { images: [], order: [] };
         currentIndex = -1;
@@ -251,10 +249,7 @@ function setupBatchLoader(node) {
         for (const f of files) form.append("files", f);
 
         try {
-            let resp = await fetch("/aiofc/batch_upload", { method: "POST", body: form });
-            if (!resp.ok) {
-                resp = await fetch("/aiorbust/batch_upload", { method: "POST", body: form });
-            }
+            const resp = await fetch("/aiorbust/batch_upload", { method: "POST", body: form });
             const json = await resp.json();
             if (json.success) {
                 for (const img of json.images) {
@@ -279,9 +274,7 @@ function setupBatchLoader(node) {
 
     // ── Delete single image ────────────────────────────────────────────────
     async function deleteImage(imgId) {
-        await fetch(`/aiofc/batch_delete/${imgId}`, { method: "DELETE" }).catch(() => {
-            fetch(`/aiorbust/batch_delete/${imgId}`, { method: "DELETE" }).catch(() => {});
-        });
+        await fetch(`/aiorbust/batch_delete/${imgId}`, { method: "DELETE" }).catch(() => {});
         imageData.images = imageData.images.filter(i => i.id !== imgId);
         imageData.order  = imageData.order.filter(id => id !== imgId);
         refresh();
@@ -328,13 +321,10 @@ function setupBatchLoader(node) {
 
             const thumb = document.createElement("img");
             const thumbSrc = meta.thumbnail || meta.filename;
-            thumb.src = `/aiofc/view/${thumbSrc}`;
+            thumb.src = `/aiorbust/view/${thumbSrc}`;
             thumb.onerror = () => {
-                thumb.src = `/aiorbust/view/${thumbSrc}`;
-                thumb.onerror = () => {
-                    thumb.style.display = "none";
-                    css(card, { background: T.border });
-                };
+                thumb.style.display = "none";
+                css(card, { background: T.border });
             };
             css(thumb, {
                 width:      "100%",
