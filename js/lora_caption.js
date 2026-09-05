@@ -1,0 +1,112 @@
+import { app } from "../../scripts/app.js";
+
+let modePrompts = {};
+
+async function loadPrompts() {
+    try {
+        const resp = await fetch("/lora_caption/get_prompts");
+        if (resp.ok) modePrompts = await resp.json();
+    } catch (e) {
+        console.warn("LoraCaptionGenerator: could not load mode prompts", e);
+    }
+}
+
+loadPrompts();
+
+app.registerExtension({
+    name: "aiofc.LoraCaptionGenerator",
+    nodeCreated(node) {
+        if (node.comfyClass !== "LoraCaptionGeneratorNode") return;
+
+        const providerWidget = node.widgets.find(w => w.name === "provider");
+        const geminiModelWidget = node.widgets.find(w => w.name === "gemini_model");
+        const grokModelWidget = node.widgets.find(w => w.name === "grok_model");
+        const modeWidget = node.widgets.find(w => w.name === "mode");
+        const instructionWidget = node.widgets.find(w => w.name === "caption_instruction");
+
+        // ── provider toggle (existing behavior) ──
+        if (providerWidget) {
+            function applyProvider(provider) {
+                const isGemini = provider === "gemini";
+                const isGrok = provider === "grok";
+                if (geminiModelWidget) geminiModelWidget.disabled = !isGemini;
+                if (grokModelWidget) grokModelWidget.disabled = !isGrok;
+                app.graph.setDirtyCanvas(true);
+            }
+            const origCallback = providerWidget.callback;
+            providerWidget.callback = function (value) {
+                if (origCallback) origCallback.call(this, value);
+                applyProvider(value);
+            };
+            applyProvider(providerWidget.value);
+        }
+
+        // ── mode → caption_instruction sync ──
+        if (modeWidget && instructionWidget) {
+            async function applyMode(mode) {
+                if (!modePrompts || Object.keys(modePrompts).length === 0) {
+                    await loadPrompts();
+                }
+                const prompt = modePrompts[mode];
+                if (typeof prompt === "string") {
+                    instructionWidget.value = prompt;
+                    if (instructionWidget.callback) instructionWidget.callback(prompt);
+                    app.graph.setDirtyCanvas(true);
+                }
+            }
+            const origModeCallback = modeWidget.callback;
+            modeWidget.callback = function (value) {
+                if (origModeCallback) origModeCallback.call(this, value);
+                applyMode(value);
+            };
+            // Populate on creation if textbox is empty
+            if (!instructionWidget.value || instructionWidget.value.trim() === "") {
+                applyMode(modeWidget.value);
+            }
+        }
+
+        // ── Rename files ──
+        const btn = node.addWidget("button", "Rename files", null, async () => {
+            const folder  = node.widgets.find(w => w.name === "input_folder")?.value;
+            const trigger = (node.widgets.find(w => w.name === "trigger_word")?.value || "").trim();
+
+            if (!folder || folder === "(no folders found)") {
+                alert("Rename files: pick an input folder first.");
+                return;
+            }
+            if (!trigger) {
+                alert("Rename files: trigger_word is empty — nothing to rename the files to.");
+                return;
+            }
+            if (!confirm(
+                `Rename every image in "${folder}" to ${trigger}_01, ${trigger}_02, ...\n\n` +
+                `Any .txt caption sitting beside an image is renamed with it.\n` +
+                `This cannot be undone. Continue?`
+            )) return;
+
+            btn.name = "Renaming...";
+            node.setDirtyCanvas(true);
+            try {
+                const resp = await fetch("/lora_caption/rename_files", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ folder, trigger }),
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.error || resp.statusText);
+                console.log(`[Lora Caption] renamed ${data.renamed} image(s), ` +
+                            `${data.captions} caption(s) in ${data.folder}`);
+                alert(`Renamed ${data.renamed} image(s)` +
+                      (data.captions ? ` and ${data.captions} caption file(s)` : "") +
+                      ` to ${trigger}_01 ...`);
+            } catch (e) {
+                console.error("[Lora Caption] rename failed", e);
+                alert("Rename failed: " + e.message);
+            } finally {
+                btn.name = "Rename files";
+                node.setDirtyCanvas(true);
+            }
+        });
+        btn.serialize = false;
+    },
+});

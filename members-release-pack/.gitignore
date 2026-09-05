@@ -1,8 +1,0 @@
-__pycache__/
-*.pyc
-*.pyo
-
-# Generated at runtime by the licence gate and the H3 node.
-_cache/
-.aiorbust-private
-license.key
