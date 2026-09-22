@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-skin-detailer"
+description = "One-click, skin-only detail restoration: SAM 3.1 segmentation, a 1x skin-texture model, and a masked low-denoise refinement pass with your own MODEL/CLIP/VAE."
+version = "1.0.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/adamb/comfyui-skin-detailer"
+
+[tool.comfy]
+PublisherId = "adamb"
+DisplayName = "Skin Detailer (SAM3 • Texture • Refine)"
+Icon = ""
